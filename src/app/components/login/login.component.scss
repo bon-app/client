@@ -1,0 +1,9 @@
+#login-wrapper {
+    display: flex;
+    align-items: center;
+    height: 100%;
+
+    >* {
+        margin: 0 auto;
+    }
+}

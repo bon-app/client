@@ -1,0 +1,37 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons class="ion-hide-md-down" slot="start">
+      <ion-button fill="clear" size="large" color="secondary">{{'NavBar.about' | translate}}</ion-button>
+    </ion-buttons>
+    <ion-title>
+      <img src="assets/logo.png" height="60px" (click)="navCtrl.navigateRoot('/')" style="cursor: pointer;" />
+    </ion-title>
+    <ng-container *ngIf="auth.isAuthenticate()">
+      <ion-buttons class="ion-hide-md-down" slot="end">
+        <ion-button fill="clear" size="large" color="primary" (click)="goto('/orders')">
+          {{'NavBar.orders' | translate}}
+        </ion-button>
+      </ion-buttons>
+      <ion-buttons class="ion-hide-md-up" slot="end">
+        <ion-button fill="clear" size="large" color="primary" (click)="goto('/orders')">
+          <ion-icon name="clipboard-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+
+    </ng-container>
+    <ng-container *ngIf="!auth.isAuthenticate()">
+      <ion-buttons class="ion-hide-md-down" slot="end">
+        <ion-button fill="clear" size="large" color="tertiary" (click)="openLoginModal(true)">
+          {{'NavBar.register' | translate}}
+        </ion-button>
+        <ion-button fill="solid" size="large" (click)="openLoginModal()">{{'NavBar.login' | translate}}</ion-button>
+      </ion-buttons>
+      <ion-buttons class="ion-hide-md-up" slot="end">
+        <ion-button fill="clear" size="large" color="primary" (click)="openLoginModal()">
+          <ion-icon name="person-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+
+    </ng-container>
+  </ion-toolbar>
+</ion-header>

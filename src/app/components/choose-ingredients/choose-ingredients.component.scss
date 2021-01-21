@@ -1,0 +1,50 @@
+#ingredients-list {
+    text-align: center;
+    margin-top: 1em;
+    max-width: 80%;
+    margin-left: 10%;
+
+    ion-button {
+        font-weight: bold;
+        margin-top: 1em;
+        margin-left: 1em;
+        padding: 0.25em;
+        border: 2px solid transparent;
+        border-radius: 0.5em;
+        box-shadow: 0px 9px 20px 2px rgba(188, 188, 188, 0.2);
+
+        font-size: 1.1em;
+
+        ion-icon {
+            font-size: 2.1em;
+        }
+    }
+
+    ion-button.active {
+        border: 2px solid var(--ion-color-primary);
+        transition: all 300ms;
+    }
+}
+
+#startSearchForIngredients {
+    margin-top: 2em;
+    text-align: center;
+
+    ion-button {
+        font-weight: bold;
+    }
+}
+
+h3,
+h2 {
+    margin: 0;
+    text-align: center;
+}
+
+h2 {
+    font-size: 1.4em;
+}
+
+h3 {
+    font-size: 1.2em;
+}

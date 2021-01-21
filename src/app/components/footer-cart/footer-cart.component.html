@@ -1,0 +1,28 @@
+<ion-footer class="ion-hide-md-up">
+  <ion-toolbar class="ion-padding" style="padding-left: 0;">
+    <ion-grid class="neutral">
+      <ion-row>
+        <ion-col>
+          <div class="ion-padding-start">
+            {{getQta()}} {{"FooterCart.element_in_cart" | translate}}
+          </div>
+          <div class="ion-padding-start">
+            <strong>{{"FooterCart.cart_total" | translate:cart}}</strong>: € {{getTotal().toFixed(2)}}
+          </div>
+
+          <ion-button size="small" fill="clear" color="primary"
+            style="margin-left: 0; padding-left: 0.4em; margin-top: 1em;"
+            (click)="cartDetails()">
+            {{"FooterCart.cart_details" | translate:cart}}
+          </ion-button>
+        </ion-col>
+        <ion-col class="ion-text-right flex-center">
+          <ion-button color="primary" [disabled]="cart.items.length == 0 || getButtonDisabled()"
+            style="font-weight: bold; margin: 0 0 0 auto;" (click)="confirm.emit()">
+            {{(options?.confirm_button_text || "FooterCart.confirm_order") | translate}}
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

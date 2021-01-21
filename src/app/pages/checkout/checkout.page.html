@@ -1,0 +1,277 @@
+<bonapp-header></bonapp-header>
+
+<ion-content>
+  <div class="container ion-padding">
+    <ion-grid class="neutral">
+      <ion-row>
+        <ion-col size-xs="12" size-sm="12" size-md="8" size-lg="8" size-xl="8">
+
+          <h1 style="margin-bottom: 4em; display: flex;">
+            <ion-button size="small" fill="outline" color="secondary" (click)="navCtrl.back()"
+              style="margin-right: 1em;">
+              {{'Receipt.back' | translate}}
+            </ion-button>
+            <ion-text color="secondary">{{'Checkout.title' | translate}}</ion-text>
+          </h1>
+
+          <div style="margin-bottom: 4em;">
+            <h2>
+              <ion-text color="secondary">{{'Checkout.contact_info' | translate}}</ion-text>
+            </h2>
+            <div class="partial-border light partial-on-left"></div>
+            <ion-grid id="contact-info-form" class="neutral">
+              <ion-row>
+                <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6" size-xl="6">
+                  <ion-label>{{'Checkout.name' | translate}}</ion-label>
+                  <ion-input type="text" [(ngModel)]="order.name"></ion-input>
+                </ion-col>
+                <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6" size-xl="6">
+                  <ion-label>{{'Checkout.phone' | translate}}</ion-label>
+                  <ion-input type="tel" [(ngModel)]="order.phone"></ion-input>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </div>
+
+          <div style="margin-bottom: 4em;">
+            <h2>
+              <ion-text color="secondary">{{'Checkout.delivery_address' | translate}}</ion-text>
+            </h2>
+            <div class="partial-border light partial-on-left"></div>
+
+            <ion-grid>
+              <ion-row>
+                <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6" size-xl="6"
+                  *ngFor="let address of user?.addresses.slice(0, 3)">
+                  <ion-card button class="address" (click)="selectAddress(address)"
+                    [ngClass]="{active: address.selected}">
+                    <ion-card-content>
+                      <ion-grid class="neutral">
+                        <ion-row>
+                          <ion-col>
+                            <div><b>{{'Checkout.address' | translate}}</b></div>
+                            <div>{{address.street}}, {{address.street_number}} - {{address.city}}</div>
+                          </ion-col>
+                        </ion-row>
+                        <ion-row>
+                          <ion-col>
+                            <div><b>{{'Checkout.address_note' | translate}}</b></div>
+                            <div>{{address.note || '-'}}</div>
+                          </ion-col>
+                        </ion-row>
+                      </ion-grid>
+                    </ion-card-content>
+                  </ion-card>
+                </ion-col>
+                <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6" size-xl="6">
+                  <ion-card button class="add-address" [button]="true" style="cursor: pointer;"
+                    (click)="selectAddress(null);openAddressModal()">
+                    <ion-card-content>
+                      <div style="margin: 0 auto; display: flex; align-items: center;">
+                        <ion-icon name="add" style="font-size: 3em;"></ion-icon>
+                        {{'Checkout.add_address' | translate}}
+                      </div>
+                    </ion-card-content>
+                  </ion-card>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+
+
+
+          </div>
+
+          <div id="delivery-times" style="margin-bottom: 4em;">
+            <h2>
+              <ion-text color="secondary">{{'Checkout.delivery_time' | translate}}</ion-text>
+            </h2>
+            <div class="partial-border light partial-on-left"></div>
+            <ion-grid id="delivery-times-grid" class="neutral">
+              <ion-row>
+                <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6" size-xl="6">
+                  <ion-grid class="neutral" style="height: 100%;">
+                    <ion-row style="height: 100%;">
+                      <ion-col size-xs="12" size-sm="12" size-md="4" size-lg="4" size-xl="4"
+                        style="display: flex; align-items: center;">
+                        <ion-button color="light" [ngClass]="{active: order.delivery_time == 'asap'}"
+                          (click)="order.delivery_time = 'asap'">
+                          <ion-label>
+                            <div><strong>ASAP</strong></div>
+                            <div>15 - 25 min</div>
+                          </ion-label>
+                        </ion-button>
+                      </ion-col>
+                      <ion-col size-xs="12" size-sm="12" size-md="4" size-lg="4" size-xl="4" class="ion-text-center"
+                        size="4" style="display: flex; align-items: center;">
+                        <div style="margin: 0 auto;"><strong>or</strong></div>
+                      </ion-col>
+                      <ion-col size-xs="12" size-sm="12" size-md="4" size-lg="4" size-xl="4"
+                        style="display: flex; align-items: center;">
+                        <div class="ion-text-center" style="margin: 0 auto;">
+                          <ion-icon src="assets/receipts/clock.svg"></ion-icon>
+                          <br>
+                          Schedule
+                        </div>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                </ion-col>
+                <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6" size-xl="6">
+                  <ion-grid class="neutral">
+                    <ion-row>
+                      <ion-col size="4" *ngFor="let time of delivery_times">
+                        <ion-button color="light" [ngClass]="{active: order.delivery_time == time}"
+                          (click)="order.delivery_time = time">{{time}}</ion-button>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </div>
+
+          <div style="margin-bottom: 4em;">
+            <h2>
+              <ion-text color="secondary">{{'Checkout.delivery_method' | translate}}</ion-text>
+            </h2>
+            <div class="partial-border light partial-on-left"></div>
+            <div id="delivery-method-buttons" class="ion-padding">
+              <ion-button size="large" color="light" [ngClass]="{active: order.delivery_method == 'standard'}"
+                (click)="order.delivery_method = 'standard'">
+                {{'Checkout.delivery_standard' | translate}}
+              </ion-button>
+              <ion-button size="large" color="light" [ngClass]="{active: order.delivery_method == 'footstep'}"
+                (click)="order.delivery_method = 'footstep'">
+                {{'Checkout.delivery_footstep' | translate}}
+              </ion-button>
+            </div>
+          </div>
+
+          <div id="payments" style="margin-bottom: 4em;">
+            <h2>
+              <ion-text color="secondary">{{'Checkout.payment_info' | translate}}</ion-text>
+            </h2>
+            <div class="partial-border light partial-on-left"></div>
+            <!-- <ion-card button [ngClass]="{'active': selectedPayment == card.id}" *ngFor="let card of payments"
+              (click)="selectedPayment = card.id; addMethod = false">
+              <ion-card-content>
+                <ion-icon name="card" color="primary"></ion-icon>
+                **** **** **** {{card.last4}}
+              </ion-card-content>
+            </ion-card> -->
+            <!-- <ion-card button [ngClass]="{'active': addMethod && selectedPayment == null}" (click)="selectedPayment = null"> -->
+            <ion-card button (click)="selectedPayment = null">
+              <ion-card-content [ngClass]="{'ion-text-center': !addMethod}">
+                <!-- <ng-container *ngIf="addMethod"> -->
+                <div class="ion-padding">
+                  <h2>
+                    <ion-text color="secondary">{{'Checkout.credit_card' | translate}}</ion-text>
+                  </h2>
+                  <div class="partial-border light partial-on-left"></div>
+                </div>
+                <div class="ion-padding">
+
+                  <div id="stripe-card" #form></div>
+
+                </div>
+                <ion-item lines="none">
+                  <ion-label style="font-size: 0.9em;">{{'Checkout.save_card' | translate}}</ion-label>
+                  <ion-checkbox slot="start" [(ngModel)]="saveCard"></ion-checkbox>
+                </ion-item>
+                <!-- <ion-button fill="clear" color="secondary" (click)="addMethod = !addMethod">
+                    {{'Checkout.add_payment_cancel' | translate}}
+                  </ion-button>
+                  <ion-button class="ion-float-right" color="primary" (click)="addPayment()">
+                    {{'Checkout.add_payment_next' | translate}}
+                  </ion-button> -->
+                <!-- </ng-container> -->
+                <!-- <ng-container *ngIf="!addMethod">
+                  <ion-button fill="clear" color="secondary" (click)="addMethod = !addMethod; createPaymentForm()">
+                    <ion-icon name="add"></ion-icon>
+                  </ion-button>
+                </ng-container> -->
+
+              </ion-card-content>
+            </ion-card>
+          </div>
+
+        </ion-col>
+
+        <ion-col class="ion-hide-md-down" size="4">
+          <div style="position: fixed; width: 30%;">
+            <ion-card>
+              <ion-card-content>
+                <h2>
+                  <ion-text color="secondary">{{'Checkout.your_order' | translate}}</ion-text>
+                </h2>
+                <div class="partial-border light partial-on-left"></div>
+                <ion-grid class="neutral cart-item" *ngFor="let item of cart.items">
+                  <ion-row style="margin-bottom: 1em;">
+                    <ion-col size="3">
+                      <div
+                        [ngStyle]="{background: 'url('+item.ingredient?.icon_url+') no-repeat center center', 'background-size': 'contain'}"
+                        style="height: 90%;width: 90%;margin: 5%;"></div>
+                    </ion-col>
+                    <ion-col size="9">
+                      <ion-grid>
+                        <ion-row>
+                          <ion-col size="9">
+                            {{item.ingredient?.name}}
+                          </ion-col>
+                          <ion-col class="ion-text-right" size="3">€ {{item.ingredient?.price.toFixed(2)}}</ion-col>
+                        </ion-row>
+                        <ion-row class="qta-wrapper">
+                          <ion-col class="less" size="3" (click)="cart.add(item.ingredient, -1)">
+                            <!-- <ion-button fill="clear" color="secondary"> -->
+                            <ion-icon name="remove" color="secondary"></ion-icon>
+                            <!-- </ion-button> -->
+                          </ion-col>
+                          <ion-col size="6" class="qta">
+                            <div>
+                              x{{item.qta}}
+                            </div>
+                          </ion-col>
+                          <ion-col class="add" size="3" class="ion-text-right" (click)="cart.add(item.ingredient, 1)">
+                            <!-- <ion-button fill="clear" color="secondary"> -->
+                            <ion-icon name="add" color="secondary"></ion-icon>
+                            <!-- </ion-button> -->
+                          </ion-col>
+                        </ion-row>
+                      </ion-grid>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+
+                <ion-grid id="cart-summary">
+                  <ion-row>
+                    <ion-col>{{'Checkout.products' | translate}}</ion-col>
+                    <ion-col class="ion-text-right">€ {{cart.total.toFixed(2)}}</ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col>{{'Checkout.delivery' | translate}}</ion-col>
+                    <ion-col class="ion-text-right">€ {{ order.delivery_method == 'standard'? '0.99' : '2.49'}}
+                    </ion-col>
+                  </ion-row>
+                  <ion-row style="margin-top: 1.5em;">
+                    <ion-col><b>{{'Checkout.total' | translate}}</b></ion-col>
+                    <ion-col class="ion-text-right"><b>€ {{ getTotal().toFixed(2)}}</b></ion-col>
+                  </ion-row>
+                </ion-grid>
+
+              </ion-card-content>
+            </ion-card>
+
+            <ion-button id="confirm-order-button" class="ion-margin" expand="full" size="large"
+              [disabled]="cart.items.length == 0" style="font-weight: bold;" (click)="payWithCard()">
+              {{"Checkout.confirm_order" | translate}}
+            </ion-button>
+          </div>
+
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>
+
+<footer-cart class="ion-hide-md-up" [order]="order" (confirm)="payWithCard()"></footer-cart>

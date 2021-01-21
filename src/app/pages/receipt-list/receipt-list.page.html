@@ -1,0 +1,15 @@
+<bonapp-header></bonapp-header>
+
+<ion-content>
+  <div class="container">
+
+    <h1 style="margin: 1em; display: flex;">
+      <ion-button size="small" fill="outline" color="secondary" (click)="navCtrl.back()" style="margin-right: 1em;">
+        {{'Receipt.back' | translate}}
+      </ion-button>
+    </h1>
+
+    <random-receipts [receipts]="receipts"></random-receipts>
+
+  </div>
+</ion-content>

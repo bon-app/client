@@ -1,0 +1,21 @@
+<div id="ingredients-wrapper">
+  <h2>{{'IngredientsForm.title' | translate}}</h2>
+  <ion-auto-complete #autoComplete [options]="{ placeholder : ('IngredientsForm.add_ingredient' | translate) }"
+    [dataProvider]="ingredientDataProvider" (itemSelected)="addIngredient($event); autoComplete.clearValue()">
+  </ion-auto-complete>
+  <div class="ion-padding-top ion-padding-bottom">
+    <ion-reorder-group [disabled]="true" (ionItemReorder)="reorderItems($event)">
+      <ion-item *ngFor="let item of items;">
+        <ion-reorder slot="start"></ion-reorder>
+        <ion-label>
+          {{item.name}}
+        </ion-label>
+        <ion-icon name="trash" slot="end" (click)="removeIngredient(item)"></ion-icon>
+      </ion-item>
+    </ion-reorder-group>
+  </div>
+  <div class="ion-padding">
+    <ion-button fill="clear" (click)="close()">{{'IngredientsForm.cancel' | translate}}</ion-button>
+    <ion-button class="ion-float-right" color="primary" (click)="save()">{{'IngredientsForm.save' | translate}}</ion-button>
+  </div>
+</div>

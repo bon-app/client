@@ -1,0 +1,180 @@
+{
+    "Errors": {
+        "_USER_NOT_FOUND": "Email e/o password errate",
+        "_NO_ORDER_ADDRESS": "Seleziona o aggiungi un indirizzo",
+        "_NO_ORDER_PAYMENT": "Seleziona o aggiungi un metodo di pagamento"
+    },
+    "DB": {
+        "Ingredients": {
+            "name": "Nome",
+            "brand": "Marca",
+            "price": "Prezzo",
+            "icon_url": "URL Immagine",
+            "active": "Attivo"
+        },
+        "Categories": {
+            "id": "id",
+            "name": "Nome",
+            "ingredients": "Prodotti",
+            "subcategories": "Sottocategorie"
+        },
+        "Receipts": {
+            "id": "id",
+            "name": "Nome",
+            "description": "Descrizione",
+            "kcal": "Kcal",
+            "preparing": "Preparazione",
+            "time": "Tempo",
+            "image_url": "URL immagine",
+            "ingredients": "Ingredienti"
+        },
+        "RIM": {
+            "id": "id",
+            "name": "Nome",
+            "matchingName": "Matching name",
+            "isCondiment": "Condimento",
+            "icon_url": "URL immagine",
+            "ingredients": "Ingredienti"
+        }
+    },
+    "Ingredients": {
+        "asparagus": "Asparagi",
+        "avocado": "Avocado",
+        "beef": "Manzo",
+        "broccoli": "Broccoli",
+        "chicken": "Pollo",
+        "egg": "Uova",
+        "gorgonzola": "Gorgonzola",
+        "mozzarella": "Mozzarella",
+        "pasta": "Pasta",
+        "pesto": "Pesto",
+        "pork": "Maiale",
+        "salmon": "Salmone",
+        "tuna": "Tonno",
+        "wheat": "Farina",
+        "zucchini": "Zucchine"
+    },
+    "Login": {
+        "email": "Email",
+        "password": "Password",
+        "login": "Accedi",
+        "signin": "Registrati",
+        "cancel": "indietro",
+        "name": "Nome",
+        "surname": "Cognome",
+        "phone": "Telefono",
+        "c_password": "Conferma password",
+        "c_password_error": "Le password non coincidono"
+    },
+    "NavBar": {
+        "register": "Registrati",
+        "login": "Login",
+        "orders": "Ordini",
+        "about": "About BonApp"
+    },
+    "ChooseIngredients": {
+        "title": "Scegli i tuoi ingredienti",
+        "subtitle": "Personalizza la tua esperienza",
+        "bonapp": "BonAppa!"
+    },
+    "Home": {
+        "h1": "Ricette e ingredienti, consegnati in meno di 25 minuti",
+        "all_receipts": "Tutte le ricette",
+        "market": "Il Supermercato"
+    },
+    "RandomReceipts": {
+        "title": "Scelte per questa sera"
+    },
+    "Receipt": {
+        "back": "Back",
+        "ingredients_info": "Ingredienti per 1 porzione",
+        "goto_market": "Vai al negozio"
+    },
+    "ReceiptBuy": {
+        "ingredients_for": "Ingredienti per {{name}}",
+        "goto_checkout": "Prosegui",
+        "cart": "Carrello",
+        "cart_total": "Totale",
+        "categories": "Categorie",
+        "condiments": "Condimenti",
+        "element_in_cart": "{{items.length}} prodotti nel carrello",
+        "cart_details": "Dettiglio carrello"
+    },
+    "AddressForm": {
+        "address": "Indirizzo",
+        "street": "Via / C.so / Piazza",
+        "street_number": "Civico",
+        "city": "Città",
+        "prov": "Provincia",
+        "state": "Stato",
+        "note": "Note",
+        "save": "Salva",
+        "cancel": "Annulla",
+        "save_address": "Salva indirizzo"
+    },
+    "FooterCart": {
+        "element_in_cart": " prodotti nel carrello",
+        "cart_total": "Totale",
+        "cart_details": "Dettiglio carrello",
+        "confirm_order": "Conferma ordine"
+    },
+    "Checkout": {
+        "products": "Prodotti",
+        "delivery": "Consegna",
+        "total": "Totale",
+        "your_order": "Il tuo ordine",
+        "delivery_address": "Indirizzo",
+        "delivery_time": "Orario di consegna",
+        "delivery_method": "Metodo di consegna",
+        "delivery_standard": "Consegna al citofono",
+        "delivery_footstep": "Consegna fino alla porta (+€ 1.50)",
+        "payment_info": "Pagamento",
+        "contact_info": "Contatti",
+        "title": "Checkout",
+        "name": "Nome e cognome",
+        "phone": "Telefono",
+        "confirm_order": "Conferma ordine",
+        "add_address": "Aggiungi indirizzo",
+        "address": "Indirizzo",
+        "address_note": "Note",
+        "credit_card": "Carta di credito/debito",
+        "save_card": "Salva metodo di pagamento",
+        "add_payment_cancel": "Annulla",
+        "add_payment_next": "Procedi"
+    },
+    "OrderConfirm": {
+        "status": "Il tuo ordine è in arrivo!",
+        "status_sub": "Riceverai un'e-mail con i dettagli dell'ordine",
+        "order_detail": "Dettaglio ordine",
+        "customer_details": "Dettaglio cliente",
+        "order_details": {
+            "name": "Nome e cognome",
+            "id": "ID ordine",
+            "address": "Indirizzo",
+            "note": "Note",
+            "payment_method": "Metodo di pagamento",
+            "credit_card": "Carta di credito/debito"
+        }
+    },
+    "Orders": {
+        "details": "Dettagli",
+        "title": "Ordini effettati",
+        "status": "Stato ordine",
+        "status_list": {
+            "payment_pending": "In attesa di pagamento",
+            "paid": "Pagato"
+        }
+    },
+    "IngredientsPriority": {
+        "title": "Lista ingredienti",
+        "add_ingredient": "Cerca e aggiungi ingrediente",
+        "cancel": "Annulla",
+        "save": "Salva"
+    },
+    "IngredientsForm": {
+        "title": "Lista ingredienti",
+        "add_ingredient": "Cerca e aggiungi ingrediente",
+        "cancel": "Annulla",
+        "save": "Salva"
+    }
+}

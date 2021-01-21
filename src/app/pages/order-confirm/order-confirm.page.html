@@ -1,0 +1,109 @@
+<bonapp-header></bonapp-header>
+
+<ion-content>
+  <div class="container" *ngIf="order">
+    <div class="ion-text-center ion-margin" style="margin-top: 3em;">
+      <img src="assets/confirm-box.png" style="width: 25%;" />
+      <h1 style="margin-bottom: 0;">
+        <ion-text color="secondary">
+          <strong>{{'OrderConfirm.status' | translate}}</strong>
+        </ion-text>
+      </h1>
+      <h2 style="margin-top: 0;">
+        <ion-text color="tertiary">{{'OrderConfirm.status_sub' | translate}}</ion-text>
+      </h2>
+    </div>
+    <ion-grid id="info-cards" class="neutral ion-margin-top">
+      <ion-row>
+        <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6" size-xl="6">
+          <ion-card>
+            <ion-card-content>
+              <div style="margin-bottom: 2em;">
+                <h2>
+                  <ion-text color="secondary">{{'OrderConfirm.customer_details' | translate}}</ion-text>
+                </h2>
+                <div class="partial-border light partial-on-left"></div>
+              </div>
+
+              <div id="customer-details">
+                <div>
+                  <ion-label class="ion-padding-top ion-padding-bottom">
+                    <b>{{'OrderConfirm.order_details.name' | translate}}</b>
+                  </ion-label>
+                  <div>{{order.name}}</div>
+                </div>
+                <div>
+                  <ion-label class="ion-padding-top ion-padding-bottom">
+                    <b>{{'OrderConfirm.order_details.id' | translate}}</b>
+                  </ion-label>
+                  <div style="text-transform: uppercase;">#{{order.id}}</div>
+                </div>
+                <div>
+                  <ion-label class="ion-padding-top ion-padding-bottom">
+                    <b>{{'OrderConfirm.order_details.address' | translate}}</b>
+                  </ion-label>
+                  <div>{{order.address.street}}, {{order.address.street_number}} - {{order.address.city}}</div>
+                </div>
+                <div>
+                  <ion-label class="ion-padding-top ion-padding-bottom">
+                    <b>{{'OrderConfirm.order_details.note' | translate}}</b>
+                  </ion-label>
+                  <div>{{order.address.note || '-'}}</div>
+                </div>
+                <div>
+                  <ion-label class="ion-padding-top ion-padding-bottom">
+                    <b>{{'OrderConfirm.order_details.payment_method' | translate}}</b>
+                  </ion-label>
+                  <div>{{'OrderConfirm.order_details.credit_card' | translate}}</div>
+                </div>
+              </div>
+
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6" size-xl="6">
+          <ion-card>
+            <ion-card-content>
+              <div style="margin-bottom: 2em;">
+                <h2>
+                  <ion-text color="secondary">{{'OrderConfirm.order_detail' | translate}}</ion-text>
+                </h2>
+                <div class="partial-border light partial-on-left"></div>
+              </div>
+
+              <ion-grid id="cart-items">
+                <ion-row *ngFor="let item of order.info">
+                  <ion-col size="2">
+                    x{{item.qta}}
+                  </ion-col>
+                  <ion-col>{{item.ingredient.name}}</ion-col>
+                  <ion-col size="3" class="ion-text-right">
+                    € {{item.ingredient.price.toFixed(2)}}
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+
+
+              <ion-grid id="cart-summary">
+                <ion-row>
+                  <ion-col>{{'Checkout.products' | translate}}</ion-col>
+                  <ion-col class="ion-text-right">€ {{getTotal(false).toFixed(2)}}</ion-col>
+                </ion-row>
+                <ion-row *ngIf="order">
+                  <ion-col>{{'Checkout.delivery' | translate}}</ion-col>
+                  <ion-col class="ion-text-right">€ {{order.shipping_cost}}</ion-col>
+                </ion-row>
+                <ion-row style="margin-top: 1.5em;">
+                  <ion-col><b>{{'Checkout.total' | translate}}</b></ion-col>
+                  <ion-col class="ion-text-right"><b>€ {{ getTotal().toFixed(2)}}</b></ion-col>
+                </ion-row>
+              </ion-grid>
+
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+</ion-content>

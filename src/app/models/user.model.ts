@@ -1,0 +1,9 @@
+export class User {
+    public id: string;
+    public email: string;
+    public password: string;
+    public name: string;
+    public surname: string;
+    public addresses?: { street?: string, street_number?: string, city?: string, prov?: string, state?: string, note?: string, [key: string]: any }[] = [];
+    public phone: string;
+}

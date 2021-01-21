@@ -1,0 +1,93 @@
+#receipt-info {
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    >div {
+        float: left;
+        padding: 1em;
+        font-size: 1.2em;
+        color: var(--ion-color-tertiary);
+
+        ion-icon {
+            font-size: 2em;
+            color: var(--ion-color-tertiary);
+        }
+    }
+
+    >.divider {
+        background: var(--ion-color-tertiary);
+        width: 2px;
+        height: 3em;
+    }
+}
+
+#image {
+    min-height: 300px;
+}
+
+#ingredients {
+    padding: 1em;
+}
+
+h1 {
+    margin-top: 0;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+#info {
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+ul {
+    list-style-type: square;
+    border-left: 2px solid var(--ion-color-tertiary);
+
+    li {
+        font-size: 1.2em;
+        margin-bottom: 0.5em;
+    }
+}
+
+#recept-description {
+    font-size: 1.4em;
+}
+
+#back {
+    margin-top: 3em;
+    margin-bottom: 3em;
+}
+
+.partial-border.big:after {
+    margin-left: 0 !important;
+}
+
+#button-goto-market {
+    margin-top: 3em;
+
+    ion-button {
+        font-weight: bold;
+    }
+}
+
+#preparation {
+    margin-top: 3em;
+}
+
+
+@media only screen and (max-width: 768px) {
+    #receipt-info {
+        >div {
+            margin: 0 auto;
+        }
+    }
+
+    #info {
+        h1 {
+            padding-top: 1em;
+        }
+    }
+
+}

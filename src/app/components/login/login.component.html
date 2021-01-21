@@ -1,0 +1,66 @@
+<div id="login-wrapper">
+  <ng-container *ngIf="section == 'login'">
+    <form #loginForm="ngForm">
+      <div class="ion-padding ion-text-center">
+        <img src="assets/logo.png" height="60px" />
+      </div>
+      <ion-item>
+        <ion-label position="floating">{{'Login.email' | translate}}</ion-label>
+        <ion-input type="email" name="username" [(ngModel)]="user.email" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">{{'Login.password' | translate}}</ion-label>
+        <ion-input type="password" name="password" [(ngModel)]="user.password" required></ion-input>
+      </ion-item>
+      <div class="ion-padding">
+        <ion-button type="submit" expand="full" color="primary" [disabled]="loginForm.invalid" (click)="login()">
+          {{'Login.login' | translate}}</ion-button>
+        <ion-button expand="full" fill="clear" color="primary" (click)="section = 'signin'">
+          {{'Login.signin' | translate}}</ion-button>
+      </div>
+    </form>
+  </ng-container>
+
+  <ng-container *ngIf="section == 'signin'">
+    <form #loginForm="ngForm">
+      <div class="ion-padding ion-text-center">
+        <img src="assets/logo.png" height="60px" />
+      </div>
+      <ion-item>
+        <ion-label position="floating">{{'Login.name' | translate}}</ion-label>
+        <ion-input type="text" name="name" [(ngModel)]="user.name" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">{{'Login.surname' | translate}}</ion-label>
+        <ion-input type="text" name="surname" [(ngModel)]="user.surname" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">{{'Login.phone' | translate}}</ion-label>
+        <ion-input type="tel" name="phone" [(ngModel)]="user.phone" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">{{'Login.email' | translate}}</ion-label>
+        <ion-input type="email" name="username" [(ngModel)]="user.email" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">{{'Login.password' | translate}}</ion-label>
+        <ion-input type="password" name="password" [(ngModel)]="user.password" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">{{'Login.c_password' | translate}}</ion-label>
+        <ion-input type="password" name="c_password" [(ngModel)]="c_password" required></ion-input>
+      </ion-item>
+      <div class="ion-padding" *ngIf="user.password != c_password">
+        <ion-text color="danger">{{'Login.c_password_error' | translate}}</ion-text>
+      </div>
+      <div class="ion-padding">
+        <ion-button type="submit" expand="full" color="primary"
+          [disabled]="loginForm.invalid || user.password != c_password" (click)="signIn()">
+          {{'Login.signin' | translate}}</ion-button>
+        <ion-button expand="full" fill="clear" color="primary" (click)="section = 'login'">
+          {{'Login.cancel' | translate}}</ion-button>
+      </div>
+    </form>
+  </ng-container>
+
+</div>

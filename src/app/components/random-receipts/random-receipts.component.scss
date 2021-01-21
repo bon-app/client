@@ -1,0 +1,61 @@
+h3,
+h2 {
+    margin: 0;
+    text-align: center;
+}
+
+h2 {
+    font-size: 1.4em;
+}
+
+h3 {
+    font-size: 1.2em;
+}
+
+ion-card {
+    padding: 0;
+    --padding-start: 0;
+    --padding-end: 0;
+    border-radius: 0.5em;
+    overflow: hidden;
+    cursor: pointer;
+
+    ion-card-header {
+        padding-left: 0;
+    }
+
+    ion-card-content {
+        padding: 0;
+        --padding-start: 0;
+        --padding-end: 0;
+    }
+}
+
+.partial-border.primary:after {
+    content: '';
+    width: 30px;
+    height: 4px;
+    margin-left: -15px;
+    background: #EFBDAE;
+    position: absolute;
+    bottom: -4px;
+}
+
+@media only screen and (max-width: 768px) {
+
+    ion-card-title {
+        padding-left: 1em;
+        text-align: center;
+    }
+
+    #info-cook {
+        display: flex;
+        align-items: center;
+
+        >div {
+            padding: 0.5em;
+            padding-top: 1.5em;
+            margin: 0 auto;
+        }
+    }
+}

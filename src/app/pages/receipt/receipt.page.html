@@ -1,0 +1,53 @@
+<bonapp-header></bonapp-header>
+
+<ion-content>
+  <div class="container" *ngIf="receipt">
+    <div id="back">
+      <ion-button size="small" fill="outline" color="secondary" (click)="navCtrl.back()">{{'Receipt.back' | translate}}</ion-button>
+    </div>
+    <ion-grid class="neutral">
+      <ion-row>
+        <ion-col id="image" size-xs="12" size-sm="12" size-md="4" size-lg="4" size-xl="4"
+          [ngStyle]="{background: 'url('+receipt.image_url+') no-repeat center center', 'background-size': 'cover'}">
+        </ion-col>
+        <ion-col id="info" size-xs="12" size-sm="12" size-md="5" size-lg="5" size-xl="5">
+          <h1>{{receipt?.name}}</h1>
+          <div class="partial-border light big ion-margin-top ion-margin-bottom"></div>
+          <div id="receipt-info">
+            <div class="ion-margin-top ion-margin-bottom ion-text-center">
+              <div>
+                <ion-icon src="assets/receipts/clock.svg"></ion-icon>
+              </div>
+              <div>
+                {{receipt.time}}
+              </div>
+            </div>
+            <!-- <div class="divider"></div> -->
+            <div class="ion-margin-top ion-margin-bottom ion-text-center">
+              <div>
+                <ion-icon src="assets/receipts/flame.svg"></ion-icon>
+              </div>
+              <div>
+                {{receipt.kcal}}
+              </div>
+            </div>
+            <div class="ion-hide-md-down" style="clear: both"></div>
+          </div>
+          <div id="recept-description" [innerHTML]="receipt.description"></div>
+        </ion-col>
+        <ion-col id="ingredients" class="ion-padding" size-xs="12" size-sm="12" size-md="3" size-lg="3" size-xl="3">
+          <h2>{{'Receipt.ingredients_info' | translate}}</h2>
+          <ul>
+            <li *ngFor="let i of receipt.ingredients"> {{i.qta}} <strong>{{i.ingredient?.name}}</strong> </li>
+          </ul>
+          <div id="button-goto-market">
+            <ion-button color="primary" size="large" [routerLink]="'/receipt/' + receipt.id + '/buy'">
+              {{'Receipt.goto_market' | translate}}
+            </ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <div id="preparation" class="ion-padding" [innerHTML]="receipt.preparing"></div>
+  </div>
+</ion-content>

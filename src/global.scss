@@ -1,0 +1,97 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+@import "./assets/ionic-style.extended.scss";
+@import "~ionic4-auto-complete/auto-complete";
+
+* {
+    color: var(--ion-color-secondary);
+}
+
+ion-header {
+    background: white;
+}
+
+.container {
+    max-width: 1360px;
+    margin: 0 auto;
+}
+
+ion-header {
+    box-shadow: 0px 9px 20px 2px rgba(188, 188, 188, 0.05);
+}
+
+ion-toolbar {
+    --min-height: 90px;
+    max-width: 1360px;
+    margin: 0 auto;
+}
+
+/** PARTIAL BORDER */
+.partial-border {
+    position: relative;
+}
+
+.partial-border:after {
+    content: '';
+    width: 60px;
+    height: 2px;
+    margin-left: calc(50% - 30px);
+    background: #545454;
+    position: absolute;
+    bottom: -2px;
+}
+
+.partial-border.light:after {
+    background: #bcbcbc2f;
+}
+
+.partial-border.big:after {
+    width: 30%;
+    margin-left: 35%;
+}
+
+
+.partial-border.partial-on-left:after {
+    content: '';
+    width: 60px;
+    height: 2px;
+    margin-left: 0;
+    background: #545454;
+    position: absolute;
+    bottom: -2px;
+}
+
+// LUCKYSHEET CSS FIX
+#luckysheet_info_detail,
+#luckysheet-bottom-controll-row {
+    display: none !important;
+}
+
+#luckysheet-rich-text-editor {
+    -webkit-user-modify: read-write;
+    color: black;
+}

@@ -1,0 +1,39 @@
+<!-- <ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button fill="clear" size="large" color="secondary">{{'NavBar.about' | translate}}</ion-button>
+    </ion-buttons>
+    <ion-title>
+      <img src="assets/logo.png" height="60px" />
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" size="large" color="tertiary">{{'NavBar.register' | translate}}</ion-button>
+      <ion-button fill="solid" size="large">{{'NavBar.login' | translate}}</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header> -->
+<bonapp-header></bonapp-header>
+
+<ion-content>
+  <div class="container">
+    <h1>{{'Home.h1' | translate}}</h1>
+
+    <choose-ingredients></choose-ingredients>
+
+    <div class="ion-text-center" id="buttons">
+      <ion-button color="primary" size="large" [routerLink]="'/receipts'">
+        {{'Home.all_receipts' | translate}}
+      </ion-button>
+      <ion-button color="primary" size="large">
+        {{'Home.market' | translate}}
+      </ion-button>
+    </div>
+
+    <div>
+      <h2>{{'RandomReceipts.title' | translate}}</h2>
+      <div class="partial-border ion-margin-top ion-margin-bottom"></div>
+    </div>
+    <random-receipts [receipts]="receipts"></random-receipts>
+
+  </div>
+</ion-content>

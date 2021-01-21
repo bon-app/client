@@ -1,0 +1,46 @@
+<div id="address-form">
+  <form #AddressFormForm="ngForm" (submit)="save()">
+    <h2>
+      <ion-text color="secondary">{{'AddressForm.address' | translate}}</ion-text>
+    </h2>
+    <div class="partial-border light partial-on-left"></div>
+    <ion-item>
+      <ion-label position="floating">{{'AddressForm.street' | translate}}</ion-label>
+      <ion-input type="text" name="street" [(ngModel)]="address.street" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">{{'AddressForm.street_number' | translate}}</ion-label>
+      <ion-input type="text" name="street_number" [(ngModel)]="address.street_number" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">{{'AddressForm.city' | translate}}</ion-label>
+      <ion-input type="text" name="city" [(ngModel)]="address.city" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">{{'AddressForm.prov' | translate}}</ion-label>
+      <ion-input type="text" name="prov" [(ngModel)]="address.prov" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">{{'AddressForm.state' | translate}}</ion-label>
+      <ion-input type="text" name="state" [(ngModel)]="address.state" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">{{'AddressForm.note' | translate}}</ion-label>
+      <ion-textarea [rows]="5" name="note" [(ngModel)]="address.note"></ion-textarea>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-label style="font-size: 0.9em;">{{'AddressForm.save_address' | translate}}</ion-label>
+      <ion-checkbox slot="start" name="save" [(ngModel)]="address.save"></ion-checkbox>
+    </ion-item>
+
+    <div class="ion-padding">
+      <ion-button type="submit" expand="full" color="primary" [disabled]="AddressFormForm.invalid">
+        {{'AddressForm.save' | translate}}
+      </ion-button>
+      <ion-button expand="full" fill="clear" color="primary" (click)="cancel()">
+        {{'AddressForm.cancel' | translate}}
+      </ion-button>
+    </div>
+  </form>
+</div>

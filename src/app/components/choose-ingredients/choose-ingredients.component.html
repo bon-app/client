@@ -1,0 +1,20 @@
+<div>
+  <h3>
+    <ion-text color="tertiary">{{'ChooseIngredients.subtitle' | translate}}</ion-text>
+  </h3>
+  <h2>{{'ChooseIngredients.title' | translate}}</h2>
+  <div class="partial-border ion-margin-top ion-margin-bottom"></div>
+</div>
+<div id="ingredients-list">
+  <ion-button color="white" [ngClass]="{active: ingredient.active}" *ngFor="let ingredient of ingredients"
+    (click)="ingredient.active = !ingredient.active">
+    <ion-icon slot="start" [src]="ingredient.icon_url"></ion-icon>
+    {{ingredient.name | translate}}
+  </ion-button>
+</div>
+<div id="startSearchForIngredients">
+  <ion-button color="primary" size="large" [disabled]="!canStartSearch()" (click)="searchReceipts()">
+    {{'ChooseIngredients.bonapp' | translate}}
+  </ion-button>
+</div>
+<div class="partial-border light big ion-margin-top ion-margin-bottom" ></div>

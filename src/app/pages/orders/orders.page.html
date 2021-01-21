@@ -1,0 +1,77 @@
+<bonapp-header></bonapp-header>
+
+<ion-content>
+
+  <div class="container">
+
+    <h1 style="margin: 1em; display: flex;">
+      <ion-button size="small" fill="outline" color="secondary" (click)="navCtrl.back()" style="margin-right: 1em;">
+        {{'Receipt.back' | translate}}
+      </ion-button>
+      <ion-text color="secondary">{{'Orders.title' | translate}}</ion-text>
+    </h1>
+    <ion-grid>
+      <ion-row>
+        <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6" size-xl="6" *ngFor="let order of orders">
+          <ion-card>
+            <ion-card-content>
+              <ion-grid class="neutral order-info">
+                <ion-row>
+                  <ion-col size-xs="12" size-sm="12" size-md="12" size-lg="4" size-xl="4">
+                    <div class="ion-padding ion-text-center">
+                      <ngx-qrcode [elementType]="'canvas'" [value]="order.id" errorCorrectionLevel="L">
+                      </ngx-qrcode>
+                    </div>
+                  </ion-col>
+                  <ion-col class="ion-padding-top ion-padding-bottom flex-center">
+                    <h1>
+                      <b>{{'OrderConfirm.order_details.id' | translate}} </b>
+                      <span style="text-transform: uppercase;"> #{{order.id}}</span>
+                    </h1>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6" size-xl="6">
+                    <ion-label class="ion-padding-top ion-padding-bottom">
+                      <b>{{'OrderConfirm.order_details.address' | translate}}</b>
+                    </ion-label>
+                    <div>{{order.address.street}}, {{order.address.street_number}} - {{order.address.city}}</div>
+                  </ion-col>
+                  <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6" size-xl="6">
+                    <ion-label class="ion-padding-top ion-padding-bottom">
+                      <b>{{'Orders.status' | translate}}</b>
+                    </ion-label>
+                    <div>{{'Orders.status_list.' + this.order.status | translate}}</div>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6" size-xl="6">
+                    <ion-label class="ion-padding-top ion-padding-bottom">
+                      <b>{{'OrderConfirm.order_details.payment_method' | translate}}</b>
+                    </ion-label>
+                    <div>{{'OrderConfirm.order_details.credit_card' | translate}}</div>
+                  </ion-col>
+                  <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6" size-xl="6">
+                    <ion-label class="ion-padding-top ion-padding-bottom">
+                      <b>{{'OrderConfirm.order_details.payment_method' | translate}}</b>
+                    </ion-label>
+                    <div>{{'OrderConfirm.order_details.credit_card' | translate}}</div>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col class="ion-text-center">
+                    <ion-button fill="clear" color="primary" [routerLink]="'/orders/'+order.id">
+                      {{'Orders.details' | translate}}
+                    </ion-button>
+                    <!-- {{order.created | date:'dd/MM/yyyy HH:mm'}} -->
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+</ion-content>

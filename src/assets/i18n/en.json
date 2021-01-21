@@ -1,0 +1,12 @@
+{
+    "Ingredients": {
+        "asparagus": "Asparagus",
+        "avocado": "Avocado"
+    },
+    "ChooseIngredients": {
+        "bonapp": "BonApp!"
+    },
+    "Home": {
+        "h1": "Receips & ingredients, delivered in less than 25 minutes"
+    }
+}
