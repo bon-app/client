@@ -1,0 +1,23 @@
+<bonapp-header></bonapp-header>
+
+<ion-content>
+  <div class="container">
+    <input id="import-csv" type="file" style="display: none;" (change)="importCSV($event)" accept="text/csv"/>
+    <dynamic-list *ngIf="config" #list 
+      [config]="config" 
+      [data]="data" 
+      [settings]="settings"
+      [extraButtons]="config.listOptions?.extraButtons" 
+
+      (add)="goto('/dashboard/data/'+entity)"
+      (edit)="goto('/dashboard/data/'+entity+'/'+$event.id)" 
+      (delete)="deleteElement($event)" 
+
+      (more)="getRecords()"
+      (filterChange)="getRecords(true)" 
+      
+      (extraButtonClick)="handleExtraButtons($event)" 
+      (rowLengthChange)="getRecords(true)">
+    </dynamic-list>
+  </div>
+</ion-content>

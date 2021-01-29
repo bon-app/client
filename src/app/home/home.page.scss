@@ -1,8 +1,11 @@
+#title {
+  margin-top: 10em;
+  margin-bottom: 10em;
+}
+
 h1 {
   text-align: center;
   font-size: 2.5em;
-  margin-top: 3em;
-  margin-bottom: 3em;
 }
 
 #buttons {
@@ -18,4 +21,78 @@ h1 {
 
 random-receipts {
   margin-bottom: 3em;
+}
+
+// #filters {
+//   width: 50%;
+//   margin: 0 auto;
+
+//   ion-card {
+//     height: 100%;    
+//     margin-top: 3em;
+
+//     ion-card-content {
+//       height: 100%;
+//     }
+//   }
+
+//   ion-toggle {
+//     --handle-width: 1em;
+//     --handle-height: 1em;
+//     height: 1.25em;
+//   }
+
+// }
+
+// @media only screen and (max-width: 768px) {
+//   #filters {
+//     width: 100%;
+//     padding: 1em;
+//   }
+// }
+
+
+#filters {
+  width: 50%;
+
+  margin: 4em auto;
+
+  .flex-center .flex-center {
+    >div {
+      margin: 0 auto;
+    }
+  }
+
+  ion-card.active {
+    border: solid 1px var(--ion-color-primary);
+  }
+
+  ion-card {
+    height: 100%;
+    flex: auto;
+    margin: 0.5em;
+    width: 100px;
+    height: 130px;
+
+    ion-card-content {
+      height: 100%;
+    }
+  }
+
+  ion-icon {
+    font-size: 1.8em;
+  }
+
+  ion-toggle {
+    --handle-width: 1em;
+    --handle-height: 1em;
+    height: 1.25em;
+  }
+
+}
+
+@media only screen and (max-width: 768px) {
+  #filters {
+    width: 100%;
+  }
 }

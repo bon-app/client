@@ -12,6 +12,29 @@ import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TokenInterceptor } from './auth/interceptors/token.interceptor';
+import { FormlyModule } from '@ngx-formly/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormlyIonicModule } from '@ngx-formly/ionic';
+import { ComponentsModule } from './components/components.module';
+import { DFIngredientsPriorityComponent } from './components/dynamics-form-custom/ingredients-priority/ingredients-priority.component';
+import { DFIngredientsComponent } from './components/dynamics-form-custom/df-ingredients/df-ingredients.component';
+import { IngredientsQtaComponent } from './components/dynamics-form-custom/ingredients-qta/ingredients-qta.component';
+import { JoditAngularModule } from 'jodit-angular';
+import { HtmlEditorComponent } from './lib/dynamic-forms/components/dynamic-form-custom-template/html-editor/html-editor.component';
+import { DynamicFormsModule } from './lib/dynamic-forms';
+import { ENTITIES } from './dashboard/pages/entities/entities.config';
+import { ReceiptIngredientsMatching } from './models/receipt-ingredientsMatching.model';
+import { Ingredient } from './models/ingredient.model';
+import { Category } from './models/category.model';
+import { Receipt } from './models/receipt.model';
+import { IngredientsService } from './services/ingredients.service';
+import { CategoriesService } from './services/categories.service';
+import { ReceiptsService } from './services/receipts.service';
+import { RimsService } from './services/rims.service';
+import { User } from './models/user.model';
+import { Order } from './models/order.model';
+import { UsersService } from './services/users.service';
+import { OrdersService } from './services/orders.service';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -25,13 +48,51 @@ export function createTranslateLoader(http: HttpClient) {
     IonicModule.forRoot({ mode: 'ios' }),
     AppRoutingModule,
     HttpClientModule,
+    ComponentsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
         useFactory: (createTranslateLoader),
         deps: [HttpClient]
       }
-    })
+    }),
+    ReactiveFormsModule,
+    FormlyModule.forRoot(
+      {
+        types: [
+          { name: 'ingredients-priority', component: DFIngredientsPriorityComponent },
+          { name: 'ingredients', component: DFIngredientsComponent },
+          { name: 'ingredients-qta', component: IngredientsQtaComponent },
+        ]
+      }
+    ),
+    FormlyIonicModule,
+    JoditAngularModule,
+    DynamicFormsModule.forRoot({
+      entitiesConfig: [
+        { key: 'ingredients', config: ENTITIES.ingredients },
+        { key: 'categories', config: ENTITIES.categories },
+        { key: 'receipts', config: ENTITIES.receipts },
+        { key: 'rims', config: ENTITIES.rims },
+        { key: 'orders', config: ENTITIES.orders },
+      ],
+      entities: [
+        { entity: Ingredient },
+        { entity: Category },
+        { entity: Receipt },
+        { entity: ReceiptIngredientsMatching },
+        { entity: User },
+        { entity: Order },
+      ],
+      entitiesService: [
+        { service: IngredientsService },
+        { service: CategoriesService },
+        { service: ReceiptsService },
+        { service: RimsService },
+        { service: UsersService },
+        { service: OrdersService },
+      ]
+    }),
   ],
   providers: [
     StatusBar,

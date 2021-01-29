@@ -1,3 +1,6 @@
+import { DynamicEntity } from "../lib/dynamic-forms/decorators/dynamic-entity.decorator";
+
+@DynamicEntity()
 export class Ingredient {
     public id: string;
     public name: string;

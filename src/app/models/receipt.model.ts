@@ -1,5 +1,7 @@
+import { DynamicEntity } from '../lib/dynamic-forms/decorators/dynamic-entity.decorator';
 import { ReceiptIngredientsMatching } from './receipt-ingredientsMatching.model';
 
+@DynamicEntity()
 export class Receipt {
     public id: string;
     public name: string;
@@ -9,4 +11,8 @@ export class Receipt {
     public kcal: string;
     public time: string;
     public preparing?: string;
+
+    constructor() {
+        this.ingredients = [];
+    }
 }

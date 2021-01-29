@@ -1,0 +1,16 @@
+<div>
+  <div class="ion-padding-top ion-padding-start ion-padding-end">
+    <ion-label>{{field.templateOptions?.label}}</ion-label>
+  </div>
+
+  <ion-card id="image-preview" (click)="image.click()">
+    <ion-content>
+      <div id="image-wrapper">
+        <div class="ion-text-center">Upload image</div>
+      </div>
+      <!-- <img [src]="model[field.key] || defaultImage" /> -->
+    </ion-content>
+  </ion-card>
+
+  <input #image type="file" style="display: none;" accept="image/*" (change)="previewImage($event)" />
+</div>

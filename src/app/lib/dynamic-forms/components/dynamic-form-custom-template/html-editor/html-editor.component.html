@@ -1,0 +1,12 @@
+<div id="html-editor-wrapper">
+  <ion-item>
+    <ion-label>
+      <div style="font-weight: 600; margin-bottom: 0.5em;">{{field.templateOptions.label}}</div>
+      <jodit-editor [name]="field.key" [required]="field.templateOptions.required" [(ngModel)]="model[field.key]"
+        [config]="{ buttons: 'bold,strikethrough,underline,italic,ul,ol', placeholder: field.templateOptions.placeholder }"
+        style="color: black; width: 100%; min-height: 300px">
+      </jodit-editor>
+
+    </ion-label>
+  </ion-item>
+</div>

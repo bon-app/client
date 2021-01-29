@@ -70,7 +70,8 @@
         "register": "Registrati",
         "login": "Login",
         "orders": "Ordini",
-        "about": "About BonApp"
+        "about": "About BonApp",
+        "datas": "Gestione dati"
     },
     "ChooseIngredients": {
         "title": "Scegli i tuoi ingredienti",
@@ -79,11 +80,14 @@
     },
     "Home": {
         "h1": "Ricette e ingredienti, consegnati in meno di 25 minuti",
+        "h2": "Personalizza la proposta di ricette",
         "all_receipts": "Tutte le ricette",
         "market": "Il Supermercato"
     },
     "RandomReceipts": {
-        "title": "Scelte per questa sera"
+        "title": "Scelte per questa sera",
+        "results": "Risultati",
+        "no_results": "Nessuna ricetta trovata con i filtri attuali!"
     },
     "Receipt": {
         "back": "Back",
@@ -92,6 +96,7 @@
     },
     "ReceiptBuy": {
         "ingredients_for": "Ingredienti per {{name}}",
+        "products": "Prodotti",
         "goto_checkout": "Prosegui",
         "cart": "Carrello",
         "cart_total": "Totale",

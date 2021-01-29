@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { Ingredient } from 'src/app/models/ingredient.model';
 import { Receipt } from 'src/app/models/receipt.model';
 
 @Component({
@@ -17,6 +18,10 @@ export class RandomReceiptsComponent implements OnInit {
 
   goto(url: string) {
     this.navCtrl.navigateForward(url);
+  }
+
+  sliceThree(ingredients: { qta: string, ingredient: Ingredient }[]) {
+    return ingredients.slice(0, 3);
   }
 
 }

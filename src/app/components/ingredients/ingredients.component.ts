@@ -33,7 +33,7 @@ export class IngredientsComponent implements OnInit {
   save() {
     this.modalCtrl.dismiss(this.items);
   }
-  
+
   close() {
     this.modalCtrl.dismiss();
   }

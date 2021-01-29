@@ -3,12 +3,12 @@
   <ion-auto-complete #autoComplete [options]="{ placeholder : ('IngredientsPriority.add_ingredient' | translate) }"
     [dataProvider]="ingredientDataProvider" (itemSelected)="addIngredient($event); autoComplete.clearValue()">
   </ion-auto-complete>
-  <div class="ion-padding-top ion-padding-bottom">
+  <div class="list ion-padding-top ion-padding-bottom">
     <ion-reorder-group disabled="false" (ionItemReorder)="reorderItems($event)">
       <ion-item *ngFor="let item of items; let i = index">
         <ion-reorder slot="start"></ion-reorder>
         <ion-label>
-          {{i+1}}. {{item.ingredient?.name}}
+          {{i+1}}. {{item.ingredient?.name}} - {{item.ingredient?.brand}}
         </ion-label>
         <ion-icon name="trash" slot="end" (click)="removeIngredient(item.ingredient)"></ion-icon>
       </ion-item>

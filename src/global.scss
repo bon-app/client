@@ -27,7 +27,7 @@
 @import "./assets/ionic-style.extended.scss";
 @import "~ionic4-auto-complete/auto-complete";
 
-* {
+*:not(.ion-invalid) {
     color: var(--ion-color-secondary);
 }
 
@@ -48,6 +48,12 @@ ion-toolbar {
     --min-height: 90px;
     max-width: 1360px;
     margin: 0 auto;
+}
+
+.text-ellips {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /** PARTIAL BORDER */
@@ -86,12 +92,23 @@ ion-toolbar {
 }
 
 // LUCKYSHEET CSS FIX
-#luckysheet_info_detail,
-#luckysheet-bottom-controll-row {
+//#luckysheet_info_detail,
+#luckysheet-bottom-controll-row,
+#luckysheet-wa-editor {
     display: none !important;
 }
 
 #luckysheet-rich-text-editor {
     -webkit-user-modify: read-write;
     color: black;
+}
+
+.htCore {
+    td {
+        text-align: center;
+    }
+}
+
+.ht_master .wtHolder {
+    height: auto !important;
 }

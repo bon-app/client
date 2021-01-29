@@ -27,7 +27,7 @@ export class IngredientsPriorityComponent implements OnInit {
   }
 
   removeIngredient($event: Ingredient) {
-    this.items = this.items.filter(i => i.ingredient.id != $event.id || (i.ingredient as any)._id == $event.id)
+    this.items = this.items.filter(i => i.ingredient.id != $event.id)
   }
 
   save() {

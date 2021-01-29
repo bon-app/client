@@ -14,11 +14,16 @@ import { AddressFormComponent } from './address-form/address-form.component';
 import { IngredientsPriorityComponent } from './ingredients-priority/ingredients-priority.component';
 import { IngredientsReceiptsComponent } from './ingredients-receipts/ingredients-receipts.component';
 import { IngredientsComponent } from './ingredients/ingredients.component';
+import { FormlyModule } from '@ngx-formly/core';
+import { DFIngredientsPriorityComponent } from './dynamics-form-custom/ingredients-priority/ingredients-priority.component';
+import { JoditAngularModule } from 'jodit-angular';
+import { DatasPopoverComponent } from './datas-popover/datas-popover.component';
 
 const components = [
   ChooseIngredientsComponent, RandomReceiptsComponent, BonAppHeaderComponent,
   LoginComponent, FooterCartComponent, CartDetailsComponent, AddressFormComponent,
-  IngredientsPriorityComponent, IngredientsReceiptsComponent, IngredientsComponent
+  IngredientsPriorityComponent, IngredientsReceiptsComponent, IngredientsComponent,
+  DFIngredientsPriorityComponent, DatasPopoverComponent
 ];
 
 @NgModule({
@@ -28,7 +33,9 @@ const components = [
     FormsModule,
     CommonModule,
     AutoCompleteModule,
-    TranslateModule.forChild()
+    FormlyModule,
+    TranslateModule.forChild(),
+    JoditAngularModule
   ],
   exports: components
 })

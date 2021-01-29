@@ -3,7 +3,8 @@
 <ion-content>
   <div class="container" *ngIf="receipt">
     <div id="back">
-      <ion-button size="small" fill="outline" color="secondary" (click)="navCtrl.back()">{{'Receipt.back' | translate}}</ion-button>
+      <ion-button size="small" fill="outline" color="secondary" (click)="navCtrl.back()">{{'Receipt.back' | translate}}
+      </ion-button>
     </div>
     <ion-grid class="neutral">
       <ion-row>
@@ -38,7 +39,8 @@
         <ion-col id="ingredients" class="ion-padding" size-xs="12" size-sm="12" size-md="3" size-lg="3" size-xl="3">
           <h2>{{'Receipt.ingredients_info' | translate}}</h2>
           <ul>
-            <li *ngFor="let i of receipt.ingredients"> {{i.qta}} <strong>{{i.ingredient?.name}}</strong> </li>
+            <li *ngFor="let i of receipt.ingredients"> {{i.qta}} <strong>{{getIngredientName(i.ingredient)}}</strong>
+            </li>
           </ul>
           <div id="button-goto-market">
             <ion-button color="primary" size="large" [routerLink]="'/receipt/' + receipt.id + '/buy'">

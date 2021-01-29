@@ -1,0 +1,142 @@
+<div>
+  <div class="title">
+    <h1> {{settings?.title ? settings.title : 'List ' + config.title}}</h1>
+    <div class="partial-border light partial-on-left ion-margin-bottom"></div>
+  </div>
+
+  <div>
+    <div class="flex-center">
+      <ion-button fill="clear" size="icon-only" (click)="add.emit()" class="ion-margin-top ion-margin-bottom">
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+      <ion-searchbar [(ngModel)]="filterBuilder.term"
+        (ionInput)="filterBuilder.term=$event.target.value; createFilter()"></ion-searchbar>
+      <ion-button size="icon-only" [color]="!showFilter? 'secondary' : 'primary'" fill="clear"
+        class="ion-margin-top ion-margin-bottom" (click)="showFilter = !showFilter">
+        <ion-icon name="funnel" [color]="!showFilter? 'secondary' : 'primary'"></ion-icon>
+      </ion-button>
+
+      <ion-button *ngFor="let button of (extraButtons || [])" size="icon-only" color="secondary" fill="clear"
+        class="ion-margin-top ion-margin-bottom" (click)="extraButtonClick.emit({ key:button.key })">
+        <ion-icon [name]="button.icon" color="secondary"></ion-icon>
+      </ion-button>
+    </div>
+
+    <ion-card id="filter" *ngIf="showFilter">
+      <ion-card-content>
+
+        <div class="filter-section">
+          Showed rows:
+          <div class="partial-border light partial-on-left ion-margin-bottom"></div>
+          <ion-item>
+            <ion-input #row_length type="number" placeholder="From" [(ngModel)]="settings.row_length"
+              (ngModelChange)="rowLengthChange.emit(settings.row_length)" style="width: 60px;"></ion-input>
+          </ion-item>
+        </div>
+
+        <div class="filter-section">
+          Search in:
+          <div class="partial-border light partial-on-left ion-margin-bottom"></div>
+          <ion-grid class="neutral">
+            <ion-row>
+              <ion-col *ngFor="let field of getSearchableFields()">
+                <ion-item>
+                  <ion-label>{{field.templateOptions?.label}}</ion-label>
+                  <ion-checkbox slot="start" [(ngModel)]="filterBuilder.searchable[field.key]"
+                    (ngModelChange)="createFilter()"></ion-checkbox>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+
+        <div class="filter-section" *ngIf="getRangeFields().length">
+          Range in:
+          <div class="partial-border light partial-on-left ion-margin-bottom"></div>
+          <ion-grid class="neutral">
+            <ion-row>
+              <ion-col *ngFor="let field of getRangeFields()">
+                <ion-item lines="none">
+                  <ion-label lines="none">
+                    {{field.templateOptions?.label}}
+                  </ion-label>
+                  <ion-item>
+                    <ion-input #from type="number" placeholder="From" [(ngModel)]="filterBuilder.ranges[field.key].from"
+                      (ngModelChange)="createFilter()" style="width: 80px;"></ion-input>
+                  </ion-item>
+                  <ion-item>
+                    <ion-input #to type="number" placeholder="To" [(ngModel)]="filterBuilder.ranges[field.key].to"
+                      (ngModelChange)="createFilter()" style="width: 80px;"></ion-input>
+                  </ion-item>
+                  <ion-button fill="clear" color="primary" (click)="from.value='';to.value=''">
+                    Clear
+                  </ion-button>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+
+        <div class="filter-section" *ngIf="getCheckboxFields().length">
+          Checked at:
+          <div class="partial-border light partial-on-left ion-margin-bottom"></div>
+          <ion-grid class="neutral">
+            <ion-row>
+              <ion-col *ngFor="let field of getCheckboxFields()">
+                <ion-item>
+                  <ion-checkbox slot="start" [(ngModel)]="filterBuilder.checked[field.key].active"
+                    (ngModelChange)="createFilter()"></ion-checkbox>
+                  <ion-label>{{field.templateOptions?.label}}</ion-label>
+                  <ion-toggle #toggle [value]="filterBuilder.checked[field.key].value"
+                    (ionChange)="filterBuilder.checked[field.key].value = toggle.checked;createFilter()"></ion-toggle>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <table id="list" class="ion-margin-top">
+    <thead>
+      <tr>
+        <th *ngFor="let field of fields">
+          {{field.templateOptions?.label}}
+        </th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of data">
+        <td *ngFor="let field of fields" [ngStyle]="field.list.cssStyle" [ngClass]="field.list.cssClass"
+          [innerHTML]="getParser(field, row[field.key]) | safeHtml"></td>
+        <td class="ion-text-right">
+          <ion-button fill="clear" size="icon-only" color="secondary" (click)="edit.emit(row)">
+            <ion-icon name="create"></ion-icon>
+          </ion-button>
+          <ion-button fill="clear" size="icon-only" color="danger" (click)="delete.emit(row)">
+            <ion-icon name="trash"></ion-icon>
+          </ion-button>
+          <!-- <ion-button *ngFor="let button of (row.list.extraButtons || [])" size="icon-only" color="secondary" fill="clear"
+            class="ion-margin-top ion-margin-bottom" (click)="extraButtonClick.emit({ key:button.key })">
+            <ion-icon [name]="button.icon" color="secondary"></ion-icon>
+          </ion-button> -->
+          <!-- <span (click)="edit.emit(row)">edit</span> | <span (click)="delete.emit(row)">delete</span> -->
+        </td>
+      </tr>
+      <tr *ngIf="!data.length">
+        <td style="text-align: center;padding-top: 2em;padding-bottom: 2em;" [attr.colspan]="fields.length+1">
+          No elements
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="ion-padding" *ngIf="settings.showMoreButton">
+    <ion-button expand="full" fill="clear" color="primary" (click)="more.emit()">
+      more
+    </ion-button>
+  </div>
+</div>

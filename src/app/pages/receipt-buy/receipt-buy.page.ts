@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Category } from '../../models/category.model';
 import { CartService } from '../../services/cart.service';
-import { Ingredient } from '../../models/ingredient.model';
 import { Receipt } from '../../models/receipt.model';
 import { NavController } from '@ionic/angular';
 import { ReceiptIngredientsMatching } from 'src/app/models/receipt-ingredientsMatching.model';
 import { ReceiptsService } from 'src/app/services/receipts.service';
 import { IngredientsService } from 'src/app/services/ingredients.service';
 import { ActivatedRoute } from '@angular/router';
+import { CategoriesService } from 'src/app/services/categories.service';
+import { Ingredient } from 'src/app/models/ingredient.model';
 
 @Component({
   selector: 'app-receipt-buy',
@@ -16,20 +17,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ReceiptBuyPage implements OnInit {
 
-  public categories: Category[] = [
-    { id: 'a', name: "Acqua", ingredients: [] },
-    { id: 'sf', name: "Salumi e formaggi", ingredients: [] },
-    { id: 'cm', name: "Colazione e merenda", ingredients: [] },
-    { id: 'ull', name: "Uova, latte e latticini", ingredients: [] },
-    { id: 'fv', name: "Frutta e verdera", ingredients: [] },
-    { id: 'pr', name: "Pasta e riso", ingredients: [] },
-    { id: 'pft', name: "Pane, focaccia e taralli", ingredients: [] },
-    { id: 'cp', name: "Carne e pesce", ingredients: [] },
-    { id: 'sc', name: "Sughi e condimenti", ingredients: [] },
-    { id: 'pps', name: "Piatti pronti e snacks", ingredients: [] },
-    { id: 'gec', name: "Gelati e Congelati", ingredients: [] },
-    { id: 'altro', name: "Altro", ingredients: [] },
-  ];
+  public categories: Category[] = [];
 
   public selectedCategories: Category[] = [];
   public receipt: Receipt;
@@ -37,6 +25,7 @@ export class ReceiptBuyPage implements OnInit {
   constructor(
     public cart: CartService,
     public receiptsService: ReceiptsService,
+    public categoriesService: CategoriesService,
     private ingredientsService: IngredientsService,
     public navCtrl: NavController,
     public route: ActivatedRoute) { }
@@ -46,6 +35,7 @@ export class ReceiptBuyPage implements OnInit {
 
   async ionViewWillEnter() {
     try {
+      this.categories = await this.categoriesService.find({ showBeforeCheckout: { $ne: true } }, ['-__v'], 0, 50, { name: 1 }, ['ingredients', 'subcategories'])
       let receipt = await this.receiptsService.findById(this.route.snapshot.params.id, ['-__v'], ['ingredients.ingredient'])
       let ingrs = receipt.ingredients.map((i: any) => i.ingredient.ingredients[0] ? i.ingredient.ingredients[0].ingredient : null).filter(i => i != null);
       let ingredients = await this.ingredientsService.find({ $expr: { $in: [{ $toString: '$_id' }, ingrs] } }, ['-__v'], 0, 200, { name: 1 })
@@ -85,9 +75,9 @@ export class ReceiptBuyPage implements OnInit {
   toggleCategory(category: Category) {
     if (!!this.selectedCategories.find(sc => sc.id == category.id)) {
       this.selectedCategories = this.selectedCategories.filter(sc => sc.id != category.id);
-      return;
+    } else {
+      this.selectedCategories.push(category);
     }
-    this.selectedCategories.push(category);
   }
 
   isCategorySelected(category: Category) {

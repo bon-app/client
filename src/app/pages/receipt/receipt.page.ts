@@ -26,4 +26,8 @@ export class ReceiptPage implements OnInit {
     }
   }
 
+  getIngredientName(ingredient) {
+    return typeof ingredient != 'string' ? ingredient.name : ingredient;
+  }
+
 }

@@ -1,3 +1,22 @@
-<p>
-  ingredients-receipts works!
-</p>
+<div id="ingredients-priority-wrapper">
+  <h2>{{'IngredientsPriority.title' | translate}}</h2>
+  <ion-auto-complete #autoComplete [options]="{ placeholder : ('IngredientsPriority.add_ingredient' | translate) }"
+    [dataProvider]="ingredientDataProvider" (itemSelected)="addIngredient($event); autoComplete.clearValue()">
+  </ion-auto-complete>
+  <div class="list ion-padding-top ion-padding-bottom">
+    <ion-reorder-group disabled="true">
+      <ion-item *ngFor="let item of items; let i = index">
+        <ion-reorder slot="start"></ion-reorder>
+        <ion-label>
+          <input type="text" [(ngModel)]="item.qta" /> {{item.ingredient?.name}}
+        </ion-label>
+        <ion-icon name="trash" slot="end" (click)="removeIngredient(item.ingredient)"></ion-icon>
+      </ion-item>
+    </ion-reorder-group>
+  </div>
+  <div class="ion-padding">
+    <ion-button fill="clear" (click)="close()">{{'IngredientsPriority.cancel' | translate}}</ion-button>
+    <ion-button class="ion-float-right" color="primary" (click)="save()">{{'IngredientsPriority.save' | translate}}
+    </ion-button>
+  </div>
+</div>

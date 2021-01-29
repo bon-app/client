@@ -40,8 +40,20 @@ const routes: Routes = [
     loadChildren: () => import('./pages/receipt-list/receipt-list.module').then( m => m.ReceiptListPageModule)
   },
   {
-    path: 'data',
-    loadChildren: () => import('./dashboard/pages/data/data.module').then( m => m.DataPageModule)
+    path: 'dashboard/data/:entity',
+    loadChildren: () => import('./dashboard/pages/dynamic-form/dynamic-form.module').then( m => m.DynamicFormPageModule)
+  },
+  {
+    path: 'dashboard/data/:entity/:id',
+    loadChildren: () => import('./dashboard/pages/dynamic-form/dynamic-form.module').then( m => m.DynamicFormPageModule)
+  },
+  {
+    path: 'dashboard/list/:entity',
+    loadChildren: () => import('./dashboard/pages/dynamic-list/dynamic-list.module').then( m => m.DynamicListPageModule)
+  },
+  {
+    path: 'suggested-products',
+    loadChildren: () => import('./pages/suggested-products/suggested-products.module').then( m => m.SuggestedProductsPageModule)
   },
 ];
 

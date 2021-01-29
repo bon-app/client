@@ -4,17 +4,25 @@
       <ion-button fill="clear" size="large" color="secondary">{{'NavBar.about' | translate}}</ion-button>
     </ion-buttons>
     <ion-title>
-      <img src="assets/logo.png" height="60px" (click)="navCtrl.navigateRoot('/')" style="cursor: pointer;" />
+      <a [href]="'/'">
+        <img src="assets/logo.png" height="60px" (click)="navCtrl.navigateRoot('/')" style="cursor: pointer;" />
+      </a>
     </ion-title>
     <ng-container *ngIf="auth.isAuthenticate()">
       <ion-buttons class="ion-hide-md-down" slot="end">
         <ion-button fill="clear" size="large" color="primary" (click)="goto('/orders')">
           {{'NavBar.orders' | translate}}
         </ion-button>
+        <ion-button fill="clear" size="large" color="primary" (click)="presentDatasPopover($event)">
+          {{'NavBar.datas' | translate}}
+        </ion-button>
       </ion-buttons>
       <ion-buttons class="ion-hide-md-up" slot="end">
         <ion-button fill="clear" size="large" color="primary" (click)="goto('/orders')">
           <ion-icon name="clipboard-outline"></ion-icon>
+        </ion-button>
+        <ion-button fill="clear" size="large" color="primary" (click)="presentDatasPopover($event)">
+          <ion-icon name="grid"></ion-icon>
         </ion-button>
       </ion-buttons>
 

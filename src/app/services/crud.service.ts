@@ -10,11 +10,11 @@ export class CRUDService<T> {
     find(filter: any, fields: string[], skip: number, take: number, orderBy: any, includes: string[] = []): Promise<T[]> {
         let params = {
             filter: JSON.stringify(filter || {}),
-            fields: fields.join(','),
-            includes: includes.join(','),
+            fields: fields.join(' '),
+            includes: includes.join(' '),
             skip: '' + skip,
             take: '' + take,
-            orderBy: orderBy ? JSON.stringify(orderBy) : null
+            orderBy: orderBy? orderBy : null
         }
         return this.http.get<T[]>(this.endpoint, { params }).toPromise()
     }
@@ -22,8 +22,8 @@ export class CRUDService<T> {
     findOne(filter: any, fields: string[], orderBy: any, includes: string[] = []): Promise<T> {
         let params = {
             filter: JSON.stringify(filter || {}),
-            fields: fields.join(','),
-            includes: includes.join(','),
+            fields: fields.join(' '),
+            includes: includes.join(' '),
             skip: '0',
             take: '1',
             orderBy: orderBy ? JSON.stringify(orderBy) : null
@@ -34,9 +34,25 @@ export class CRUDService<T> {
     findById(id: any, fields: string[], includes: string[] = []): Promise<T> {
         let params = {
             filter: JSON.stringify({}),
-            fields: fields.join(','),
-            includes: includes.join(',')
+            fields: fields.join(' '),
+            includes: includes.join(' ')
         }
         return this.http.get<T>(`${this.endpoint}/${id}`, { params }).toPromise()
+    }
+
+    add(entity: T): Promise<T> {
+        return this.http.post<T>(this.endpoint, entity).toPromise();
+    }
+
+    update(entity: T, fields: string[], updateFields: string[]): Promise<T> {
+        let params = {
+            fields: fields.length ? fields.join(' ') : null,
+            updateFields: updateFields.length ? updateFields.join(' ') : null,
+        }
+        return this.http.put<T>(this.endpoint, entity, { params }).toPromise();
+    }
+
+    delete(id: string): Promise<T> {
+        return this.http.delete<T>(`${this.endpoint}/${id}`).toPromise();
     }
 }

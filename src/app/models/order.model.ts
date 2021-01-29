@@ -1,3 +1,6 @@
+import { DynamicEntity } from "../lib/dynamic-forms/decorators/dynamic-entity.decorator";
+
+@DynamicEntity()
 export class Order {
     public id: string;
     public created: Date = new Date();

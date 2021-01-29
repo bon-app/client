@@ -1,0 +1,13 @@
+<div>
+  <form (submit)="save()">
+    <div class="title">
+      <h1>{{config.title}}</h1>
+      <div class="partial-border light partial-on-left ion-margin-bottom"></div>
+    </div>
+    <formly-form [form]="form" [model]="model" [fields]="config.fields"></formly-form>
+    <div class="ion-padding">
+      <ion-button fill="clear" color="secondary" (click)="cancel()">Cancel</ion-button>
+      <ion-button type="submit" [disabled]="form.invalid" class="ion-float-right" color="primary">Save</ion-button>
+    </div>
+  </form>
+</div>
