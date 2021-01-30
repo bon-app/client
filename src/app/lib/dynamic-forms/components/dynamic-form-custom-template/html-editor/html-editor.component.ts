@@ -11,20 +11,16 @@ import { FieldType } from '@ngx-formly/core';
 })
 export class HtmlEditorComponent extends FieldType implements OnInit {
 
-  public show: boolean;
-  public editor: any
-
   constructor() {
     super();
-    console.log("Jodit: ", this.show)
-    this.show = true;
-    console.log("Jodit: ", this.show)
   }
 
   ngOnInit() {
-    console.log("Jodit: ", this.show)
-    this.show = true;
-    console.log("Jodit: ", this.show)
+
+  }
+
+  changeValidation() {
+    this.formControl.patchValue(this.model[this.field.key as string]);
   }
 
 }

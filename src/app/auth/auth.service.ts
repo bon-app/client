@@ -57,11 +57,11 @@ export class AuthService {
     let user_roles: string[] = [];
 
     if (this.identity) {
-      user_roles = this.identity.roles;
+      user_roles = this.identity.roles || [];
     } else {
       let payload = this.getPayload(this.getToken());
       if (payload) {
-        user_roles = payload.roles;
+        user_roles = payload.roles || [];
       }
     }
     return !!user_roles.find(ur => roles.find(r => r == ur))

@@ -1,12 +1,12 @@
 <div id="many-wrapper">
   <h2>{{field.templateOptions?.label}}</h2>
-  <ion-auto-complete #autoComplete [options]="{ placeholder : 'Search' }" [dataProvider]="manyRelationDataProvider"
+  <ion-auto-complete #autoComplete [options]="{ placeholder : 'Search' }" [dataProvider]="oneRelationDataProvider"
     (itemSelected)="add($event); autoComplete.clearValue()">
   </ion-auto-complete>
   <div id="many-list" class="ion-padding-top ion-padding-bottom">
-    <ion-item *ngFor="let item of items;">
+    <ion-item>
       <ion-label>
-        {{item.name}}
+        {{label(item)}}
       </ion-label>
       <ion-icon name="trash" slot="end" (click)="remove(item)"></ion-icon>
     </ion-item>

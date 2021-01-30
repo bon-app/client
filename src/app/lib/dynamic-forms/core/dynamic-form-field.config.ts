@@ -33,7 +33,7 @@ export class DynamicFormFieldConfig implements FormlyFieldConfig {
     /**
      * This is reserved for the templates. Any template-specific options go in here. Look at your specific template implementation to know the options required for this.
      */
-    templateOptions?: FormlyTemplateOptions;
+    templateOptions?: DynamicFieldTemplateOptions;
     optionsTypes?: string[];
     /**
      * An object with a few useful properties
@@ -167,4 +167,11 @@ export class DynamicListOptions {
     cssStyle: { [key: string]: any } = {};
     hidden: boolean = false;
     filterable: boolean = false;
+}
+
+
+export class DynamicFieldTemplateOptions implements FormlyTemplateOptions {
+    public service: string;
+
+    [key: string]: any;
 }

@@ -9,6 +9,7 @@ import { EntityConfig } from '../../core/entity.config';
 })
 export class DynamicFormComponent implements OnInit {
 
+  @Input("DEBUG") DEBUG: boolean = false;
   @Input("model") model: any = {};
   @Input("config") config: EntityConfig;
   @Output("save") onsave: EventEmitter<any> = new EventEmitter<any>();
@@ -27,4 +28,20 @@ export class DynamicFormComponent implements OnInit {
     this.oncancel.emit(this.model);
   }
 
+  getFormValidationErrors() {
+    let errors = [];
+    Object.keys(this.form.controls).forEach(key => {
+
+      const controlErrors: any = this.form.get(key).errors;
+      if (controlErrors != null) {
+        errors.push({ key, err: controlErrors });
+        Object.keys(controlErrors).forEach(keyError => {
+          console.log('Key control: ' + key + ', keyError: ' + keyError + ', err value: ', controlErrors[keyError]);
+        });
+      }
+    });
+    return errors;
+  }
+
 }
+

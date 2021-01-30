@@ -249,7 +249,7 @@ export const ENTITIES = {
         object: "ReceiptIngredientsMatching"
     }),
     receipts: EntityConfig.fromJson({
-        title: "Receipt",
+        title: "Recipes",
         fields: [
             {
                 key: 'image_url',
@@ -348,7 +348,7 @@ export const ENTITIES = {
                         { label: 'Gluten free', value: 'gluten-free' },
                         { label: 'No oven', value: 'no-oven' },
                         { label: 'No mixer', value: 'no-mixer' },
-                      ]
+                    ]
                 },
                 validation: {
                     messages: {
@@ -356,7 +356,7 @@ export const ENTITIES = {
                     },
                 },
                 list: {
-                    
+
                 }
             },
             {
@@ -401,11 +401,10 @@ export const ENTITIES = {
         fields: [
             {
                 key: 'created',
-                type: 'input',
+                type: 'label',
                 templateOptions: {
                     label: 'Created',
-                    type: 'datetime',
-                    readOnly: true,
+                    type: "date:'dd/MM/yyyy HH:mm'",
                 },
                 validation: {
                     messages: {
@@ -413,7 +412,7 @@ export const ENTITIES = {
                     },
                 },
                 list: {
-                    parser: "date:dd/MM/yyyy HH.mm"
+                    parser: "date:'dd/MM/yyyy HH:mm'"
                 }
             },
             {
@@ -434,11 +433,72 @@ export const ENTITIES = {
                 },
             },
             {
-                key: 'user',
+                key: 'phone',
+                type: 'input',
+                templateOptions: {
+                    label: 'Phone',
+                    required: true,
+                },
+                validation: {
+                    messages: {
+                        required: "Field is required!",
+                    },
+                },
+            },
+            {
+                key: 'delivery_method',
+                type: 'select',
+                templateOptions: {
+                    label: 'Delivery method',
+                    required: true,
+                    options: [
+                        { label: "Standard", value: "standard" },
+                        { label: "Footstep", value: "footstep" },
+                    ],
+                },
+                validation: {
+                    messages: {
+                        required: "Field is required!",
+                    },
+                }
+            },
+            {
+                key: 'delivery_time',
+                type: 'label',
+                templateOptions: {
+                    label: 'Delivery time',
+                    required: true,
+                },
+                validation: {
+                    messages: {
+                        required: "Field is required!",
+                    },
+                }
+            },
+            {
+                key: 'shipping_cost',
+                type: 'label',
+                templateOptions: {
+                    label: 'Shipping cost',
+                    type: "currency:2",
+                },
+                validation: {
+                    messages: {
+                        required: "Field is required!",
+                    },
+                },
+                list: {
+                    parser: "currency:2:€"
+                }
+            },
+            {
+                key: 'fk_user',
                 type: 'one',
                 templateOptions: {
                     label: 'User',
                     required: true,
+                    service: 'UsersService',
+                    selected_key: 'item.name + " " + item.surname + " (" + item.email + ")"'
                 },
                 validation: {
                     messages: {

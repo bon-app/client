@@ -1,3 +1,10 @@
-export { DynamicFormComponent } from "./dynamic-form/dynamic-form.component";
-export { DynamicListComponent } from "./dynamic-list/dynamic-list.component";
-export { HtmlEditorComponent } from "./dynamic-form-custom-template/html-editor/html-editor.component";
+export * from "./dynamic-form/dynamic-form.component"
+export * from "./dynamic-list/dynamic-list.component"
+export * from "./dynamic-form-custom-template/html-editor/html-editor.component"
+export * from "./dynamic-form-custom-template/dynamic-label/dynamic-label.component"
+export * from "./dynamic-form-custom-template/dynamic-many-relation/dynamic-many-relation.component"
+export * from "./dynamic-form-custom-template/dynamic-one-relation/dynamic-one-relation.component"
+export * from "./dynamic-form-custom-template/many-relation/many-relation.component"
+export * from "./dynamic-form-custom-template/one-relation/one-relation.component"
+export * from "./dynamic-form-custom-template/upload-image-preview/default-image"
+export * from "./dynamic-form-custom-template/upload-image-preview/upload-image-preview.component"

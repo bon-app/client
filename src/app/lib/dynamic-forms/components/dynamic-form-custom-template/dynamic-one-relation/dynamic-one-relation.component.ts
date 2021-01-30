@@ -2,7 +2,7 @@ import { Component, Injector, Input, OnInit } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { AutoCompleteService } from 'ionic4-auto-complete';
-import { SERVICES_MAPPER } from '../../core';
+import { SERVICES_MAPPER } from '../../../core';
 
 @Component({
   selector: 'app-dynamic-one-relation',
@@ -12,8 +12,8 @@ import { SERVICES_MAPPER } from '../../core';
 export class DynamicOneRelationComponent implements OnInit {
 
 
-  @Input("item") item: any = [];
-  public manyRelationDataProvider: ManyRelationDataProvider;
+  @Input("item") item: any = {name: 'not work'};
+  public oneRelationDataProvider: OneRelationDataProvider;
   public service: any;
   public field: FormlyFieldConfig;
 
@@ -22,7 +22,7 @@ export class DynamicOneRelationComponent implements OnInit {
 
   ngOnInit() {
     this.service = this.injector.get(SERVICES_MAPPER.get(this.field.templateOptions.service));
-    this.manyRelationDataProvider = new ManyRelationDataProvider(this.service);
+    this.oneRelationDataProvider = new OneRelationDataProvider(this.service);
   }
 
   async add($event: any) {
@@ -41,10 +41,14 @@ export class DynamicOneRelationComponent implements OnInit {
     this.modalCtrl.dismiss();
   }
 
+  label(item) {
+    return eval(this.field.templateOptions.selected_key || 'item.id')
+  }
+
 }
 
 
-export class ManyRelationDataProvider implements AutoCompleteService {
+export class OneRelationDataProvider implements AutoCompleteService {
   labelAttribute = 'id';
   formValueAttribute = 'name';
 

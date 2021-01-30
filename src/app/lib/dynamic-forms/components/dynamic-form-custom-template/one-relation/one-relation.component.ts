@@ -18,6 +18,7 @@ export class OneRelationComponent extends FieldType implements OnInit {
 
 
   async openModal() {
+
     let modal = await this.modalCtrl.create({
       component: DynamicOneRelationComponent,
       componentProps: {

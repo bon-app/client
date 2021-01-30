@@ -31,13 +31,11 @@ export class UploadImagePreviewComponent extends FieldType implements OnInit {
     let input = $event.target;
     if (input.files && input.files[0]) {
       var reader = new FileReader();
-
       reader.onload = (e) => {
         this.model[this.field.key as string] = e.target.result;
-        this.setPreview()
-
+        this.setPreview();
+        this.formControl.patchValue(this.model[this.field.key as string]);
       }
-
       reader.readAsDataURL(input.files[0]); // convert to base64 string
     }
   }

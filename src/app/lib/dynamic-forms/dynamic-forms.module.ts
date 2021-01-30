@@ -12,11 +12,12 @@ import { DynamicListComponent } from './components/dynamic-list/dynamic-list.com
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 import { DynamicFormsModuleConfig } from './core';
 import { ENTITIES_CONFIG_MAPPER, ENTITIES_MAPPER, SERVICES_MAPPER } from './core';
-import { DynamicManyRelationComponent } from './components/dynamic-many-relation/dynamic-many-relation.component';
+import { DynamicManyRelationComponent } from './components/dynamic-form-custom-template/dynamic-many-relation/dynamic-many-relation.component';
 import { AutoCompleteModule } from 'ionic4-auto-complete';
-import { ManyRelationComponent } from './components/many-relation/many-relation.component';
-import { UploadImagePreviewComponent } from './components/upload-image-preview/upload-image-preview.component';
-import { OneRelationComponent } from './components/one-relation/one-relation.component';
+import { ManyRelationComponent } from './components/dynamic-form-custom-template/many-relation/many-relation.component';
+import { UploadImagePreviewComponent } from './components/dynamic-form-custom-template/upload-image-preview/upload-image-preview.component';
+import { OneRelationComponent } from './components/dynamic-form-custom-template/one-relation/one-relation.component';
+import { DynamicLabelComponent } from './components';
 
 
 const components = [
@@ -35,6 +36,7 @@ const components = [
     CommonModule,
     FormlyModule.forChild({
       types: [
+        { name: 'label', component: DynamicLabelComponent },
         { name: 'html-editor', component: HtmlEditorComponent },
         { name: 'image-preview', component: UploadImagePreviewComponent },
         { name: 'many', component: ManyRelationComponent },
@@ -63,7 +65,7 @@ export class DynamicFormsModule {
     }
 
     for (let e of (config.entitiesService || [])) {
-      SERVICES_MAPPER.register(e.key|| e.service.name, e.service)
+      SERVICES_MAPPER.register(e.key || e.service.name, e.service)
     }
 
     for (let e of (config.formTypes || [])) {

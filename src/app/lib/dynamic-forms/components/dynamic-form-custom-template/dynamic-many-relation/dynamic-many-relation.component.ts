@@ -2,7 +2,7 @@ import { Component, Injectable, Injector, Input, OnInit } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
 import { FieldType, FormlyFieldConfig } from '@ngx-formly/core';
 import { AutoCompleteService } from 'ionic4-auto-complete';
-import { EntityConfig, SERVICES_MAPPER } from '../../core';
+import { EntityConfig, SERVICES_MAPPER } from '../../../core';
 
 @Component({
   selector: 'app-dynamic-many-relation',
@@ -43,6 +43,10 @@ export class DynamicManyRelationComponent implements OnInit {
 
   close() {
     this.modalCtrl.dismiss();
+  }
+
+  label(item) {
+    return eval(this.field.templateOptions.selected_key || 'item.name')
   }
 
 }

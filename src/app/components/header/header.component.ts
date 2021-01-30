@@ -11,7 +11,12 @@ import { LoginComponent } from '../login/login.component';
 })
 export class BonAppHeaderComponent implements OnInit {
 
-  constructor(public navCtrl: NavController, private modalCtrl: ModalController, public auth: AuthService, private popoverCtrl: PopoverController) { }
+  constructor(
+    public navCtrl: NavController,
+    private modalCtrl: ModalController,
+    public auth: AuthService,
+    private popoverCtrl: PopoverController
+  ) { }
 
   ngOnInit() { }
 
@@ -37,6 +42,11 @@ export class BonAppHeaderComponent implements OnInit {
 
   goto(url: string) {
     this.navCtrl.navigateForward(url)
+  }
+
+  logout(redirect: string) {
+    this.auth.logout();
+    this.navCtrl.navigateRoot(redirect || '/');
   }
 
 }

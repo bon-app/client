@@ -18,7 +18,7 @@ export class RegisteredParser {
             return new DatePipe('en').transform(value, format);
         },
         'count': (value) => `${value.length} elements`,
-        'currency': (value) => value ? value.toFixed(2) : '-',
+        'currency': (value, n = '2', symbol = '€') => value ? `${symbol} ${value.toFixed(parseInt((n || '2')))}` : '-',
         'checkbox': (value) => value ? 'Yes' : 'No',
         'image': (value) => `<img src="${value}" style="height: 50px" />`,
     }
@@ -35,7 +35,7 @@ export class RegisteredParser {
 
         let args = []
         if (key.indexOf(':') > -1) {
-            args = key.split(':');
+            args = key.split(/\:(?=(?:[^(\'|\")]*\'[^(\'|\")]*\')*[^(\'|\")]*$)/).map(k => k.replace(/('|")/ig, ''));
             let fn = RegisteredParser.pool[args[0]] || RegisteredParser._default;
             args.shift();
             return (value) => fn.call(fn, value, ...args);

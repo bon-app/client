@@ -11,3 +11,10 @@
     </div>
   </form>
 </div>
+<ng-container *ngIf="DEBUG">
+  {{getFormValidationErrors() | json}}
+  {{form.invalid | json}}
+  <pre>
+    {{model | json}}
+  </pre>
+</ng-container>

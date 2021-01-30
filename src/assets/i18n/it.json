@@ -71,7 +71,8 @@
         "login": "Login",
         "orders": "Ordini",
         "about": "About BonApp",
-        "datas": "Gestione dati"
+        "datas": "Gestione dati",
+        "logout": "Logout"
     },
     "ChooseIngredients": {
         "title": "Scegli i tuoi ingredienti",
