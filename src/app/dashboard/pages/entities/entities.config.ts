@@ -519,4 +519,41 @@ export const ENTITIES = {
         service: 'OrdersService',
         object: "Order"
     }),
+    images: EntityConfig.fromJson({
+        title: "Image",
+        fields: [
+            {
+                key: 'image',
+                type: 'image-preview',
+                templateOptions: {
+                    label: 'Image'
+                },
+                validation: {
+                    messages: {
+                        required: "Field is required!",
+                    },
+                },
+                expressionProperties: {
+                    'templateOptions.required': '!model.id',
+                },
+                list: {
+                    parser: 'image',
+                    cssStyle: { 'text-align': 'center' },
+                    filterable: false,
+                }
+            },
+        ],
+        crudOptions: {
+            find: {
+                includes: []
+            }
+        },
+        listOptions: {
+            rows: {
+                extraButtons: [{ key: 'copy-url', icon: 'link' }]
+            },
+        },
+        service: 'ImagesService',
+        object: "BAImage"
+    }),
 }

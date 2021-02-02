@@ -20,7 +20,6 @@ import { DFIngredientsPriorityComponent } from './components/dynamics-form-custo
 import { DFIngredientsComponent } from './components/dynamics-form-custom/df-ingredients/df-ingredients.component';
 import { IngredientsQtaComponent } from './components/dynamics-form-custom/ingredients-qta/ingredients-qta.component';
 import { JoditAngularModule } from 'jodit-angular';
-import { HtmlEditorComponent } from './lib/dynamic-forms/components/dynamic-form-custom-template/html-editor/html-editor.component';
 import { DynamicFormsModule } from './lib/dynamic-forms';
 import { ENTITIES } from './dashboard/pages/entities/entities.config';
 import { ReceiptIngredientsMatching } from './models/receipt-ingredientsMatching.model';
@@ -35,6 +34,8 @@ import { User } from './models/user.model';
 import { Order } from './models/order.model';
 import { UsersService } from './services/users.service';
 import { OrdersService } from './services/orders.service';
+import { BAImage } from './models/image.model';
+import { ImagesService } from './services/images.service';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -75,6 +76,7 @@ export function createTranslateLoader(http: HttpClient) {
         { key: 'receipts', config: ENTITIES.receipts },
         { key: 'rims', config: ENTITIES.rims },
         { key: 'orders', config: ENTITIES.orders },
+        { key: 'images', config: ENTITIES.images },
       ],
       entities: [
         { entity: Ingredient },
@@ -83,6 +85,7 @@ export function createTranslateLoader(http: HttpClient) {
         { entity: ReceiptIngredientsMatching },
         { entity: User },
         { entity: Order },
+        { entity: BAImage },
       ],
       entitiesService: [
         { service: IngredientsService },
@@ -91,6 +94,7 @@ export function createTranslateLoader(http: HttpClient) {
         { service: RimsService },
         { service: UsersService },
         { service: OrdersService },
+        { service: ImagesService },
       ]
     }),
   ],

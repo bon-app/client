@@ -80,7 +80,8 @@ export class EntityRelation {
 }
 
 export class EntityListOptions {
-    public extraButtons: { key: string, icon: string }[];
+    public extraButtons: { key: string, icon: string }[] = [];
+    public rows: { extraButtons?: { key: string, icon: string }[] } = { extraButtons: [] }
     public actions: { edit: boolean, remove: boolean, [key: string]: boolean } = { edit: true, remove: true };
 
     static fromJson(json: any) {
@@ -88,6 +89,7 @@ export class EntityListOptions {
         if (json) {
             options.extraButtons = json.extraButtons || [];
             options.actions = { edit: true, remove: true };
+            options.rows = json.rows || { extraButtons: [] };
             Object.assign(options.actions, json.json || {});
         }
         return options;

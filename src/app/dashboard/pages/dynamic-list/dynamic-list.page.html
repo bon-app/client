@@ -3,6 +3,7 @@
 <ion-content>
   <div class="container">
     <input id="import-csv" type="file" style="display: none;" (change)="importCSV($event)" accept="text/csv"/>
+    <input id="copy" style="display: none;" />
     <dynamic-list *ngIf="config" #list 
       [config]="config" 
       [data]="data" 

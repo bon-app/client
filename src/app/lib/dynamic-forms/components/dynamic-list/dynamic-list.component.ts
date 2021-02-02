@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewContainerRef } from '@angular/core';
 import { IDynamicFilterBuilder } from '../../core/dynamic-filter.interface';
 import { DynamicFormFieldConfig } from '../../core/dynamic-form-field.config';
 import { EntityConfig } from '../../core/entity.config';

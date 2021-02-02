@@ -4,11 +4,8 @@ import { CRUDService } from '../../../services/crud.service';
 import { EntityConfig } from '../../../lib/dynamic-forms/core/entity.config';
 import { NavController } from '@ionic/angular';
 import { DynamicListComponent } from '../../../lib/dynamic-forms/components';
-import { Debounce } from '../../../lib/dynamic-forms/decorators';
-import { ENTITIES_MAPPER, SERVICES_MAPPER } from '../../../lib/dynamic-forms/core';
+import { SERVICES_MAPPER } from '../../../lib/dynamic-forms/core';
 import { ENTITIES } from '../entities/entities.config';
-import { Ingredient } from 'src/app/models/ingredient.model';
-import { IngredientsService } from 'src/app/services/ingredients.service';
 
 @Component({
   selector: 'app-dynamic-list',
@@ -86,10 +83,22 @@ export class DynamicListPage implements OnInit {
         console.log("Upload CSV");
         document.querySelector<HTMLInputElement>('#import-csv').click()
         break;
+      case 'copy-url':
+        console.log("Copy URL", $event);
+        this.copyToClipboard($event.data.id);
+        break;
 
       default:
         break;
     }
+  }
+
+  copyToClipboard(value: string) {
+    let copyText = document.querySelector<HTMLInputElement>('#copy')
+    copyText.value = value;
+    copyText.select();
+    copyText.setSelectionRange(0, 99999); /* For mobile devices */
+    document.execCommand("copy");
   }
 
   importCSV($event) {
@@ -115,7 +124,7 @@ export class DynamicListPage implements OnInit {
           ingredients.push(ingredient);
         }
         input.value = '';
-        (<IngredientsService>this.service).importCSV(ingredients.filter(i => i.icon_url != 'icon_url'));
+        (<any>this.service).importCSV(ingredients.filter(i => i.icon_url != 'icon_url'));
         this.getRecords(true);
       }
       reader.readAsText(input.files[0], "UTF-8");
