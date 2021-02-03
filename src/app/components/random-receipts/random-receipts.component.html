@@ -3,7 +3,7 @@
     <ion-col size-xs="12" size-sm="6" size-md="4" size-lg="4" size-xl="4" *ngFor="let receipt of receipts">
       <ion-card (click)="goto('/receipt/'+receipt.id)">
         <ion-card-header>
-          <ion-card-title>{{receipt.name}}</ion-card-title>
+          <ion-card-title class="ssprofont HeaderRecipeFont">{{receipt.name}}</ion-card-title>
         </ion-card-header>
         <ion-card-content>
           <ion-grid class="neutral">
@@ -27,7 +27,7 @@
                       <ion-icon src="assets/receipts/flame.svg" style="font-size: 1.5em;"></ion-icon>
                     </div>
                     <div>
-                      {{receipt.kcal}}
+                      Kcal {{receipt.kcal}}
                     </div>
                   </div>
                 </div>

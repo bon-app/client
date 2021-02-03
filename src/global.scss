@@ -117,6 +117,9 @@ ion-toolbar {
     font-weight: bold;
 }
 
+.HeaderRecipeFont{
+    font-size: 23px;
+}
 
 /*Font Globale Recoleta*/
 @font-face {   
@@ -144,7 +147,7 @@ ion-toolbar {
         margin: auto;
     }
     #title h1{
-        font-size: 1.3em !important;
+        font-size: 1.5em  !important;
     }
     #filters{
         margin: 2em auto !important;
