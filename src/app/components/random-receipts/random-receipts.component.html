@@ -1,6 +1,6 @@
 <ion-grid>
   <ion-row>
-    <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="6" size-xl="6" *ngFor="let receipt of receipts">
+    <ion-col size-xs="12" size-sm="6" size-md="4" size-lg="4" size-xl="4" *ngFor="let receipt of receipts">
       <ion-card (click)="goto('/receipt/'+receipt.id)">
         <ion-card-header>
           <ion-card-title>{{receipt.name}}</ion-card-title>

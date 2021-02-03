@@ -22,86 +22,105 @@
     </div>
     
     <div id="filters">
-      <h2 class="ion-text-center">{{'Home.h2' | translate}}</h2>
+      <h2 class="ion-text-center filtertext">{{'Home.h2' | translate}}</h2>
+
       <div class="flex-center">
-        <ion-card [ngClass]="{'active': _filter.tags.indexOf('healthy') > -1}" (click)="onChangeFilter('healthy')">
-          <ion-card-content class="flex-center">
-            <div>
-              <div class="ion-text-center">
-                <ion-icon src="assets/filters/healthy.svg"></ion-icon>
-              </div>
-              <div class="ion-text-center">
-                Healthy
-              </div>
-            </div>
-          </ion-card-content>
-        </ion-card>
-        <ion-card [ngClass]="{'active': _filter.tags.indexOf('quick-n-easy') > -1}" (click)="onChangeFilter('quick-n-easy')">
-          <ion-card-content class="flex-center">
-            <div>
-              <div class="ion-text-center">
-                <ion-icon src="assets/filters/qne.svg"></ion-icon>
-              </div>
-              <div class="ion-text-center">
-                Quick n Easy
-              </div>
-            </div>
-          </ion-card-content>
-        </ion-card>
-        <ion-card style="width: 200px;">
-          <ion-card-content>
-            <ion-item lines="none">
-              <ion-label>Vegetariano</ion-label>
-              <ion-toggle value="vegetarian" (click)="onChangeFilter('vegetarian')"></ion-toggle>
-            </ion-item>
-            <ion-item lines="none">
-              <ion-label>Gluten-free</ion-label>
-              <ion-toggle value="gluten-free" (click)="onChangeFilter('gluten-free')"></ion-toggle>
-            </ion-item>
-          </ion-card-content>
-        </ion-card>
+        <ion-grid class="ion-no-padding">
+          <ion-row>
+            <ion-col size-xs="6" size-sm="3" size-md="3" size-lg="3" size-xl="3" class="pad-5">
+              <ion-card [ngClass]="{'active': _filter.tags.indexOf('healthy') > -1}" (click)="onChangeFilter('healthy')">
+                <ion-card-content class="flex-center">
+                  <div>
+                    <div class="ion-text-center">
+                      <ion-icon src="assets/filters/healthy.svg"></ion-icon>
+                    </div>
+                    <div class="ion-text-center ssprofont boldtext">
+                      Healthy
+                    </div>
+                  </div>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+            <ion-col size-xs="6" size-sm="3" size-md="3" size-lg="3" size-xl="3" class="pad-5">
+              <ion-card [ngClass]="{'active': _filter.tags.indexOf('quick-n-easy') > -1}" (click)="onChangeFilter('quick-n-easy')">
+                <ion-card-content class="flex-center">
+                  <div>
+                    <div class="ion-text-center">
+                      <ion-icon src="assets/filters/qne.svg"></ion-icon>
+                    </div>
+                    <div class="ion-text-center ssprofont boldtext">
+                      Quick n Easy
+                    </div>
+                  </div>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+            <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="6" size-xl="6" class="pad-5">
+              <ion-card>
+                <ion-card-content>
+                  <ion-item lines="none">
+                    <ion-label>Vegetariano</ion-label>
+                    <ion-toggle value="vegetarian" (click)="onChangeFilter('vegetarian')"></ion-toggle>
+                  </ion-item>
+                  <ion-item lines="none">
+                    <ion-label>Gluten-free</ion-label>
+                    <ion-toggle value="gluten-free" (click)="onChangeFilter('gluten-free')"></ion-toggle>
+                  </ion-item>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </div>
 
       <div class="flex-center">
-        <ion-card [ngClass]="{'active': _filter.tags.indexOf('first') > -1}" (click)="onChangeFilter('first')">
-          <ion-card-content class="flex-center">
-            <div>
-              <div class="ion-text-center">
-                <ion-icon src="assets/filters/traditional.svg"></ion-icon>
-              </div>
-              <div class="ion-text-center">
-                Primi
-              </div>
-            </div>
-          </ion-card-content>
-        </ion-card>
-        <ion-card [ngClass]="{'active': _filter.tags.indexOf('second') > -1}" (click)="onChangeFilter('second')">
-          <ion-card-content class="flex-center">
-            <div>
-              <div class="ion-text-center">
-                <ion-icon src="assets/filters/second.svg"></ion-icon>
-              </div>
-              <div class="ion-text-center">
-                Secondi
-              </div>
-            </div>
-          </ion-card-content>
-        </ion-card>
-
-        <ion-card style="width: 200px;">
-          <ion-card-content>
-            <ion-item lines="none">
-              <ion-label>Senza forno</ion-label>
-              <ion-toggle value="no-oven"  (click)="onChangeFilter('no-oven')"></ion-toggle>
-            </ion-item>
-            <ion-item lines="none">
-              <ion-label>Senza mixer</ion-label>
-              <ion-toggle value="no-mixer" (click)="onChangeFilter('no-mixer')"></ion-toggle>
-            </ion-item>
-          </ion-card-content>
-        </ion-card>
+        <ion-grid class="ion-no-padding">
+          <ion-row>
+            <ion-col size-xs="6" size-sm="3" size-md="3" size-lg="3" size-xl="3" class="pad-5">
+              <ion-card [ngClass]="{'active': _filter.tags.indexOf('first') > -1}" (click)="onChangeFilter('first')">
+                <ion-card-content class="flex-center">
+                  <div>
+                    <div class="ion-text-center">
+                      <ion-icon src="assets/filters/traditional.svg"></ion-icon>
+                    </div>
+                    <div class="ion-text-center ssprofont boldtext">
+                      Primi
+                    </div>
+                  </div>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+            <ion-col size-xs="6" size-sm="3" size-md="3" size-lg="3" size-xl="3" class="pad-5">
+              <ion-card [ngClass]="{'active': _filter.tags.indexOf('second') > -1}" (click)="onChangeFilter('second')">
+                <ion-card-content class="flex-center">
+                  <div>
+                    <div class="ion-text-center">
+                      <ion-icon src="assets/filters/second.svg"></ion-icon>
+                    </div>
+                    <div class="ion-text-center ssprofont boldtext">
+                      Secondi
+                    </div>
+                  </div>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+            <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="6" size-xl="6" class="pad-5">
+              <ion-card>
+                <ion-card-content>
+                  <ion-item lines="none">
+                    <ion-label>Senza forno</ion-label>
+                    <ion-toggle value="no-oven"  (click)="onChangeFilter('no-oven')"></ion-toggle>
+                  </ion-item>
+                  <ion-item lines="none">
+                    <ion-label>Senza mixer</ion-label>
+                    <ion-toggle value="no-mixer" (click)="onChangeFilter('no-mixer')"></ion-toggle>
+                  </ion-item>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </div>
-
     </div>
     <!-- 
     <div id="filters">
@@ -187,7 +206,7 @@
       <div class="partial-border ion-margin-top ion-margin-bottom"></div>
     </div> -->
 
-    <div style="margin-top: 4em">
+    <div>
       <h2 class="ion-text-center">{{'RandomReceipts.results' | translate}}</h2>
       <div class="partial-border ion-margin-top ion-margin-bottom"></div>
     </div>

@@ -113,7 +113,52 @@ ion-toolbar {
     height: auto !important;
 }
 
-
-.test{
-    width: 10%;
+.boldtext{  
+    font-weight: bold;
 }
+
+
+/*Font Globale Recoleta*/
+@font-face {   
+    font-family: 'Recoleta';    //This is what we are going to call
+    src: url('./assets/font/recoleta-semibold.otf');
+}
+
+
+/*RESPONSIVE RULES*/
+
+/* smartphones, iPhone, portrait 480x320 phones */
+@media (max-width:480px)  { 
+    
+ }
+
+/* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
+@media (max-width:481px)  {  
+    #filters {
+        width: 90% !important;
+    }
+    #title{
+        margin-top: 1em !important;
+        margin-bottom: 1em !important;
+        width: 90%;
+        margin: auto;
+    }
+    #title h1{
+        font-size: 1.3em !important;
+    }
+    #filters{
+        margin: 2em auto !important;
+    }
+}
+
+/* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
+@media (min-width:641px)  {  }
+
+/* tablet, landscape iPad, lo-res laptops ands desktops */ 
+@media (min-width:961px)  { }
+
+/* big landscape tablets, laptops, and desktops */
+@media (min-width:1025px) {  }
+
+/* hi-res laptops and desktops */
+@media (min-width:1281px) {  }
