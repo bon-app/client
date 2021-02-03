@@ -118,7 +118,25 @@ ion-toolbar {
 }
 
 .HeaderRecipeFont{
-    font-size: 23px;
+    font-size: 21px;
+}
+
+.resulttexth3{
+    font-size: 19px;
+    color: #7d7c7c !important;
+}
+
+.cardHeaderRecipes{
+    padding: 8px !important;
+    height: 66px;
+}
+
+.width-100{
+    width: 100%;
+}
+
+ion-card.recipesBox {
+    margin: 10px 10px !important;
 }
 
 /*Font Globale Recoleta*/
@@ -154,8 +172,25 @@ ion-toolbar {
     }
 }
 
+@media screen and (min-width: 482px) and (max-width: 641px) {
+    #filters {
+        width: 65% !important;
+    }
+}
+@media screen and (min-width: 961px) and (max-width: 1281px) {
+    #filters {
+        width: 45% !important;
+    }
+}
+@media screen and (min-width: 1282px) and (max-width: 1981px) {
+    #filters {
+        width: 35% !important;
+    }
+}
+
+
 /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
-@media (min-width:641px)  {  }
+@media (min-width:641px)  { }
 
 /* tablet, landscape iPad, lo-res laptops ands desktops */ 
 @media (min-width:961px)  { }

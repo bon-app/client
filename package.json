@@ -37,6 +37,7 @@
     "jodit-angular": "^1.0.119",
     "lodash": "^4.17.20",
     "rxjs": "~6.5.5",
+    "sweetalert2": "^10.14.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
   },

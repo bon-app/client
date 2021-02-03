@@ -3,6 +3,7 @@ import { ModalController, NavController, PopoverController } from '@ionic/angula
 import { AuthService } from '../../auth/auth.service';
 import { DatasPopoverComponent } from '../datas-popover/datas-popover.component';
 import { LoginComponent } from '../login/login.component';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'bonapp-header',
@@ -45,8 +46,21 @@ export class BonAppHeaderComponent implements OnInit {
   }
 
   logout(redirect: string) {
-    this.auth.logout();
-    this.navCtrl.navigateRoot(redirect || '/');
+    Swal.fire({
+      title: 'Do you want to save the changes?',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: `Save`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.auth.logout();
+        this.navCtrl.navigateRoot(redirect || '/');
+      }
+    })
+
+
+   
   }
 
 }
