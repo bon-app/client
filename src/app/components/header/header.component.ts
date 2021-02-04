@@ -4,6 +4,7 @@ import { AuthService } from '../../auth/auth.service';
 import { DatasPopoverComponent } from '../datas-popover/datas-popover.component';
 import { LoginComponent } from '../login/login.component';
 import Swal from 'sweetalert2'
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'bonapp-header',
@@ -16,7 +17,8 @@ export class BonAppHeaderComponent implements OnInit {
     public navCtrl: NavController,
     private modalCtrl: ModalController,
     public auth: AuthService,
-    private popoverCtrl: PopoverController
+    private popoverCtrl: PopoverController,
+    private translate: TranslateService
   ) { }
 
   ngOnInit() { }
@@ -47,10 +49,10 @@ export class BonAppHeaderComponent implements OnInit {
 
   logout(redirect: string) {
     Swal.fire({
-      title: 'Do you want to save the changes?',
-      showDenyButton: true,
+      title: this.translate.instant("Alerts.logout"),
       showCancelButton: true,
-      confirmButtonText: `Save`,
+      confirmButtonText: this.translate.instant("Alerts.conferma"),
+      cancelButtonText: this.translate.instant("Alerts.annulla"),
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {

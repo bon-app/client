@@ -182,5 +182,10 @@
         "add_ingredient": "Cerca e aggiungi ingrediente",
         "cancel": "Annulla",
         "save": "Salva"
+    },
+    "Alerts": {
+        "logout": "Sei sicuro di voler effettuare il logout?",
+        "conferma": "Si",
+        "annulla": "Annulla"
     }
 }

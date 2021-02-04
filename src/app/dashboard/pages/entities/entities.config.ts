@@ -297,7 +297,7 @@ export const ENTITIES = {
                     },
                 },
                 list: {
-                    parser: 'ellips:100'
+                    parser: 'ellips:50'
                 }
 
             },

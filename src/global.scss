@@ -138,6 +138,12 @@ ion-toolbar {
 ion-card.recipesBox {
     margin: 10px 10px !important;
 }
+.swal2-styled.swal2-confirm{
+    background-color: #efbdae !important;
+}
+.swal2-styled:focus {
+    box-shadow: 0 0 0 3px rgb(239 189 174) !important;
+}
 
 /*Font Globale Recoleta*/
 @font-face {   
