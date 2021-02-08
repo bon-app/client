@@ -18,12 +18,14 @@ import { FormlyModule } from '@ngx-formly/core';
 import { DFIngredientsPriorityComponent } from './dynamics-form-custom/ingredients-priority/ingredients-priority.component';
 import { JoditAngularModule } from 'jodit-angular';
 import { DatasPopoverComponent } from './datas-popover/datas-popover.component';
+import { IngredientsQtaComponent } from './dynamics-form-custom/ingredients-qta/ingredients-qta.component';
+import { DFIngredientsComponent } from './dynamics-form-custom/df-ingredients/df-ingredients.component';
 
 const components = [
   ChooseIngredientsComponent, RandomReceiptsComponent, BonAppHeaderComponent,
   LoginComponent, FooterCartComponent, CartDetailsComponent, AddressFormComponent,
   IngredientsPriorityComponent, IngredientsReceiptsComponent, IngredientsComponent,
-  DFIngredientsPriorityComponent, DatasPopoverComponent
+  DFIngredientsPriorityComponent, DatasPopoverComponent, IngredientsQtaComponent, DFIngredientsComponent
 ];
 
 @NgModule({

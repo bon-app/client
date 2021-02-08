@@ -19,7 +19,7 @@
           <div class="partial-border light partial-on-left ion-margin-bottom"></div>
           <ion-button [fill]="selectedCategories.length? 'outline' : 'solid'"
             [color]="selectedCategories.length? 'tertiary' : 'primary'" *ngIf="receipt"
-            style="width: 100%; text-align: left;" (click)="selectedCategories = []; products = [];">
+            style="width: 100%; text-align: left;" (click)="selectedCategories = [];">
             <span class="ion-text-left">{{receipt.name}}</span>
           </ion-button>
           <ion-button [fill]="!isCategorySelected(category)? 'outline' : 'solid'"
@@ -116,14 +116,14 @@
                   <ion-card class="product">
                     <ion-card-content>
                       <div class="product-img"
-                        [ngStyle]="{background: 'url('+product.icon_url+') no-repeat center center', 'background-size': 'contain'}">
+                        [ngStyle]="{background: 'url('+getProduct(product).icon_url+') no-repeat center center', 'background-size': 'contain'}">
                       </div>
-                      <div class="product-brand" [title]="product.brand">
-                        <ion-text color="tertiary">{{product.brand}}</ion-text>
+                      <div class="product-brand" [title]="getProduct(product).brand">
+                        <ion-text color="tertiary">{{getProduct(product).brand}}</ion-text>
                       </div>
-                      <div class="product-name" [title]="product.name">{{product.name}}</div>
+                      <div class="product-name" [title]="getProduct(product).name">{{getProduct(product).name}}</div>
                       <div class="product-price ion-margin-top">
-                        € {{(product.price? product.price.toFixed(2) : '-')}}
+                        € {{(getProduct(product).price? getProduct(product).price.toFixed(2) : '-')}}
                       </div>
                       <div class="ion-text-right actions">
                         <ion-button color="primary" size="small" (click)="cart.add(product, 1)">

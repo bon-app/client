@@ -84,4 +84,8 @@ export class ReceiptBuyPage implements OnInit {
     return !!this.selectedCategories.find(sc => sc.id == category.id);
   }
 
+
+  getProduct(product) {
+    return product as any;
+  }
 }

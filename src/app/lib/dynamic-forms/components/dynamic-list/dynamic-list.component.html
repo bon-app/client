@@ -17,7 +17,7 @@
       </ion-button>
 
       <ion-button *ngFor="let button of (extraButtons || [])" size="icon-only" color="secondary" fill="clear"
-        class="ion-margin-top ion-margin-bottom" (click)="extraButtonClick.emit({ key:button.key })">
+        class="ion-margin-top ion-margin-bottom" (click)="extraButtonClick.emit({ key:button.key, data: null })">
         <ion-icon [name]="button.icon" color="secondary"></ion-icon>
       </ion-button>
     </div>

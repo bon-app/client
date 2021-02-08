@@ -2,7 +2,7 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
-import { FormlyConfig, FormlyModule } from '@ngx-formly/core';
+import { FormlyModule } from '@ngx-formly/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { JoditAngularModule } from 'jodit-angular';
 import { DynamicFormComponent } from './components/dynamic-form/dynamic-form.component';
@@ -17,7 +17,7 @@ import { AutoCompleteModule } from 'ionic4-auto-complete';
 import { ManyRelationComponent } from './components/dynamic-form-custom-template/many-relation/many-relation.component';
 import { UploadImagePreviewComponent } from './components/dynamic-form-custom-template/upload-image-preview/upload-image-preview.component';
 import { OneRelationComponent } from './components/dynamic-form-custom-template/one-relation/one-relation.component';
-import { DynamicLabelComponent } from './components';
+import { DynamicLabelComponent, DynamicOneRelationComponent } from './components';
 
 
 const components = [
@@ -25,7 +25,12 @@ const components = [
   HtmlEditorComponent,
   DynamicListComponent,
   DynamicManyRelationComponent,
-  SafeHtmlPipe
+  SafeHtmlPipe,
+  ManyRelationComponent,
+  OneRelationComponent,
+  UploadImagePreviewComponent,
+  DynamicOneRelationComponent,
+  DynamicLabelComponent
 ];
 
 @NgModule({
