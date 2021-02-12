@@ -70,6 +70,7 @@
         "register": "Registrati",
         "login": "Login",
         "orders": "Ordini",
+        "shop": "Shop", 
         "about": "About BonApp",
         "datas": "Gestione dati",
         "logout": "Logout"
@@ -102,9 +103,11 @@
         "cart": "Carrello",
         "cart_total": "Totale",
         "categories": "Categorie",
+        "subcategories": "Sottocategorie",
         "condiments": "Condimenti",
         "element_in_cart": "{{items.length}} prodotti nel carrello",
-        "cart_details": "Dettiglio carrello"
+        "cart_details": "Dettiglio carrello",
+        "no_products": "Cerca i prodotti che più desideri!"
     },
     "AddressForm": {
         "address": "Indirizzo",

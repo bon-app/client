@@ -1,0 +1,29 @@
+#list {
+
+    $borderColor: var(--ion-color-tertiary);
+
+    width: 100%;
+    // border-radius: 1em;
+    // border: 1px solid $borderColor;
+
+    th {
+        padding: 0.5em;
+        background: var(--ion-color-light);
+    }
+
+    th,
+    td {
+        padding: 0.5em;
+        text-align: left;
+    }
+
+    tr:nth-child(2n) {
+        background: var(--ion-color-light);
+    }
+
+    td {
+        span {
+            cursor: pointer;
+        }
+    }
+}

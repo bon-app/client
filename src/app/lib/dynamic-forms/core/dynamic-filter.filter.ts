@@ -1,6 +1,7 @@
 import { IDynamicFilterBuilder } from "./dynamic-filter.interface";
 import { DynamicFormFieldConfig } from "./dynamic-form-field.config";
 
+
 export class DefaultDynamicFilterBuilder implements IDynamicFilterBuilder {
 
     public term: string = '';

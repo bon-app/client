@@ -1,6 +1,11 @@
 import { DatePipe } from "@angular/common";
+import { Type } from "@angular/core";
+import { DefaultFilterComponent } from "../components/default-filter/default-filter.component";
+import { DynamicTableComponent } from "../components/dynamic-table/dynamic-table.component";
+import { DynamicFilter } from "../core/dynamic-filter.base";
 import { DefaultDynamicFilterBuilder } from "../core/dynamic-filter.filter";
 import { IDynamicFilterBuilder } from "../core/dynamic-filter.interface";
+import { DynamicList } from "../core/dynamic-list.base";
 
 export class RegisteredParser {
 
@@ -56,8 +61,8 @@ export class RegisteredFilterBuilders {
         return new DefaultDynamicFilterBuilder()
     }
 
-    static register(key: string, parser: (value: any, ...args: any[]) => any) {
-        RegisteredParser.pool[key] = parser;
+    static register(key: string, builder: IDynamicFilterBuilder) {
+        RegisteredFilterBuilders.pool[key] = builder;
     }
 
     static get(key: string) {
@@ -66,3 +71,52 @@ export class RegisteredFilterBuilders {
     }
 
 }
+
+export class RegisteredFilterComponents {
+
+    static pool: { [key: string]: Type<DynamicFilter> } = {
+        'default': DefaultFilterComponent,
+    }
+
+    static _default(): Type<DynamicFilter> {
+        return DefaultFilterComponent
+    }
+
+    static register(key: string, type: Type<DynamicFilter>) {
+        RegisteredFilterComponents.pool[key] = type;
+    }
+
+    static get(key: string) {
+        return RegisteredFilterComponents.pool[key] || RegisteredFilterComponents._default();
+    }
+
+}
+
+export class RegisteredListComponents {
+
+    static pool: { [key: string]: Type<DynamicList> } = {
+        'default': DynamicTableComponent,
+    }
+
+    static _default(): Type<DynamicList> {
+        return DynamicTableComponent
+    }
+
+    static register(key: string, type: Type<DynamicList>) {
+        RegisteredListComponents.pool[key] = type;
+    }
+
+    static get(key: string) {
+        return RegisteredListComponents.pool[key] || RegisteredListComponents._default();
+    }
+
+}
+
+export const REGISTER = {
+    LIST_COMPONENTS: RegisteredListComponents,
+    FILTER_COMPONENTS: RegisteredFilterComponents,
+    FILTER_BUILDERS: RegisteredFilterBuilders,
+    LIST_PARSERS: RegisteredParser,
+}
+
+window["__DYNAMIC_REGISTER"] = REGISTER;

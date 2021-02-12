@@ -46,7 +46,7 @@ export class ENTITIES_CONFIG_MAPPER {
     }
 }
 
-window["__TEST"] = {
+window["__DYNAMIC_MAPPERS"] = {
     ENTITIES_MAPPER,
     SERVICES_MAPPER,
     ENTITIES_CONFIG_MAPPER

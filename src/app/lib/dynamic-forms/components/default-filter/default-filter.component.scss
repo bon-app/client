@@ -1,0 +1,12 @@
+#filter {
+    margin: 0;
+    margin-bottom: 4em;
+
+    .filter-section {
+        margin-bottom: 1em;
+
+        ion-input {
+            --padding-end: 0;
+        }
+    }
+}

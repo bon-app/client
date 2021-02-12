@@ -1,0 +1,42 @@
+
+  <table id="list" class="ion-margin-top">
+    <thead>
+      <tr>
+        <th *ngFor="let field of fields">
+          {{field.templateOptions?.label}}
+        </th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of data">
+        <td *ngFor="let field of fields" [ngStyle]="field.list.cssStyle" [ngClass]="field.list.cssClass"
+          [innerHTML]="getParser(field, row[field.key]) | safeHtml"></td>
+        <td class="ion-text-right">
+          <ion-button *ngFor="let button of (config.listOptions?.rows?.extraButtons || [])" size="icon-only"
+            color="secondary" fill="clear" class="ion-margin-top ion-margin-bottom"
+            (click)="extraButtonClick.emit({ key:button.key, data: row })">
+            <ion-icon [name]="button.icon" color="secondary"></ion-icon>
+          </ion-button>
+          <ion-button fill="clear" size="icon-only" color="secondary" (click)="edit.emit(row)">
+            <ion-icon name="create"></ion-icon>
+          </ion-button>
+          <ion-button fill="clear" size="icon-only" color="danger" (click)="delete.emit(row)">
+            <ion-icon name="trash"></ion-icon>
+          </ion-button>
+          <!-- <span (click)="edit.emit(row)">edit</span> | <span (click)="delete.emit(row)">delete</span> -->
+        </td>
+      </tr>
+      <tr *ngIf="!data.length">
+        <td style="text-align: center;padding-top: 2em;padding-bottom: 2em;" [attr.colspan]="fields.length+1">
+          No elements
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="ion-padding" *ngIf="settings.showMoreButton">
+    <ion-button expand="full" fill="clear" color="primary" (click)="more.emit()">
+      more
+    </ion-button>
+  </div>

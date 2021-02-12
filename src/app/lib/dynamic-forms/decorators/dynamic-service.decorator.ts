@@ -1,4 +1,5 @@
-import { SERVICES_MAPPER } from "../core/mapper";
+import { SERVICES_MAPPER } from "../core/mapper"
+
 
 export function DynamicService(key: string = null) {
     return (constructor: Function) => {

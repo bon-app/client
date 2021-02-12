@@ -1,11 +1,14 @@
-import { DynamicFormFieldConfig } from "./dynamic-form-field.config";
+
 import * as _ from 'lodash';
+import { DynamicFormFieldConfig } from './dynamic-form-field.config';
 
 export class EntityConfig {
     title: string;
     fields: DynamicFormFieldConfig[];
     crudOptions: { [key: string]: { fields?: string[], orderBy?: any, includes?: string[] } };
     filterBuilder?: string;
+    filterComponent?: string;
+    listComponent?: string;
     listOptions: EntityListOptions = new EntityListOptions();
     relations: EntityRelation[] = [];
     service: string;

@@ -94,11 +94,12 @@ export class DynamicListPage implements OnInit {
   }
 
   copyToClipboard(value: string) {
-    let copyText = document.querySelector<HTMLInputElement>('#copy')
-    copyText.value = value;
-    copyText.select();
-    copyText.setSelectionRange(0, 99999); /* For mobile devices */
-    document.execCommand("copy");
+    // debugger
+    // let copyText = document.querySelector<HTMLInputElement>('#copy')
+    // copyText.value = value;
+    // copyText.select();
+    // copyText.setSelectionRange(0, 99999); /* For mobile devices */
+    // document.execCommand("copy");
   }
 
   importCSV($event) {

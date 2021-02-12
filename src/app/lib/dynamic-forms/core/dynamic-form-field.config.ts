@@ -3,7 +3,7 @@ import { FormlyFieldConfig, FormlyFormOptions, FormlyTemplateOptions } from "@ng
 import { FormlyLifeCycleOptions, FormlyHookFn } from "@ngx-formly/core/lib/components/formly.field.config";
 import { ValidationMessageOption } from "@ngx-formly/core/lib/services/formly.config";
 import { Observable } from "rxjs";
-import { RegisteredParser } from "../utils/dynamic-form.utils";
+import { REGISTER } from "../utils/dynamic-form.utils";
 
 
 export class DynamicFormFieldConfig implements FormlyFieldConfig {
@@ -154,8 +154,8 @@ export class DynamicFormFieldConfig implements FormlyFieldConfig {
         Object.assign(field, json);
         field.list = json.list || {};
         field.list.parser = json.list && json.list.parser ?
-            (typeof json.list.parser == 'string' ? RegisteredParser.get(json.list.parser) : json.list.parser || RegisteredParser._default)
-            : RegisteredParser._default;
+            (typeof json.list.parser == 'string' ? REGISTER.LIST_PARSERS.get(json.list.parser) : json.list.parser || REGISTER.LIST_PARSERS._default)
+            : REGISTER.LIST_PARSERS._default;
 
         return field;
     }
@@ -167,6 +167,28 @@ export class DynamicListOptions {
     cssStyle: { [key: string]: any } = {};
     hidden: boolean = false;
     filterable: boolean = false;
+    filter_type: FilterTypes = FilterTypes.AUTO;
+}
+
+export enum FilterTypes {
+    AUTO = 'auto',
+    TEXT = 'text',
+    HTML_TEXT = 'html-text',
+    RANGE = 'range',
+    NUMBER = 'number',
+    SELECT = 'select',
+    MULTISELECT = 'multiselect',
+    CHECKBOX = 'checkbox',
+    DATE = 'date',
+    DATETIME = 'datetime',
+    TIME = 'time',
+    RANGE_DATETIME = 'range-datetime'
+}
+
+export namespace FilterTypes {
+    export function getType(field: DynamicFormFieldConfig): any {
+        return FilterTypes.TEXT;
+    }
 }
 
 

@@ -103,7 +103,8 @@ ion-card.product {
     }
 }
 
-.less, .add {
+.less,
+.add {
     cursor: pointer;
 }
 
@@ -117,5 +118,22 @@ span.ion-text-left {
 
     ion-button {
         --border-radius: 5px;
+    }
+}
+
+#no-products {
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+
+    > * {
+        margin: 0 auto;
+    }
+}
+
+
+@media only screen and (max-width: 768px) {
+    ion-searchbar {
+        width: 100% !important;
     }
 }

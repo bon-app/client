@@ -5,19 +5,25 @@ import { FormsModule } from '@angular/forms';
 import { FormlyModule } from '@ngx-formly/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { JoditAngularModule } from 'jodit-angular';
-import { DynamicFormComponent } from './components/dynamic-form/dynamic-form.component';
-import { HtmlEditorComponent } from './components/dynamic-form-custom-template/html-editor/html-editor.component';
 import { FormlyIonicModule } from '@ngx-formly/ionic';
-import { DynamicListComponent } from './components/dynamic-list/dynamic-list.component';
-import { SafeHtmlPipe } from './pipes/safe-html.pipe';
-import { DynamicFormsModuleConfig } from './core';
-import { ENTITIES_CONFIG_MAPPER, ENTITIES_MAPPER, SERVICES_MAPPER } from './core';
-import { DynamicManyRelationComponent } from './components/dynamic-form-custom-template/dynamic-many-relation/dynamic-many-relation.component';
 import { AutoCompleteModule } from 'ionic4-auto-complete';
+import { DefaultFilterComponent } from './components/default-filter/default-filter.component';
+import { DynamicTableComponent } from './components/dynamic-table/dynamic-table.component';
+import { DynamicComponent } from './core/dynamic-component';
+import { DynamicFormsModuleConfig } from './core/dynamic-forms-module.config';
+import { DynamicDirective } from './core/dynamic.directive';
+import { ENTITIES_CONFIG_MAPPER, ENTITIES_MAPPER, SERVICES_MAPPER } from './core/mapper';
+import { SafeHtmlPipe } from './pipes/safe-html.pipe';
+import { DynamicFormComponent } from './components/dynamic-form/dynamic-form.component';
+import { DynamicLabelComponent } from './components/dynamic-form-custom-template/dynamic-label/dynamic-label.component';
+import { DynamicManyRelationComponent } from './components/dynamic-form-custom-template/dynamic-many-relation/dynamic-many-relation.component';
+import { DynamicOneRelationComponent } from './components/dynamic-form-custom-template/dynamic-one-relation/dynamic-one-relation.component';
+import { HtmlEditorComponent } from './components/dynamic-form-custom-template/html-editor/html-editor.component';
 import { ManyRelationComponent } from './components/dynamic-form-custom-template/many-relation/many-relation.component';
-import { UploadImagePreviewComponent } from './components/dynamic-form-custom-template/upload-image-preview/upload-image-preview.component';
 import { OneRelationComponent } from './components/dynamic-form-custom-template/one-relation/one-relation.component';
-import { DynamicLabelComponent, DynamicOneRelationComponent } from './components';
+import { UploadImagePreviewComponent } from './components/dynamic-form-custom-template/upload-image-preview/upload-image-preview.component';
+import { DynamicListComponent } from './components/dynamic-list/dynamic-list.component';
+
 
 
 const components = [
@@ -30,7 +36,11 @@ const components = [
   OneRelationComponent,
   UploadImagePreviewComponent,
   DynamicOneRelationComponent,
-  DynamicLabelComponent
+  DynamicLabelComponent,
+  DefaultFilterComponent,
+  DynamicComponent,
+  DynamicDirective,
+  DynamicTableComponent
 ];
 
 @NgModule({

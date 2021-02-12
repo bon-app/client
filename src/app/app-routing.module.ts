@@ -12,6 +12,10 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'shop',
+    loadChildren: () => import('./pages/receipt-buy/receipt-buy.module').then( m => m.ReceiptBuyPageModule)
+  },
+  {
     path: 'receipt/:id',
     loadChildren: () => import('./pages/receipt/receipt.module').then( m => m.ReceiptPageModule)
   },

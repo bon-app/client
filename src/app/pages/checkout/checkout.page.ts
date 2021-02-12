@@ -214,7 +214,7 @@ export class CheckoutPage implements OnInit {
         // The payment has been processed!
         if (result.paymentIntent.status === 'succeeded') {
           this.cart.clear();
-          this.navCtrl.navigateRoot('/order-confirm/' + result.paymentIntent.id)
+          this.navCtrl.navigateRoot('/order-confirm/' + pm.metadata.order)
         }
       }
 

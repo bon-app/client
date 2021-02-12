@@ -1,4 +1,5 @@
-import { EntityConfig } from "../../../lib/dynamic-forms/core";
+import { EntityConfig } from "../../../lib/dynamic-forms/core/entity.config";
+
 
 export const ENTITIES = {
     ingredients: EntityConfig.fromJson({
@@ -36,6 +37,9 @@ export const ENTITIES = {
                         required: "Field is required!",
                     },
                 },
+                list: {
+                    filter_type: 'text'
+                }
             },
             {
                 key: 'brand',
@@ -136,6 +140,13 @@ export const ENTITIES = {
                     messages: {
                         required: "Field is required!",
                     },
+                },
+            },
+            {
+                key: 'showInShop',
+                type: 'checkbox',
+                templateOptions: {
+                    label: 'Show category in shop',
                 },
             },
             {
@@ -523,7 +534,7 @@ export const ENTITIES = {
         title: "Image",
         fields: [
             {
-                key: 'image',
+                key: 'url',
                 type: 'image-preview',
                 templateOptions: {
                     label: 'Image'
@@ -542,6 +553,30 @@ export const ENTITIES = {
                     filterable: false,
                 }
             },
+            {
+                key: 'name',
+                type: 'input',
+                templateOptions: {
+                    label: 'Name'
+                },
+                validation: {
+                    messages: {
+                        required: "Field is required!",
+                    },
+                },
+                list: {
+                }
+            },
+            {
+                key: 'url',
+                type: 'label',
+                templateOptions: {
+                    label: 'Url'
+                },
+                validation: {},
+                list: {
+                }
+            }
         ],
         crudOptions: {
             find: {
@@ -550,7 +585,7 @@ export const ENTITIES = {
         },
         listOptions: {
             rows: {
-                extraButtons: [{ key: 'copy-url', icon: 'link' }]
+                extraButtons: []
             },
         },
         service: 'ImagesService',

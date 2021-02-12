@@ -1,5 +1,6 @@
 import { DynamicFormFieldConfig } from "./dynamic-form-field.config";
 
+
 export interface IDynamicFilterBuilder {
     term: string;
     searchable: { [key: string]: any };

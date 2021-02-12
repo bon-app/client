@@ -1,0 +1,75 @@
+<ion-card id="filter">
+  <ion-card-content>
+
+    <div class="filter-section">
+      Showed rows:
+      <div class="partial-border light partial-on-left ion-margin-bottom"></div>
+      <ion-item>
+        <ion-input #row_length type="number" placeholder="From" [(ngModel)]="settings.row_length"
+          (ngModelChange)="rowLengthChange.emit(settings.row_length)" style="width: 60px;"></ion-input>
+      </ion-item>
+    </div>
+
+    <div class="filter-section">
+      Search in:
+      <div class="partial-border light partial-on-left ion-margin-bottom"></div>
+      <ion-grid class="neutral">
+        <ion-row>
+          <ion-col *ngFor="let field of getSearchableFields()">
+            <ion-item>
+              <ion-label>{{field.templateOptions?.label}}</ion-label>
+              <ion-checkbox slot="start" [(ngModel)]="filterBuilder.searchable[field.key]"
+                (ngModelChange)="filterChange.emit()"></ion-checkbox>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+    <div class="filter-section" *ngIf="getRangeFields().length">
+      Range in:
+      <div class="partial-border light partial-on-left ion-margin-bottom"></div>
+      <ion-grid class="neutral">
+        <ion-row>
+          <ion-col *ngFor="let field of getRangeFields()">
+            <ion-item lines="none">
+              <ion-label lines="none">
+                {{field.templateOptions?.label}}
+              </ion-label>
+              <ion-item>
+                <ion-input #from type="number" placeholder="From" [(ngModel)]="filterBuilder.ranges[field.key].from"
+                  (ngModelChange)="filterChange.emit()" style="width: 80px;"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-input #to type="number" placeholder="To" [(ngModel)]="filterBuilder.ranges[field.key].to"
+                  (ngModelChange)="filterChange.emit()" style="width: 80px;"></ion-input>
+              </ion-item>
+              <ion-button fill="clear" color="primary" (click)="from.value='';to.value=''">
+                Clear
+              </ion-button>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+    <div class="filter-section" *ngIf="getCheckboxFields().length">
+      Checked at:
+      <div class="partial-border light partial-on-left ion-margin-bottom"></div>
+      <ion-grid class="neutral">
+        <ion-row>
+          <ion-col *ngFor="let field of getCheckboxFields()">
+            <ion-item>
+              <ion-checkbox slot="start" [(ngModel)]="filterBuilder.checked[field.key].active"
+                (ngModelChange)="filterChange.emit()"></ion-checkbox>
+              <ion-label>{{field.templateOptions?.label}}</ion-label>
+              <ion-toggle #toggle [value]="filterBuilder.checked[field.key].value"
+                (ionChange)="filterBuilder.checked[field.key].value = toggle.checked;filterChange.emit()"></ion-toggle>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+  </ion-card-content>
+</ion-card>
