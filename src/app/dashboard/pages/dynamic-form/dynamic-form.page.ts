@@ -1,7 +1,8 @@
 import { Component, Injector, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
-import { ENTITIES_MAPPER, EntityConfig, SERVICES_MAPPER } from '../../../lib/dynamic-forms/core';
+import { EntityConfig } from '../../../lib/dynamic-forms/core/entity.config';
+import { ENTITIES_MAPPER, SERVICES_MAPPER } from '../../../lib/dynamic-forms/core/mapper';
 import { CRUDService } from '../../../services/crud.service';
 import { ENTITIES } from "../entities/entities.config";
 

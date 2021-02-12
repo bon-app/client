@@ -3,9 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { CRUDService } from '../../../services/crud.service';
 import { EntityConfig } from '../../../lib/dynamic-forms/core/entity.config';
 import { NavController } from '@ionic/angular';
-import { DynamicListComponent } from '../../../lib/dynamic-forms/components';
-import { SERVICES_MAPPER } from '../../../lib/dynamic-forms/core';
 import { ENTITIES } from '../entities/entities.config';
+import { DynamicListComponent } from '../../../lib/dynamic-forms/components/dynamic-list/dynamic-list.component';
+import { SERVICES_MAPPER } from '../../../lib/dynamic-forms/core/mapper';
 
 @Component({
   selector: 'app-dynamic-list',

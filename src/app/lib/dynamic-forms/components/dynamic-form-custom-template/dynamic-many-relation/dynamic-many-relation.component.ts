@@ -2,7 +2,7 @@ import { Component, Injectable, Injector, Input, OnInit } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
 import { FieldType, FormlyFieldConfig } from '@ngx-formly/core';
 import { AutoCompleteService } from 'ionic4-auto-complete';
-import { EntityConfig, SERVICES_MAPPER } from '../../../core';
+import { SERVICES_MAPPER } from '../../../core/mapper';
 
 @Component({
   selector: 'app-dynamic-many-relation',

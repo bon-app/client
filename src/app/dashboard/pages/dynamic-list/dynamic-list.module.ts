@@ -7,9 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { DynamicListPageRoutingModule } from './dynamic-list-routing.module';
 
 import { DynamicListPage } from './dynamic-list.page';
-import { DynamicFormsModule } from '../../../lib/dynamic-forms';
-import { ComponentsModule } from 'src/app/components/components.module';
-import { ENTITIES } from '../entities/entities.config';
+import { ComponentsModule } from '../../../components/components.module';
+import { DynamicFormsModule } from '../../../lib/dynamic-forms/dynamic-forms.module';
 
 @NgModule({
   imports: [
