@@ -1,4 +1,4 @@
-import { Component, OnInit, } from '@angular/core';
+import { Component, HostListener, OnInit, } from '@angular/core';
 import { LoadingController, ModalController, NavController, ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { User } from '../../models/user.model';

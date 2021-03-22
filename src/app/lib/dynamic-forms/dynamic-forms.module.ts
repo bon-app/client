@@ -9,7 +9,7 @@ import { FormlyIonicModule } from '@ngx-formly/ionic';
 import { AutoCompleteModule } from 'ionic4-auto-complete';
 import { DefaultFilterComponent } from './components/default-filter/default-filter.component';
 import { DynamicTableComponent } from './components/dynamic-table/dynamic-table.component';
-import { DynamicComponent } from './core/dynamic-component';
+import { DynamicFactory } from './core/dynamic-factory';
 import { DynamicFormsModuleConfig } from './core/dynamic-forms-module.config';
 import { DynamicDirective } from './core/dynamic.directive';
 import { ENTITIES_CONFIG_MAPPER, ENTITIES_MAPPER, SERVICES_MAPPER } from './core/mapper';
@@ -38,7 +38,7 @@ const components = [
   DynamicOneRelationComponent,
   DynamicLabelComponent,
   DefaultFilterComponent,
-  DynamicComponent,
+  DynamicFactory,
   DynamicDirective,
   DynamicTableComponent
 ];

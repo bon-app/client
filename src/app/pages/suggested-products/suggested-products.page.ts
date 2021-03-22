@@ -26,4 +26,7 @@ export class SuggestedProductsPage implements OnInit {
     this.navCtrl.navigateForward(url);
   }
 
-}
+  getIngredients(category) {
+    return category.ingredients;
+  }
+} 

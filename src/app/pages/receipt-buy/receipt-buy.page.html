@@ -9,6 +9,14 @@
         <ion-searchbar [(ngModel)]="seach_term" [debounce]="400" (ngModelChange)="searchIngredients()"></ion-searchbar>
       </div>
     </div>
+    <div class="ion-padding" id="categories-mobile">
+      <ion-label class="ion-margin-bottom">{{"ReceiptBuy.categories" | translate}}</ion-label>
+      <ion-select [interface]="'popover'" (ionChange)="selectChange($event)">
+        <ion-select-option [value]="'receipt'" *ngIf="receipt">{{receipt.name}}</ion-select-option>
+        <ion-select-option [value]="category" *ngFor="let category of categories">{{category.name}}
+        </ion-select-option>
+      </ion-select>
+    </div>
     <ion-grid>
       <ion-row>
 
@@ -20,13 +28,13 @@
           <ion-button [fill]="selectedCategories.length? 'outline' : 'solid'"
             [color]="selectedCategories.length? 'tertiary' : 'primary'" *ngIf="receipt"
             style="width: 100%; text-align: left;" (click)="selectedCategories = []; seach_term = ''">
-            <span class="ion-text-left">{{receipt.name}}</span>
+            <span class="ion-text-left wrap-text">{{receipt.name}}</span>
           </ion-button>
           <ng-container *ngFor="let category of categories">
             <ion-button [fill]="!isCategorySelected(category)? 'outline' : 'solid'"
               [color]="!isCategorySelected(category)? 'tertiary' : 'primary'" (click)="toggleCategory(category)"
               style="width: 100%; text-align: left;">
-              <span class="ion-text-left">{{category.name}}</span>
+              <span class="ion-text-left wrap-text">{{category.name}}</span>
             </ion-button>
             <ng-container *ngIf="isCategorySelected(category) || isSubCategorySelected(category)">
               <ion-button [fill]="!isCategorySelected(subcategory)? 'outline' : 'solid'"
@@ -41,7 +49,7 @@
 
         <ion-col>
           <ng-container *ngIf="!selectedCategories.length && receipt && !seach_term">
-            <div class="ion-padding-start">
+            <div class="ion-padding-start" *ngIf="getIngredients(false).length">
               <h2>
                 <ion-text color="secondary">{{"ReceiptBuy.ingredients_for" | translate:receipt}}</ion-text>
               </h2>
@@ -61,11 +69,20 @@
                         <ion-text color="tertiary">{{product.brand}}</ion-text>
                       </div>
                       <div class="product-name" [title]="product.name">{{product.name}}</div>
+                      <div>
+                        <small><i>{{getSelf(product).qty}}</i></small>
+                      </div>
                       <div class="product-price ion-margin-top">
                         € {{(product.price? product.price.toFixed(2) : '-')}}
                       </div>
-                      <div class="ion-text-right actions">
-                        <ion-button color="primary" size="small" (click)="cart.add(product, 1)">
+                      <div class="ion-text-center actions">
+                        <ion-button fill="clear" color="primary" size="small" (click)="cart.add(product, -1)" style="float:left" *ngIf="cart.getQta(product) > 0">
+                          <ion-icon name="remove"></ion-icon>
+                        </ion-button>
+                        <ion-button fill="clear" color="secondary" size="small" (click)="cart.add(product, -1)" *ngIf="cart.getQta(product) > 0">
+                          {{cart.getQta(product)}}
+                        </ion-button>
+                        <ion-button color="primary" size="small" (click)="cart.add(product, 1)" style="float:right">
                           <ion-icon name="add"></ion-icon>
                         </ion-button>
                       </div>
@@ -75,7 +92,7 @@
               </ion-row>
             </ion-grid>
 
-            <div class="ion-padding-start" style="margin-top: 3em;">
+            <div class="ion-padding-start" style="margin-top: 3em;" *ngIf="getIngredients(true).length">
               <h2>
                 <ion-text color="secondary">{{"ReceiptBuy.condiments" | translate:receipt}}</ion-text>
               </h2>
@@ -94,12 +111,23 @@
                       <div class="product-brand" [title]="product.brand">
                         <ion-text color="tertiary">{{product.brand}}</ion-text>
                       </div>
-                      <div class="product-name" [title]="product.name">{{product.name}}</div>
+                      <div class="product-name" [title]="product.name">
+                        {{product.name}}
+                      </div>
+                      <div>
+                        <small><i>{{product.qty}}</i></small>
+                      </div>
                       <div class="product-price ion-margin-top">
                         € {{(product.price? product.price.toFixed(2) : '-')}}
                       </div>
-                      <div class="ion-text-right actions">
-                        <ion-button color="primary" size="small" (click)="cart.add(product, 1)">
+                      <div class="ion-text-center actions">
+                        <ion-button fill="clear" color="primary" size="small" (click)="cart.add(product, -1)" style="float:left" *ngIf="cart.getQta(product) > 0">
+                          <ion-icon name="remove"></ion-icon>
+                        </ion-button>
+                        <ion-button fill="clear" color="secondary" size="small" (click)="cart.add(product, -1)" *ngIf="cart.getQta(product) > 0">
+                          {{cart.getQta(product)}}
+                        </ion-button>
+                        <ion-button color="primary" size="small" (click)="cart.add(product, 1)" style="float:right">
                           <ion-icon name="add"></ion-icon>
                         </ion-button>
                       </div>
@@ -139,7 +167,7 @@
                 </ion-row>
               </ion-grid>
 
-              <div class="ion-padding-start">
+              <div class="ion-padding-start" *ngIf="category.ingredients?.length">
                 <h2>
                   <ion-text color="secondary">{{category.name}}</ion-text>
                 </h2>
@@ -159,11 +187,23 @@
                           <ion-text color="tertiary">{{getSelf(product).brand}}</ion-text>
                         </div>
                         <div class="product-name" [title]="getSelf(product).name">{{getSelf(product).name}}</div>
+                        <div>
+                          <small><i>{{getSelf(product).qty}}</i></small>
+                        </div>
+                        <div>
+                          <small><i>{{getSelf(product).qty}}</i></small>
+                        </div>
                         <div class="product-price ion-margin-top">
                           € {{(getSelf(product).price? getSelf(product).price.toFixed(2) : '-')}}
                         </div>
-                        <div class="ion-text-right actions">
-                          <ion-button color="primary" size="small" (click)="cart.add(product, 1)">
+                        <div class="ion-text-center actions">
+                          <ion-button fill="clear" color="primary" size="small" (click)="cart.add(product, -1)" style="float:left" *ngIf="cart.getQta(product) > 0">
+                            <ion-icon name="remove"></ion-icon>
+                          </ion-button>
+                          <ion-button fill="clear" color="secondary" size="small" (click)="cart.add(product, -1)" *ngIf="cart.getQta(product) > 0">
+                            {{cart.getQta(product)}}
+                          </ion-button>
+                          <ion-button color="primary" size="small" (click)="cart.add(product, 1)" style="float:right">
                             <ion-icon name="add"></ion-icon>
                           </ion-button>
                         </div>
@@ -200,8 +240,14 @@
                         <div class="product-price ion-margin-top">
                           € {{(getSelf(product).price? getSelf(product).price.toFixed(2) : '-')}}
                         </div>
-                        <div class="ion-text-right actions">
-                          <ion-button color="primary" size="small" (click)="cart.add(product, 1)">
+                        <div class="ion-text-center actions">
+                          <ion-button fill="clear" color="primary" size="small" (click)="cart.add(product, -1)" style="float:left" *ngIf="cart.getQta(product) > 0">
+                            <ion-icon name="remove"></ion-icon>
+                          </ion-button>
+                          <ion-button fill="clear" color="secondary" size="small" (click)="cart.add(product, -1)" *ngIf="cart.getQta(product) > 0">
+                            {{cart.getQta(product)}}
+                          </ion-button>
+                          <ion-button color="primary" size="small" (click)="cart.add(product, 1)" style="float:right">
                             <ion-icon name="add"></ion-icon>
                           </ion-button>
                         </div>
@@ -293,5 +339,5 @@
 </ion-content>
 
 <footer-cart class="ion-hide-md-up" [options]="{ confirm_button_text: 'ReceiptBuy.goto_checkout' }"
-  (confirm)="goto('/checkout')">
+  (confirm)="goto('/suggested-products')">
 </footer-cart>

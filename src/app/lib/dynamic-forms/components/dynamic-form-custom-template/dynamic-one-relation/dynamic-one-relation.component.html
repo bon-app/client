@@ -4,7 +4,7 @@
     (itemSelected)="add($event); autoComplete.clearValue()">
   </ion-auto-complete>
   <div id="many-list" class="ion-padding-top ion-padding-bottom">
-    <ion-item>
+    <ion-item *ngIf="item">
       <ion-label>
         {{label(item)}}
       </ion-label>

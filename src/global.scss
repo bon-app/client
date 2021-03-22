@@ -27,6 +27,17 @@
 @import "./assets/ionic-style.extended.scss";
 @import "~ionic4-auto-complete/auto-complete";
 
+.toast-alert {
+    --background: var(--ion-color-primary);
+    font-size: 1.2em;
+}
+
+.wrap-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 *:not(.ion-invalid) {
     color: var(--ion-color-secondary);
 }

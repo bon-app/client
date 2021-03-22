@@ -1,5 +1,7 @@
 {
   "name": "bonapp.client",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

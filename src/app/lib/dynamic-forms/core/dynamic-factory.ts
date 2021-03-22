@@ -1,4 +1,4 @@
-import { Component, ComponentFactoryResolver, Input, NgZone, OnChanges, OnDestroy, OnInit, SimpleChanges, Type, ViewChild } from "@angular/core";
+import { Component, ComponentFactoryResolver, EventEmitter, Input, NgZone, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, Type, ViewChild } from "@angular/core";
 import { DynamicDirective } from "./dynamic.directive";
 
 
@@ -6,11 +6,13 @@ import { DynamicDirective } from "./dynamic.directive";
     selector: "dynamic-factory",
     template: `<ng-template dynamic></ng-template>`
 })
-export class DynamicComponent implements OnInit, OnChanges {
+export class DynamicFactory implements OnInit, OnChanges {
 
     @ViewChild(DynamicDirective, { static: true }) dynamic: DynamicDirective;
     @Input() component: Type<any>;
     @Input() props: { [key: string]: any };
+    @Input() debugging: { showComponentOutputs: boolean } = { showComponentOutputs: false };
+    @Output() catchEvent: EventEmitter<{ key: string, $event: any }> = new EventEmitter<{ key: string, $event: any }>();
 
     private instance: any
 
@@ -33,6 +35,16 @@ export class DynamicComponent implements OnInit, OnChanges {
 
         const componentRef = viewContainerRef.createComponent<any>(componentFactory);
         this.instance = componentRef.instance;
+        for (let k in componentRef.instance) {
+            if (componentRef.instance[k] instanceof EventEmitter) {
+                if (this.debugging && this.debugging.showComponentOutputs) {
+                    console.log(`[${this.component.name}] => ${k} event`);
+                }
+                componentRef.instance[k].subscribe(res => {
+                    this.catchEvent.emit({ key: k, $event: res });
+                })
+            }
+        }
         this.updateProps(this.props);
     }
 

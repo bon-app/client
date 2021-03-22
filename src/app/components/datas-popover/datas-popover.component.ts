@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NavController, PopoverController } from '@ionic/angular';
+import { AuthService } from 'src/app/auth/auth.service';
 import { ENTITIES } from 'src/app/dashboard/pages/entities/entities.config';
 
 @Component({
@@ -11,11 +12,13 @@ export class DatasPopoverComponent implements OnInit {
 
   @Input("items") items: { label: string, url: string }[] = []
 
-  constructor(private navCtrl: NavController, private popoverCtrl: PopoverController) { }
+  constructor(private navCtrl: NavController, private popoverCtrl: PopoverController, private auth: AuthService) { }
 
   ngOnInit() {
     for (let k in ENTITIES) {
-      this.items.push({ label: ENTITIES[k].title, url: `/dashboard/list/${k}` })
+      if ((k == 'receipts' && this.auth.hasRoles(['creator'])) || this.auth.hasRoles(['admin'])) {
+        this.items.push({ label: ENTITIES[k].title, url: `/dashboard/list/${k}` })
+      }
     }
   }
 

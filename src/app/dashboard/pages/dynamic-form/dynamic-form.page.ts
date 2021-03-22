@@ -1,6 +1,6 @@
 import { Component, Injector, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NavController } from '@ionic/angular';
+import { LoadingController, NavController } from '@ionic/angular';
 import { EntityConfig } from '../../../lib/dynamic-forms/core/entity.config';
 import { ENTITIES_MAPPER, SERVICES_MAPPER } from '../../../lib/dynamic-forms/core/mapper';
 import { CRUDService } from '../../../services/crud.service';
@@ -18,7 +18,7 @@ export class DynamicFormPage implements OnInit {
 
   public service: CRUDService<any>;
 
-  constructor(private route: ActivatedRoute, private injector: Injector, public navCtrl: NavController) {
+  constructor(private route: ActivatedRoute, private injector: Injector, public navCtrl: NavController, private loadingCtrl: LoadingController) {
 
   }
 
@@ -33,24 +33,34 @@ export class DynamicFormPage implements OnInit {
     this.service = this.injector.get(SERVICES_MAPPER.get(this.config.service));
 
     if (id) {
-      let findOptions = this.config.crudOptions.find || {};
+      let findOptions = this.config.crudOptions.findOne || {};
       this.model = await this.service.findById(id, findOptions.fields || ['-__v'], findOptions.includes);
     }
   }
 
   async save($event) {
 
-    let model = JSON.parse(JSON.stringify(this.model));
-    model = this.config.validateModel(model);
-    if (!$event.id) {
-      await this.service.add(model);
+    let loading = await this.loadingCtrl.create({ message: "loading..." });
+    loading.present();
+
+    try {
+      let model = JSON.parse(JSON.stringify(this.model));
+      model = this.config.validateModel(model);
+      if (!$event.id) {
+        await this.service.add(model);
+        loading.dismiss();
+        this.navCtrl.back();
+        return;
+      }
+
+      let fields: string[] = this.config.fields.map(f => f.key) as string[];
+      await this.service.update(model, fields, fields);
+      loading.dismiss();
       this.navCtrl.back();
-      return;
+    } catch (error) {
+      loading.dismiss();
     }
 
-    let fields: string[] = this.config.fields.map(f => f.key) as string[];
-    await this.service.update(model, fields, fields);
-    this.navCtrl.back();
   }
 
 }

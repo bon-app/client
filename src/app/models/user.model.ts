@@ -9,4 +9,5 @@ export class User {
     public surname: string;
     public addresses?: { street?: string, street_number?: string, city?: string, prov?: string, state?: string, note?: string, [key: string]: any }[] = [];
     public phone: string;
+    public roles: string[];
 }

@@ -2,7 +2,7 @@ import { Component, Injector, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CRUDService } from '../../../services/crud.service';
 import { EntityConfig } from '../../../lib/dynamic-forms/core/entity.config';
-import { NavController } from '@ionic/angular';
+import { LoadingController, NavController, ToastController } from '@ionic/angular';
 import { ENTITIES } from '../entities/entities.config';
 import { DynamicListComponent } from '../../../lib/dynamic-forms/components/dynamic-list/dynamic-list.component';
 import { SERVICES_MAPPER } from '../../../lib/dynamic-forms/core/mapper';
@@ -24,7 +24,12 @@ export class DynamicListPage implements OnInit {
   private service: CRUDService<any>;
 
 
-  constructor(private route: ActivatedRoute, private injector: Injector, private navCtrl: NavController) { }
+  constructor(private route: ActivatedRoute,
+    private injector: Injector,
+    private navCtrl: NavController,
+    private loadingCtrl: LoadingController,
+    private toastCtrl: ToastController
+  ) { }
 
   async ngOnInit() {
     let entity = this.route.snapshot.params.entity;
@@ -53,9 +58,11 @@ export class DynamicListPage implements OnInit {
   }
 
   async deleteElement($event) {
-    console.log($event);
-    await this.service.delete($event.id);
-    this.data = this.data.filter(d => d.id != $event.id);
+    if (confirm(`Are you sure you want to delete the "${$event.name}" element?`)) {
+      console.log($event);
+      await this.service.delete($event.id);
+      this.data = this.data.filter(d => d.id != $event.id);
+    }
 
   }
 
@@ -102,12 +109,15 @@ export class DynamicListPage implements OnInit {
     // document.execCommand("copy");
   }
 
-  importCSV($event) {
+  async importCSV($event) {
+
+    let loading = await this.loadingCtrl.create({ message: "Importing..." });
+    await loading.present()
 
     let input = $event.target;
     if (input.files && input.files[0]) {
       var reader = new FileReader();
-      reader.onload = (e) => {
+      reader.onload = async (e) => {
         let elements = (e.target.result as string).split(/\r\n|\n|\r/);
         let ingredients = []
         for (let el of elements) {
@@ -116,16 +126,22 @@ export class DynamicListPage implements OnInit {
             icon_url: fields[0],
             name: fields[1],
             brand: fields[2],
-            price: Math.floor(parseFloat(fields[3]) * 100) / 100,
-            active: !!fields[4],
-            matchingName: fields[5],
-            priority: parseInt(fields[6] || '999'),
-            category: fields[7],
+            qty: fields[3],
+            price: Math.floor(parseFloat(fields[4]) * 100) / 100,
+            active: !!fields[5],
+            matchingName: fields[6],
+            priority: parseInt(fields[7] || '999'),
+            category: fields[8],
           }
           ingredients.push(ingredient);
         }
         input.value = '';
-        (<any>this.service).importCSV(ingredients.filter(i => i.icon_url != 'icon_url'));
+        await (<any>this.service).importCSV(ingredients.filter(i => i.icon_url != 'icon_url'));
+        await loading.dismiss()
+
+        let toast = await this.toastCtrl.create({ message: `${ingredients.length} ingredients imported!`, duration: 3500, cssClass: ['toast-alert'] });
+        toast.present();
+
         this.getRecords(true);
       }
       reader.readAsText(input.files[0], "UTF-8");

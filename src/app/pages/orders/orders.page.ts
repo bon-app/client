@@ -19,7 +19,7 @@ export class OrdersPage implements OnInit {
   }
 
   async ionViewWillEnter() {
-    this.orders = await this.ordersService.find({}, ['-__v'], 0, 50, { created: 1 });
+    this.orders = await this.ordersService.find({}, ['-__v'], 0, 50, '-created');
   }
 
 }

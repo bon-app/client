@@ -33,4 +33,9 @@ export class OrderConfirmPage implements OnInit {
     }
     return total;
   }
+
+  openImage(item) {
+    let encoded_url = encodeURIComponent(`<img src="${item.ingredient.icon_url}">`);
+    window.open(`data:text/html,${encoded_url}`, '_blank')
+  }
 }

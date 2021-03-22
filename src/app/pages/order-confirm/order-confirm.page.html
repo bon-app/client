@@ -72,11 +72,13 @@
               </div>
 
               <ion-grid id="cart-items">
-                <ion-row *ngFor="let item of order.info">
+                <ion-row *ngFor="let item of order.info" ionImgViewer
+                  [title]="item.ingredient.brand +' - ' + item.ingredient.name" scheme="light"
+                  [src]="item.ingredient.icon_url">
                   <ion-col size="2">
                     x{{item.qta}}
                   </ion-col>
-                  <ion-col>{{item.ingredient.name}}</ion-col>
+                  <ion-col>{{item.ingredient.brand}} - {{item.ingredient.name}}</ion-col>
                   <ion-col size="3" class="ion-text-right">
                     € {{item.ingredient.price.toFixed(2)}}
                   </ion-col>

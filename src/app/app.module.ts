@@ -36,6 +36,7 @@ import { OrdersService } from './services/orders.service';
 import { BAImage } from './models/image.model';
 import { ImagesService } from './services/images.service';
 import { DynamicFormsModule } from './lib/dynamic-forms/dynamic-forms.module';
+import { PreparingFormComponent } from './components/dynamics-form-custom/preparing-form/preparing-form.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -64,6 +65,7 @@ export function createTranslateLoader(http: HttpClient) {
           { name: 'ingredients-priority', component: DFIngredientsPriorityComponent },
           { name: 'ingredients', component: DFIngredientsComponent },
           { name: 'ingredients-qta', component: IngredientsQtaComponent },
+          { name: 'preparing', component: PreparingFormComponent },
         ]
       }
     ),
@@ -86,6 +88,7 @@ export function createTranslateLoader(http: HttpClient) {
         { entity: User },
         { entity: Order },
         { entity: BAImage },
+        { entity: User },
       ],
       entitiesService: [
         { service: IngredientsService },
@@ -95,6 +98,7 @@ export function createTranslateLoader(http: HttpClient) {
         { service: UsersService },
         { service: OrdersService },
         { service: ImagesService },
+        { service: UsersService },
       ]
     }),
   ],

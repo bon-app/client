@@ -35,6 +35,10 @@ ion-card {
     }
 }
 
+.ingredients{
+    text-align: left;
+}
+
 .partial-border.primary:after {
     content: '';
     width: 30px;
@@ -52,6 +56,10 @@ ion-card {
         text-align: center;
     }
 
+    .ingredients{
+        text-align: center;
+    }
+
     #info-cook {
         display: flex;
         align-items: center;
@@ -60,6 +68,10 @@ ion-card {
             padding: 0.5em;
             padding-top: 1.5em;
             margin: 0 auto;
+        }
+
+        .time {
+            margin-top: 1em;
         }
     }
 }

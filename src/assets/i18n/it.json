@@ -1,4 +1,7 @@
 {
+    "Messages": {
+        "home": ""
+    },
     "Errors": {
         "_USER_NOT_FOUND": "Email e/o password errate",
         "_NO_ORDER_ADDRESS": "Seleziona o aggiungi un indirizzo",
@@ -53,6 +56,9 @@
         "tuna": "Tonno",
         "wheat": "Farina",
         "zucchini": "Zucchine"
+    },
+    "HomeMessage": {
+        "message": "<b>Prova</b> prova"
     },
     "Login": {
         "email": "Email",
@@ -149,7 +155,10 @@
         "credit_card": "Carta di credito/debito",
         "save_card": "Salva metodo di pagamento",
         "add_payment_cancel": "Annulla",
-        "add_payment_next": "Procedi"
+        "add_payment_next": "Procedi",
+        "asap": "ASAP",
+        "asap_time": "15 - 20 min",
+        "asap_info": "* Dalle 19:00 alle 20:00"
     },
     "OrderConfirm": {
         "status": "Il tuo ordine è in arrivo!",

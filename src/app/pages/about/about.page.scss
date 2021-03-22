@@ -1,0 +1,21 @@
+@import "../../../assets/about/css/bonapp.webflow.css";
+@import "../../../assets/about/css/normalize.css";
+@import "../../../assets/about/css/webflow.css";
+
+*{
+    opacity: 1 !important;
+}
+
+a {
+    background-color: transparent !important;
+}
+
+.footer {
+    background: var(--ion-color-secondary);
+}
+
+.w-nav {
+    position: relative;
+    background: transparent;
+    z-index: 1000;
+}

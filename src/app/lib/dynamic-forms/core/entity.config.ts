@@ -3,6 +3,7 @@ import * as _ from 'lodash';
 import { DynamicFormFieldConfig } from './dynamic-form-field.config';
 
 export class EntityConfig {
+    key: string;
     title: string;
     fields: DynamicFormFieldConfig[];
     crudOptions: { [key: string]: { fields?: string[], orderBy?: any, includes?: string[] } };
@@ -39,6 +40,7 @@ export class EntityConfig {
 
     static fromJson(json: any) {
         let config = new EntityConfig();
+        config.key = json.key;
         config.title = json.title;
         config.service = json.service;
         config.object = json.object;

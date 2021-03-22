@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, Type, ViewChild } from '@angular/core';
-import { DynamicComponent } from '../../core/dynamic-component';
+import { DynamicFactory } from '../../core/dynamic-factory';
 import { IDynamicFilterBuilder } from '../../core/dynamic-filter.interface';
 import { DynamicFormFieldConfig } from '../../core/dynamic-form-field.config';
 import { EntityConfig } from '../../core/entity.config';
@@ -12,8 +12,8 @@ import { REGISTER } from '../../utils/dynamic-form.utils';
 })
 export class DynamicListComponent implements OnInit, OnChanges {
 
-  @ViewChild('filterComp') filterComp: DynamicComponent;
-  @ViewChild('list') list: DynamicComponent;
+  @ViewChild('filterComp') filterComp: DynamicFactory;
+  @ViewChild('list') list: DynamicFactory;
 
   @Input("settings") settings: { title?: string, row_length: number, showMoreButton: boolean } = { row_length: 20, showMoreButton: true };
   @Input("config") config: EntityConfig;
@@ -92,19 +92,47 @@ export class DynamicListComponent implements OnInit, OnChanges {
     this.filterChange.emit(this.filter);
   }
 
-  // getSearchableFields() {
-  //   return this.fields.filter(f => f.type == 'input' && (f.templateOptions.type == null || f.templateOptions.type == 'text') && (f.list.filterable == null || f.list.filterable))
-  // }
+  handleListEvent(result: { key: string, $event: any }) {
+    switch (result.key) {
+      case 'edit':
+        this.edit.emit(result.$event)
+        break;
 
-  // getRangeFields() {
-  //   return this.fields.filter(f => f.type == 'input' && (f.templateOptions.type == 'number' || f.templateOptions.type == 'date') && (f.list.filterable == null || f.list.filterable))
-  // }
+      case 'more':
+        this.more.emit(result.$event)
+        break;
 
-  // getCheckboxFields() {
-  //   return this.fields.filter(f => f.type == 'checkbox' && (f.list.filterable == null || f.list.filterable))
-  // }
+      case 'extraButtonClick':
+        this.extraButtonClick.emit(result.$event)
+        break;
 
-  // getParser(field, value) {
-  //   return field.list.parser(value);
-  // }
+      case 'delete':
+        this.delete.emit(result.$event)
+        break;
+
+      default:
+        break;
+    }
+  }
+
+
+  handleFilterEvent(result: { key: string, $event: any }) {
+    switch (result.key) {
+      case 'rowLengthChange':
+        this.rowLengthChange.emit(this.settings.row_length)
+        break;
+
+      case 'filterChange':
+        this.createFilter();
+        break;
+      default:
+        break;
+    }
+  }
+
+  printConsole(result: { key: string, $event: any }) {
+    debugger
+    console.log(result);
+  }
+
 }

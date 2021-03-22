@@ -53,7 +53,25 @@ export const ENTITIES = {
                         required: "Field is required!",
                     },
                 },
-
+                list: {
+                    filter_type: 'text'
+                },
+            },
+            {
+                key: 'qty',
+                type: 'input',
+                templateOptions: {
+                    label: 'Q.ty',
+                    required: true,
+                },
+                validation: {
+                    messages: {
+                        required: "Field is required!",
+                    },
+                },
+                list: {
+                    filter_type: 'text'
+                },
             },
             {
                 key: 'price',
@@ -70,7 +88,8 @@ export const ENTITIES = {
                     },
                 },
                 list: {
-                    parser: 'currency'
+                    parser: 'currency',
+                    filter_type: 'range'
                 }
             },
             {
@@ -79,7 +98,10 @@ export const ENTITIES = {
                 templateOptions: {
                     label: 'Active',
                 },
-                list: { parser: 'checkbox' }
+                list: {
+                    parser: 'checkbox',
+                    filter_type: 'checkbox'
+                }
             },
         ],
         crudOptions: {
@@ -128,6 +150,9 @@ export const ENTITIES = {
                         required: "Field is required!",
                     },
                 },
+                list: {
+                    filter_type: 'text'
+                },
             },
             {
                 key: 'identifier',
@@ -141,6 +166,9 @@ export const ENTITIES = {
                         required: "Field is required!",
                     },
                 },
+                list: {
+                    filter_type: 'text'
+                },
             },
             {
                 key: 'showInShop',
@@ -148,12 +176,18 @@ export const ENTITIES = {
                 templateOptions: {
                     label: 'Show category in shop',
                 },
+                list: {
+                    filter_type: 'checkbox'
+                },
             },
             {
                 key: 'showBeforeCheckout',
                 type: 'checkbox',
                 templateOptions: {
                     label: 'Show before checkout',
+                },
+                list: {
+                    filter_type: 'checkbox'
                 },
             },
             {
@@ -185,6 +219,9 @@ export const ENTITIES = {
         ],
         crudOptions: {
             find: {
+                includes: []
+            },
+            findOne: {
                 includes: ['ingredients', 'subcategories']
             }
         },
@@ -196,7 +233,7 @@ export const ENTITIES = {
         object: "Category"
     }),
     rims: EntityConfig.fromJson({
-        title: "Receipt Ingredients Matching",
+        title: "Recipes Ingredients Matching",
         fields: [
             {
                 key: 'name',
@@ -249,7 +286,7 @@ export const ENTITIES = {
 
         ],
         crudOptions: {
-            find: {
+            findOne: {
                 includes: ['ingredients.ingredient']
             }
         },
@@ -297,7 +334,7 @@ export const ENTITIES = {
             },
             {
                 key: 'description',
-                type: 'html-editor',
+                type: 'textarea',
                 templateOptions: {
                     label: 'Description',
                     required: true,
@@ -314,7 +351,7 @@ export const ENTITIES = {
             },
             {
                 key: 'preparing',
-                type: 'html-editor',
+                type: 'preparing',
                 templateOptions: {
                     label: 'Preparing',
                     required: true,
@@ -384,6 +421,29 @@ export const ENTITIES = {
                 },
             },
             {
+                key: 'active',
+                type: 'checkbox',
+                defaultValue: true,
+                templateOptions: {
+                    label: 'Is active?',
+                }
+            },
+            {
+                key: 'priority',
+                type: 'input',
+                defaultValue: 1000,
+                templateOptions: {
+                    label: 'Priority',
+                    type: "number",
+                    required: true,
+                },
+                validation: {
+                    messages: {
+                        required: "Field is required!",
+                    },
+                },
+            },
+            {
                 key: 'ingredients',
                 type: 'ingredients-qta',
                 templateOptions: {
@@ -395,14 +455,32 @@ export const ENTITIES = {
                 },
 
             },
+            {
+                key: 'fk_user',
+                type: 'one',
+                templateOptions: {
+                    label: 'Creator',
+                    service: 'UsersService',
+                    selected_key: 'item.name + " " + item.surname',
+                    dataProvider: {
+                        label: 'email',
+                        value: 'email'
+                    }
+                },
+                list: {
+                    filterable: false
+                },
+
+            },
         ],
         crudOptions: {
-            find: {
+            findOne: {
                 includes: ['ingredients.ingredient']
             }
         },
         relations: [
-            { type: 'many', field: 'ingredients', fk_field: 'ingredient', pk_field: 'ingredient.id' }
+            { type: 'many', field: 'ingredients', fk_field: 'ingredient', pk_field: 'ingredient.id' },
+            { type: 'one', field: 'fk_user', pk_field: 'id' },
         ],
         service: 'ReceiptsService',
         object: "Receipt"
@@ -590,5 +668,82 @@ export const ENTITIES = {
         },
         service: 'ImagesService',
         object: "BAImage"
+    }),
+    users: EntityConfig.fromJson({
+        title: "User",
+        fields: [
+            {
+                key: 'email',
+                type: 'label',
+                templateOptions: {
+                    label: 'Email'
+                },
+                validation: {
+                    messages: {
+                        required: "Field is required!",
+                    },
+                },
+                list: {
+                    filter_type: 'text',
+                    filterable: true
+                }
+            },
+            {
+                key: 'name',
+                type: 'label',
+                templateOptions: {
+                    label: 'Name'
+                },
+                validation: {
+                    messages: {
+                        required: "Field is required!",
+                    },
+                },
+                list: {
+                    filter_type: 'text',
+                    filterable: true
+                }
+            },
+            {
+                key: 'surname',
+                type: 'label',
+                templateOptions: {
+                    label: 'Surname'
+                },
+                validation: {},
+                list: {
+                    filter_type: 'text',
+                    filterable: true
+                }
+            },
+            {
+                key: 'roles',
+                type: 'select',
+                templateOptions: {
+                    label: 'Roles',
+                    multiple: true,
+                    required: true,
+                    options: [
+                        { label: 'Admin', value: 'admin' },
+                        { label: 'Creator', value: 'creator' },
+                    ]
+                },
+                validation: {},
+                list: {
+                }
+            }
+        ],
+        crudOptions: {
+            find: {
+                includes: []
+            }
+        },
+        listOptions: {
+            rows: {
+                extraButtons: []
+            },
+        },
+        service: 'UsersService',
+        object: "User"
     }),
 }

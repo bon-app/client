@@ -38,9 +38,8 @@ ion-card.product {
         .actions {
             position: absolute;
             bottom: 0;
-            width: 100%;
-            padding: 1em;
-            padding-right: 2em;
+            width: calc(100% - 2em);
+            padding: 1em 0;
         }
     }
 }
@@ -48,10 +47,10 @@ ion-card.product {
 #cart {
 
     position: fixed;
-    width: 15%;
+    width: 20%;
 
     ion-card-content {
-        min-height: 60vh;
+        min-height: 40vh;
     }
 }
 
@@ -68,9 +67,9 @@ ion-card.product {
 }
 
 #goto-checkout {
-    position: absolute;
-    bottom: 0;
-    left: 0;
+    // position: absolute;
+    // bottom: 0;
+    // left: 0;
     width: calc(100% - 2em);
     margin: 1em;
 }
@@ -90,9 +89,11 @@ ion-card.product {
 }
 
 .items-list {
-    max-height: 45vh;
+    max-height: 35vh;
+    min-height: 35vh;
     overflow: hidden;
     overflow-y: auto;
+    padding-right: 1em;
 }
 
 .qta-wrapper {
@@ -126,8 +127,18 @@ span.ion-text-left {
     display: flex;
     align-items: center;
 
-    > * {
+    >* {
         margin: 0 auto;
+    }
+}
+
+#categories-mobile {
+
+    display: none;
+
+    ion-select {
+        border: 1px solid #ddd;
+        border-radius: 1em;
     }
 }
 
@@ -135,5 +146,30 @@ span.ion-text-left {
 @media only screen and (max-width: 768px) {
     ion-searchbar {
         width: 100% !important;
+    }
+
+    #back {
+        margin-top: 3em;
+        margin-bottom: 0em;
+        display: flex;
+        align-items: center;
+
+        ion-searchbar {
+            width: 60%;
+            margin: 0 auto;
+        }
+    }
+
+    #categories-mobile {
+        margin-bottom: 3em;
+        display: block;
+    }
+}
+
+.categories {
+    ion-button {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 }

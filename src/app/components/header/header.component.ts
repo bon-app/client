@@ -44,6 +44,10 @@ export class BonAppHeaderComponent implements OnInit {
   }
 
   goto(url: string) {
+    if (url.startsWith("http")) {
+      window.open(url, '_blank');
+      return;
+    }
     this.navCtrl.navigateForward(url)
   }
 

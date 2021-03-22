@@ -7,7 +7,7 @@
       </ion-button>
     </div>
     <ion-grid class="neutral">
-      <ion-row>
+      <ion-row style="position: relative;">
         <ion-col id="image" size-xs="12" size-sm="12" size-md="4" size-lg="4" size-xl="4"
           [ngStyle]="{background: 'url('+receipt.image_url+') no-repeat center center', 'background-size': 'cover'}">
         </ion-col>
@@ -42,7 +42,7 @@
             <li *ngFor="let i of receipt.ingredients"> {{i.qta}} <strong>{{getIngredientName(i.ingredient)}}</strong>
             </li>
           </ul>
-          <div id="button-goto-market">
+          <div id="button-goto-market" class="ion-hide-md-down">
             <ion-button color="primary" size="large" [routerLink]="'/receipt/' + receipt.id + '/buy'">
               {{'Receipt.goto_market' | translate}}
             </ion-button>
@@ -50,6 +50,19 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-    <div id="preparation" class="ion-padding" [innerHTML]="receipt.preparing"></div>
+    <div id="preparation" class="ion-padding">
+      <h2>Preparazione</h2>
+      <ng-container *ngFor="let step of receipt.preparing; let i = index;">
+        <p><strong>Passaggio {{i+1}}</strong></p>
+        <p [innerHTML]="step"></p>
+      </ng-container>
+    </div>
   </div>
 </ion-content>
+<ion-footer class="ion-hide-md-up" *ngIf="receipt">
+  <ion-toolbar>
+    <ion-button color="primary" expand="full" [routerLink]="'/receipt/' + receipt.id + '/buy'">
+      {{'Receipt.goto_market' | translate}}
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,21 @@
+<div class="ion-padding">
+  <ion-label>Preparing</ion-label>
+  <ion-card *ngFor="let step of model[this.field.key]; let i = index">
+    <ion-card-content>
+      <div class="ion-margin-bottom ion-margin-top">
+        <b>Step {{i +1}}</b>
+        <ion-button fill="clear" color="secondary" size="icon-only" style="float: right;" (click)="removeStep(i)">
+          <ion-icon name="trash"></ion-icon>
+        </ion-button>
+      </div>
+      <ion-textarea placeholder="Write step description..." [id]="'step-'+(i+1)" [name]="'step-'+(i+1)" 
+      [value]="step" (keyup)="editStep($event, i)"></ion-textarea>
+    </ion-card-content>
+  </ion-card>
+  <ion-card (click)="addStep()" button>
+    <ion-card-content class="ion-text-center">
+      <ion-icon name="add"></ion-icon> <br>
+      <div>Add step</div>
+    </ion-card-content>
+  </ion-card>
+</div>

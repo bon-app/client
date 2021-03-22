@@ -87,7 +87,7 @@ ion-input {
     border-radius: 0.25em;
 
     ion-card-content {
-        border-left: 0.6em solid var(--ion-color-primary);
+        border-left: 0.6em solid var(--ion-color-medium);
     }
 }
 
@@ -104,6 +104,10 @@ ion-checkbox {
 
 ion-card.address.active {
     border: 2px solid var(--ion-color-primary);
+
+    ion-card-content {
+        border-left: 0.6em solid var(--ion-color-primary);
+    }
 }
 
 #payments {
@@ -112,7 +116,32 @@ ion-card.address.active {
     }
 }
 
+#secure-payment {
+    width: 50%;
+}
+
+#item-list {
+    max-height: 40vh;
+    overflow: hidden;
+    overflow-y: auto;
+    padding-right: 1em;
+}
+
+@media only screen and (max-width: 1100px) {
+
+#item-list {
+    max-height: 25vh;
+    overflow: hidden;
+    overflow-y: auto;
+    padding-right: 1em;
+}
+}
+
 @media only screen and (max-width: 768px) {
+
+    #secure-payment {
+        width: 100% !important;
+    }
 
     #delivery-times-grid {
         margin-top: 2em;

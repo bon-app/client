@@ -1,6 +1,10 @@
-import { EventEmitter, Input, Output } from "@angular/core";
+import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { IDynamicFilterBuilder } from "./dynamic-filter.interface";
 import { DynamicFormFieldConfig, FilterTypes } from "./dynamic-form-field.config";
+
+@Component({
+  template: ''
+})
 export abstract class DynamicFilter {
 
   @Input() filterBuilder: IDynamicFilterBuilder;

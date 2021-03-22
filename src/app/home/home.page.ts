@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Receipt } from '../models/receipt.model';
 import { ReceiptsService } from '../services/receipts.service';
+import Swal from "sweetalert2";
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
@@ -12,18 +14,30 @@ export class HomePage {
   public receipts: Receipt[] = []
   public filter: any = {};
   public _filter = {
-    tags: []
+    tags: [],
+    active: true
   }
 
-  constructor(private receiptsService: ReceiptsService) { }
+  public isShow: boolean =  true;
+
+  constructor(private receiptsService: ReceiptsService, private translate: TranslateService) { }
 
   async ionViewWillEnter() {
     await this.getReceipts();
+
   }
 
-  async getReceipts() {
+  async getReceipts(event: any = null, force: boolean = false) {
+    let skip = this.receipts.length || 0;
     try {
-      this.receipts = await this.receiptsService.find(this.filter, ['-__v'], 0, 4, { id: 1 }, ['ingredients.ingredient'])
+      if (skip > 0 && !force) {
+        this.receipts.push(...(await this.receiptsService.find(this.filter, ['-__v'], skip, 12, '-priority', ['ingredients.ingredient'])));
+        if(event) event.target.complete();
+        return
+      }
+      this.receipts = await this.receiptsService.find(this.filter, ['-__v'], skip, 12, '-priority', ['ingredients.ingredient'])
+      if(event) event.target.complete();
+
     } catch (error) {
 
     }
@@ -39,8 +53,9 @@ export class HomePage {
   }
 
   async createFilter() {
-    this.filter = this._filter.tags.length ? { tags: { $elemMatch: { $in: this._filter.tags } } } : {};
-    await this.getReceipts();
+    // this.filter = this._filter.tags.length ? { tags: { $elemMatch: { $in: this._filter.tags } } } : {};
+    this.filter = this._filter.tags.length ? { tags: { $all: this._filter.tags } } : {};
+    await this.getReceipts(null, true);
   }
 
 }

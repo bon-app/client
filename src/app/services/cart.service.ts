@@ -36,6 +36,10 @@ export class CartService {
 
   }
 
+  getQta(ingredient: Ingredient) {
+    return this._items[ingredient.id] ? this._items[ingredient.id].qta || 0 : 0;
+  }
+
   add(ingredient: Ingredient, qta: number) {
     if (!this._items[ingredient.id]) {
       this._items[ingredient.id] = { ingredient, qta: 0 };

@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
+import { retry } from "rxjs/operators";
 
 export class CRUDService<T> {
 
+    protected defaulSort: string;
     protected endpoint: string;
 
     constructor(protected http: HttpClient) {
@@ -14,9 +16,9 @@ export class CRUDService<T> {
             includes: includes.join(' '),
             skip: '' + skip,
             take: '' + take,
-            orderBy: orderBy? orderBy : null
+            orderBy: orderBy? orderBy : this.defaulSort
         }
-        return this.http.get<T[]>(this.endpoint, { params }).toPromise()
+        return this.http.get<T[]>(this.endpoint, { params }).pipe(retry(2)).toPromise()
     }
 
     findOne(filter: any, fields: string[], orderBy: any, includes: string[] = []): Promise<T> {
@@ -26,9 +28,9 @@ export class CRUDService<T> {
             includes: includes.join(' '),
             skip: '0',
             take: '1',
-            orderBy: orderBy ? JSON.stringify(orderBy) : null
+            orderBy: orderBy ? JSON.stringify(orderBy) : this.defaulSort
         }
-        return this.http.get<T[]>(this.endpoint, { params }).toPromise().then(res => res[0])
+        return this.http.get<T[]>(this.endpoint, { params }).pipe(retry(2)).toPromise().then(res => res[0])
     }
 
     findById(id: any, fields: string[], includes: string[] = []): Promise<T> {
@@ -37,7 +39,7 @@ export class CRUDService<T> {
             fields: fields.join(' '),
             includes: includes.join(' ')
         }
-        return this.http.get<T>(`${this.endpoint}/${id}`, { params }).toPromise()
+        return this.http.get<T>(`${this.endpoint}/${id}`, { params }).pipe(retry(2)).toPromise()
     }
 
     add(entity: T): Promise<T> {

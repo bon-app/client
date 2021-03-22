@@ -20,7 +20,22 @@ export class ReceiptPage implements OnInit {
 
   async ionViewWillEnter() {
     try {
-      this.receipt = await this.receiptsService.findById(this.route.snapshot.params.id, ['-__v'], ['ingredients.ingredient'])
+      this.receipt = await this.receiptsService.findById(this.route.snapshot.params.id, ['-__v'], ['ingredients.ingredient']);
+      if (typeof this.receipt.preparing == 'string') {
+        let steps = [];
+        let div = document.createElement('div');
+        div.innerHTML = this.receipt.preparing;
+        for (let strong of Array.from(div.querySelectorAll('strong'))) {
+          strong.remove();
+        }
+        for (let p of Array.from(div.querySelectorAll('p'))) {
+          if (p.innerHTML && p.innerHTML != '&nbsp;<br>' && p.innerHTML != ' ' && p.innerHTML != '&nbsp;' && p.innerHTML != '<br>') {
+            steps.push(p.innerHTML);
+          }
+        }
+        this.receipt.preparing = steps as any;
+        return;
+      }
     } catch (error) {
 
     }

@@ -23,6 +23,10 @@ export class DynamicOneRelationComponent implements OnInit {
   ngOnInit() {
     this.service = this.injector.get(SERVICES_MAPPER.get(this.field.templateOptions.service));
     this.oneRelationDataProvider = new OneRelationDataProvider(this.service);
+    if (this.field.templateOptions.dataProvider) {
+      this.oneRelationDataProvider.labelAttribute = this.field.templateOptions.dataProvider.label;
+      this.oneRelationDataProvider.formValueAttribute = this.field.templateOptions.dataProvider.value;
+    }
   }
 
   async add($event: any) {

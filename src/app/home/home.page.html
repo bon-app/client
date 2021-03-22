@@ -212,6 +212,20 @@
     </div>
 
     <random-receipts [receipts]="receipts"></random-receipts>
-
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="getReceipts($event)">
+      <ion-infinite-scroll-content
+        loadingSpinner="bubbles"
+        loadingText="Loading more data...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
   </div>
 </ion-content>
+
+<div id="message" *ngIf="isShow && ('Messages.home' | translate)">
+  <div class="ion-text-center">
+    <p [innerHTML]="'Messages.home' | translate"></p>
+    <ion-button fill="outline" (click)="isShow = false">
+      OK
+    </ion-button>
+  </div>
+</div>

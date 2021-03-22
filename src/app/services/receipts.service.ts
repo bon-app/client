@@ -13,7 +13,8 @@ export class ReceiptsService extends CRUDService<Receipt> {
 
   constructor(protected http: HttpClient) {
     super(http);
-    this.endpoint = Global.ENDPOINTS.RECEIPT
+    this.endpoint = Global.ENDPOINTS.RECEIPT;
+    this.defaulSort = '-priority'
    }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Category } from '../../models/category.model';
 import { CartService } from '../../services/cart.service';
 import { Receipt } from '../../models/receipt.model';
@@ -40,7 +40,14 @@ export class ReceiptBuyPage implements OnInit {
       this.categories = await this.categoriesService.find({ showBeforeCheckout: { $ne: true }, showInShop: true }, ['-__v'], 0, 50, { name: 1 }, ['ingredients', 'subcategories'])
       if (this.route.snapshot.params.id) {
         let receipt = await this.receiptsService.findById(this.route.snapshot.params.id, ['-__v'], ['ingredients.ingredient'])
-        let ingrs = receipt.ingredients.map((i: any) => i.ingredient.ingredients[0] ? i.ingredient.ingredients[0].ingredient : null).filter(i => i != null);
+        let ingrs = [];
+        for (let i of receipt.ingredients) {
+          let i1: ReceiptIngredientsMatching = i.ingredient as ReceiptIngredientsMatching;
+          for (let ii of i1.ingredients) {
+            ingrs.push(ii.ingredient);
+          }
+        }
+        // let ingrs = receipt.ingredients.map((i: any) => i.ingredient.ingredients[0] ? i.ingredient.ingredients[0].ingredient : null).filter(i => i != null);
         let ingredients = await this.ingredientsService.find({ $expr: { $in: [{ $toString: '$_id' }, ingrs] } }, ['-__v'], 0, 200, { name: 1 })
         for (let i of receipt.ingredients) {
           for (let i1 of (i.ingredient as ReceiptIngredientsMatching).ingredients) {
@@ -70,7 +77,7 @@ export class ReceiptBuyPage implements OnInit {
       }
     }
 
-    return ingredients;
+    return ingredients.filter(i => !!i);
   }
 
   goto(url: string) {
@@ -116,5 +123,33 @@ export class ReceiptBuyPage implements OnInit {
 
   getSelf(obj) {
     return obj as any;
+  }
+
+  selectChange($event) {
+    console.log($event);
+    if ($event.detail.value == 'receipt') {
+      this.selectedCategories = [];
+      this.seach_term = '';
+      return;
+    }
+    this.toggleCategory($event.detail.value)
+  }
+
+  positionCart: number = 0;
+  @HostListener('wheel', ['$event'])
+  onWheelScroll(event: WheelEvent) {
+    let cartElement = document.querySelector<HTMLDivElement>('#cart')
+    if (this.positionCart == 0) {
+      let offsetTop = cartElement.offsetTop;
+      this.positionCart = offsetTop;
+    }
+
+    let scrollPositionY = event.offsetY;
+    console.log("scroll position: " + scrollPositionY)
+    if (scrollPositionY > 100) {
+        cartElement.style.top = '95px';
+    }else {
+      cartElement.style.top = this.positionCart + 'px';
+    }
   }
 }
