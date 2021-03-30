@@ -1,6 +1,7 @@
 import { Component, Injector, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LoadingController, NavController } from '@ionic/angular';
+import { AuthService } from 'src/app/auth/auth.service';
 import { EntityConfig } from '../../../lib/dynamic-forms/core/entity.config';
 import { ENTITIES_MAPPER, SERVICES_MAPPER } from '../../../lib/dynamic-forms/core/mapper';
 import { CRUDService } from '../../../services/crud.service';
@@ -18,7 +19,8 @@ export class DynamicFormPage implements OnInit {
 
   public service: CRUDService<any>;
 
-  constructor(private route: ActivatedRoute, private injector: Injector, public navCtrl: NavController, private loadingCtrl: LoadingController) {
+  constructor(private route: ActivatedRoute, private injector: Injector, 
+    public navCtrl: NavController, private loadingCtrl: LoadingController, private auth: AuthService) {
 
   }
 
@@ -54,6 +56,9 @@ export class DynamicFormPage implements OnInit {
       }
 
       let fields: string[] = this.config.fields.map(f => f.key) as string[];
+      // if (this.auth.hasRoles(['admin'])) {
+      //   fields = fields.filter(f => f != 'fk_user');
+      // }
       await this.service.update(model, fields, fields);
       loading.dismiss();
       this.navCtrl.back();

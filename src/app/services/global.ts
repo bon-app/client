@@ -23,8 +23,8 @@ export class Global {
     IMAGES: 'https://lz8reiflz6.execute-api.eu-west-3.amazonaws.com/dev/images',
   }
 
-  // public static STRIPE_KEY: string = 'pk_live_51I8QppHjOfILFTWVeeCo79dkyVjwDGBryZzxhCdZflyAwqhaMYz3wjWymhpqeLGP2dffXbkQ2Z17RjLVri7c2jEk0020XR3gHA';
-  public static STRIPE_KEY: string = 'pk_test_51I8QppHjOfILFTWVorIfk1b81ydI4vvKE0Ix4bSuhea9ce5RixdxM2UkzDZgyfAKW52HNTl5EAg2kwkdhdpdOUIV00GbVAnEHQ';
+  public static STRIPE_KEY: string = 'pk_live_51I8QppHjOfILFTWVeeCo79dkyVjwDGBryZzxhCdZflyAwqhaMYz3wjWymhpqeLGP2dffXbkQ2Z17RjLVri7c2jEk0020XR3gHA';
+  // public static STRIPE_KEY: string = 'pk_test_51I8QppHjOfILFTWVorIfk1b81ydI4vvKE0Ix4bSuhea9ce5RixdxM2UkzDZgyfAKW52HNTl5EAg2kwkdhdpdOUIV00GbVAnEHQ';
 
   public static jwt_helper = new JwtHelperService();
 

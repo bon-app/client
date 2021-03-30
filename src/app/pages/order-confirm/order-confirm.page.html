@@ -46,6 +46,12 @@
                 </div>
                 <div>
                   <ion-label class="ion-padding-top ion-padding-bottom">
+                    <b>Telefono</b>
+                  </ion-label>
+                  <div>{{order.phone || '-'}}</div>
+                </div>
+                <div>
+                  <ion-label class="ion-padding-top ion-padding-bottom">
                     <b>{{'OrderConfirm.order_details.note' | translate}}</b>
                   </ion-label>
                   <div>{{order.address.note || '-'}}</div>

@@ -1,6 +1,6 @@
 {
     "Messages": {
-        "home": ""
+        "home": "<h4>Benvenuto su</h4><img src='https://www.bonapp.life/assets/brand.png' alt='' width='153' height='74' /><br>&bull;<i> ingredienti a domicilio in 20 minuti &bull;</i><p>Servizio di consegna attivo su Milano zona<strong><br>Porta Romana, Bocconi, Navigli</strong></p><p></p>"
     },
     "Errors": {
         "_USER_NOT_FOUND": "Email e/o password errate",
@@ -58,7 +58,7 @@
         "zucchini": "Zucchine"
     },
     "HomeMessage": {
-        "message": "<b>Prova</b> prova"
+        "message": ""
     },
     "Login": {
         "email": "Email",
@@ -83,19 +83,19 @@
     },
     "ChooseIngredients": {
         "title": "Scegli i tuoi ingredienti",
-        "subtitle": "Personalizza la tua esperienza",
+        "subtitle": "Personalizza la tua esperienza..",
         "bonapp": "BonAppa!"
     },
     "Home": {
-        "h1": "Ricette e ingredienti, consegnati in meno di 25 minuti",
-        "h2": "Personalizza la proposta di ricette",
+        "h1": "Scegli la ricetta e ricevi qualsiasi ingrediente in 20 minuti!",
+        "h2": "Personalizza la proposta di ricette..",
         "all_receipts": "Tutte le ricette",
         "market": "Il Supermercato"
     },
     "RandomReceipts": {
         "title": "Scelte per questa sera",
         "results": "Risultati",
-        "no_results": "Nessuna ricetta trovata con i filtri attuali!"
+        "no_results": "Caricando le ricette..."
     },
     "Receipt": {
         "back": "Back",
@@ -113,7 +113,7 @@
         "condiments": "Condimenti",
         "element_in_cart": "{{items.length}} prodotti nel carrello",
         "cart_details": "Dettiglio carrello",
-        "no_products": "Cerca i prodotti che più desideri!"
+        "no_products": "Cerca qualsiasi ingrediente..."
     },
     "AddressForm": {
         "address": "Indirizzo",
@@ -142,7 +142,7 @@
         "delivery_time": "Orario di consegna",
         "delivery_method": "Metodo di consegna",
         "delivery_standard": "Consegna al citofono",
-        "delivery_footstep": "Consegna fino alla porta (+€ 1.50)",
+        "delivery_footstep": "Consegna fino alla porta (+ € 1.50)",
         "payment_info": "Pagamento",
         "contact_info": "Contatti",
         "title": "Checkout",
@@ -157,11 +157,11 @@
         "add_payment_cancel": "Annulla",
         "add_payment_next": "Procedi",
         "asap": "ASAP",
-        "asap_time": "15 - 20 min",
-        "asap_info": "* Dalle 19:00 alle 20:00"
+        "asap_time": "15 - 25 min",
+        "asap_info": "* Dalle 19:00 alle 21:00"
     },
     "OrderConfirm": {
-        "status": "Il tuo ordine è in arrivo!",
+        "status": "Il tuo ordine è stato ricevuto!",
         "status_sub": "Riceverai un'e-mail con i dettagli dell'ordine",
         "order_detail": "Dettaglio ordine",
         "customer_details": "Dettaglio cliente",

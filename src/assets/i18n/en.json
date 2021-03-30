@@ -1,11 +1,11 @@
 {
     "Messages": {
-        "home": ""
+        "home": "<h4>Welcome on</h4><img src='https://www.bonapp.life/assets/brand.png' alt='' width='153' height='74' /><br>&bull;<i> ingredients delivered in 20 minutes &bull;</i><p>Home delivery available in Milano zona<strong><br>Porta Romana, Bocconi, Navigli</strong></p><p></p>"
     },
     "Errors": {
-        "_USER_NOT_FOUND": "Email e/o password errate",
-        "_NO_ORDER_ADDRESS": "Seleziona o aggiungi un indirizzo",
-        "_NO_ORDER_PAYMENT": "Seleziona o aggiungi un metodo di pagamento"
+        "_USER_NOT_FOUND": "Wrong email and/or password",
+        "_NO_ORDER_ADDRESS": "Choose or add an address",
+        "_NO_ORDER_PAYMENT": "Choose or add a payment method"
     },
     "DB": {
         "Ingredients": {
@@ -58,24 +58,24 @@
         "zucchini": "Zucchine"
     },
     "HomeMessage": {
-        "message": "<b>Prova</b> prova"
+        "message": ""
     },
     "Login": {
         "email": "Email",
         "password": "Password",
-        "login": "Accedi",
-        "signin": "Registrati",
-        "cancel": "indietro",
-        "name": "Nome",
-        "surname": "Cognome",
-        "phone": "Telefono",
-        "c_password": "Conferma password",
-        "c_password_error": "Le password non coincidono"
+        "login": "Login",
+        "signin": "Register",
+        "cancel": "Cancel",
+        "name": "Name",
+        "surname": "Last name",
+        "phone": "Phone",
+        "c_password": "Confirm password",
+        "c_password_error": "Passwords do not match!"
     },
     "NavBar": {
-        "register": "Registrati",
+        "register": "Register",
         "login": "Login",
-        "orders": "Ordini",
+        "orders": "Orders",
         "shop": "Shop", 
         "about": "About BonApp",
         "datas": "Gestione dati",
@@ -87,117 +87,117 @@
         "bonapp": "BonAppa!"
     },
     "Home": {
-        "h1": "Ricette e ingredienti, consegnati in meno di 25 minuti",
-        "h2": "Personalizza la proposta di ricette",
-        "all_receipts": "Tutte le ricette",
+        "h1": "Choose a recipe and receive any ingredient in 20 minutes!",
+        "h2": "Tailor your proposal..",
+        "all_receipts": "All Recipes",
         "market": "Il Supermercato"
     },
     "RandomReceipts": {
         "title": "Scelte per questa sera",
         "results": "Risultati",
-        "no_results": "Nessuna ricetta trovata con i filtri attuali!"
+        "no_results": "Loading recipes.."
     },
     "Receipt": {
         "back": "Back",
-        "ingredients_info": "Ingredienti per 1 porzione",
-        "goto_market": "Vai al negozio"
+        "ingredients_info": "Ingredients for 1 person",
+        "goto_market": "Go to shop"
     },
     "ReceiptBuy": {
-        "ingredients_for": "Ingredienti per {{name}}",
-        "products": "Prodotti",
-        "goto_checkout": "Prosegui",
-        "cart": "Carrello",
-        "cart_total": "Totale",
-        "categories": "Categorie",
-        "subcategories": "Sottocategorie",
-        "condiments": "Condimenti",
-        "element_in_cart": "{{items.length}} prodotti nel carrello",
-        "cart_details": "Dettiglio carrello",
-        "no_products": "Cerca i prodotti che più desideri!"
+        "ingredients_for": "Ingredients for {{name}}",
+        "products": "Products",
+        "goto_checkout": "Proceed to Checkout",
+        "cart": "Basket",
+        "cart_total": "Total",
+        "categories": "Categories",
+        "subcategories": "Subcategories",
+        "condiments": "Seasonings",
+        "element_in_cart": "{{items.length}} items",
+        "cart_details": "Basket details",
+        "no_products": "Search any product.."
     },
     "AddressForm": {
-        "address": "Indirizzo",
+        "address": "Address",
         "street": "Via / C.so / Piazza",
-        "street_number": "Civico",
-        "city": "Città",
-        "prov": "Provincia",
-        "state": "Stato",
-        "note": "Note",
-        "save": "Salva",
-        "cancel": "Annulla",
-        "save_address": "Salva indirizzo"
+        "street_number": "Street nº",
+        "city": "City",
+        "prov": "Province",
+        "state": "State",
+        "note": "Note (eg. Name on the intercom)",
+        "save": "Save",
+        "cancel": "Cancel",
+        "save_address": "Save address"
     },
     "FooterCart": {
-        "element_in_cart": " prodotti nel carrello",
-        "cart_total": "Totale",
-        "cart_details": "Dettiglio carrello",
-        "confirm_order": "Conferma ordine"
+        "element_in_cart": " items in Basket",
+        "cart_total": "Total",
+        "cart_details": "Basket details",
+        "confirm_order": "Confirm Order"
     },
     "Checkout": {
-        "products": "Prodotti",
-        "delivery": "Consegna",
-        "total": "Totale",
-        "your_order": "Il tuo ordine",
-        "delivery_address": "Indirizzo",
-        "delivery_time": "Orario di consegna",
-        "delivery_method": "Metodo di consegna",
-        "delivery_standard": "Consegna al citofono",
-        "delivery_footstep": "Consegna fino alla porta (+€ 1.50)",
-        "payment_info": "Pagamento",
-        "contact_info": "Contatti",
+        "products": "Products",
+        "delivery": "Delivery",
+        "total": "Total",
+        "your_order": "Your Order",
+        "delivery_address": "Address",
+        "delivery_time": "Delivery time",
+        "delivery_method": "Delivery option",
+        "delivery_standard": "Delivery at intercom",
+        "delivery_footstep": "Delivery at doorstep (+ € 1.50)",
+        "payment_info": "Payment",
+        "contact_info": "Contacts",
         "title": "Checkout",
-        "name": "Nome e cognome",
-        "phone": "Telefono",
-        "confirm_order": "Conferma ordine",
-        "add_address": "Aggiungi indirizzo",
+        "name": "Name and Last Name",
+        "phone": "Phone",
+        "confirm_order": "Confirm Order",
+        "add_address": "Add address",
         "address": "Indirizzo",
         "address_note": "Note",
-        "credit_card": "Carta di credito/debito",
-        "save_card": "Salva metodo di pagamento",
-        "add_payment_cancel": "Annulla",
-        "add_payment_next": "Procedi",
+        "credit_card": "Credit/Debit card",
+        "save_card": "Save payment method",
+        "add_payment_cancel": "Cancel",
+        "add_payment_next": "Proceed",
         "asap": "ASAP",
-        "asap_time": "15 - 20 min",
-        "asap_info": "* Dalle 19:00 alle 20:00"
+        "asap_time": "15 - 25 min",
+        "asap_info": "* From 19:00 to 21:00"
     },
     "OrderConfirm": {
-        "status": "Il tuo ordine è in arrivo!",
-        "status_sub": "Riceverai un'e-mail con i dettagli dell'ordine",
-        "order_detail": "Dettaglio ordine",
-        "customer_details": "Dettaglio cliente",
+        "status": "You order has been received!",
+        "status_sub": "You will receive an email with your order's details",
+        "order_detail": "Order details",
+        "customer_details": "Customer info",
         "order_details": {
-            "name": "Nome e cognome",
-            "id": "ID ordine",
-            "address": "Indirizzo",
+            "name": "Name and Last Name",
+            "id": "Order ID",
+            "address": "Address",
             "note": "Note",
-            "payment_method": "Metodo di pagamento",
-            "credit_card": "Carta di credito/debito"
+            "payment_method": "Payment method",
+            "credit_card": "Credit/Debit card"
         }
     },
     "Orders": {
-        "details": "Dettagli",
-        "title": "Ordini effettati",
-        "status": "Stato ordine",
+        "details": "Details",
+        "title": "Previous orders",
+        "status": "Order status",
         "status_list": {
-            "payment_pending": "In attesa di pagamento",
-            "paid": "Pagato"
+            "payment_pending": "Payment pending",
+            "paid": "Paid"
         }
     },
     "IngredientsPriority": {
-        "title": "Lista ingredienti",
-        "add_ingredient": "Cerca e aggiungi ingrediente",
-        "cancel": "Annulla",
-        "save": "Salva"
+        "title": "Ingredients list",
+        "add_ingredient": "Search or add ingredients",
+        "cancel": "Cancel",
+        "save": "Save"
     },
     "IngredientsForm": {
-        "title": "Lista ingredienti",
-        "add_ingredient": "Cerca e aggiungi ingrediente",
-        "cancel": "Annulla",
-        "save": "Salva"
+        "title": "Ingredients list",
+        "add_ingredient": "Search or add ingredients",
+        "cancel": "Cancel",
+        "save": "Save"
     },
     "Alerts": {
-        "logout": "Sei sicuro di voler effettuare il logout?",
-        "conferma": "Si",
-        "annulla": "Annulla"
+        "logout": "Confirm logging out?",
+        "conferma": "Yes",
+        "annulla": "Cancel"
     }
 }

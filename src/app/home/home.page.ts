@@ -12,13 +12,13 @@ import { TranslateService } from '@ngx-translate/core';
 export class HomePage {
 
   public receipts: Receipt[] = []
-  public filter: any = {};
+  public filter: any = { active: true };
   public _filter = {
     tags: [],
     active: true
   }
 
-  public isShow: boolean =  true;
+  public isShow: boolean = true;
 
   constructor(private receiptsService: ReceiptsService, private translate: TranslateService) { }
 
@@ -32,11 +32,11 @@ export class HomePage {
     try {
       if (skip > 0 && !force) {
         this.receipts.push(...(await this.receiptsService.find(this.filter, ['-__v'], skip, 12, '-priority', ['ingredients.ingredient'])));
-        if(event) event.target.complete();
+        if (event) event.target.complete();
         return
       }
       this.receipts = await this.receiptsService.find(this.filter, ['-__v'], skip, 12, '-priority', ['ingredients.ingredient'])
-      if(event) event.target.complete();
+      if (event) event.target.complete();
 
     } catch (error) {
 
@@ -54,7 +54,7 @@ export class HomePage {
 
   async createFilter() {
     // this.filter = this._filter.tags.length ? { tags: { $elemMatch: { $in: this._filter.tags } } } : {};
-    this.filter = this._filter.tags.length ? { tags: { $all: this._filter.tags } } : {};
+    this.filter = this._filter.tags.length ? { active: true, tags: { $all: this._filter.tags } } : { active: true, };
     await this.getReceipts(null, true);
   }
 

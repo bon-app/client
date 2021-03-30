@@ -73,7 +73,10 @@ export class EntityRelation {
             return data;
         }
 
-        data = _.get(data, this.pk_field);
+        if (typeof data != 'string') {
+            data = _.get(data, this.pk_field);
+        }
+        
         return data;
     }
 
