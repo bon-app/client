@@ -28,7 +28,7 @@ export class HomePage {
   }
 
   async getReceipts(event: any = null, force: boolean = false) {
-    let skip = this.receipts.length || 0;
+    let skip = force? 0 : this.receipts.length || 0;
     try {
       if (skip > 0 && !force) {
         this.receipts.push(...(await this.receiptsService.find(this.filter, ['-__v'], skip, 12, '-priority', ['ingredients.ingredient'])));

@@ -211,7 +211,10 @@
       <div class="partial-border ion-margin-top ion-margin-bottom"></div>
     </div>
 
+<!-- Mostra le ricette -->
     <random-receipts [receipts]="receipts"></random-receipts>
+
+
     <ion-infinite-scroll threshold="100px" (ionInfinite)="getReceipts($event)">
       <ion-infinite-scroll-content
         loadingSpinner="bubbles"

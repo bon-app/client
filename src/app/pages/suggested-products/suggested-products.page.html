@@ -80,14 +80,15 @@
         </ion-col>
         <ion-col>
           <div [ngStyle]="{'margin-top': i>0? '3em': '0'}" *ngFor="let category of categories; let i = index">
-            <div class="ion-padding-start">
+            <div class="suggested-category ion-padding-start" (click)="category.showed = !getSelf(category).showed">
               <h2>
                 <ion-text color="secondary">{{category.name}}</ion-text>
+                <ion-icon [name]="getSelf(category).showed?'chevron-down' : 'chevron-forward'" style="float: right;"></ion-icon>
               </h2>
               <div class="partial-border light partial-on-left"></div>
             </div>
 
-            <ion-grid id="product-list" class="neutral">
+            <ion-grid id="product-list" class="neutral" *ngIf="getSelf(category).showed">
               <ion-row>
                 <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="4" size-xl="4"
                   *ngFor="let product of getIngredients(category)">
@@ -100,6 +101,9 @@
                         <ion-text color="tertiary">{{product.brand}}</ion-text>
                       </div>
                       <div class="product-name" [title]="product.name">{{product.name}}</div>
+                      <div>
+                        <small><i>{{getSelf(product).qty}}</i></small>
+                      </div>
                       <div class="product-price ion-margin-top">
                         € {{(product.price? product.price.toFixed(2) : '-')}}
                       </div>

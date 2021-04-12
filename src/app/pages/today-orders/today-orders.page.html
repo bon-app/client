@@ -1,0 +1,19 @@
+<bonapp-header></bonapp-header>
+
+<ion-content>
+	<ion-list>
+		<ion-list-header>Ordini del giorno</ion-list-header>
+		<ion-item *ngFor="let order of orders" [routerLink]="'/orders/'+order.id">
+			<ion-label>
+				<div>{{order.info.length}} prodotti</div>
+				<div><small><b>Indirizzo:</b> <i> {{order.address.street}}, {{order.address.street_number}} - {{order.address.city}}</i></small></div>
+        <div>
+          <small><b>Ora consegna:</b> {{(order.delivery_time || '').toUpperCase()}} - <b>Tel:</b> {{order.phone}}</small>
+        </div>
+			</ion-label>
+		</ion-item>
+    <ion-item class="ion-text-center" *ngIf="orders.length == 0">
+      Nessun ordine per oggi
+    </ion-item>
+	</ion-list>
+</ion-content>

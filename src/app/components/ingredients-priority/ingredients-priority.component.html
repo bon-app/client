@@ -8,7 +8,7 @@
       <ion-item *ngFor="let item of items; let i = index">
         <ion-reorder slot="start"></ion-reorder>
         <ion-label>
-          {{i+1}}. {{item.ingredient?.name}} - {{item.ingredient?.brand}}
+          {{i+1}}. {{item.ingredient?.name}} - {{item.ingredient?.brand}} - {{item.ingredient?.qty}}
         </ion-label>
         <ion-icon name="trash" slot="end" (click)="removeIngredient(item.ingredient)"></ion-icon>
       </ion-item>

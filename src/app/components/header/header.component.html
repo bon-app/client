@@ -5,14 +5,15 @@
         (click)="logout('/')">
         {{'NavBar.logout' | translate}}
       </ion-button>
-      <ion-button class="ion-hide-md-down" fill="clear" size="large" color="secondary" (click)="goto('https://about.bonapp.life/')">
+      <ion-button class="ion-hide-md-down" fill="clear" size="large" color="secondary"
+        (click)="goto('https://about.bonapp.life/')">
         {{'NavBar.about' | translate}}</ion-button>
       <ion-button *ngIf="auth.isAuthenticate()" class="ion-hide-md-up" fill="clear" size="large" color="secondary"
         (click)="logout('/')">
         <ion-icon name="log-out"></ion-icon>
       </ion-button>
       <ion-button *ngIf="auth.isAuthenticate()" class="ion-hide-md-up" fill="clear" size="large" color="secondary"
-      (click)="goto('https://about.bonapp.life/')">
+        (click)="goto('https://about.bonapp.life/')">
         <ion-icon name="help-circle-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -25,6 +26,10 @@
       <ion-buttons class="ion-hide-md-down" slot="end">
         <ion-button class="ion-hide-md-down" fill="clear" size="large" color="secondary" (click)="goto('/shop')">
           {{'NavBar.shop' | translate}}</ion-button>
+        <ion-button *ngIf="auth.hasRoles(['admin'])" fill="clear" size="large" color="primary"
+          (click)="goto('/today-orders')">
+          {{'NavBar.orders' | translate}}
+        </ion-button>
         <ion-button *ngIf="!auth.hasRoles(['admin', 'creator'])" fill="clear" size="large" color="primary"
           (click)="goto('/orders')">
           {{'NavBar.orders' | translate}}

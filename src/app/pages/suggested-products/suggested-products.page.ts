@@ -29,4 +29,9 @@ export class SuggestedProductsPage implements OnInit {
   getIngredients(category) {
     return category.ingredients;
   }
+
+  
+  getSelf(obj) {
+    return obj as any;
+  }
 } 

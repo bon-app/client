@@ -51,7 +51,7 @@ export class IngredientsComponent implements OnInit {
 })
 export class IngredientDataProvider implements AutoCompleteService {
   labelAttribute = 'id';
-  formValueAttribute = 'name';
+  formValueAttribute = '_name';
 
   constructor(private ingredientsService: IngredientsService) {
 
@@ -60,6 +60,10 @@ export class IngredientDataProvider implements AutoCompleteService {
   async getResults(keyword: string) {
     if (!keyword) { return false; }
 
-    return (await this.ingredientsService.find({ name: { $regex: `.*${keyword}.*`, $options: 'i' } }, ['-__v'], 0, 5, { name: 1 }))
+    let results = await this.ingredientsService.find({ name: { $regex: `.*${keyword}.*`, $options: 'i' } }, ['-__v'], 0, 5, { name: 1 });
+    for(let r of results) {
+      (<any>r)._name = `${r.name} - ${r.brand} - ${(<any>r).qty}`
+    }
+    return results;
   }
 }
