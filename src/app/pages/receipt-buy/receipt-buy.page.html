@@ -5,18 +5,18 @@
     <div id="back">
       <ion-button size="small" fill="outline" color="secondary" (click)="navCtrl.back()">{{'Receipt.back' | translate}}
       </ion-button>
-      <div style="width: 100%">
+      <div style="width: 100%" class="ion-hide-md-down">
         <ion-searchbar [(ngModel)]="seach_term" [debounce]="400" (ngModelChange)="searchIngredients()"></ion-searchbar>
       </div>
     </div>
-    <div class="ion-padding" id="categories-mobile">
+    <!-- <div class="ion-padding" id="categories-mobile">
       <ion-label class="ion-margin-bottom">{{"ReceiptBuy.categories" | translate}}</ion-label>
       <ion-select [interface]="'popover'" (ionChange)="selectChange($event)">
         <ion-select-option [value]="'receipt'" *ngIf="receipt">{{receipt.name}}</ion-select-option>
         <ion-select-option [value]="category" *ngFor="let category of categories">{{category.name}}
         </ion-select-option>
       </ion-select>
-    </div>
+    </div> -->
     <ion-grid>
       <ion-row>
 

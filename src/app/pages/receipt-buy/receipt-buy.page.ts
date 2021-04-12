@@ -2,7 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { Category } from '../../models/category.model';
 import { CartService } from '../../services/cart.service';
 import { Receipt } from '../../models/receipt.model';
-import { NavController } from '@ionic/angular';
+import { LoadingController, NavController } from '@ionic/angular';
 import { ReceiptIngredientsMatching } from 'src/app/models/receipt-ingredientsMatching.model';
 import { ReceiptsService } from 'src/app/services/receipts.service';
 import { IngredientsService } from 'src/app/services/ingredients.service';
@@ -29,6 +29,7 @@ export class ReceiptBuyPage implements OnInit {
     public receiptsService: ReceiptsService,
     public categoriesService: CategoriesService,
     private ingredientsService: IngredientsService,
+    private loadingCtrl: LoadingController,
     public navCtrl: NavController,
     public route: ActivatedRoute) { }
 
@@ -36,6 +37,8 @@ export class ReceiptBuyPage implements OnInit {
   }
 
   async ionViewWillEnter() {
+    let loading = await this.loadingCtrl.create({message: 'Loading...'});
+    loading.present();
     try {
       this.categories = await this.categoriesService.find({ showBeforeCheckout: { $ne: true }, showInShop: true }, ['-__v'], 0, 50, { name: 1 }, ['ingredients', 'subcategories'])
       if (this.route.snapshot.params.id) {
@@ -57,9 +60,11 @@ export class ReceiptBuyPage implements OnInit {
         }
         this.receipt = receipt;
       }
+      loading.dismiss();
 
     } catch (error) {
-      console.error(error)
+      console.error(error);
+      loading.dismiss();
     }
   }
 

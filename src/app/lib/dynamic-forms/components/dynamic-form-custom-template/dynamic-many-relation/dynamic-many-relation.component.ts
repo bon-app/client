@@ -22,6 +22,7 @@ export class DynamicManyRelationComponent implements OnInit {
   ngOnInit() {
     this.service = this.injector.get(SERVICES_MAPPER.get(this.field.templateOptions.service));
     this.manyRelationDataProvider = new ManyRelationDataProvider(this.service);
+    this.manyRelationDataProvider.field = this.field;
   }
 
   async add($event: any) {
@@ -54,7 +55,8 @@ export class DynamicManyRelationComponent implements OnInit {
 
 export class ManyRelationDataProvider implements AutoCompleteService {
   labelAttribute = 'id';
-  formValueAttribute = 'name';
+  formValueAttribute = '_name';
+  field;
 
   constructor(private service: any) {
 
@@ -63,6 +65,9 @@ export class ManyRelationDataProvider implements AutoCompleteService {
   async getResults(keyword: string) {
     if (!keyword) { return false; }
 
-    return (await this.service.find({ name: { $regex: `.*${keyword}.*`, $options: 'i' } }, ['-__v'], 0, 5, { name: 1 }))
+    return (await this.service.find({ name: { $regex: `.*${keyword}.*`, $options: 'i' } }, ['-__v'], 0, 5, { name: 1 })).filter(item => {
+      item._name = eval(this.field.templateOptions.selected_key || 'item.name')
+      return item;
+    })
   }
 }

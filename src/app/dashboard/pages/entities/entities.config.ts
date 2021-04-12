@@ -195,7 +195,8 @@ export const ENTITIES = {
                 type: 'many',
                 templateOptions: {
                     label: 'Products',
-                    service: 'IngredientsService'
+                    service: 'IngredientsService',
+                    selected_key: "item.name + ' - ' + item.brand + ' - ' + item.qty"
                 },
                 list: {
                     parser: 'count',
