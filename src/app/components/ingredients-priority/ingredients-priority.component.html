@@ -1,6 +1,6 @@
 <div id="ingredients-priority-wrapper">
   <h2>{{'IngredientsPriority.title' | translate}}</h2>
-  <ion-auto-complete #autoComplete [options]="{ placeholder : ('IngredientsPriority.add_ingredient' | translate) }"
+  <ion-auto-complete #autoComplete [maxResults]="50" [options]="{ placeholder : ('IngredientsPriority.add_ingredient' | translate) }"
     [dataProvider]="ingredientDataProvider" (itemSelected)="addIngredient($event); autoComplete.clearValue()">
   </ion-auto-complete>
   <div class="list ion-padding-top ion-padding-bottom">

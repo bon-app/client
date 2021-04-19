@@ -217,3 +217,12 @@ ion-card.recipesBox {
 
 /* hi-res laptops and desktops */
 @media (min-width:1281px) {  }
+
+
+ion-auto-complete {
+    ul {
+        max-height: 40vh;
+        overflow: hidden;
+        overflow-y: auto;
+    }
+}

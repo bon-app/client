@@ -57,6 +57,7 @@ export class CheckoutPage implements OnInit {
     }
     this.setUser();
     this.createPaymentForm();
+    this.selectAddress(null);
   }
 
   getTotal() {

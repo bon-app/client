@@ -65,7 +65,7 @@ export class ManyRelationDataProvider implements AutoCompleteService {
   async getResults(keyword: string) {
     if (!keyword) { return false; }
 
-    return (await this.service.find({ name: { $regex: `.*${keyword}.*`, $options: 'i' } }, ['-__v'], 0, 5, { name: 1 })).filter(item => {
+    return (await this.service.find({ name: { $regex: `.*${keyword}.*`, $options: 'i' } }, ['-__v'], 0, 50, { name: 1 })).filter(item => {
       item._name = eval(this.field.templateOptions.selected_key || 'item.name')
       return item;
     })

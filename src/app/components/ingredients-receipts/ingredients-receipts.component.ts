@@ -49,16 +49,16 @@ export class IngredientDataProvider implements AutoCompleteService {
   labelAttribute = 'id';
   formValueAttribute = '_name';
 
-  constructor(private ingredientsService: IngredientsService) {
+  constructor(private rimsService: RimsService) {
 
   }
 
   async getResults(keyword: string) {
     if (!keyword) { return false; }
 
-    let results = await this.ingredientsService.find({ name: { $regex: `.*${keyword}.*`, $options: 'i' } }, ['-__v'], 0, 5, { name: 1 });
+    let results = await this.rimsService.find({ name: { $regex: `.*${keyword}.*`, $options: 'i' } }, ['-__v'], 0, 50, { name: 1 });
     for(let r of results) {
-      (<any>r)._name = `${r.name} - ${r.brand} - ${(<any>r).qty}`
+      (<any>r)._name = `${r.name}`
     }
     return results;
   }

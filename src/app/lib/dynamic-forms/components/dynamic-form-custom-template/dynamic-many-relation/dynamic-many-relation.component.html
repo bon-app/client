@@ -1,6 +1,6 @@
 <div id="many-wrapper">
   <h2>{{field.templateOptions?.label}}</h2>
-  <ion-auto-complete #autoComplete [options]="{ placeholder : 'Search' }"
+  <ion-auto-complete #autoComplete [options]="{ placeholder : 'Search' }" [maxResults]="50"
     [dataProvider]="manyRelationDataProvider" (itemSelected)="add($event); autoComplete.clearValue()">
   </ion-auto-complete>
   <div id="many-list" class="ion-padding-top ion-padding-bottom">
