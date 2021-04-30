@@ -35,28 +35,36 @@ ion-card {
     }
 }
 
-.ingredients{
+.ingredients {
     text-align: left;
 }
 
 .partial-border.primary:after {
-    content: '';
+    content: "";
     width: 30px;
     height: 4px;
     margin-left: -15px;
-    background: #EFBDAE;
+    background: #efbdae;
     position: absolute;
     bottom: -4px;
 }
 
 @media only screen and (max-width: 768px) {
+    .recipesBox {
+        .wrap-text {
+            text-align: center;
+            overflow: unset;
+            text-overflow: unset;
+            white-space: unset;
+        }
+    }
 
     ion-card-title {
         font-size: 1.4em;
         text-align: center;
     }
 
-    .ingredients{
+    .ingredients {
         text-align: center;
     }
 
@@ -64,7 +72,7 @@ ion-card {
         display: flex;
         align-items: center;
 
-        >div {
+        > div {
             padding: 0.5em;
             padding-top: 1.5em;
             margin: 0 auto;

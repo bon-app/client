@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { AddressFormComponent } from 'src/app/components/address-form/address-form.component';
 import { Global } from 'src/app/services/global';
 import { PaymentService } from 'src/app/services/payment.service';
+import { ICreateOrderRequest, IPayPalConfig } from 'ngx-paypal';
 
 declare var Stripe: any;
 
@@ -34,6 +35,8 @@ export class CheckoutPage implements OnInit {
     { id: 'P123457', last4: '3578' },
   ];
 
+  public payPalConfig?: IPayPalConfig;
+
   constructor(
     public cart: CartService,
     public navCtrl: NavController,
@@ -48,6 +51,8 @@ export class CheckoutPage implements OnInit {
   }
 
   async ngOnInit() {
+    this.createPaymentForm();
+    // this.initConfig();
     this.order.delivery_time = 'asap';
     this.order.delivery_method = 'standard';
 
@@ -56,7 +61,6 @@ export class CheckoutPage implements OnInit {
       return;
     }
     this.setUser();
-    this.createPaymentForm();
     this.selectAddress(null);
   }
 
@@ -163,7 +167,7 @@ export class CheckoutPage implements OnInit {
 
 
     if (!this.order.address) {
-      let toast = await this.toastCtrl.create({ message: this.translate.instant("Errors._NO_ORDER_ADDRESS") , duration: 5000 });
+      let toast = await this.toastCtrl.create({ message: this.translate.instant("Errors._NO_ORDER_ADDRESS"), duration: 5000 });
       toast.present();
       return
     }
@@ -225,6 +229,63 @@ export class CheckoutPage implements OnInit {
       loading.dismiss();
     }
 
+  }
+
+  private initConfig(): void {
+    this.payPalConfig = {
+      currency: 'EUR',
+      clientId: 'AWYaTJP6VQTX0rciOzG_Lw2Da5ILf_4lhQyYp7engsMtK-HeQeYS2ricKyx5TU13DOupHJ7L0BvOwglt',
+      createOrderOnClient: (data) => <ICreateOrderRequest>{
+        intent: 'AUTHORIZE',
+        purchase_units: [{
+          amount: {
+            currency_code: 'EUR',
+            value: '9.99',
+            breakdown: {
+              item_total: {
+                currency_code: 'EUR',
+                value: '9.99'
+              }
+            }
+          },
+          items: [{
+            name: 'Enterprise Subscription',
+            quantity: '1',
+            category: 'DIGITAL_GOODS',
+            unit_amount: {
+              currency_code: 'EUR',
+              value: '9.99',
+            },
+          }]
+        }]
+      },
+      advanced: {
+        commit: 'true'
+      },
+      style: {
+        label: 'paypal',
+        layout: 'vertical'
+      },
+      onApprove: (data, actions) => {
+        console.log('onApprove - transaction was approved, but not authorized', data, actions);
+        actions.order.get().then(details => {
+          console.log('onApprove - you can get full order details inside onApprove: ', details);
+        });
+
+      },
+      onClientAuthorization: (data) => {
+        console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
+      },
+      onCancel: (data, actions) => {
+        console.log('OnCancel', data, actions);
+      },
+      onError: err => {
+        console.log('OnError', err);
+      },
+      onClick: (data, actions) => {
+        console.log('onClick', data, actions);
+      },
+    };
   }
 
 }

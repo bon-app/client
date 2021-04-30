@@ -9,7 +9,7 @@
         </ion-button>
       </div>
       <ion-textarea placeholder="Write step description..." [id]="'step-'+(i+1)" [name]="'step-'+(i+1)" 
-      [value]="step" (keyup)="editStep($event, i)"></ion-textarea>
+      [value]="step" (blur)="editStep($event, i)"></ion-textarea>
     </ion-card-content>
   </ion-card>
   <ion-card (click)="addStep()" button>

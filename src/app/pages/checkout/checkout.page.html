@@ -157,6 +157,13 @@
               <ion-text color="secondary">{{'Checkout.payment_info' | translate}}</ion-text>
             </h2>
             <div class="partial-border light partial-on-left"></div>
+            <!-- <ion-card>
+              <ion-card-content>
+                <div class="ion-padding-start ion-padding-end">
+                  <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+                </div>
+              </ion-card-content>
+            </ion-card> -->
             <!-- <ion-card button [ngClass]="{'active': selectedPayment == card.id}" *ngFor="let card of payments"
               (click)="selectedPayment = card.id; addMethod = false">
               <ion-card-content>
@@ -275,6 +282,7 @@
               [disabled]="cart.items.length == 0" style="font-weight: bold;" (click)="payWithCard()">
               {{"Checkout.confirm_order" | translate}}
             </ion-button>
+            
           </div>
 
         </ion-col>

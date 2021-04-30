@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+import { NgxPayPalModule } from 'ngx-paypal';
 import { IonicModule } from '@ionic/angular';
 
 import { CheckoutPageRoutingModule } from './checkout-routing.module';
@@ -17,7 +17,8 @@ import { ComponentsModule } from '../../components/components.module';
     IonicModule,
     CheckoutPageRoutingModule,
     TranslateModule.forChild(),
-    ComponentsModule
+    ComponentsModule,
+    NgxPayPalModule
   ],
   declarations: [CheckoutPage]
 })

@@ -42,7 +42,7 @@
             <li *ngFor="let i of receipt.ingredients"> {{i.qta}} <strong>{{getIngredientName(i.ingredient)}}</strong>
             </li>
           </ul>
-          <div id="button-goto-market" class="ion-hide-md-down">
+          <div id="button-goto-market">
             <ion-button color="primary" size="large" [routerLink]="'/receipt/' + receipt.id + '/buy'">
               {{'Receipt.goto_market' | translate}}
             </ion-button>
@@ -61,8 +61,8 @@
 </ion-content>
 <ion-footer class="ion-hide-md-up" *ngIf="receipt">
   <ion-toolbar>
-    <ion-button color="primary" expand="full" [routerLink]="'/receipt/' + receipt.id + '/buy'">
-      {{'Receipt.goto_market' | translate}}
+    <ion-button color="primary" expand="full" [routerLink]="'/receipt/' + receipt.id + '/buy'" style="font-size: 1.2em;">
+      <b>{{'Receipt.goto_market' | translate}}</b>
     </ion-button>
   </ion-toolbar>
 </ion-footer>
