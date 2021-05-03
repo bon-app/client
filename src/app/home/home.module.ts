@@ -7,6 +7,7 @@ import { HomePage } from './home.page';
 import { HomePageRoutingModule } from './home-routing.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { ComponentsModule } from '../components/components.module';
+import { AutoCompleteModule } from 'ionic4-auto-complete';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { ComponentsModule } from '../components/components.module';
     IonicModule,
     HomePageRoutingModule,
     TranslateModule.forChild(),
+    AutoCompleteModule,
     ComponentsModule
   ],
   declarations: [HomePage]

@@ -20,7 +20,17 @@
       <h1>{{'Home.h1' | translate}}</h1>
       <div class="partial-border ion-margin-top ion-margin-bottom"></div>
     </div>
-    
+
+    <div id="search">
+      <ion-auto-complete #autoComplete [options]="{ placeholder : 'Cerca un ingrediente che hai in frigo..' }" [maxResults]="50"
+        [dataProvider]="rimsProvider" (itemSelected)="selectedRim($event)">
+      </ion-auto-complete>
+      <ion-chip *ngIf="selected_rim" color="primary" (click)="autoComplete.clearValue();selectedRim()">
+        <ion-label>{{selected_rim?.name}}</ion-label>
+        <ion-icon name="close"></ion-icon>
+      </ion-chip>
+    </div>
+
     <div id="filters">
       <h2 class="ion-text-center filtertext">{{'Home.h2' | translate}}</h2>
 
@@ -28,7 +38,8 @@
         <ion-grid class="ion-no-padding">
           <ion-row>
             <ion-col size-xs="6" size-sm="3" size-md="3" size-lg="3" size-xl="3" class="pad-5">
-              <ion-card [ngClass]="{'active': _filter.tags.indexOf('healthy') > -1}" (click)="onChangeFilter('healthy')">
+              <ion-card [ngClass]="{'active': _filter.tags.indexOf('healthy') > -1}"
+                (click)="onChangeFilter('healthy')">
                 <ion-card-content class="flex-center">
                   <div>
                     <div class="ion-text-center">
@@ -42,7 +53,8 @@
               </ion-card>
             </ion-col>
             <ion-col size-xs="6" size-sm="3" size-md="3" size-lg="3" size-xl="3" class="pad-5">
-              <ion-card [ngClass]="{'active': _filter.tags.indexOf('quick-n-easy') > -1}" (click)="onChangeFilter('quick-n-easy')">
+              <ion-card [ngClass]="{'active': _filter.tags.indexOf('quick-n-easy') > -1}"
+                (click)="onChangeFilter('quick-n-easy')">
                 <ion-card-content class="flex-center">
                   <div>
                     <div class="ion-text-center">
@@ -109,7 +121,7 @@
                 <ion-card-content>
                   <ion-item lines="none">
                     <ion-label>Senza forno</ion-label>
-                    <ion-toggle value="no-oven"  (click)="onChangeFilter('no-oven')"></ion-toggle>
+                    <ion-toggle value="no-oven" (click)="onChangeFilter('no-oven')"></ion-toggle>
                   </ion-item>
                   <ion-item lines="none">
                     <ion-label>Senza mixer</ion-label>
@@ -211,19 +223,18 @@
       <div class="partial-border ion-margin-top ion-margin-bottom"></div>
     </div>
 
-<!-- Mostra le ricette -->
+    <!-- Mostra le ricette -->
     <random-receipts [receipts]="receipts"></random-receipts>
 
 
     <ion-infinite-scroll threshold="100px" (ionInfinite)="getReceipts($event)">
-      <ion-infinite-scroll-content
-        loadingSpinner="bubbles"
-        loadingText="Loading more data...">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
       </ion-infinite-scroll-content>
     </ion-infinite-scroll>
   </div>
 </ion-content>
 
+<!-- Message popup  -->
 <div id="message" *ngIf="isShow && ('Messages.home' | translate)">
   <div class="ion-text-center">
     <p [innerHTML]="'Messages.home' | translate"></p>

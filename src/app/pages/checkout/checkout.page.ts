@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { AddressFormComponent } from 'src/app/components/address-form/address-form.component';
 import { Global } from 'src/app/services/global';
 import { PaymentService } from 'src/app/services/payment.service';
-import { ICreateOrderRequest, IPayPalConfig } from 'ngx-paypal';
+import { ICreateOrderRequest, IPayPalConfig, IPurchaseUnit } from 'ngx-paypal';
 
 declare var Stripe: any;
 
@@ -232,39 +232,72 @@ export class CheckoutPage implements OnInit {
   }
 
   private initConfig(): void {
+    let amount = (this.cart.total + (this.order.delivery_method == 'standard' ? 0.99 : 2.49)).toFixed(2);
+    let payment: IPurchaseUnit = {
+      amount: {
+        currency_code: 'EUR',
+        value: amount,
+        breakdown: {
+          item_total: {
+            currency_code: 'EUR',
+            value: amount
+          }
+        }
+      },
+      items: [...this.cart.items.map(i => {
+        return {
+          name: i.ingredient.brand + ' - ' + i.ingredient.name,
+          quantity: '' + i.qta,
+          unit_amount: {
+            currency_code: 'EUR',
+            value: i.ingredient.price.toFixed(2),
+          },
+        }
+      }),
+      {
+        name: this.order.delivery_method == 'standard' ? "Consegna standard" : "Consegna FootStep",
+        quantity: '1',
+        unit_amount: {
+          currency_code: 'EUR',
+          value: this.order.delivery_method == 'standard' ? '0.99' : '2.49',
+        },
+      }
+      ]
+    };
     this.payPalConfig = {
       currency: 'EUR',
       clientId: 'AWYaTJP6VQTX0rciOzG_Lw2Da5ILf_4lhQyYp7engsMtK-HeQeYS2ricKyx5TU13DOupHJ7L0BvOwglt',
       createOrderOnClient: (data) => <ICreateOrderRequest>{
-        intent: 'AUTHORIZE',
-        purchase_units: [{
-          amount: {
-            currency_code: 'EUR',
-            value: '9.99',
-            breakdown: {
-              item_total: {
-                currency_code: 'EUR',
-                value: '9.99'
-              }
-            }
-          },
-          items: [{
-            name: 'Enterprise Subscription',
-            quantity: '1',
-            category: 'DIGITAL_GOODS',
-            unit_amount: {
-              currency_code: 'EUR',
-              value: '9.99',
-            },
-          }]
-        }]
+        intent: 'CAPTURE',
+        purchase_units: [payment],
+        // [{
+        //   amount: {
+        //     currency_code: 'EUR',
+        //     value: '9.99',
+        //     breakdown: {
+        //       item_total: {
+        //         currency_code: 'EUR',
+        //         value: '9.99'
+        //       }
+        //     }
+        //   },
+        //   items: [{
+        //     name: 'Enterprise Subscription',
+        //     quantity: '1',
+        //     category: 'DIGITAL_GOODS',
+        //     unit_amount: {
+        //       currency_code: 'EUR',
+        //       value: '9.99',
+        //     },
+        //   }]
+        // }]
       },
       advanced: {
         commit: 'true'
       },
       style: {
         label: 'paypal',
-        layout: 'vertical'
+        layout: 'horizontal'
       },
       onApprove: (data, actions) => {
         console.log('onApprove - transaction was approved, but not authorized', data, actions);
