@@ -88,7 +88,8 @@
     },
     "Home": {
         "h1": "Scegli la ricetta e ricevi qualsiasi ingrediente in 20 minuti!",
-        "h2": "Personalizza la proposta di ricette..",
+        "subtitle": "Usa gli ingredienti che hai in frigo",
+        "h2": "e personalizza la proposta di ricette..",
         "all_receipts": "Tutte le ricette",
         "market": "Il Supermercato"
     },

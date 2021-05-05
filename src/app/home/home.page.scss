@@ -1,6 +1,12 @@
 #title {
-  margin-top: 2em;
+  margin-top: 1.3em;
   margin-bottom: 2em;
+}
+
+#subtitle {
+  margin-top: 1em;
+  font-size: 1.2em;
+  text-align: center;
 }
 
 #title h1 {
@@ -11,6 +17,11 @@ h1 {
   text-align: center;
   font-size: 1.8em;
 }
+
+// h2 {
+//   text-align: center;
+//   font-size: 1.8em;
+// }
 
 #buttons {
   margin-top: 4em;
@@ -72,7 +83,7 @@ random-receipts {
   ion-card {
     width: 100%;
     margin: 0px;
-    height: 100px;
+    height: 80px;
 
     ion-card-content {
       height: 100%;
@@ -143,14 +154,34 @@ random-receipts {
   }
 }
 
-::ng-deep ion-auto-complete {
-  ion-searchbar {
-    border: solid 2px var(--ion-color-primary);
-    border-radius: 20px;
-    --placeholder-font-weight: 550;
-    --background: white;
-    --icon-color: #efbdae;
-    --box-shadow: none !important;
-    overflow: hidden;
-  }
+
+// ::ng-deep ion-auto-complete {
+//   ion-searchbar {
+//     border: solid 2px var(--ion-color-primary);
+//     border-radius: 20px;
+//     --placeholder-font-weight: 550;
+//     --background: white;
+//     --icon-color: #efbdae;
+//     --box-shadow: none !important;
+//     overflow: hidden;
+//   }
+// }
+
+ion-auto-complete {
+  width: 100%;
+  box-shadow: rgb(0 0 0 / 12%) 0px 4px 16px;
+  border-radius: 10px;
+  background: white;
+  border: none;
+  --placeholder-font-weight: 550;
 }
+
+// ::ng-deep ion-auto-complete {
+//   ion-searchbar {
+//     box-shadow:rgb(0 0 0 / 12%) 0px 4px 16px;
+//     border-radius:10px;
+//     --placeholder-font-weight:550;
+//     --background : "white";
+//     --icon-color: #efbdae;
+//   }
+// }
