@@ -14,17 +14,18 @@
 </ion-header> -->
 <bonapp-header></bonapp-header>
 
+<!-- body -->
 <ion-content>
   <div class="container">
+    <!-- title -->
     <div id="title">
       <h1>{{'Home.h1' | translate}}</h1>
       <div class="partial-border ion-margin-top ion-margin-bottom"></div>
     </div>
-
+    <!-- subtitle1: "Usa gli ingredienti che hai in frigo" -->
+    <h2 class="ion-text-center" id="subtitle1">{{'Home.subtitle' | translate}}</h2>
+    <!-- search bar -->
     <div id="search">
-
-      <h2 id="subtitle">{{'Home.subtitle' | translate}}</h2>
-
       <ion-auto-complete #autoComplete [options]="{ placeholder : 'es. tonno sott\'olio' }" [maxResults]="50"
         [dataProvider]="rimsProvider" (itemSelected)="selectedRim($event)">
       </ion-auto-complete>
@@ -33,9 +34,10 @@
         <ion-icon name="close"></ion-icon>
       </ion-chip>
     </div>
-
+    <!-- subtitle2: "e personalizza la proposta di ricette" -->
+    <h2 class="ion-text-center" id="subtitle2">{{'Home.h2' | translate}}</h2>
+    <!-- gruppo filtri per desktop -->
     <div class="ion-hide-md-down" id="filters">
-      <h2 class="ion-text-center filtertext">{{'Home.h2' | translate}}</h2>
       <div class="flex-center">
         <ion-grid class="ion-no-padding">
           <ion-row>
@@ -135,11 +137,8 @@
         </ion-grid>
       </div>
     </div>
-
+    <!-- gruppo filtri per mobile -->
     <div class="ion-hide-md-up" id="filters">
-      <h2 class="ion-text-center filtertext">{{'Home.h2' | translate}}</h2>
-
-
       <div class="flex-center">
         <ion-grid class="ion-no-padding">
           <ion-row>
@@ -274,11 +273,11 @@
 </ion-content>
 
 <!-- Message popup  -->
-<div id="message" *ngIf="isShow && ('Messages.home' | translate)">
+<!-- <div id="message" *ngIf="isShow && ('Messages.home' | translate)">
   <div class="ion-text-center">
     <p [innerHTML]="'Messages.home' | translate"></p>
     <ion-button fill="outline" (click)="isShow = false">
       OK
     </ion-button>
   </div>
-</div>
+</div> -->

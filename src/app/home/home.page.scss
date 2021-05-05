@@ -3,10 +3,16 @@
   margin-bottom: 2em;
 }
 
-#subtitle {
+#subtitle1 {
+  margin-top: 1.6em;
+  font-size: 1.2em;
+  //text-align: center;
+}
+
+#subtitle2 {
   margin-top: 1em;
   font-size: 1.2em;
-  text-align: center;
+  //text-align: center;
 }
 
 #title h1 {
@@ -17,11 +23,6 @@ h1 {
   text-align: center;
   font-size: 1.8em;
 }
-
-// h2 {
-//   text-align: center;
-//   font-size: 1.8em;
-// }
 
 #buttons {
   margin-top: 4em;
@@ -68,7 +69,9 @@ random-receipts {
 
 #filters {
   width: 50%;
+  margin-top: 1em auto;
   margin: 3em auto;
+
 
   .flex-center .flex-center {
     > div {
@@ -103,11 +106,13 @@ random-receipts {
 }
 
 .partial-border:after {
-  background: #a5a5a5;
+  background: #efbdae;
   width: 30px;
-  height: 2px;
+  border-radius : 10px;
+  height: 3px;
   margin-left: calc(50% - 15px);
 }
+
 
 .filtertext {
   color: #3b3b3b;
@@ -143,9 +148,9 @@ random-receipts {
 #search {
   margin: 0 25%;
 
-  ion-auto-complete {
-    width: 100%;
-  }
+  // ion-auto-complete {
+  //   width: 100%;
+  // }
 }
 
 @media only screen and (max-width: 768px) {
@@ -167,21 +172,61 @@ random-receipts {
 //   }
 // }
 
+// // option1
+// ::ng-deep ion-auto-complete {
+//   ion-searchbar {
+//     --box-shadow: rgb(0 0 0 / 12%) 0px 4px 16px !important;
+//     border-radius: 12px;
+//     --background: white;
+//     border: solid 2px white;
+//     --icon-color: #efbdae;
+//     --placeholder-font-weight: 550;
+//     overflow: hidden;
+//   }
+// }
+// ion-auto-complete {
+//   width: 100%;
+// }
+
+// option2
+::ng-deep ion-auto-complete {
+  ion-searchbar {
+    --box-shadow: none !important;
+    border-radius: 12px;
+    --background: white;
+    border: solid 2px white;
+    --icon-color: #efbdae;
+    --placeholder-font-weight: 550;
+    overflow: hidden;
+  }
+}
 ion-auto-complete {
   width: 100%;
   box-shadow: rgb(0 0 0 / 12%) 0px 4px 16px;
-  border-radius: 10px;
-  background: white;
-  border: none;
-  --placeholder-font-weight: 550;
+  border-radius: 12px;
+  background: none;
+  border: solid 2px white;
+  --box-shadow: none !important;
+  overflow: hidden;
 }
 
-// ::ng-deep ion-auto-complete {
-//   ion-searchbar {
-//     box-shadow:rgb(0 0 0 / 12%) 0px 4px 16px;
-//     border-radius:10px;
-//     --placeholder-font-weight:550;
-//     --background : "white";
-//     --icon-color: #efbdae;
-//   }
+// ion-searchbar {
+//   width: 100%;
+//   box-shadow: rgb(0 0 0 / 12%) 0px 4px 16px;
+//   border-radius: 12px;
+//   background: white;
+//   border: solid 2px white;
+//   --icon-color: #efbdae;
+//   --placeholder-font-weight: 550;
+// }
+
+
+// ion-auto-complete {
+//   width: 100%;
+//   box-shadow: rgb(0 0 0 / 12%) 0px 4px 16px;
+//   border-radius: 12px;
+//   background: none;
+//   border: solid 2px white;
+//   --box-shadow: none !important;
+//   overflow: hidden;
 // }
