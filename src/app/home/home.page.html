@@ -37,7 +37,7 @@
     <!-- subtitle2: "e personalizza la proposta di ricette" -->
     <h2 class="ion-text-center" id="subtitle2">{{'Home.h2' | translate}}</h2>
     <!-- gruppo filtri per desktop -->
-    <div class="ion-hide-md-down" id="filters">
+    <div class="ion-hide-md-down" id="filters-desktop">
       <div class="flex-center">
         <ion-grid class="ion-no-padding">
           <ion-row>
@@ -139,7 +139,7 @@
     </div>
     <!-- gruppo filtri per mobile -->
     <div class="ion-hide-md-up" id="filters">
-      <div class="flex-center">
+      <div class="flex-center" >
         <ion-grid class="ion-no-padding">
           <ion-row>
             <ion-col size-xs="4" size-sm="3" size-md="3" size-lg="3" size-xl="3" class="pad-5">
@@ -273,11 +273,26 @@
 </ion-content>
 
 <!-- Message popup  -->
-<!-- <div id="message" *ngIf="isShow && ('Messages.home' | translate)">
+<div id="message" *ngIf="isShow && ('Messages.home' | translate)">
   <div class="ion-text-center">
-    <p [innerHTML]="'Messages.home' | translate"></p>
+    <!-- <p [innerHTML]="'Messages.home' | translate"></p> -->
+    <h4>Benvenuto su</h4>
+    <img src='https://www.bonapp.life/assets/brand.png' alt='' width='153' height='74' />
+    <br>
+    <em> Ingredienti a domicilio con proposta di ricette!</em>
+    <div style="padding-left: 20px">
+      <ul style='text-align: left; list-style:none; font-weight:900'>
+        <li>20 minuti garantito</li>
+        <li>0.99&euro; costo consegna</li>
+        <li>Nessuna spesa minima</li>
+      </ul>
+    </div>
+    <p>Servizio di consegna attivo su Milano zona<br/>Porta Romana, Bocconi, Navigli</p>
+    <em>Dubbi o domande? Clicca in alto a sinistra</em>
+    <p></p>
+
     <ion-button fill="outline" (click)="isShow = false">
       OK
     </ion-button>
   </div>
-</div> -->
+</div>

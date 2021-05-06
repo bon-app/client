@@ -5,12 +5,13 @@
 
 #subtitle1 {
   margin-top: 1.6em;
+  margin-bottom: 0.8em;
   font-size: 1.2em;
   //text-align: center;
 }
 
 #subtitle2 {
-  margin-top: 1em;
+  margin-top: 0.6em;
   font-size: 1.2em;
   //text-align: center;
 }
@@ -39,40 +40,90 @@ random-receipts {
   margin-bottom: 3em;
 }
 
-// #filters {
-//   width: 50%;
-//   margin: 0 auto;
 
-//   ion-card {
-//     height: 100%;
-//     margin-top: 3em;
 
-//     ion-card-content {
-//       height: 100%;
-//     }
-//   }
-
-//   ion-toggle {
-//     --handle-width: 1em;
-//     --handle-height: 1em;
-//     height: 1.25em;
-//   }
-
-// }
-
-// @media only screen and (max-width: 768px) {
-//   #filters {
-//     width: 100%;
-//     padding: 1em;
-//   }
-// }
-
-#filters {
+#filters-desktop {
   width: 50%;
   margin-top: 1em auto;
   margin: 3em auto;
 
 
+  .flex-center .flex-center {
+    > div {
+      margin: 0 auto;
+    }
+  }
+
+  ion-card.active {
+    border: solid 2px var(--ion-color-primary);
+  }
+
+  ion-card {
+    width: 100%;
+    margin: 0px;
+    height: 80px;
+
+    ion-card-content {
+      height: 100%;
+      padding: 5px;
+    }
+  }
+
+  ion-icon {
+    font-size: 1.8em;
+  }
+
+  ion-toggle {
+    --handle-width: 1em;
+    --handle-height: 1em;
+    height: 1.25em;
+  }
+}
+
+#filters-mobile {
+  width: 50%;
+  margin-top: 1em auto;
+  margin: 3em auto;
+
+
+  .flex-center .flex-center {
+    > div {
+      margin: 0 auto;
+    }
+  }
+
+  ion-card.active {
+    border: solid 2px var(--ion-color-primary);
+  }
+
+  ion-card {
+    width: 100%;
+    margin: 0px;
+    height: 80px;
+
+    ion-card-content {
+      height: 100%;
+      padding: 5px;
+    }
+  }
+
+  ion-icon {
+    font-size: 1.8em;
+  }
+
+  ion-toggle {
+    --handle-width: 1em;
+    --handle-height: 1em;
+    height: 1.25em;
+  }
+}
+
+#filters {
+  width: 50%;
+  margin-top: 0em !important;
+  margin-bottom: 1em !important;
+  margin: 3em auto;
+  
   .flex-center .flex-center {
     > div {
       margin: 0 auto;
@@ -147,6 +198,7 @@ random-receipts {
 
 #search {
   margin: 0 25%;
+  margin-bottom: 0em !important;
 
   // ion-auto-complete {
   //   width: 100%;
@@ -230,3 +282,12 @@ ion-auto-complete {
 //   --box-shadow: none !important;
 //   overflow: hidden;
 // }
+
+
+li {
+  /** the image will be vertically aligned in the center **/
+  background: url("https://www.bonapp.life/assets/Ellisse.png") left center no-repeat; 
+
+  /** move the text to the right **/
+  padding-left: 20px; 
+}

@@ -1,7 +1,6 @@
 {
     "Messages": {
-        "home": "<h4>Benvenuto su</h4><img src='https://www.bonapp.life/assets/brand.png' alt='' width='153' height='74' /><br>&bull;<i> ingredienti a domicilio in 20 minuti &bull;</i><p>Servizio di consegna attivo su Milano zona<strong><br>Porta Romana, Bocconi, Navigli</strong></p><p></p>"
-    },
+        "home": "<h4>Benvenuto su</h4><p><img src='https://www.bonapp.life/assets/brand.png' alt='' width='153' height='74' /><br /><em> Ingredienti a domicilio con proposta di ricette! </em></p><ul style='text-align: center; list-style-position: inside;'><li>20 minuti garantito</li><li>0.99&euro; costo consegna</li><li>Nessuna spesa minima</li></ul><p>Servizio di consegna attivo su Milano zona<br />Porta Romana, Bocconi, Navigli</p><p>&nbsp;</p>"},
     "Errors": {
         "_USER_NOT_FOUND": "Email e/o password errate",
         "_NO_ORDER_ADDRESS": "Seleziona o aggiungi un indirizzo",
@@ -77,7 +76,7 @@
         "login": "Login",
         "orders": "Ordini",
         "shop": "Shop", 
-        "about": "About BonApp",
+        "about": "Info & Contatti",
         "datas": "Gestione dati",
         "logout": "Logout"
     },
@@ -87,8 +86,8 @@
         "bonapp": "BonAppa!"
     },
     "Home": {
-        "h1": "Scegli la ricetta e ricevi qualsiasi ingrediente in 20 minuti!",
-        "subtitle": "Usa gli ingredienti che hai in frigo",
+        "h1": "Consegna di ingredienti con proposta di ricetta",
+        "subtitle": "Usa un ingrediente che hai in frigo",
         "h2": "e personalizza la proposta di ricette..",
         "all_receipts": "Tutte le ricette",
         "market": "Il Supermercato"
