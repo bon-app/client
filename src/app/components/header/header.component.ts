@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, NavController, PopoverController } from '@ionic/angular';
 import { AuthService } from '../../auth/auth.service';
 import { DatasPopoverComponent } from '../datas-popover/datas-popover.component';
+import { UsersPopoverComponent } from '../users-popover/users-popover.component';
 import { LoginComponent } from '../login/login.component';
 import Swal from 'sweetalert2'
 import { TranslateService } from '@ngx-translate/core';
@@ -35,6 +36,15 @@ export class BonAppHeaderComponent implements OnInit {
     modal.present();
   }
 
+  async presentUsersPopover(ev: any) {
+    const popover = await this.popoverCtrl.create({
+      component: UsersPopoverComponent,
+      event: ev,
+    });
+    return await popover.present();
+  }
+
+
   async presentDatasPopover(ev: any) {
     const popover = await this.popoverCtrl.create({
       component: DatasPopoverComponent,
@@ -64,9 +74,6 @@ export class BonAppHeaderComponent implements OnInit {
         this.navCtrl.navigateRoot(redirect || '/');
       }
     })
-
-
-   
   }
 
 }
