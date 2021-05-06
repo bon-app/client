@@ -44,7 +44,8 @@ random-receipts {
 
 #filters-desktop {
   width: 50%;
-  margin-top: 1em auto;
+  margin-top: 0em !important;
+  margin-bottom: 1em !important;
   margin: 3em auto;
 
 
@@ -66,6 +67,22 @@ random-receipts {
     ion-card-content {
       height: 100%;
       padding: 5px;
+    }
+    
+    ion-item {
+      // margin-top: 0px !important;
+      // margin-bottom: 0px !important;
+      // margin:0px !important;
+      // padding:0px !important;
+      --min-height: none;
+      height: 50%;
+      padding:0px !important;
+    }
+
+    ion-label {
+      //height: 100%
+      margin-top: 0.5em ;
+      margin-bottom: 0.5em ;
     }
   }
 
@@ -247,9 +264,14 @@ random-receipts {
     border-radius: 12px;
     --background: white;
     border: solid 2px white;
-    --icon-color: #efbdae;
+    --icon-color: #efbdae !important;
+    --icon-weight: 3em !important; 
     --placeholder-font-weight: 550;
     overflow: hidden;
+  }
+  ul {
+    max-width: 100% !important;
+    position: inherit !important;
   }
 }
 ion-auto-complete {
@@ -261,6 +283,8 @@ ion-auto-complete {
   --box-shadow: none !important;
   overflow: hidden;
 }
+
+
 
 // ion-searchbar {
 //   width: 100%;
