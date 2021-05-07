@@ -1,16 +1,12 @@
-<div>
+<div class="popup_text">
   <h3>Ciao {{user.name}}!</h3>
+  <h4 *ngIf="auth.hasRoles(['admin','creator'])"> {{user.roles}}</h4>
   <div class="partial-border ion-margin-top ion-margin-bottom"></div>
 </div>
 <ion-item (click)="goto('/orders')" style="cursor: pointer;">
-  <!-- quando si attiva da un errore: Error: The pipe 'translate' could not be found!{{'NavBar.orders' | translate}} -->
-  I tuoi ordini
+  {{'NavBar.orders' | translate}}
 </ion-item>
-<!-- <ion-item (click)="goto('https://about.bonapp.life/')" style="cursor: pointer;">
-  Info & Contatti
-</ion-item> -->
 <ion-item (click)="logout('/')" style="cursor: pointer;">
-  <!-- {{'NavBar.logout' | translate}} -->
-  Logout
+  {{'NavBar.logout' | translate}}
 </ion-item>
 

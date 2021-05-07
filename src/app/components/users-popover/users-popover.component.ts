@@ -18,10 +18,10 @@ export class UsersPopoverComponent implements OnInit {
   // @Input("items") items: { label: string, url: string }[] = []
 
   constructor(
-    private navCtrl: NavController,   
+    public navCtrl: NavController,   
     private popoverCtrl: PopoverController, 
     private translate: TranslateService,
-    private auth: AuthService
+    public auth: AuthService
     ) 
     { }
 
