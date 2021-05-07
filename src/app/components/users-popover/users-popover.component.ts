@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { ENTITIES } from 'src/app/dashboard/pages/entities/entities.config';
 import Swal from 'sweetalert2'
 import { TranslateService } from '@ngx-translate/core';
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'users-popover',
@@ -11,6 +12,8 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./users-popover.component.scss'],
 })
 export class UsersPopoverComponent implements OnInit {
+
+  public user: User;
 
   // @Input("items") items: { label: string, url: string }[] = []
 
@@ -23,14 +26,12 @@ export class UsersPopoverComponent implements OnInit {
     { }
 
   ngOnInit() {
-    // for (let k in ENTITIES) {
-    //   if ((k == 'receipts' && this.auth.hasRoles(['creator'])) || this.auth.hasRoles(['admin'])) {
-    //     this.items.push({ label: ENTITIES[k].title, url: `/dashboard/list/${k}` })
-    //   }
-    // }
+    this.setUser();
   }
 
-
+  setUser() {
+    this.user = this.auth.getIdentity();
+  }
   goto(url: string) {
     if (url.startsWith("http")) {
       window.open(url, '_blank');

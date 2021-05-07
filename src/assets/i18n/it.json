@@ -86,7 +86,9 @@
         "go_to_shop": "VAI ALLO SHOP",
         "about": "Info & Contatti",
         "datas": "Gestione dati",
-        "logout": "Logout"
+        "logout": "Logout",
+        "profile": "Profilo",
+        "daily_orders": "Ordini giornalieri"
     },
     "ChooseIngredients": {
         "title": "Scegli i tuoi ingredienti",
