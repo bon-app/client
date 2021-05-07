@@ -7,3 +7,17 @@
         margin: 0 auto;
     }
 }
+
+#login_bottom {
+    //background-color: blue;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    height:2em;
+    margin-bottom:0.5em;
+
+    ion-button {
+        text-decoration: underline;
+    }
+
+}

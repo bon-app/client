@@ -3,6 +3,7 @@ import { UsersService } from '../../services/users.service';
 import { User } from '../../models/user.model';
 import { ModalController, ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
+//import { ShowHidePasswordComponent } from './show-hide-password.component';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +15,8 @@ export class LoginComponent implements OnInit {
   public user: User = new User();
   public c_password: string;
   public section: 'login' | 'signin' = 'login';
+  public showPassword = false;
+  public passwordToggleIcon = 'eye-outline';
 
   constructor(
     private usersService: UsersService,
@@ -44,4 +47,13 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  togglePassword () {
+    this.showPassword = !this.showPassword;
+    if (this.showPassword == true) {
+      this.passwordToggleIcon = 'eye-off-outline'
+    }
+    else {
+      this.passwordToggleIcon = 'eye-outline'
+    }
+  }
 }

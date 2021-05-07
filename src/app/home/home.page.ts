@@ -89,7 +89,7 @@ export class RimsDataProvider implements AutoCompleteService {
   async getResults(keyword: string) {
     if (!keyword) { return false; }
 
-    return (await this.service.find({ name: { $regex: `.*${keyword}.*`, $options: 'i' } }, ['-__v'], 0, 50, { name: 1 })).filter(item => {
+    return (await this.service.find({ name: { $regex: `.*${keyword}.*`, $options: 'i' } }, ['-__v'], 0, 25, { name: 1 })).filter(item => {
       (<any>item)._name = item.name;
       return item;
     })

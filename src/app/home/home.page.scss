@@ -273,6 +273,9 @@ random-receipts {
   ul {
     max-width: 100% !important;
     position: inherit !important;
+    max-height:32vh;
+    box-shadow: none;
+    margin-bottom: 0em;
   }
 }
 ion-auto-complete {

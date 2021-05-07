@@ -14,6 +14,9 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class BonAppHeaderComponent implements OnInit {
 
+  showPassword = false;
+  passwordToggleIcon = 'eye';
+
   constructor(
     public navCtrl: NavController,
     private modalCtrl: ModalController,
@@ -37,6 +40,7 @@ export class BonAppHeaderComponent implements OnInit {
   }
 
   async presentUsersPopover(ev: any) {
+    
     const popover = await this.popoverCtrl.create({
       component: UsersPopoverComponent,
       event: ev,

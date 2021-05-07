@@ -12,7 +12,7 @@
         <!-- popover with orders & logout -->
         <ion-button style="padding-left:0.2em" fill="clear" size="large" color="primary"
         (click)="presentUsersPopover($event)">
-        <ion-icon name="person"></ion-icon>
+        <ion-icon name="person-outline"></ion-icon>
         </ion-button>
         <ion-button style="padding-left:0.1em" *ngIf="auth.hasRoles(['admin'])" fill="clear" size="large" color="primary" (click)="goto('/today-orders')">
           <ion-icon name="clipboard"></ion-icon>
@@ -20,8 +20,8 @@
       </ng-container>
       <!-- not authenticated user -->
       <ng-container *ngIf="!auth.isAuthenticate()">
-        <ion-button style="padding-left:0.2em"  fill="clear" size="large" color="primary" (click)="openLoginModal()">
-          <ion-icon name="person-outline"></ion-icon>
+        <ion-button style="padding-left:0.2em"  (click)="openLoginModal(true)">
+          <ion-icon name="person-add-outline"></ion-icon>
         </ion-button>
       </ng-container>
     </ion-buttons>
@@ -47,11 +47,9 @@
       </ng-container>
       <!-- not authenticated user -->
       <ng-container *ngIf="!auth.isAuthenticate()">
-        <ion-button style="padding-left:0.5em"  fill="solid" size="large" (click)="openLoginModal(true)">
-          {{'NavBar.register' | translate}}
-        </ion-button>
-        <ion-button  fill="clear" size="large" color="secondary" (click)="openLoginModal()">
-          {{'NavBar.login' | translate}}
+        <ion-button style="padding-left:0.1em" color="secondary" size="large" (click)="openLoginModal(true)">
+        <ion-icon name="person-outline"></ion-icon>
+        {{'NavBar.login' | translate}}
         </ion-button>
       </ng-container>
     </ion-buttons>
