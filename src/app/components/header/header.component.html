@@ -36,7 +36,7 @@
       <!-- authenticated user -->
       <ng-container *ngIf="auth.isAuthenticate()">
         <!-- popover with orders & logout -->
-        <ion-button style="padding-left:0.2em" fill="clear" size="large" color="secondary" (click)="presentUsersPopover($event)">
+        <ion-button style="padding-left:0.5em" fill="clear" size="large" color="secondary" (click)="presentUsersPopover($event)">
           <ion-icon name="person"></ion-icon>
           {{'NavBar.profile' | translate}}
         </ion-button>
@@ -47,8 +47,8 @@
       </ng-container>
       <!-- not authenticated user -->
       <ng-container *ngIf="!auth.isAuthenticate()">
-        <ion-button style="padding-left:0.1em" color="secondary" size="large" (click)="openLoginModal(true)">
-        <ion-icon name="person-outline"></ion-icon>
+        <ion-button style="padding-left:0.5em" color="secondary" size="large" (click)="openLoginModal(true)">
+        <ion-icon name="person-add-outline"></ion-icon>
         {{'NavBar.login' | translate}}
         </ion-button>
       </ng-container>

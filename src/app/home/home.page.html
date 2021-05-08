@@ -18,6 +18,7 @@
 <ion-content>
   <div class="container">
     <!-- title -->
+    <div class="ion-hide-md-down" style="margin:2em"></div>
     <div id="title">
       <h1>{{'Home.h1' | translate}}</h1>
       <div class="partial-border ion-margin-top ion-margin-bottom"></div>
@@ -96,7 +97,7 @@
                 <ion-card-content class="flex-center">
                   <div>
                     <div class="ion-text-center">
-                      <ion-icon src="assets/filters/traditional.svg"></ion-icon>
+                      <ion-icon src="assets/filters/spaghetti.svg"></ion-icon>
                     </div>
                     <div class="ion-text-center ssprofont boldtext">
                       Primi
@@ -110,7 +111,7 @@
                 <ion-card-content class="flex-center">
                   <div>
                     <div class="ion-text-center">
-                      <ion-icon src="assets/filters/second.svg"></ion-icon>
+                      <ion-icon src="assets/filters/meat.svg"></ion-icon>
                     </div>
                     <div class="ion-text-center ssprofont boldtext">
                       Secondi
@@ -147,7 +148,7 @@
                 <ion-card-content class="flex-center">
                   <div>
                     <div class="ion-text-center">
-                      <ion-icon src="assets/filters/traditional.svg"></ion-icon>
+                      <ion-icon src="assets/filters/spaghetti.svg"></ion-icon>
                     </div>
                     <div class="ion-text-center ssprofont boldtext">
                       Primi
@@ -161,7 +162,7 @@
                 <ion-card-content class="flex-center">
                   <div>
                     <div class="ion-text-center">
-                      <ion-icon src="assets/filters/second.svg"></ion-icon>
+                      <ion-icon src="assets/filters/meat.svg"></ion-icon>
                     </div>
                     <div class="ion-text-center ssprofont boldtext">
                       Secondi
@@ -196,7 +197,7 @@
                       <ion-icon src="assets/filters/qne.svg"></ion-icon>
                     </div>
                     <div class="ion-text-center ssprofont boldtext">
-                      Quick'n easy
+                      Quick&Easy
                     </div>
                   </div>
                 </ion-card-content>
@@ -257,8 +258,8 @@
     </div> -->
 
     <div>
-      <h3 class="ion-text-center ssprofont resulttexth3">{{'RandomReceipts.results' | translate}}</h3>
-      <div class="partial-border ion-margin-top ion-margin-bottom"></div>
+      <h2 class="ion-text-center" id="subtitle2">{{'RandomReceipts.results' | translate}}</h2>
+      <div class="partial-border"></div>
     </div>
 
     <!-- Mostra le ricette -->
@@ -266,7 +267,7 @@
 
 
     <ion-infinite-scroll threshold="100px" (ionInfinite)="getReceipts($event)">
-      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more recipes...">
       </ion-infinite-scroll-content>
     </ion-infinite-scroll>
   </div>
@@ -275,24 +276,29 @@
 <!-- Message popup  -->
 <div id="message" *ngIf="isShow && ('Messages.home' | translate)">
   <div class="ion-text-center">
-    <!-- <p [innerHTML]="'Messages.home' | translate"></p> -->
-    <h4>Benvenuto su</h4>
-    <img src='https://www.bonapp.life/assets/brand.png' alt='' width='153' height='74' />
-    <br>
-    <em>Ricette e ingredienti a domicilio!</em>
-    <div style="padding-left: 20px">
-      <ul style='text-align: left; list-style:none; font-weight:900'>
+    <img src="assets/brand.png" alt=''/>
+    <h2>Il tuo nuovo modo di fare la spesa..</h2>
+    <ion-item lines="none">
+      <img slot="start" src="assets/popup/1.png" style="padding-left:10px">
+      <ion-label class="ion-text-wrap step" style="margin-left:8px"><b>Scopri cosa cucinare</b> con gli ingredienti che hai in frigo.</ion-label>
+    </ion-item>
+    <ion-item lines="none">
+      <img slot="start" src="assets/popup/2.png">
+      <ion-label class="ion-text-wrap step"><b>Ricevi gli ingredienti</b> che ti mancano in 20 minuti!</ion-label>
+    </ion-item>
+    <!-- <h3>Scegli la ricetta e ordina gli ingredienti che ti mancano</h3> -->
+    <!-- <div id=bulletPoints>
+      <ul>
         <li>20 minuti garantito</li>
         <li>0.99&euro; costo consegna</li>
         <li>Nessuna spesa minima</li>
       </ul>
-    </div>
-    <p>Servizio di consegna attivo su Milano zona<br/>Porta Romana, Bocconi, Navigli</p>
-    <em>Dubbi o domande? Clicca in alto a sinistra</em>
-    <p></p>
-
-    <ion-button fill="outline" (click)="isShow = false">
-      OK
+    </div> -->
+    <!-- <p>Servizio di consegna attivo su Milano zona<br/>Porta Romana, Bocconi, Navigli</p> -->
+    <!-- <p id="explanation">BonApp: ingredienti a domicilio <br> con proposta di ricette</p> -->
+    <p id="questions"><em>Dubbi o domande? Clicca in alto a sinistra</em></p>
+    <ion-button strong="true" class="ion-margin" fill="outline" (click)="isShow = false">
+      VAI!
     </ion-button>
   </div>
 </div>

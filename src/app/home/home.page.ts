@@ -74,7 +74,6 @@ export class HomePage {
     this.selected_rim = rim;
     this.createFilter();
   }
-
 }
 
 export class RimsDataProvider implements AutoCompleteService {

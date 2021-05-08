@@ -8,16 +8,34 @@
     }
 }
 
-#login_bottom {
+#passwordForgot {
+    text-align: right;
+    font-size: 0.9em;
+    padding-top: 0.6em;
+}
+
+.login_bottom {
     //background-color: blue;
     display:flex;
     align-items: center;
     justify-content: center;
     height:2em;
-    margin-bottom:0.5em;
+    margin-bottom:1.3em;
 
     ion-button {
         text-decoration: underline;
     }
+}
 
+.big-button {
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-bottom: 0.3em;
+    padding-top: 1.3em; 
+}
+
+
+h1 {
+    font-family: Poppins;
+    font-weight: bold;
 }
