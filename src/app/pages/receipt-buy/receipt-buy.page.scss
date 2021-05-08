@@ -1,3 +1,81 @@
+#top {
+    // margin: 1em;
+    // margin-top: 1em;
+    // margin-bottom: 1em;
+    padding-bottom: 0em;
+    display: flex;
+    align-items: center;
+    // justify-content: center;
+
+    ion-searchbar {
+        width: 60%;
+        margin: 0 auto;
+    }
+
+    h2 {
+        font-size: 1.1em;
+        font-weight: bold;
+        margin-left: 1em;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        font-family: Poppins;
+    }
+}
+
+#categories-mobile {
+
+    display: block;
+
+    ion-select {
+        border: 1.8px solid lightgrey;
+        border-radius: 0.3em;
+    }
+
+    ion-select::part(placeholder) {
+        color: #545454;
+        opacity: 0.8;
+      }
+}
+
+
+
+@media only screen and (max-width: 768px) {
+    ion-searchbar {
+        width: 100% !important;
+    }
+
+    #top {
+        // margin: 1em;
+        // margin-top: 1em;
+        // margin-bottom: 1em;
+        padding-bottom: 0em;
+        display: flex;
+        align-items: center;
+        // justify-content: center;
+    
+        ion-searchbar {
+            width: 60%;
+            margin: 0 auto;
+        }
+    
+        h2 {
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-left: 1em;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-family: Poppins;
+        }
+    }
+
+    #categories-mobile {
+        // margin-bottom: 3em;
+        display: block;
+    }
+}
+
+
+
 .product-img {
     height: 100px;
     margin-bottom: 1em;
@@ -54,17 +132,6 @@ ion-card.product {
     }
 }
 
-#back {
-    margin-top: 3em;
-    margin-bottom: 3em;
-    display: flex;
-    align-items: center;
-
-    ion-searchbar {
-        width: 60%;
-        margin: 0 auto;
-    }
-}
 
 #goto-checkout {
     // position: absolute;
@@ -132,39 +199,6 @@ span.ion-text-left {
     }
 }
 
-#categories-mobile {
-
-    display: none;
-
-    ion-select {
-        border: 1px solid #ddd;
-        border-radius: 1em;
-    }
-}
-
-
-@media only screen and (max-width: 768px) {
-    ion-searchbar {
-        width: 100% !important;
-    }
-
-    #back {
-        margin-top: 1em;
-        margin-bottom: 0em;
-        display: flex;
-        align-items: center;
-
-        ion-searchbar {
-            width: 60%;
-            margin: 0 auto;
-        }
-    }
-
-    #categories-mobile {
-        margin-bottom: 3em;
-        display: block;
-    }
-}
 
 .categories {
     ion-button {

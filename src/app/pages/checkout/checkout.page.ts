@@ -57,7 +57,7 @@ export class CheckoutPage implements OnInit {
     this.order.delivery_method = 'standard';
 
     if (!this.auth.isAuthenticate()) {
-      await this.openLoginModal();
+      await this.openLoginModal(true);
       return;
     }
     this.setUser();
@@ -85,9 +85,12 @@ export class CheckoutPage implements OnInit {
     this.addMethod = false;
   }
 
-  async openLoginModal() {
+  async openLoginModal(signin: boolean = false) {
     let modal = await this.modalCtrl.create({
       component: LoginComponent,
+      componentProps: {
+        section: signin ? 'signin' : 'login'
+      },
       backdropDismiss: false,
       swipeToClose: false,
       cssClass: ['auto-height']

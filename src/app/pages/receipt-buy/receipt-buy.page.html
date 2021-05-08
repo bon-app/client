@@ -2,21 +2,31 @@
 
 <ion-content>
   <div class="container">
-    <div id="back">
+
+    <!-- back button and searchbar -->
+    <div id="top" class="ion-padding">
       <ion-button size="small" fill="outline" color="secondary" (click)="navCtrl.back()">{{'Receipt.back' | translate}}
       </ion-button>
-      <div style="width: 100%" class="ion-hide-md-down">
-        <ion-searchbar [(ngModel)]="seach_term" [debounce]="400" (ngModelChange)="searchIngredients()"></ion-searchbar>
-      </div>
+      <h2>Il supermercato di BonApp</h2>
+      <!-- searchbar with continious input listner -->
+      <!-- <div style="width: 100%">
+        <ion-searchbar [(ngModel)]="seach_term" [debounce]="100" (ngModelChange)="searchIngredients()" placeholder="Cerca qualsiasi ingrediente.."></ion-searchbar>
+      </div> -->
+      <!-- searchbar without continious input listner -->
+      <!-- <div style="width: 100%">
+        <ion-searchbar [(ngModel)]="seach_term" (search)="searchIngredients()" placeholder="Cerca qualsiasi ingrediente.."></ion-searchbar>
+      </div> -->
     </div>
-    <!-- <div class="ion-padding" id="categories-mobile">
-      <ion-label class="ion-margin-bottom">{{"ReceiptBuy.categories" | translate}}</ion-label>
-      <ion-select [interface]="'popover'" (ionChange)="selectChange($event)">
+
+    <!-- categories mobile -->
+    <div class="ion-padding" id="categories-mobile">
+      <!-- <ion-label class="ion-margin-bottom">{{"ReceiptBuy.categories" | translate}}</ion-label> -->
+      <ion-select interface="action-sheet" placeholder="Esplora le categorie" (ionChange)="selectChange($event)">
         <ion-select-option [value]="'receipt'" *ngIf="receipt">{{receipt.name}}</ion-select-option>
-        <ion-select-option [value]="category" *ngFor="let category of categories">{{category.name}}
-        </ion-select-option>
+        <ion-select-option [value]="category" *ngFor="let category of categories">{{category.name}}</ion-select-option>
       </ion-select>
-    </div> -->
+    </div>
+
     <ion-grid>
       <ion-row>
 
