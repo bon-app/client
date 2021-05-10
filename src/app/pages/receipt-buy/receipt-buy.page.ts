@@ -41,6 +41,7 @@ export class ReceiptBuyPage implements OnInit {
     loading.present();
     try {
       this.categories = await this.categoriesService.find({ showBeforeCheckout: { $ne: true }, showInShop: true }, ['-__v'], 0, 50, { name: 1 }, ['ingredients', 'subcategories'])
+      // if user comes from a recipe:
       if (this.route.snapshot.params.id) {
         let receipt = await this.receiptsService.findById(this.route.snapshot.params.id, ['-__v'], ['ingredients.ingredient'])
         let ingrs = [];
@@ -93,7 +94,8 @@ export class ReceiptBuyPage implements OnInit {
     this.seach_term = '';
     if (!!this.selectedCategories.find(sc => sc.id == category.id)) {
       this.selectedCategories = []; //this.selectedCategories.filter(sc => sc.id != category.id);
-    } else {
+    } 
+    else {
       // this.selectedCategories.push(category);
       this.selectedCategories = [category];
     }

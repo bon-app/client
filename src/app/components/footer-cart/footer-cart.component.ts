@@ -28,7 +28,7 @@ export class FooterCartComponent implements OnInit {
       componentProps: {
         order: this.order
       },
-      cssClass: "auto-height flex-end top-round",
+      cssClass: "auto-height flex-end top-round maximize-width",
     });
     modal.present();
   }

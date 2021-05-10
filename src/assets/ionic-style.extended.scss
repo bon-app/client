@@ -29,6 +29,12 @@ ion-modal.top-round {
     }
 }
 
+ion-modal.maximize-width {
+    .modal-wrapper {
+        width: 100%;
+    }
+}
+
 ion-modal.flex-end {
     align-items: flex-end;
 }

@@ -2,6 +2,14 @@
     "Messages": {
         "home": "<h4>Welcome on</h4><img src='https://www.bonapp.life/assets/brand.png' alt='' width='153' height='74' /><br>&bull;<i> ingredients delivered in 20 minutes &bull;</i><p>Home delivery available in Milano zona<strong><br>Porta Romana, Bocconi, Navigli</strong></p><p></p>"
     },
+    "Home": {
+        "h1": "Choose a recipe and order the ingredients you need",
+        "subtitle": "Use an ingredient in your fridge",
+        "h2": "Tailor your proposal..",
+        "all_receipts": "All Recipes",
+        "market": "Il Supermercato"
+    },
+
     "Errors": {
         "_USER_NOT_FOUND": "Wrong email and/or password",
         "_NO_ORDER_ADDRESS": "Choose or add an address",
@@ -86,12 +94,7 @@
         "subtitle": "Personalizza la tua esperienza",
         "bonapp": "BonAppa!"
     },
-    "Home": {
-        "h1": "Choose a recipe and receive any ingredient in 20 minutes!",
-        "h2": "Tailor your proposal..",
-        "all_receipts": "All Recipes",
-        "market": "Il Supermercato"
-    },
+
     "RandomReceipts": {
         "title": "Scelte per questa sera",
         "results": "Risultati",

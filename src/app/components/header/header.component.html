@@ -14,7 +14,7 @@
         (click)="presentUsersPopover($event)">
         <ion-icon name="person-outline"></ion-icon>
         </ion-button>
-        <ion-button style="padding-left:0.1em" *ngIf="auth.hasRoles(['admin'])" fill="clear" size="large" color="primary" (click)="goto('/today-orders')">
+        <ion-button style="padding-left:0.2em" *ngIf="auth.hasRoles(['admin'])" fill="clear" size="large" color="primary" (click)="goto('/today-orders')">
           <ion-icon name="clipboard"></ion-icon>
         </ion-button>
       </ng-container>
@@ -37,12 +37,12 @@
       <ng-container *ngIf="auth.isAuthenticate()">
         <!-- popover with orders & logout -->
         <ion-button style="padding-left:0.5em" fill="clear" size="large" color="secondary" (click)="presentUsersPopover($event)">
-          <ion-icon name="person"></ion-icon>
+          <ion-icon name="person-outline"></ion-icon>
           {{'NavBar.profile' | translate}}
         </ion-button>
-        <ion-button style="padding-left:0.1em" *ngIf="auth.hasRoles(['admin'])" fill="clear" size="large" color="secondary" (click)="goto('/today-orders')">
+        <ion-button style="padding-left:0.5em" *ngIf="auth.hasRoles(['admin'])" fill="clear" size="large" color="secondary" (click)="goto('/today-orders')">
           <ion-icon name="clipboard"></ion-icon>
-          {{'NavBar.daily_orders' | translate}}
+          <strong>Ordini del giorno</strong>
         </ion-button>
       </ng-container>
       <!-- not authenticated user -->
@@ -72,39 +72,33 @@
     <ng-container *ngIf="auth.isAuthenticate()">
       <!-- mobile -->
       <ion-buttons class="ion-hide-md-up" slot="end">
-        <ion-button *ngIf="!auth.hasRoles(['admin', 'creator'])" fill="clear" size="large" color="primary" (click)="goto('/shop')">
+        <ion-button *ngIf="!auth.hasRoles(['admin', 'creator'])" style="padding-right:0.2em" fill="clear" size="large" color="primary" (click)="goto('/shop')">
           <ion-icon name="cart"></ion-icon>
           <strong>{{'NavBar.shop' | translate}}</strong>
         </ion-button>
-        <ion-button *ngIf="auth.hasRoles(['admin', 'creator'])" fill="clear" size="large" color="primary" (click)="goto('/shop')">
+        <ion-button *ngIf="auth.hasRoles(['admin', 'creator'])" style="padding-right:0.2em" fill="clear" size="large" color="primary" (click)="goto('/shop')">
           <ion-icon name="cart-outline"></ion-icon>
           <strong>{{'NavBar.shop' | translate}}</strong>
         </ion-button>
-        <ion-button *ngIf="auth.hasRoles(['admin', 'creator'])" fill="clear" size="large" color="primary"
+        <ion-button *ngIf="auth.hasRoles(['admin', 'creator'])" style="padding-right:0.2em" fill="clear" size="large" color="primary"
           (click)="presentDatasPopover($event)">
           <ion-icon name="grid"></ion-icon>
         </ion-button>
       </ion-buttons>
       <!-- desktop -->
       <ion-buttons class="ion-hide-md-down" slot="end">
-        <ion-button fill="clear" size="large" color="secondary" (click)="goto('/shop')">
+        <ion-button *ngIf="!auth.hasRoles(['admin', 'creator'])" style="padding-right:0.5em" fill="clear" size="large" color="secondary" (click)="goto('/shop')">
           <ion-icon name="cart"></ion-icon>
           <strong>{{'NavBar.go_to_shop' | translate}}</strong>
         </ion-button>
-        <ion-button *ngIf="auth.hasRoles(['admin'])" fill="clear" size="large" color="primary"
-          (click)="goto('/today-orders')">
-          <ion-icon name="clipboard"></ion-icon>
-          {{'NavBar.orders' | translate}}
+        <ion-button *ngIf="auth.hasRoles(['admin', 'creator'])" style="padding-right:0.5em" fill="clear" size="large" color="secondary" (click)="goto('/shop')">
+          <ion-icon name="cart-outline"></ion-icon>
+          {{'NavBar.go_to_shop' | translate}}
         </ion-button>
-        <ion-button *ngIf="!auth.hasRoles(['admin', 'creator'])" fill="clear" size="large" color="primary"
-          (click)="goto('/orders')">
-          <ion-icon name="clipboard-outline"></ion-icon>
-          {{'NavBar.orders' | translate}}
-        </ion-button>
-        <ion-button *ngIf="auth.hasRoles(['admin', 'creator'])" fill="clear" size="large" color="primary"
+        <ion-button *ngIf="auth.hasRoles(['admin', 'creator'])" style="padding-right:0.5em" fill="clear" size="large" color="secondary"
           (click)="presentDatasPopover($event)">
           <ion-icon name="grid"></ion-icon>
-          {{'NavBar.datas' | translate}}
+          <strong>{{'NavBar.datas' | translate}}</strong>
         </ion-button>
       </ion-buttons>
     </ng-container>
@@ -112,18 +106,17 @@
     <ng-container *ngIf="!auth.isAuthenticate()">
       <!-- mobile -->
       <ion-buttons class="ion-hide-md-up" slot="end">
-        <ion-button *ngIf="!auth.hasRoles(['admin'])" class="ion-hide-md-up" fill="clear" size="large" strong ="true" color="secondary" (click)="goto('/shop')">
+        <ion-button *ngIf="!auth.hasRoles(['admin'])" style="padding-right:0.2em" fill="clear" size="large" strong ="true" color="secondary" (click)="goto('/shop')">
           <ion-icon name="cart"></ion-icon>
           <strong>{{'NavBar.shop' | translate}}</strong>
         </ion-button>
       </ion-buttons>
       <!-- desktop -->
       <ion-buttons class="ion-hide-md-down" slot="end">
-        <ion-button fill="clear" size="large" color="secondary" (click)="goto('/shop')">
+        <ion-button style="padding-right:0.5em" fill="clear" size="large" color="secondary" (click)="goto('/shop')">
           <ion-icon name="cart"></ion-icon>
           <strong>{{'NavBar.go_to_shop' | translate}}</strong>
         </ion-button>
-        <ion-button class="ion-hide-md-down" disabled="true" size="medium"></ion-button>
       </ion-buttons>
     </ng-container>
   </ion-toolbar>

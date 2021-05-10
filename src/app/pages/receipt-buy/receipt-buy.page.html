@@ -19,7 +19,7 @@
     </div>
 
     <!-- categories mobile -->
-    <div class="ion-padding" id="categories-mobile">
+    <div class="ion-padding ion-hide-lg-up" id="categories-mobile">
       <!-- <ion-label class="ion-margin-bottom">{{"ReceiptBuy.categories" | translate}}</ion-label> -->
       <ion-select interface="action-sheet" placeholder="Esplora le categorie" (ionChange)="selectChange($event)">
         <ion-select-option [value]="'receipt'" *ngIf="receipt">{{receipt.name}}</ion-select-option>
@@ -29,11 +29,9 @@
 
     <ion-grid>
       <ion-row>
-
-        <ion-col class="categories ion-hide-md-down" size="2">
-          <h2>
-            <ion-text color="tertiary">{{"ReceiptBuy.categories" | translate}}</ion-text>
-          </h2>
+        <!-- categories desktop -->
+        <ion-col class="categories ion-hide-lg-down" size="2">
+          <h2><ion-text color="tertiary">{{"ReceiptBuy.categories" | translate}}</ion-text></h2>
           <div class="partial-border light partial-on-left ion-margin-bottom"></div>
           <ion-button [fill]="selectedCategories.length? 'outline' : 'solid'"
             [color]="selectedCategories.length? 'tertiary' : 'primary'" *ngIf="receipt"
@@ -57,7 +55,9 @@
           </ng-container>
         </ion-col>
 
+        <!-- products -->
         <ion-col>
+          <!-- products container for RECIPE (if user comes from a recipe) -->
           <ng-container *ngIf="!selectedCategories.length && receipt && !seach_term">
             <div class="ion-padding-start" *ngIf="getIngredients(false).length">
               <h2>
@@ -65,7 +65,6 @@
               </h2>
               <div class="partial-border light partial-on-left"></div>
             </div>
-
             <ion-grid id="product-list" class="neutral">
               <ion-row>
                 <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="4" size-xl="4"
@@ -101,14 +100,13 @@
                 </ion-col>
               </ion-row>
             </ion-grid>
-
+            <!-- Condiments for recipe-->
             <div class="ion-padding-start" style="margin-top: 3em;" *ngIf="getIngredients(true).length">
               <h2>
                 <ion-text color="secondary">{{"ReceiptBuy.condiments" | translate:receipt}}</ion-text>
               </h2>
               <div class="partial-border light partial-on-left"></div>
             </div>
-
             <ion-grid id="product-list" class="neutral">
               <ion-row>
                 <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="4" size-xl="4"
@@ -146,19 +144,19 @@
                 </ion-col>
               </ion-row>
             </ion-grid>
-
           </ng-container>
 
+          <!-- products container for CATEGORY (if category is selected)-->
           <ng-container *ngIf="!seach_term && selectedCategories.length">
             <div [ngStyle]="{'margin-top': i>0? '3em': '0'}" *ngFor="let category of selectedCategories; let i = index">
-
+              <!-- subcategory title-->
               <div class="ion-padding-start" *ngIf="category.subcategories.length">
                 <h2>
                   <ion-text color="secondary">{{"ReceiptBuy.subcategories" | translate}}</ion-text>
                 </h2>
                 <div class="partial-border light partial-on-left"></div>
               </div>
-
+              <!-- subcategories boxes -->
               <ion-grid class="neutral">
                 <ion-row>
                   <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="4" size-xl="4"
@@ -177,13 +175,14 @@
                 </ion-row>
               </ion-grid>
 
+              <!-- category title ? -->
               <div class="ion-padding-start" *ngIf="category.ingredients?.length">
                 <h2>
                   <ion-text color="secondary">{{category.name}}</ion-text>
                 </h2>
                 <div class="partial-border light partial-on-left"></div>
               </div>
-
+              <!-- category products ? -->
               <ion-grid id="product-list" class="neutral">
                 <ion-row>
                   <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="4" size-xl="4"
@@ -222,15 +221,17 @@
             </div>
           </ng-container>
 
+          <!-- products container for SEARCH -->
           <ng-container *ngIf="(!receipt || seach_term)">
             <div>
+              <!-- search title -->
               <div class="ion-padding-start">
                 <h2>
                   <ion-text color="secondary">{{"ReceiptBuy.products" | translate}}</ion-text>
                 </h2>
                 <div class="partial-border light partial-on-left"></div>
               </div>
-
+              <!-- seach products results -->
               <ion-grid id="product-list" class="neutral">
                 <ion-row>
                   <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="4" size-xl="4"
@@ -270,13 +271,13 @@
               </ion-grid>
             </div>
           </ng-container>
-
         </ion-col>
 
-        <ion-col class="ion-hide-md-down" size="3">
-
+        <!-- cart desktop -->
+        <ion-col class="ion-hide-lg-down" size="3">
           <ion-card id="cart">
             <ion-card-content>
+              <!-- cart top part: title, scooter & cost -->
               <ion-grid class="neutral">
                 <ion-row>
                   <ion-col>
@@ -286,13 +287,13 @@
                     <div class="partial-border light partial-on-left"></div>
                   </ion-col>
                   <ion-col size="6" class="ion-text-right">
-                    <ion-icon src="assets/cart/delivery.svg" color="secondary"
-                      style="font-size: 1.5em;margin-right: 1em;"></ion-icon>
+                    <ion-icon src="assets/cart/delivery.svg" color="primary"
+                      style="font-size: 1.5em; margin-right: 0.4em;"></ion-icon>
                     € 0.99
                   </ion-col>
                 </ion-row>
               </ion-grid>
-
+              <!-- cart middle part: products list -->
               <div class="items-list">
                 <ion-grid class="neutral cart-item" *ngFor="let item of cart.items">
                   <ion-row>
@@ -318,7 +319,7 @@
                   </ion-row>
                 </ion-grid>
               </div>
-
+              <!-- cart bottom part: sum & checkout button -->
               <div id="goto-checkout">
                 <ion-grid class="neutral">
                   <ion-row>
@@ -345,6 +346,6 @@
   </div>
 </ion-content>
 
-<footer-cart class="ion-hide-md-up" [options]="{ confirm_button_text: 'ReceiptBuy.goto_checkout' }"
+<footer-cart class="ion-hide-lg-up" [options]="{ confirm_button_text: 'ReceiptBuy.goto_checkout' }"
   (confirm)="goto('/suggested-products')">
 </footer-cart>

@@ -37,42 +37,40 @@
       }
 }
 
+// @media only screen and (max-width: 768px) {
+//     ion-searchbar {
+//         width: 100% !important;
+//     }
 
-
-@media only screen and (max-width: 768px) {
-    ion-searchbar {
-        width: 100% !important;
-    }
-
-    #top {
-        // margin: 1em;
-        // margin-top: 1em;
-        // margin-bottom: 1em;
-        padding-bottom: 0em;
-        display: flex;
-        align-items: center;
-        // justify-content: center;
+//     #top {
+//         // margin: 1em;
+//         // margin-top: 1em;
+//         // margin-bottom: 1em;
+//         padding-bottom: 0em;
+//         display: flex;
+//         align-items: center;
+//         // justify-content: center;
     
-        ion-searchbar {
-            width: 60%;
-            margin: 0 auto;
-        }
+//         ion-searchbar {
+//             width: 60%;
+//             margin: 0 auto;
+//         }
     
-        h2 {
-            font-size: 1.1em;
-            font-weight: bold;
-            margin-left: 1em;
-            margin-top: 10px;
-            margin-bottom: 10px;
-            font-family: Poppins;
-        }
-    }
+//         h2 {
+//             font-size: 1.1em;
+//             font-weight: bold;
+//             margin-left: 1em;
+//             margin-top: 10px;
+//             margin-bottom: 10px;
+//             font-family: Poppins;
+//         }
+//     }
 
-    #categories-mobile {
-        // margin-bottom: 3em;
-        display: block;
-    }
-}
+//     #categories-mobile {
+//         // margin-bottom: 3em;
+//         display: block;
+//     }
+// }
 
 
 
@@ -207,3 +205,4 @@ span.ion-text-left {
         text-overflow: ellipsis;
     }
 }
+

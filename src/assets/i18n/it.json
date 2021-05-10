@@ -1,13 +1,15 @@
 {
     "Messages": {
         "home": "<h4>Benvenuto su</h4><p><img src='https://www.bonapp.life/assets/brand.png' alt='' width='153' height='74' /><br /><em> Ingredienti a domicilio con proposta di ricette! </em></p><ul style='text-align: center; list-style-position: inside;'><li>20 minuti garantito</li><li>0.99&euro; costo consegna</li><li>Nessuna spesa minima</li></ul><p>Servizio di consegna attivo su Milano zona<br />Porta Romana, Bocconi, Navigli</p><p>&nbsp;</p>"},
+    
     "Home": {
         "h1": "Scegli la ricetta e ordina gli ingredienti che ti mancano!",
         "subtitle": "Usa un ingrediente che hai in frigo",
         "h2": "e personalizza la proposta di ricette..",
         "all_receipts": "Tutte le ricette",
         "market": "Il Supermercato"
-        },
+    },
+
     "Errors": {
     "_USER_NOT_FOUND": "Email e/o password errate",
     "_NO_ORDER_ADDRESS": "Seleziona o aggiungi un indirizzo",
