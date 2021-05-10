@@ -32,32 +32,40 @@ export class PreparingFormComponent extends FieldType implements OnInit {
           }
         }
         this.model[this.field.key as string] = steps;
-        this.formControl.patchValue(this.model[this.field.key as string])
+        this.formControl.patchValue(this.model[this.field.key as string]);
 
         return;
       }
       this.model[this.field.key as string] = value || [];
-      this.formControl.patchValue(this.model[this.field.key as string])
+      this.formControl.patchValue(this.model[this.field.key as string]);
+      console.log('preparing-from ngOnInit:this.formControl:', this.formControl );
+      console.log('preparing-from ngOnInit :this.model:', this.model );
 
     }, 500);
   }
 
   addStep() {
     this.model[this.field.key as string].push('');
-    this.formControl.patchValue(this.model[this.field.key as string])
+    this.formControl.patchValue(this.model[this.field.key as string]);
+    console.log('preparing-from addStep, this.model:', this.model)
   }
 
-  @Debounce(1000)
+  // @Debounce(100)
   editStep($event, index) {
+    console.log('preparing-from EDITSTEP:$event.target.value:', $event.target.value)
     this.model[this.field.key as string][index] = $event.target.value;
     document.querySelector<HTMLTextAreaElement>(`#step-${index + 1} textarea`).focus();
     this.formControl.patchValue(this.model[this.field.key as string]);
+    console.log('preparing-from EDITSTEP:this.formControl:', this.formControl );
+    console.log('preparing-from EDITSTEP:this.model:', this.model );
   }
 
   removeStep(index) {
     if (confirm(`Are you sure you want to delete the step ${index + 1}?`)) {
       this.model[this.field.key as string].splice(index, 1);
-      this.formControl.patchValue(this.model[this.field.key as string])
+      this.formControl.patchValue(this.model[this.field.key as string]);
+      console.log('preparing-from Stepremove, this.model:', this.model)
+
 
     }
   }

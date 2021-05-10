@@ -335,33 +335,44 @@ export const ENTITIES = {
             },
             {
                 key: 'description',
-                type: 'textarea',
+                type: 'input',
                 templateOptions: {
                     label: 'Description',
-                    required: true,
+                    // required: true,
                 },
-                validation: {
-                    messages: {
-                        required: "Field is required!",
-                    },
-                },
+                // validation: {
+                //     messages: {
+                //         required: "Field is required!",
+                //     },
+                // },
                 list: {
                     parser: 'ellips:50'
                 }
 
             },
             {
+                key: 'ingredients',
+                type: 'ingredients-qta',
+                templateOptions: {
+                    label: 'Ingredienti',
+                },
+                list: {
+                    parser: 'count',
+                    filterable: false
+                },
+
+            },            {
                 key: 'preparing',
                 type: 'preparing',
                 templateOptions: {
                     label: 'Preparing',
-                    required: true,
+                    // required: true,
                 },
-                validation: {
-                    messages: {
-                        required: "Field is required!",
-                    },
-                },
+                // validation: {
+                //     messages: {
+                //         required: "Field is required!",
+                //     },
+                // },
                 list: {
                     parser: 'ellips:100',
                     hidden: true
@@ -370,16 +381,21 @@ export const ENTITIES = {
             },
             {
                 key: 'kcal',
-                type: 'input',
+                type: 'select',
                 templateOptions: {
-                    label: 'kcal',
-                    required: true,
+                    label: 'Kcal',
+                    // required: true,
+                    options: [
+                        { label: 'Basso', value: 'low' },
+                        { label: 'Medio', value: 'medium' },
+                        { label: 'Alto', value: 'high' },
+                    ]
                 },
-                validation: {
-                    messages: {
-                        required: "Field is required!",
-                    },
-                }
+                // validation: {
+                //     messages: {
+                //         required: "Field is required!",
+                //     },
+                // }
             },
             {
                 key: 'tags',
@@ -387,13 +403,13 @@ export const ENTITIES = {
                 templateOptions: {
                     label: 'Tags',
                     multiple: true,
-                    required: true,
+                    // required: true,
                     options: [
                         { label: 'Healthy', value: 'healthy' },
                         { label: 'Quick n Easy', value: 'quick-n-easy' },
                         { label: 'Primi', value: 'first' },
                         { label: 'Secondi', value: 'second' },
-                        { label: 'Vegatariano', value: 'vegetarian' },
+                        { label: 'Vegetariano', value: 'vegetarian' },
                         { label: 'Gluten free', value: 'gluten-free' },
                         { label: 'No oven', value: 'no-oven' },
                         { label: 'No mixer', value: 'no-mixer' },
@@ -402,7 +418,7 @@ export const ENTITIES = {
                 validation: {
                     messages: {
                         required: "Field is required!",
-                    },
+                    }, 
                 },
                 list: {
 
@@ -417,14 +433,14 @@ export const ENTITIES = {
                 },
                 validation: {
                     messages: {
-                        required: "Field is required!",
+                        required: "Inserisci un multiplo di 5",
                     },
                 },
             },
             {
                 key: 'active',
                 type: 'checkbox',
-                defaultValue: true,
+                defaultValue: false,
                 templateOptions: {
                     label: 'Is active?',
                 }
@@ -440,21 +456,9 @@ export const ENTITIES = {
                 },
                 validation: {
                     messages: {
-                        required: "Field is required!",
+                        required: "Non modificare!",
                     },
                 },
-            },
-            {
-                key: 'ingredients',
-                type: 'ingredients-qta',
-                templateOptions: {
-                    label: 'Ingredienti',
-                },
-                list: {
-                    parser: 'count',
-                    filterable: false
-                },
-
             },
             {
                 key: 'fk_user',
@@ -469,7 +473,7 @@ export const ENTITIES = {
                     }
                 },
                 list: {
-                    filterable: false
+                    filterable: true,
                 },
 
             },
@@ -477,6 +481,7 @@ export const ENTITIES = {
         crudOptions: {
             findOne: {
                 includes: ['ingredients.ingredient']
+
             }
         },
         relations: [
@@ -489,6 +494,17 @@ export const ENTITIES = {
     orders: EntityConfig.fromJson({
         title: "Order",
         fields: [
+            {
+                key: 'id',
+                type: 'label',
+                templateOptions: {
+                    label: 'Id',
+                    type: "text",
+                },
+                list: {
+                    filterable: true,
+                }
+            },
             {
                 key: 'created',
                 type: 'label',
@@ -522,18 +538,53 @@ export const ENTITIES = {
                     },
                 },
             },
+            // {
+            //     key: 'transaction',
+            //     type: 'count',
+            //     templateOptions: {
+            //         label: 'Ammount',
+            //         type: "currency:2",
+            //     },
+            //     validation: {
+            //         messages: {
+            //             required: "Field is required!",
+            //         },
+            //     },
+            //     list: {
+            //         parser: "currency:2:€"
+            //     }
+            // },
             {
-                key: 'phone',
-                type: 'input',
+                key: 'address',
+                type: 'label',
                 templateOptions: {
-                    label: 'Phone',
-                    required: true,
+                    label: 'Address',
+                    type: "text",
                 },
                 validation: {
                     messages: {
                         required: "Field is required!",
                     },
                 },
+                list: {
+                    hidden: true,
+                }
+            },
+            {
+                key: 'info',
+                type: 'label',
+                templateOptions: {
+                    label: 'Products',
+                    type: "text",
+                },
+                validation: {
+                    messages: {
+                        required: "Field is required!",
+                    },
+                },
+                list: {
+                    hidden: true,
+                }
             },
             {
                 key: 'delivery_method',
@@ -566,45 +617,41 @@ export const ENTITIES = {
                 }
             },
             {
-                key: 'shipping_cost',
+                key: 'name',
                 type: 'label',
                 templateOptions: {
-                    label: 'Shipping cost',
-                    type: "currency:2",
-                },
-                validation: {
-                    messages: {
-                        required: "Field is required!",
-                    },
-                },
-                list: {
-                    parser: "currency:2:€"
-                }
-            },
-            {
-                key: 'fk_user',
-                type: 'one',
-                templateOptions: {
                     label: 'User',
-                    required: true,
-                    service: 'UsersService',
-                    selected_key: 'item.name + " " + item.surname + " (" + item.email + ")"'
+                    type:'text',
                 },
                 validation: {
                     messages: {
                         required: "Field is required!",
                     },
                 },
+                // {
+                //     key: 'fk_user',
+                //     type: 'one',
+                //     templateOptions: {
+                //         label: 'User',
+                //         required: true,
+                //         service: 'UsersService',
+                //         selected_key: 'item.name + " " + item.surname + " (" + item.email + ")"'
+                //     },
+                //     validation: {
+                //         messages: {
+                //             required: "Field is required!",
+                //         },
+                //     },
             },
         ],
         crudOptions: {
             find: {
-                includes: [],
+                includes: ['transaction.amount'],
                 orderBy: '-created'
             }
         },
         relations: [
-            { type: 'one', field: 'user', pk_field: 'ingredient.id' }
+            { type: 'one', field: 'user', pk_field: 'ingredient.id' }    
         ],
         service: 'OrdersService',
         object: "Order"
@@ -674,15 +721,10 @@ export const ENTITIES = {
         title: "User",
         fields: [
             {
-                key: 'email',
+                key: 'id',
                 type: 'label',
                 templateOptions: {
-                    label: 'Email'
-                },
-                validation: {
-                    messages: {
-                        required: "Field is required!",
-                    },
+                    label: 'Id'
                 },
                 list: {
                     filter_type: 'text',
@@ -711,10 +753,36 @@ export const ENTITIES = {
                 templateOptions: {
                     label: 'Surname'
                 },
-                validation: {},
+                validation: {
+                    messages: {
+                        required: "Field is required!",
+                    },
+                },
                 list: {
                     filter_type: 'text',
                     filterable: true
+                }
+            },
+            {
+                key: 'email',
+                type: 'label',
+                templateOptions: {
+                    label: 'Email'
+                },
+                list: {
+                    filter_type: 'text',
+                    filterable: true
+                }
+            },
+            {
+                key: 'phone',
+                type: 'label',
+                templateOptions: {
+                    label: 'Phone'
+                },
+                list: {
+                    filter_type: 'text',
+                    filterable: true,
                 }
             },
             {
@@ -722,8 +790,8 @@ export const ENTITIES = {
                 type: 'select',
                 templateOptions: {
                     label: 'Roles',
-                    multiple: true,
-                    required: true,
+                    multiple: false,
+                    required: false,
                     options: [
                         { label: 'Admin', value: 'admin' },
                         { label: 'Creator', value: 'creator' },
@@ -731,6 +799,8 @@ export const ENTITIES = {
                 },
                 validation: {},
                 list: {
+                    filter_type: 'text',
+                    filterable: true,
                 }
             }
         ],

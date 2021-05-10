@@ -25,6 +25,7 @@ export class DynamicFormPage implements OnInit {
   }
 
   ngOnInit() {
+    console.log('dynamic-form ngOnInit:', this.model)
   }
 
   async ionViewWillEnter() {
@@ -33,10 +34,12 @@ export class DynamicFormPage implements OnInit {
     this.config = ENTITIES[entity];
     this.model = new (ENTITIES_MAPPER.get(this.config.object))();
     this.service = this.injector.get(SERVICES_MAPPER.get(this.config.service));
+    console.log('dynamic-form ionViewWillEnter:',this.model)
 
     if (id) {
       let findOptions = this.config.crudOptions.findOne || {};
       this.model = await this.service.findById(id, findOptions.fields || ['-__v'], findOptions.includes);
+      console.log('dynamic-form ionViewWillEnter if (id):',this.model)
     }
   }
 
@@ -61,6 +64,7 @@ export class DynamicFormPage implements OnInit {
       // }
       await this.service.update(model, fields, fields);
       loading.dismiss();
+      console.log('dynamic-form save($event)',this.model)
       this.navCtrl.back();
     } catch (error) {
       loading.dismiss();
