@@ -6,6 +6,8 @@ import { UsersPopoverComponent } from '../users-popover/users-popover.component'
 import { LoginComponent } from '../login/login.component';
 import Swal from 'sweetalert2'
 import { TranslateService } from '@ngx-translate/core';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'bonapp-header',
@@ -14,15 +16,17 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class BonAppHeaderComponent implements OnInit {
 
-  showPassword = false;
-  passwordToggleIcon = 'eye';
+  public showPassword = false;
+  public passwordToggleIcon = 'eye';
+  public ShopSelected = false;
 
   constructor(
     public navCtrl: NavController,
     private modalCtrl: ModalController,
     public auth: AuthService,
     private popoverCtrl: PopoverController,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private router: Router
   ) { }
 
   ngOnInit() { }
@@ -63,6 +67,17 @@ export class BonAppHeaderComponent implements OnInit {
       return;
     }
     this.navCtrl.navigateForward(url)
+  }
+
+  SelectShop() {
+    this.ShopSelected = true;
+    console.log('this.router.url', this.router.url)
+  }
+
+  ionViewWillLeave() {
+    if (this.ShopSelected) {
+      this.ShopSelected = !this.ShopSelected;
+    }
   }
 
   logout(redirect: string) {

@@ -5,9 +5,9 @@
 
     <!-- back button and searchbar -->
     <div id="top" class="ion-padding">
-      <ion-button size="small" fill="outline" color="secondary" (click)="navCtrl.back()">{{'Receipt.back' | translate}}
-      </ion-button>
+      <ion-button class="back-button" size="small" fill="outline" color="secondary" (click)="navCtrl.back()">{{'Receipt.back' | translate}}</ion-button>
       <h2>Il supermercato di BonApp</h2>
+      <ion-icon size="large" name="cart-outline"></ion-icon>
       <!-- searchbar with continious input listner -->
       <!-- <div style="width: 100%">
         <ion-searchbar [(ngModel)]="seach_term" [debounce]="100" (ngModelChange)="searchIngredients()" placeholder="Cerca qualsiasi ingrediente.."></ion-searchbar>
@@ -60,16 +60,15 @@
           <!-- products container for RECIPE (if user comes from a recipe) -->
           <ng-container *ngIf="!selectedCategories.length && receipt && !seach_term">
             <div class="ion-padding-start" *ngIf="getIngredients(false).length">
-              <h2>
-                <ion-text color="secondary">{{"ReceiptBuy.ingredients_for" | translate:receipt}}</ion-text>
-              </h2>
-              <div class="partial-border light partial-on-left"></div>
+              <h2><ion-text color="secondary">{{"ReceiptBuy.ingredients_for" | translate:receipt}}</ion-text></h2>
+              <div class="partial-border light partial-on-left" style="margin-bottom: 1em;"></div>
             </div>
-            <ion-grid id="product-list" class="neutral">
+            <ion-grid class="neutral">
               <ion-row>
                 <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="4" size-xl="4"
                   *ngFor="let product of getIngredients(false)">
-                  <ion-card class="product">
+                  <product-card [product]="product"></product-card>
+                  <!-- <ion-card class="product">
                     <ion-card-content>
                       <div class="product-img"
                         [ngStyle]="{background: 'url('+product.icon_url+') no-repeat center center', 'background-size': 'contain'}">
@@ -81,66 +80,37 @@
                       <div>
                         <small><i>{{getSelf(product).qty}}</i></small>
                       </div>
-                      <div class="product-price ion-margin-top">
-                        € {{(product.price? product.price.toFixed(2) : '-')}}
-                      </div>
-                      <div class="ion-text-center actions">
-                        <ion-button fill="clear" color="primary" size="small" (click)="cart.add(product, -1)" style="float:left" *ngIf="cart.getQta(product) > 0">
-                          <ion-icon name="remove"></ion-icon>
-                        </ion-button>
-                        <ion-button fill="clear" color="secondary" size="small" (click)="cart.add(product, -1)" *ngIf="cart.getQta(product) > 0">
-                          {{cart.getQta(product)}}
-                        </ion-button>
-                        <ion-button color="primary" size="small" (click)="cart.add(product, 1)" style="float:right">
-                          <ion-icon name="add"></ion-icon>
-                        </ion-button>
+                      <div class="prod-card-bottom">
+                        <div class="product-price">
+                          € {{(product.price? product.price.toFixed(2) : '-')}}
+                        </div>
+                        <div class="actions">
+                          <ion-button fill="clear" color="primary" size="small" (click)="cart.add(product, -1)" *ngIf="cart.getQta(product) > 0">
+                            <ion-icon name="remove"></ion-icon>
+                          </ion-button>
+                          <ion-button fill="clear" color="secondary" size="small" (click)="cart.add(product, -1)" *ngIf="cart.getQta(product) > 0">
+                            {{cart.getQta(product)}}
+                          </ion-button>
+                          <ion-button color="primary" size="small" (click)="cart.add(product, 1)">
+                            <ion-icon name="add"></ion-icon>
+                          </ion-button>
+                        </div>
                       </div>
                     </ion-card-content>
-                  </ion-card>
+                  </ion-card> -->
                 </ion-col>
               </ion-row>
             </ion-grid>
             <!-- Condiments for recipe-->
-            <div class="ion-padding-start" style="margin-top: 3em;" *ngIf="getIngredients(true).length">
-              <h2>
-                <ion-text color="secondary">{{"ReceiptBuy.condiments" | translate:receipt}}</ion-text>
-              </h2>
-              <div class="partial-border light partial-on-left"></div>
+            <div class="ion-padding-start" style="margin-top: 1.2em;" *ngIf="getIngredients(true).length">
+              <h2><ion-text color="secondary">{{"ReceiptBuy.condiments" | translate:receipt}}</ion-text></h2>
+              <div class="partial-border light partial-on-left" style="margin-bottom: 1em;"></div>
             </div>
-            <ion-grid id="product-list" class="neutral">
+            <ion-grid class="neutral">
               <ion-row>
                 <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="4" size-xl="4"
                   *ngFor="let product of getIngredients(true)">
-                  <ion-card class="product">
-                    <ion-card-content>
-                      <div class="product-img"
-                        [ngStyle]="{background: 'url('+product.icon_url+') no-repeat center center', 'background-size': 'contain'}">
-                      </div>
-                      <div class="product-brand" [title]="product.brand">
-                        <ion-text color="tertiary">{{product.brand}}</ion-text>
-                      </div>
-                      <div class="product-name" [title]="product.name">
-                        {{product.name}}
-                      </div>
-                      <div>
-                        <small><i>{{product.qty}}</i></small>
-                      </div>
-                      <div class="product-price ion-margin-top">
-                        € {{(product.price? product.price.toFixed(2) : '-')}}
-                      </div>
-                      <div class="ion-text-center actions">
-                        <ion-button fill="clear" color="primary" size="small" (click)="cart.add(product, -1)" style="float:left" *ngIf="cart.getQta(product) > 0">
-                          <ion-icon name="remove"></ion-icon>
-                        </ion-button>
-                        <ion-button fill="clear" color="secondary" size="small" (click)="cart.add(product, -1)" *ngIf="cart.getQta(product) > 0">
-                          {{cart.getQta(product)}}
-                        </ion-button>
-                        <ion-button color="primary" size="small" (click)="cart.add(product, 1)" style="float:right">
-                          <ion-icon name="add"></ion-icon>
-                        </ion-button>
-                      </div>
-                    </ion-card-content>
-                  </ion-card>
+                  <product-card [product]="product"></product-card>
                 </ion-col>
               </ion-row>
             </ion-grid>
@@ -180,41 +150,14 @@
                 <h2>
                   <ion-text color="secondary">{{category.name}}</ion-text>
                 </h2>
-                <div class="partial-border light partial-on-left"></div>
+                <div class="partial-border light partial-on-left" style="margin-bottom: 1em;"></div>
               </div>
               <!-- category products ? -->
-              <ion-grid id="product-list" class="neutral">
+              <ion-grid class="neutral">
                 <ion-row>
                   <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="4" size-xl="4"
                     *ngFor="let product of category.ingredients">
-                    <ion-card class="product">
-                      <ion-card-content>
-                        <div class="product-img"
-                          [ngStyle]="{background: 'url('+getSelf(product).icon_url+') no-repeat center center', 'background-size': 'contain'}">
-                        </div>
-                        <div class="product-brand" [title]="getSelf(product).brand">
-                          <ion-text color="tertiary">{{getSelf(product).brand}}</ion-text>
-                        </div>
-                        <div class="product-name" [title]="getSelf(product).name">{{getSelf(product).name}}</div>
-                        <div>
-                          <small><i>{{getSelf(product).qty}}</i></small>
-                        </div>
-                        <div class="product-price ion-margin-top">
-                          € {{(getSelf(product).price? getSelf(product).price.toFixed(2) : '-')}}
-                        </div>
-                        <div class="ion-text-center actions">
-                          <ion-button fill="clear" color="primary" size="small" (click)="cart.add(product, -1)" style="float:left" *ngIf="cart.getQta(product) > 0">
-                            <ion-icon name="remove"></ion-icon>
-                          </ion-button>
-                          <ion-button fill="clear" color="secondary" size="small" (click)="cart.add(product, -1)" *ngIf="cart.getQta(product) > 0">
-                            {{cart.getQta(product)}}
-                          </ion-button>
-                          <ion-button color="primary" size="small" (click)="cart.add(product, 1)" style="float:right">
-                            <ion-icon name="add"></ion-icon>
-                          </ion-button>
-                        </div>
-                      </ion-card-content>
-                    </ion-card>
+                    <product-card [product]="product"></product-card>
                   </ion-col>
                 </ion-row>
               </ion-grid>
@@ -232,35 +175,11 @@
                 <div class="partial-border light partial-on-left"></div>
               </div>
               <!-- seach products results -->
-              <ion-grid id="product-list" class="neutral">
+              <ion-grid class="neutral">
                 <ion-row>
                   <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="4" size-xl="4"
                     *ngFor="let product of ingredients">
-                    <ion-card class="product">
-                      <ion-card-content>
-                        <div class="product-img"
-                          [ngStyle]="{background: 'url('+getSelf(product).icon_url+') no-repeat center center', 'background-size': 'contain'}">
-                        </div>
-                        <div class="product-brand" [title]="getSelf(product).brand">
-                          <ion-text color="tertiary">{{getSelf(product).brand}}</ion-text>
-                        </div>
-                        <div class="product-name" [title]="getSelf(product).name">{{getSelf(product).name}}</div>
-                        <div class="product-price ion-margin-top">
-                          € {{(getSelf(product).price? getSelf(product).price.toFixed(2) : '-')}}
-                        </div>
-                        <div class="ion-text-center actions">
-                          <ion-button fill="clear" color="primary" size="small" (click)="cart.add(product, -1)" style="float:left" *ngIf="cart.getQta(product) > 0">
-                            <ion-icon name="remove"></ion-icon>
-                          </ion-button>
-                          <ion-button fill="clear" color="secondary" size="small" (click)="cart.add(product, -1)" *ngIf="cart.getQta(product) > 0">
-                            {{cart.getQta(product)}}
-                          </ion-button>
-                          <ion-button color="primary" size="small" (click)="cart.add(product, 1)" style="float:right">
-                            <ion-icon name="add"></ion-icon>
-                          </ion-button>
-                        </div>
-                      </ion-card-content>
-                    </ion-card>
+                    <product-card [product]="product"></product-card>
                   </ion-col>
                 </ion-row>
                 <ion-row *ngIf="!ingredients.length">

@@ -3,7 +3,7 @@ import { EntityConfig } from "../../../lib/dynamic-forms/core/entity.config";
 
 export const ENTITIES = {
     ingredients: EntityConfig.fromJson({
-        title: "Ingredient",
+        title: "Ingredients",
         fields: [
             {
                 key: 'icon_url',
@@ -116,7 +116,7 @@ export const ENTITIES = {
         object: "Ingredient"
     }),
     categories: EntityConfig.fromJson({
-        title: "Category",
+        title: "Categories",
         fields: [
             {
                 key: 'image_url',
@@ -151,7 +151,8 @@ export const ENTITIES = {
                     },
                 },
                 list: {
-                    filter_type: 'text'
+                    filter_type: 'text',
+                    filterable: true,
                 },
             },
             {
@@ -167,7 +168,8 @@ export const ENTITIES = {
                     },
                 },
                 list: {
-                    filter_type: 'text'
+                    filter_type: 'text',
+                    filterable: true,
                 },
             },
             {
@@ -177,7 +179,8 @@ export const ENTITIES = {
                     label: 'Show category in shop',
                 },
                 list: {
-                    filter_type: 'checkbox'
+                    filter_type: 'checkbox',
+                    filterable: true,
                 },
             },
             {
@@ -187,7 +190,8 @@ export const ENTITIES = {
                     label: 'Show before checkout',
                 },
                 list: {
-                    filter_type: 'checkbox'
+                    filter_type: 'checkbox',
+                    filterable: true,
                 },
             },
             {
@@ -200,7 +204,7 @@ export const ENTITIES = {
                 },
                 list: {
                     parser: 'count',
-                    filterable: false
+                    filterable: true,
                 }
 
             },
@@ -213,7 +217,7 @@ export const ENTITIES = {
                 },
                 list: {
                     parser: 'count',
-                    filterable: false
+                    filterable: true
                 },
 
             },
@@ -234,7 +238,7 @@ export const ENTITIES = {
         object: "Category"
     }),
     rims: EntityConfig.fromJson({
-        title: "Recipes Ingredients Matching",
+        title: "Recipes Ingredients Matching (RIMS)",
         fields: [
             {
                 key: 'name',
@@ -491,8 +495,171 @@ export const ENTITIES = {
         service: 'ReceiptsService',
         object: "Receipt"
     }),
+    receiptsForCreator: EntityConfig.fromJson({
+        title: "Ricette",
+        fields: [
+            {
+                key: 'image_url',
+                type: 'image-preview',
+                templateOptions: {
+                    label: 'Image'
+                },
+                expressionProperties: {
+                    'templateOptions.required': '!model.id',
+                },
+                validation: {
+                    messages: {
+                        required: "Field is required!",
+                    },
+                },
+                list: {
+                    parser: 'image',
+                    cssStyle: { 'text-align': 'center' },
+                    filterable: false
+                }
+            },
+            {
+                key: 'name',
+                type: 'input',
+                templateOptions: {
+                    label: 'Name',
+                    required: true,
+                },
+                validation: {
+                    messages: {
+                        required: "Field is required!",
+                    },
+                },
+            },
+            {
+                key: 'description',
+                type: 'input',
+                templateOptions: {
+                    label: 'Description',
+                //     required: true,
+                // },
+                // validation: {
+                //     messages: {
+                //         required: "Field is required!",
+                //     },
+                },
+                list: {
+                    parser: 'ellips:50'
+                }
+
+            },
+            {
+                key: 'ingredients',
+                type: 'ingredients-qta',
+                templateOptions: {
+                    label: 'Ingredienti',
+                },
+                list: {
+                    parser: 'count',
+                    filterable: false
+                },
+
+            },            
+            {
+                key: 'preparing',
+                type: 'preparing',
+                templateOptions: {
+                    label: 'Preparing',
+                    required: true,
+                },
+                validation: {
+                    messages: {
+                        required: "Field is required!",
+                    },
+                },
+                list: {
+                    parser: 'ellips:100',
+                    hidden: true
+                }
+
+            },
+            {
+                key: 'kcal',
+                type: 'select',
+                templateOptions: {
+                    label: 'Kcal',
+                    required: true,
+                    options: [
+                        { label: 'Basso', value: 'low' },
+                        { label: 'Medio', value: 'medium' },
+                        { label: 'Alto', value: 'high' },
+                    ]
+                },
+                validation: {
+                    messages: {
+                        required: "Field is required!",
+                    },
+                }
+            },
+            {
+                key: 'tags',
+                type: 'select',
+                templateOptions: {
+                    label: 'Tags',
+                    multiple: true,
+                    required: true,
+                    options: [
+                        { label: 'Healthy', value: 'healthy' },
+                        { label: 'Quick n Easy', value: 'quick-n-easy' },
+                        { label: 'Primi', value: 'first' },
+                        { label: 'Secondi', value: 'second' },
+                        { label: 'Vegetariano', value: 'vegetarian' },
+                        { label: 'Gluten free', value: 'gluten-free' },
+                        { label: 'No oven', value: 'no-oven' },
+                        { label: 'No mixer', value: 'no-mixer' },
+                    ]
+                },
+                validation: {
+                    messages: {
+                        required: "Field is required!",
+                    }, 
+                },
+                list: {
+
+                }
+            },
+            {
+                key: 'time',
+                type: 'input',
+                templateOptions: {
+                    label: 'Time',
+                    required: true,
+                },
+                validation: {
+                    messages: {
+                        required: "Inserisci un multiplo di 5",
+                    },
+                },
+            },
+            {
+                key: 'active',
+                type: 'checkbox',
+                defaultValue: false,
+                templateOptions: {
+                    label: 'Is active?',
+                }
+            },
+        ],
+        crudOptions: {
+            findOne: {
+                includes: ['ingredients.ingredient']
+
+            }
+        },
+        relations: [
+            { type: 'many', field: 'ingredients', fk_field: 'ingredient', pk_field: 'ingredient.id' },
+            { type: 'one', field: 'fk_user', pk_field: 'id' },
+        ],
+        service: 'ReceiptsService',
+        object: "Receipt"
+    }),
     orders: EntityConfig.fromJson({
-        title: "Order",
+        title: "Orders",
         fields: [
             {
                 key: 'id',
@@ -657,7 +824,7 @@ export const ENTITIES = {
         object: "Order"
     }),
     images: EntityConfig.fromJson({
-        title: "Image",
+        title: "Images",
         fields: [
             {
                 key: 'url',
@@ -718,7 +885,7 @@ export const ENTITIES = {
         object: "BAImage"
     }),
     users: EntityConfig.fromJson({
-        title: "User",
+        title: "Users",
         fields: [
             {
                 key: 'id',

@@ -3,7 +3,7 @@
     <!-- left side -->
     <ion-buttons slot="start" class="ion-hide-md-up">
       <!-- mobile -->
-      <ion-button style="padding-left:0.2em"  fill="clear" size="large" color="secondary"
+      <ion-button style="padding-left:0.2em" fill="clear" size="large" color="secondary"
       (click)="goto('https://about.bonapp.life/')">
       <ion-icon name="help-circle-outline"></ion-icon>
       </ion-button>
@@ -73,11 +73,11 @@
       <!-- mobile -->
       <ion-buttons class="ion-hide-md-up" slot="end">
         <ion-button *ngIf="!auth.hasRoles(['admin', 'creator'])" style="padding-right:0.2em" fill="clear" size="large" color="primary" (click)="goto('/shop')">
-          <ion-icon name="cart"></ion-icon>
+          <ion-icon style="font-size:1.5em" [ngClass]="{'icon-selected' : router.url == '/shop'}" name="cart"></ion-icon>
           <strong>{{'NavBar.shop' | translate}}</strong>
         </ion-button>
         <ion-button *ngIf="auth.hasRoles(['admin', 'creator'])" style="padding-right:0.2em" fill="clear" size="large" color="primary" (click)="goto('/shop')">
-          <ion-icon name="cart-outline"></ion-icon>
+          <ion-icon style="font-size:1.5em" [ngClass]="{'icon-selected' : router.url == '/shop'}" name="cart-outline"></ion-icon>
           <strong>{{'NavBar.shop' | translate}}</strong>
         </ion-button>
         <ion-button *ngIf="auth.hasRoles(['admin', 'creator'])" style="padding-right:0.2em" fill="clear" size="large" color="primary"
@@ -88,11 +88,11 @@
       <!-- desktop -->
       <ion-buttons class="ion-hide-md-down" slot="end">
         <ion-button *ngIf="!auth.hasRoles(['admin', 'creator'])" style="padding-right:0.5em" fill="clear" size="large" color="secondary" (click)="goto('/shop')">
-          <ion-icon name="cart"></ion-icon>
+          <ion-icon style="font-size:1.5em" [ngClass]="{'icon-selected' : router.url == '/shop'}" name="cart"></ion-icon>
           <strong>{{'NavBar.go_to_shop' | translate}}</strong>
         </ion-button>
         <ion-button *ngIf="auth.hasRoles(['admin', 'creator'])" style="padding-right:0.5em" fill="clear" size="large" color="secondary" (click)="goto('/shop')">
-          <ion-icon name="cart-outline"></ion-icon>
+          <ion-icon style="font-size:1.5em" [ngClass]="{'icon-selected' : router.url == '/shop'}" name="cart-outline"></ion-icon>
           {{'NavBar.go_to_shop' | translate}}
         </ion-button>
         <ion-button *ngIf="auth.hasRoles(['admin', 'creator'])" style="padding-right:0.5em" fill="clear" size="large" color="secondary"
@@ -106,15 +106,15 @@
     <ng-container *ngIf="!auth.isAuthenticate()">
       <!-- mobile -->
       <ion-buttons class="ion-hide-md-up" slot="end">
-        <ion-button *ngIf="!auth.hasRoles(['admin'])" style="padding-right:0.2em" fill="clear" size="large" strong ="true" color="secondary" (click)="goto('/shop')">
-          <ion-icon name="cart"></ion-icon>
+        <ion-button style="padding-right:0.2em" fill="clear" size="large" strong ="true" color="secondary" (click)="goto('/shop')">
+          <ion-icon style="font-size:1.5em" [ngClass]="{'icon-selected' : router.url == '/shop'}" name="cart" ></ion-icon>
           <strong>{{'NavBar.shop' | translate}}</strong>
         </ion-button>
       </ion-buttons>
       <!-- desktop -->
       <ion-buttons class="ion-hide-md-down" slot="end">
         <ion-button style="padding-right:0.5em" fill="clear" size="large" color="secondary" (click)="goto('/shop')">
-          <ion-icon name="cart"></ion-icon>
+          <ion-icon style="font-size:1.5em" [ngClass]="{'icon-selected' : router.url == '/shop'}" name="cart"></ion-icon>
           <strong>{{'NavBar.go_to_shop' | translate}}</strong>
         </ion-button>
       </ion-buttons>

@@ -14,3 +14,32 @@
 //     .toolbar-container {}
 //         div
 // }
+
+
+#dettaglio {
+    ion-button {
+        margin:0;
+    }
+
+    ion-button::part(native) {
+        padding:0em;
+    }
+}
+
+#proceed-button {
+
+    ion-button {
+        font-size:1.23em; 
+        font-weight: bold; 
+        margin: 0 0 0 auto;
+    }
+
+    ion-button::part(native) {
+        padding:1em;
+    }
+}
+
+// ion-button::part(native) {
+//     padding:0em;
+// }
+

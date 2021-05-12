@@ -1,0 +1,30 @@
+<ion-card>
+  <ion-card-content>
+    <div class="product-img"
+      [ngStyle]="{background: 'url('+product.icon_url+') no-repeat center center', 'background-size': 'contain'}">
+    </div>
+    <div class="product-brand" [title]="product.brand">
+      <ion-text color="tertiary">{{product.brand}}</ion-text>
+    </div>
+    <div class="product-name" [title]="product.name">{{product.name}}</div>
+    <div>
+      <small><i>{{getSelf(product).qty}}</i></small>
+    </div>
+    <div class="prod-card-bottom">
+      <div class="product-price">
+        € {{(product.price? product.price.toFixed(2) : '-')}}
+      </div>
+      <div class="actions">
+        <ion-button fill="clear" color="primary" size="small" (click)="cart.add(product, -1)" *ngIf="cart.getQta(product) > 0">
+          <ion-icon name="remove"></ion-icon>
+        </ion-button>
+        <ion-button fill="clear" color="secondary" size="small" *ngIf="cart.getQta(product)>0" style="margin-left:0;margin-right:1em;">
+          {{cart.getQta(product)}}
+        </ion-button>
+        <ion-button color="primary" size="small" (click)="cart.add(product, 1)">
+          <ion-icon name="add"></ion-icon>
+        </ion-button>
+      </div>
+    </div>
+  </ion-card-content>
+</ion-card>

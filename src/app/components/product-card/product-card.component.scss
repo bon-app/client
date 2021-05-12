@@ -1,0 +1,60 @@
+ion-card {
+    //border: 1px solid var(--ion-color-tertiary);
+    padding: 0;
+    margin-top: 1.2em;
+    margin-bottom: 1.2em; 
+    --padding-start: 0;
+    --padding-end: 0;
+    border-radius: 0.5em;
+    overflow: hidden;
+    height: 100%;
+
+    .product-img {
+        height: 100px;
+        margin-bottom: 0.3em;
+    }
+    
+    .product-name,
+    .product-brand {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    
+    ion-col {
+        height:100%;
+    }
+
+    ion-card-header {
+        padding-left: 0;
+    }
+
+    ion-card-content {
+        position: relative;
+        padding: 0.6em;
+        padding-top: 0.3em;
+        padding-bottom: 0.3em;
+        height: 100%;
+
+        .prod-card-bottom {
+            display: flex;
+            align-items: center;
+            margin-top: 0.2em;
+        }
+
+        .actions {
+            margin-left: auto;
+        }
+        .less,
+        .add {
+        cursor: pointer;
+        }
+
+    }
+}
+
+
+
+
+

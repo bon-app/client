@@ -6,6 +6,8 @@ import { LoadingController, NavController, ToastController } from '@ionic/angula
 import { ENTITIES } from '../entities/entities.config';
 import { DynamicListComponent } from '../../../lib/dynamic-forms/components/dynamic-list/dynamic-list.component';
 import { SERVICES_MAPPER } from '../../../lib/dynamic-forms/core/mapper';
+import { AuthService } from 'src/app/auth/auth.service';
+
 
 @Component({
   selector: 'app-dynamic-list',
@@ -28,7 +30,8 @@ export class DynamicListPage implements OnInit {
     private injector: Injector,
     private navCtrl: NavController,
     private loadingCtrl: LoadingController,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    private auth: AuthService,
   ) { }
 
   async ngOnInit() {
@@ -48,8 +51,10 @@ export class DynamicListPage implements OnInit {
     let entity = this.route.snapshot.params.entity;
     this.entity = entity
     this.config = ENTITIES[entity];
+    console.log('ionViewDidEnter - config:', this.config)
 
     this.service = this.injector.get(SERVICES_MAPPER.get(this.config.service));
+    console.log('ionViewDidEnter - service:', this.service)
     this.getRecords(true);
   }
 
@@ -60,10 +65,11 @@ export class DynamicListPage implements OnInit {
   async deleteElement($event) {
     if (confirm(`Are you sure you want to delete the "${$event.name}" element?`)) {
       console.log($event);
-      await this.service.delete($event.id);
-      this.data = this.data.filter(d => d.id != $event.id);
+      if (this.auth.hasRoles(['admin'])) {
+        await this.service.delete($event.id);
+        this.data = this.data.filter(d => d.id != $event.id);
+      }
     }
-
   }
 
   //@Debounce(300)

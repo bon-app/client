@@ -4,6 +4,7 @@ import { ChooseIngredientsComponent } from './choose-ingredients/choose-ingredie
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { RandomReceiptsComponent } from './random-receipts/random-receipts.component';
+import { ProductCardComponent } from './product-card/product-card.component';
 import { BonAppHeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
@@ -24,7 +25,7 @@ import { DFIngredientsComponent } from './dynamics-form-custom/df-ingredients/df
 import { PreparingFormComponent } from './dynamics-form-custom/preparing-form/preparing-form.component';
 
 const components = [
-  ChooseIngredientsComponent, RandomReceiptsComponent, BonAppHeaderComponent,
+  ChooseIngredientsComponent, RandomReceiptsComponent, ProductCardComponent, BonAppHeaderComponent,
   LoginComponent, FooterCartComponent, CartDetailsComponent, AddressFormComponent,
   IngredientsPriorityComponent, IngredientsReceiptsComponent, IngredientsComponent,
   DFIngredientsPriorityComponent, DatasPopoverComponent, UsersPopoverComponent, IngredientsQtaComponent, DFIngredientsComponent,
