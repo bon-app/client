@@ -9,6 +9,7 @@ import { IngredientsService } from 'src/app/services/ingredients.service';
 import { ActivatedRoute } from '@angular/router';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { Ingredient } from 'src/app/models/ingredient.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-receipt-buy',
@@ -25,6 +26,7 @@ export class ReceiptBuyPage implements OnInit {
   public seach_term: string;
 
   constructor(
+    public router: Router,
     public cart: CartService,
     public receiptsService: ReceiptsService,
     public categoriesService: CategoriesService,
@@ -34,6 +36,13 @@ export class ReceiptBuyPage implements OnInit {
     public route: ActivatedRoute) { }
 
   ngOnInit() {
+    console.log('this.router.url:', this.router.url)
+    if (this.router.url.includes('buy')) {
+      console.log("this.router.url.includes('buy)')")
+    }
+    else {
+      console.log("this.router.url DOES NOT includes('buy)')")
+    }
   }
 
   async ionViewWillEnter() {

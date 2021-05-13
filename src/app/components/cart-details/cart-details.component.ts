@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CartService } from '../../services/cart.service';
 import { Order } from '../../models/order.model';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'cart-details',
@@ -11,7 +12,7 @@ export class CartDetailsComponent implements OnInit {
 
   @Input('order') order: Order;
 
-  constructor(public cart: CartService) { }
+  constructor(public cart: CartService, public modalCtrl: ModalController) { }
 
   ngOnInit() { }
 

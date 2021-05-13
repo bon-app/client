@@ -1,4 +1,4 @@
-<ion-card [ngClass]="{'prod-selected' : (cart.getQta(product)>0)}" id="foo">
+<ion-card [ngClass]="{'prod-selected' : (cart.getQta(product)>0)}">
   <ion-card-content>
     <div class="product-img"
       [ngStyle]="{background: 'url('+product.icon_url+') no-repeat center center', 'background-size': 'contain'}">
@@ -15,12 +15,10 @@
         € {{(product.price? product.price.toFixed(2) : '-')}}
       </div>
       <div class="actions">
-        <span id="less-button-container">
-          <ion-button id="less-quantity" fill="clear" color="primary" size="small" (click)="cart.add(product, -1)" *ngIf="cart.getQta(product) > 0">
-            <ion-icon name="remove"></ion-icon>
-          </ion-button>
-        </span>
-        <ion-button id="show-quantity" fill="clear" color="secondary" size="small" *ngIf="(cart.getQta(product)>0) && (getObjectWidth('foo')>190)" style="margin-left:0;margin-right:1em;">
+        <ion-button fill="clear" color="primary" size="small" (click)="cart.add(product, -1)" *ngIf="cart.getQta(product) > 0">
+          <ion-icon name="remove"></ion-icon>
+        </ion-button>
+        <ion-button id="prod-quantity" fill="clear" color="secondary" size="small" *ngIf="cart.getQta(product)>0" style="margin-left:0;margin-right:1em;">
           {{cart.getQta(product)}}
         </ion-button>
         <ion-button color="primary" size="small" (click)="cart.add(product, 1)">

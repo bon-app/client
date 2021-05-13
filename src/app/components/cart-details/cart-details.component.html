@@ -51,9 +51,11 @@
       <ion-col>{{'Checkout.delivery' | translate}}</ion-col>
       <ion-col class="ion-text-right">€ {{ order.delivery_method == 'standard'? '0.99' : '2.49'}}</ion-col>
     </ion-row>
-    <ion-row style="margin-top: 1.5em;">
+    <ion-row style="margin-top: 1.2em;">
       <ion-col><b>{{'Checkout.total' | translate}}</b></ion-col>
       <ion-col class="ion-text-right"><b>€ {{ getTotal().toFixed(2)}}</b></ion-col>
     </ion-row>
   </ion-grid>
+
+  <ion-button style="display:block;text-align:center" fill="clear" color="primary" (click)="modalCtrl.dismiss()">Close</ion-button>
 </div>

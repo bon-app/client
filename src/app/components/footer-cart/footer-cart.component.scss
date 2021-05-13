@@ -35,7 +35,8 @@
     }
 
     ion-button::part(native) {
-        padding:1em;
+        padding:0.5em;
+        min-width: 7em;
     }
 }
 

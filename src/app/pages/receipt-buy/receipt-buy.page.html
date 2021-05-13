@@ -5,7 +5,7 @@
 
     <!-- back button and searchbar -->
     <div id="top" class="ion-padding">
-      <ion-button class="back-button" size="small" fill="outline" color="secondary" (click)="navCtrl.back()">{{'Receipt.back' | translate}}</ion-button>
+      <ion-button class="back-button" color="secondary" fill="outline" (click)="navCtrl.back()">{{'Receipt.back' | translate}}</ion-button>
       <h2>Il supermercato di BonApp</h2>
       <ion-icon size="large" name="cart-outline"></ion-icon>
       <!-- searchbar with continious input listner -->
@@ -65,10 +65,15 @@
             </div>
             <ion-grid class="neutral">
               <ion-row>
-                <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="4" size-xl="4"
+                <!-- <ion-col class="ion-hide-sm-down" size-xs="12" size-sm="4" size-md="4" size-lg="4" size-xl="4"
                   *ngFor="let product of getIngredients(false)">
                   <product-card [product]="product"></product-card>
-                  <!-- <ion-card class="product">
+                </ion-col> -->
+                <ion-col size-xs="6" size-sm="4" size-md="3" size-lg="3" size-xl="3" 
+                *ngFor="let product of getIngredients(false)">
+                  <product-card [product]="product"></product-card>
+                </ion-col>
+                <!-- <ion-card>
                     <ion-card-content>
                       <div class="product-img"
                         [ngStyle]="{background: 'url('+product.icon_url+') no-repeat center center', 'background-size': 'contain'}">
@@ -88,7 +93,7 @@
                           <ion-button fill="clear" color="primary" size="small" (click)="cart.add(product, -1)" *ngIf="cart.getQta(product) > 0">
                             <ion-icon name="remove"></ion-icon>
                           </ion-button>
-                          <ion-button fill="clear" color="secondary" size="small" (click)="cart.add(product, -1)" *ngIf="cart.getQta(product) > 0">
+                          <ion-button fill="clear" color="secondary" size="small" *ngIf="cart.getQta(product)>0" style="margin-left:0;margin-right:1em;">
                             {{cart.getQta(product)}}
                           </ion-button>
                           <ion-button color="primary" size="small" (click)="cart.add(product, 1)">
@@ -98,7 +103,7 @@
                       </div>
                     </ion-card-content>
                   </ion-card> -->
-                </ion-col>
+                
               </ion-row>
             </ion-grid>
             <!-- Condiments for recipe-->
@@ -108,8 +113,8 @@
             </div>
             <ion-grid class="neutral">
               <ion-row>
-                <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="4" size-xl="4"
-                  *ngFor="let product of getIngredients(true)">
+                <ion-col size-xs="6" size-sm="4" size-md="3" size-lg="3" size-xl="3" 
+                *ngFor="let product of getIngredients(true)">
                   <product-card [product]="product"></product-card>
                 </ion-col>
               </ion-row>
@@ -145,17 +150,17 @@
                 </ion-row>
               </ion-grid>
 
-              <!-- category title ? -->
+              <!-- subcategory title -->
               <div class="ion-padding-start" *ngIf="category.ingredients?.length">
                 <h2>
                   <ion-text color="secondary">{{category.name}}</ion-text>
                 </h2>
                 <div class="partial-border light partial-on-left" style="margin-bottom: 1em;"></div>
               </div>
-              <!-- category products ? -->
+              <!-- subcategory products -->
               <ion-grid class="neutral">
                 <ion-row>
-                  <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="4" size-xl="4"
+                  <ion-col size-xs="6" size-sm="4" size-md="3" size-lg="3" size-xl="3" 
                     *ngFor="let product of category.ingredients">
                     <product-card [product]="product"></product-card>
                   </ion-col>
@@ -177,7 +182,7 @@
               <!-- seach products results -->
               <ion-grid class="neutral">
                 <ion-row>
-                  <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="4" size-xl="4"
+                  <ion-col size-xs="6" size-sm="4" size-md="3" size-lg="3" size-xl="3" 
                     *ngFor="let product of ingredients">
                     <product-card [product]="product"></product-card>
                   </ion-col>

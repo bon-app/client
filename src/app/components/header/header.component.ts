@@ -26,7 +26,7 @@ export class BonAppHeaderComponent implements OnInit {
     public auth: AuthService,
     private popoverCtrl: PopoverController,
     private translate: TranslateService,
-    private router: Router
+    public router: Router
   ) { }
 
   ngOnInit() { }
@@ -67,17 +67,6 @@ export class BonAppHeaderComponent implements OnInit {
       return;
     }
     this.navCtrl.navigateForward(url)
-  }
-
-  SelectShop() {
-    this.ShopSelected = true;
-    console.log('this.router.url', this.router.url)
-  }
-
-  ionViewWillLeave() {
-    if (this.ShopSelected) {
-      this.ShopSelected = !this.ShopSelected;
-    }
   }
 
   logout(redirect: string) {

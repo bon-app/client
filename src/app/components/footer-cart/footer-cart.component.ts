@@ -18,7 +18,7 @@ export class FooterCartComponent implements OnInit {
   }
   @Output("confirm") confirm: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(public cart: CartService, private modalCtrl: ModalController) { }
+  constructor(public cart: CartService, public modalCtrl: ModalController) { }
 
   ngOnInit() { }
 
