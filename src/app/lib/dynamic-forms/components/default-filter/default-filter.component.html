@@ -1,14 +1,5 @@
-<ion-card id="filter">
-  <ion-card-content>
-
-    <div class="filter-section">
-      Showed rows:
-      <div class="partial-border light partial-on-left ion-margin-bottom"></div>
-      <ion-item>
-        <ion-input #row_length type="number" placeholder="From" [(ngModel)]="settings.row_length"
-          (ngModelChange)="rowLengthChange.emit(settings.row_length)" style="width: 60px;"></ion-input>
-      </ion-item>
-    </div>
+<ion-card id="filter" style='box-shadow: none !important;'>
+  <ion-card-content style="padding:0; padding-left:0.6em">
 
     <div class="filter-section">
       Search in:
@@ -16,10 +7,28 @@
       <ion-grid class="neutral">
         <ion-row>
           <ion-col *ngFor="let field of getSearchableFields()">
-            <ion-item>
+            <ion-item lines="none">
               <ion-label>{{field.templateOptions?.label}}</ion-label>
               <ion-checkbox slot="start" [(ngModel)]="filterBuilder.searchable[field.key]"
                 (ngModelChange)="filterChange.emit()"></ion-checkbox>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+    <div class="filter-section" *ngIf="getCheckboxFields().length">
+      Checked at:
+      <div class="partial-border light partial-on-left ion-margin-bottom"></div>
+      <ion-grid class="neutral">
+        <ion-row>
+          <ion-col *ngFor="let field of getCheckboxFields()">
+            <ion-item lines="none" style="max-width: 300px;">
+              <ion-checkbox slot="start" [(ngModel)]="filterBuilder.checked[field.key].active"
+                (ngModelChange)="filterChange.emit()"></ion-checkbox>
+              <ion-label>{{field.templateOptions?.label}}</ion-label>
+              <ion-toggle #toggle [value]="filterBuilder.checked[field.key].value"
+                (ionChange)="filterBuilder.checked[field.key].value = toggle.checked;filterChange.emit()"></ion-toggle>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -53,23 +62,14 @@
       </ion-grid>
     </div>
 
-    <div class="filter-section" *ngIf="getCheckboxFields().length">
-      Checked at:
+    <!-- <div class="filter-section">
+      Showed rows:
       <div class="partial-border light partial-on-left ion-margin-bottom"></div>
-      <ion-grid class="neutral">
-        <ion-row>
-          <ion-col *ngFor="let field of getCheckboxFields()">
-            <ion-item>
-              <ion-checkbox slot="start" [(ngModel)]="filterBuilder.checked[field.key].active"
-                (ngModelChange)="filterChange.emit()"></ion-checkbox>
-              <ion-label>{{field.templateOptions?.label}}</ion-label>
-              <ion-toggle #toggle [value]="filterBuilder.checked[field.key].value"
-                (ionChange)="filterBuilder.checked[field.key].value = toggle.checked;filterChange.emit()"></ion-toggle>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </div>
+      <ion-item>
+        <ion-input #row_length type="number" placeholder="From" [(ngModel)]="settings.row_length"
+          (ngModelChange)="rowLengthChange.emit(settings.row_length)" style="width: 60px;"></ion-input>
+      </ion-item>
+    </div> -->
 
   </ion-card-content>
 </ion-card>

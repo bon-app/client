@@ -179,6 +179,7 @@ export const ENTITIES = {
                     label: 'Show category in shop',
                 },
                 list: {
+                    parser:'checkbox',
                     filter_type: 'checkbox',
                     filterable: true,
                 },
@@ -190,6 +191,7 @@ export const ENTITIES = {
                     label: 'Show before checkout',
                 },
                 list: {
+                    parser:'checkbox',
                     filter_type: 'checkbox',
                     filterable: true,
                 },
@@ -204,7 +206,8 @@ export const ENTITIES = {
                 },
                 list: {
                     parser: 'count',
-                    filterable: true,
+                    filter_type: 'range',
+                    filterable: false,
                 }
 
             },
@@ -217,7 +220,7 @@ export const ENTITIES = {
                 },
                 list: {
                     parser: 'count',
-                    filterable: true
+                    filterable: false
                 },
 
             },
@@ -273,7 +276,8 @@ export const ENTITIES = {
                     label: 'Is condiment',
                 },
                 list: {
-                    parser: 'checkbox'
+                    parser: 'checkbox',
+                    filter_type: 'checkbox',
                 }
             },
             {
@@ -284,7 +288,7 @@ export const ENTITIES = {
                 },
                 list: {
                     parser: 'count',
-                    filterable: false
+                    filter_type: 'range',
                 },
 
             }
@@ -336,6 +340,10 @@ export const ENTITIES = {
                         required: "Field is required!",
                     },
                 },
+                list: {
+                    filter_type: 'text',
+                    filterable: true
+                }
             },
             {
                 key: 'description',
@@ -350,7 +358,8 @@ export const ENTITIES = {
                 //     },
                 // },
                 list: {
-                    parser: 'ellips:50'
+                    parser: 'ellips:50',
+                    filterable: false
                 }
 
             },
@@ -362,10 +371,11 @@ export const ENTITIES = {
                 },
                 list: {
                     parser: 'count',
-                    filterable: false
+                    filterable: false,
                 },
 
-            },            {
+            },            
+            {
                 key: 'preparing',
                 type: 'preparing',
                 templateOptions: {
@@ -379,7 +389,7 @@ export const ENTITIES = {
                 // },
                 list: {
                     parser: 'ellips:100',
-                    hidden: true
+                    hidden: true,
                 }
 
             },
@@ -399,6 +409,10 @@ export const ENTITIES = {
                 //     messages: {
                 //         required: "Field is required!",
                 //     },
+                list: {
+                    filter_type: 'text',
+                    filterable: true,
+                }
                 // }
             },
             {
@@ -425,6 +439,8 @@ export const ENTITIES = {
                     }, 
                 },
                 list: {
+                    filter_type: 'text',
+                    filterable: true,
 
                 }
             },
@@ -433,6 +449,7 @@ export const ENTITIES = {
                 type: 'input',
                 templateOptions: {
                     label: 'Time',
+                    type: "number",
                     required: true,
                 },
                 validation: {
@@ -440,6 +457,11 @@ export const ENTITIES = {
                         required: "Inserisci un multiplo di 5",
                     },
                 },
+                list: {
+                    filter_type: 'range',
+                    filterable: true,
+
+                }
             },
             {
                 key: 'active',
@@ -447,7 +469,12 @@ export const ENTITIES = {
                 defaultValue: false,
                 templateOptions: {
                     label: 'Is active?',
-                }
+                },
+                list: {
+                    parser: 'checkbox',
+                    filter_type: 'checkbox',
+                    filterable: true,
+                },
             },
             {
                 key: 'priority',
@@ -463,6 +490,10 @@ export const ENTITIES = {
                         required: "Non modificare!",
                     },
                 },
+                list: {
+                    filter_type: 'range',
+                    filterable: true,
+                },
             },
             {
                 key: 'fk_user',
@@ -477,6 +508,7 @@ export const ENTITIES = {
                     }
                 },
                 list: {
+                    filter_type: 'text',
                     filterable: true,
                 },
 
@@ -496,7 +528,7 @@ export const ENTITIES = {
         object: "Receipt"
     }),
     receiptsForCreator: EntityConfig.fromJson({
-        title: "Ricette",
+        title: "Gestione ricette",
         fields: [
             {
                 key: 'image_url',
@@ -530,21 +562,26 @@ export const ENTITIES = {
                         required: "Field is required!",
                     },
                 },
+                list: {
+                    filter_type: 'text',
+                    filterable: true
+                }
             },
             {
                 key: 'description',
                 type: 'input',
                 templateOptions: {
                     label: 'Description',
-                //     required: true,
-                // },
+                    // required: true,
+                },
                 // validation: {
                 //     messages: {
                 //         required: "Field is required!",
                 //     },
-                },
+                // },
                 list: {
-                    parser: 'ellips:50'
+                    parser: 'ellips:50',
+                    filterable: false
                 }
 
             },
@@ -556,7 +593,7 @@ export const ENTITIES = {
                 },
                 list: {
                     parser: 'count',
-                    filterable: false
+                    filterable: false,
                 },
 
             },            
@@ -565,16 +602,16 @@ export const ENTITIES = {
                 type: 'preparing',
                 templateOptions: {
                     label: 'Preparing',
-                    required: true,
+                    // required: true,
                 },
-                validation: {
-                    messages: {
-                        required: "Field is required!",
-                    },
-                },
+                // validation: {
+                //     messages: {
+                //         required: "Field is required!",
+                //     },
+                // },
                 list: {
                     parser: 'ellips:100',
-                    hidden: true
+                    hidden: true,
                 }
 
             },
@@ -583,18 +620,22 @@ export const ENTITIES = {
                 type: 'select',
                 templateOptions: {
                     label: 'Kcal',
-                    required: true,
+                    // required: true,
                     options: [
                         { label: 'Basso', value: 'low' },
                         { label: 'Medio', value: 'medium' },
                         { label: 'Alto', value: 'high' },
                     ]
                 },
-                validation: {
-                    messages: {
-                        required: "Field is required!",
-                    },
+                // validation: {
+                //     messages: {
+                //         required: "Field is required!",
+                //     },
+                list: {
+                    filter_type: 'text',
+                    filterable: true,
                 }
+                // }
             },
             {
                 key: 'tags',
@@ -602,7 +643,7 @@ export const ENTITIES = {
                 templateOptions: {
                     label: 'Tags',
                     multiple: true,
-                    required: true,
+                    // required: true,
                     options: [
                         { label: 'Healthy', value: 'healthy' },
                         { label: 'Quick n Easy', value: 'quick-n-easy' },
@@ -620,6 +661,8 @@ export const ENTITIES = {
                     }, 
                 },
                 list: {
+                    filter_type: 'text',
+                    filterable: true,
 
                 }
             },
@@ -628,6 +671,7 @@ export const ENTITIES = {
                 type: 'input',
                 templateOptions: {
                     label: 'Time',
+                    type: "number",
                     required: true,
                 },
                 validation: {
@@ -635,6 +679,11 @@ export const ENTITIES = {
                         required: "Inserisci un multiplo di 5",
                     },
                 },
+                list: {
+                    filter_type: 'range',
+                    filterable: true,
+
+                }
             },
             {
                 key: 'active',
@@ -642,7 +691,12 @@ export const ENTITIES = {
                 defaultValue: false,
                 templateOptions: {
                     label: 'Is active?',
-                }
+                },
+                list: {
+                    parser: 'checkbox',
+                    filter_type: 'checkbox',
+                    filterable: true,
+                },
             },
         ],
         crudOptions: {
@@ -888,17 +942,6 @@ export const ENTITIES = {
         title: "Users",
         fields: [
             {
-                key: 'id',
-                type: 'label',
-                templateOptions: {
-                    label: 'Id'
-                },
-                list: {
-                    filter_type: 'text',
-                    filterable: true
-                }
-            },
-            {
                 key: 'name',
                 type: 'label',
                 templateOptions: {
@@ -957,7 +1000,7 @@ export const ENTITIES = {
                 type: 'select',
                 templateOptions: {
                     label: 'Roles',
-                    multiple: false,
+                    multiple: true,
                     required: false,
                     options: [
                         { label: 'Admin', value: 'admin' },

@@ -3,7 +3,7 @@
 <ion-content>
   <div class="container">
     <div id="back">
-      <ion-button style="margin:5px;font-size:1.2em;--border-width:3px;height:35px;width:70px" size="medium" strong="true" fill="outline" color="secondary" (click)="navCtrl.back()">Back</ion-button>
+      <ion-button class="custom-back-button" fill="outline" size="small" (click)="navCtrl.back()">Back</ion-button>
     </div>
     <input id="import-csv" type="file" style="display: none;" (change)="importCSV($event)" accept="text/csv"/>
     <input id="copy" style="display: none;" />

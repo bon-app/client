@@ -32,3 +32,15 @@
     position: absolute;
     bottom: -2px;
 }
+
+ion-searchbar {
+    --box-shadow: none !important;
+    border-radius: 12px;
+    --background: white;
+    border: solid 1.5px #E0C8C2;
+    --icon-color: #E0C8C2 !important;
+    --icon-weight: 3em !important; 
+    --placeholder-font-weight: 550;
+    overflow: hidden;
+    height:2.7em;
+}

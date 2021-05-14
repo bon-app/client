@@ -3,7 +3,7 @@
 <ion-content>
   <div class="container" *ngIf="receipt">
     <div id="back">
-      <ion-button size="small" fill="outline" color="secondary" (click)="navCtrl.back()">{{'Receipt.back' | translate}}
+      <ion-button size="small" class="custom-back-button" fill="outline"  (click)="navCtrl.back()">{{'Receipt.back' | translate}}
       </ion-button>
     </div>
     <ion-grid class="neutral">

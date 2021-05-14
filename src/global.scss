@@ -162,6 +162,11 @@ ion-card.recipesBox {
     src: url('./assets/font/recoleta-semibold.otf');
 }
 
+/*Font Globale Poppins*/
+@font-face {   
+    font-family: 'Poppins';    //This is what we are going to call
+    src: url('./assets/font/Poppins-SemiBold.ttf');
+}
 
 /*RESPONSIVE RULES*/
 
@@ -225,4 +230,16 @@ ion-auto-complete {
         overflow: hidden;
         overflow-y: auto;
     }
+}
+
+.custom-back-button {
+    margin:5px;
+    font-size:0.88em;
+    font-weight: 600;
+    --border-width:2px;
+    height:24px;
+    width: 49px;
+    color: #E0C8C2;
+    border-color: #E0C8C2;
+    --border-color: #E0C8C2;
 }

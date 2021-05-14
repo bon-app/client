@@ -1,30 +1,33 @@
-<div>
+<div style="margin:5px">
   <div class="title">
     <h1 style='margin-top:10px'> {{settings?.title ? settings.title : config.title}}</h1>
     <div class="partial-border light partial-on-left ion-margin-bottom"></div>
   </div>
 
   <div>
-    <div class="flex-center">
-      <ion-button fill="clear" size="icon-only" (click)="add.emit()" class="ion-margin-top ion-margin-bottom">
-        <ion-icon name="add"></ion-icon>
+    <div #but>
+      <ion-button class="ion-margin-top ion-margin-bottom" style="font-size: 1.3em; font-weight: 700;" fill="clear" color="primary" (click)="add.emit()">
+        <ion-icon style="margin-right:10px" color="primary" name="add"></ion-icon> 
+        {{(settings?.title || config.title) == 'Gestione ricette' ? 'Aggiungi una ricetta' : 'Aggiungi'}}
       </ion-button>
-      <ion-searchbar [(ngModel)]="filterBuilder.term" debounce="300" (ngModelChange)="createFilter()"></ion-searchbar>
-      <ion-button size="icon-only" [color]="!showFilter? 'secondary' : 'primary'" fill="clear"
-        class="ion-margin-top ion-margin-bottom" (click)="showFilter = !showFilter">
-        <ion-icon name="funnel" [color]="!showFilter? 'secondary' : 'primary'"></ion-icon>
-      </ion-button>
-
       <ion-button *ngFor="let button of (extraButtons || [])" size="icon-only" color="secondary" fill="clear"
         class="ion-margin-top ion-margin-bottom" (click)="extraButtonClick.emit({ key:button.key, data: null })">
         <ion-icon [name]="button.icon" color="secondary"></ion-icon>
       </ion-button>
     </div>
+    <div style="padding-right:2em">
+      <div class="flex-center">
+        <ion-button size="icon-only" color="secondary" fill="clear"
+         (click)="showFilter = !showFilter">
+        <ion-icon [name]="(showFilter==true)?'funnel':'funnel-outline'" color="#E0C8C2"></ion-icon>
+        </ion-button>
+        <ion-searchbar [(ngModel)]="filterBuilder.term" debounce="300" (ngModelChange)="createFilter()"></ion-searchbar>
+      </div>
 
-    <dynamic-factory #filterComp *ngIf="showFilter" [component]="filterComponent.type" [props]="filterComponent.props"
-      (catchEvent)="handleFilterEvent($event)">
-    </dynamic-factory>
-
+      <dynamic-factory #filterComp *ngIf="showFilter" [component]="filterComponent.type" [props]="filterComponent.props"
+        (catchEvent)="handleFilterEvent($event)">
+      </dynamic-factory>
+    </div>
   </div>
 
   <dynamic-factory #list *ngIf="listComponent.type" [component]="listComponent.type" [props]="listComponent.props"

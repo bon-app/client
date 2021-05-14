@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, Type, ViewChild } from '@angular/core';
+import { truncate } from 'fs';
 import { DynamicFactory } from '../../core/dynamic-factory';
 import { IDynamicFilterBuilder } from '../../core/dynamic-filter.interface';
 import { DynamicFormFieldConfig } from '../../core/dynamic-form-field.config';
@@ -29,7 +30,7 @@ export class DynamicListComponent implements OnInit, OnChanges {
   @Output("rowLengthChange") rowLengthChange: EventEmitter<any> = new EventEmitter<any>();
 
   public fields: DynamicFormFieldConfig[] = [];
-  public showFilter: boolean = false;
+  public showFilter: boolean = true;
   public filter: any = {};
   public filterBuilder: IDynamicFilterBuilder;
   public filterComponent: {
@@ -85,6 +86,7 @@ export class DynamicListComponent implements OnInit, OnChanges {
       fields: this.fields,
       settings: this.settings
     }
+    if ((this.settings?.title || this.config.title) == 'Gestione ricette') {this.showFilter = false};
   }
 
   createFilter() {

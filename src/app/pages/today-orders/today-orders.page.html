@@ -1,6 +1,7 @@
 <bonapp-header></bonapp-header>
 
 <ion-content>
+	<ion-button class="custom-back-button" size="small" fill="outline" (click)="navCtrl.back()">{{'Receipt.back' | translate}}</ion-button>
 	<ion-list>
 		<ion-list-header>Ordini del giorno</ion-list-header>
 		<ion-item *ngFor="let order of orders" [routerLink]="'/orders/'+order.id">

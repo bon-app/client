@@ -71,12 +71,35 @@ ion-card {
 
   
 
-@media screen and (max-width: 400px) {
-    #less-button-container {
-        ion-button::part(native) {
-            padding: 0.5em;
-        }
-        }
+// @media screen and (max-width: 400px) {
+//     #less-button-container {
+//         ion-button::part(native) {
+//             padding: 0.5em;
+//         }
+//         }
+//     }
+
+.narrow {
+    ion-button::part(native) {
+        padding: 0em;
+        margin-right:0em !important;
     }
+    #show-quantity {
+        padding-right: 0.1em
+    }
+}
 
-
+.normal {
+    ion-button::part(native) {
+        padding: 0em;
+        margin-right:0em !important;
+    }
+    #less-quantity {
+        margin-right: getObjectWidth('foo')px;
+        padding: 0.5em
+    }
+    #show-quantity {
+        margin-right:0.3em;
+        padding: 0.5em
+    }
+}
