@@ -191,6 +191,16 @@ random-receipts {
   margin-left: calc(50% - 15px);
 }
 
+.partial-bor {
+  background: #efbdae;
+  width: 30px;
+  border-radius : 10px;
+  height: 3px;
+  margin: auto;
+  margin-top: 0.7em;
+  margin-bottom: 0.8em;
+}
+
 
 .filtertext {
   color: #3b3b3b;
@@ -255,8 +265,13 @@ random-receipts {
     font-size:1em;
   }
 
+  #zone {
+    margin-top: 10px;
+    margin-bottom: 5px;
+  }
+
   #questions {
-    margin-top: 12px;
+    margin-top: 5px;
     margin-bottom: 10px;
   }
 

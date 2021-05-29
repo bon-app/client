@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, Type, ViewChild } from '@angular/core';
-import { truncate } from 'fs';
 import { DynamicFactory } from '../../core/dynamic-factory';
 import { IDynamicFilterBuilder } from '../../core/dynamic-filter.interface';
 import { DynamicFormFieldConfig } from '../../core/dynamic-form-field.config';

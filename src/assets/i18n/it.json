@@ -101,7 +101,7 @@
     "RandomReceipts": {
         "title": "Scelte per questa sera",
         "results": "Risultati",
-        "no_results": "Caricando le ricette..."
+        "no_results": "Nessuna ricetta trovata con i filtri attuali.."
     },
     "Receipt": {
         "back": "Back",

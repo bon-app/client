@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { Ingredient } from 'src/app/models/ingredient.model';
 import { Router } from '@angular/router';
+import { NullTemplateVisitor } from '@angular/compiler';
 
 @Component({
   selector: 'app-receipt-buy',
@@ -20,10 +21,12 @@ export class ReceiptBuyPage implements OnInit {
 
   public categories: Category[] = [];
   public ingredients: Ingredient[] = [];
-
+  public ingredientIds: any;
   public selectedCategories: Category[] = [];
   public receipt: Receipt;
   public seach_term: string;
+  private topolino: any;
+  public selectedSubCategory: Category;
 
   constructor(
     public router: Router,
@@ -45,10 +48,19 @@ export class ReceiptBuyPage implements OnInit {
     }
   }
 
+  // async ionViewWillEnter() {
+  //   await this.getReceipts();
+  // }
+
+  // async getCategories() {
+  //   this.categories = await this.categoriesService.find({ showBeforeCheckout: { $ne: true }, showInShop: true }, ['-__v'], 0, 50, { name: 1 }, ['ingredients', 'subcategories'])
+  // }
+
   async ionViewWillEnter() {
     let loading = await this.loadingCtrl.create({message: 'Loading...'});
     loading.present();
     try {
+      // load all categories
       this.categories = await this.categoriesService.find({ showBeforeCheckout: { $ne: true }, showInShop: true }, ['-__v'], 0, 50, { name: 1 }, ['ingredients', 'subcategories'])
       // if user comes from a recipe:
       if (this.route.snapshot.params.id) {
@@ -78,6 +90,7 @@ export class ReceiptBuyPage implements OnInit {
     }
   }
 
+  // only for recipes
   getIngredients(isCondiment: boolean = null) {
 
     let ingredients = []
@@ -91,8 +104,18 @@ export class ReceiptBuyPage implements OnInit {
         ingredients.push(first.ingredient);
       }
     }
-
     return ingredients.filter(i => !!i);
+  }
+
+  customBack() {
+    if (this.receipt || (!this.seach_term && !this.selectedCategories.length)) {
+      this.navCtrl.back()
+    }
+    else {
+    this.seach_term = '';
+    this.selectedCategories = [];
+    this.selectedSubCategory = null;
+    }
   }
 
   goto(url: string) {
@@ -100,29 +123,59 @@ export class ReceiptBuyPage implements OnInit {
   }
 
   toggleCategory(category: Category) {
+    console.log(category)
     this.seach_term = '';
     if (!!this.selectedCategories.find(sc => sc.id == category.id)) {
+      console.log("this.selectedCategories",this.selectedCategories)
+      console.log("this.selectedCategories.find(sc => sc.id == category.id)",this.selectedCategories.find(sc => sc.id == category.id))
       this.selectedCategories = []; //this.selectedCategories.filter(sc => sc.id != category.id);
+      console.log("this.selectedCategories",this.selectedCategories)
     } 
     else {
       // this.selectedCategories.push(category);
       this.selectedCategories = [category];
+      console.log("this.selectedCategories",this.selectedCategories)
+      console.log("this.selectedCategories[0].subcategories[0]",this.selectedCategories[0].subcategories[0])
+      this.toggleSubCategory(this.selectedCategories[0].subcategories[0] as Category)
     }
   }
 
   async toggleSubCategory(subcategory: Category) {
-    let ingredientIds = typeof subcategory.ingredients[0] == 'string' ? subcategory.ingredients : subcategory.ingredients.map((i: Ingredient) => i.id)
+    console.log('subcategory',subcategory)
+    this.ingredientIds = typeof subcategory.ingredients[0] == 'string' ? subcategory.ingredients : subcategory.ingredients.map((i: Ingredient) => i.id)
     let categoryIds = typeof subcategory.subcategories[0] == 'string' ? subcategory.subcategories : subcategory.subcategories.map((i: Category) => i.id)
-    let promises = [
-      this.ingredientsService.find({ $expr: { $in: [{ $toString: '$_id' }, ingredientIds] } }, ['-__v'], 0, 100, 'name', ['ingredients']),
-      this.categoriesService.find({ $expr: { $in: [{ $toString: '$_id' }, categoryIds] } }, ['-__v'], 0, 100, 'name', ['subcategories'])
-    ];
-    let results = await Promise.all(promises as any[])
-    subcategory.ingredients = results[0];
-    subcategory.subcategories = results[1];
-
-    this.toggleCategory(subcategory);
+    subcategory.ingredients = await this.ingredientsService.find({ $expr: { $in: [{ $toString: '$_id' }, this.ingredientIds] } }, ['-__v'], 0, 24, 'name', ['ingredients']);
+    subcategory.subcategories = await this.categoriesService.find({ $expr: { $in: [{ $toString: '$_id' }, categoryIds] } }, ['-__v'], 0, 30, 'name', ['subcategories']);
+    // this.toggleCategory(subcategory);
+    this.selectedSubCategory = subcategory;
+    this.topolino = subcategory;
   }
+
+  async loadMoreIngredients(event: any = null, selectedSubCategory: Category) {
+    try {
+      selectedSubCategory.ingredients.push(...(await this.ingredientsService.find({ $expr: { $in: [{ $toString: '$_id' }, this.ingredientIds] } }, ['-__v'], this.selectedSubCategory.ingredients.length, 24, 'name', ['ingredients'])));
+      // this.selectedSubCategory = [category]
+      if (event) event.target.complete();
+      return
+    }
+    catch (error) {
+    }
+  }
+
+  // async toggleSubCategory(subcategory: Category) {
+  //   let ingredientIds = typeof subcategory.ingredients[0] == 'string' ? subcategory.ingredients : subcategory.ingredients.map((i: Ingredient) => i.id)
+  //   let categoryIds = typeof subcategory.subcategories[0] == 'string' ? subcategory.subcategories : subcategory.subcategories.map((i: Category) => i.id)
+  //   let promises = [
+  //     this.ingredientsService.find({ $expr: { $in: [{ $toString: '$_id' }, ingredientIds] } }, ['-__v'], 0, 24, 'name', ['ingredients']),
+  //     this.categoriesService.find({ $expr: { $in: [{ $toString: '$_id' }, categoryIds] } }, ['-__v'], 0, 30, 'name', ['subcategories'])
+  //   ];
+  //   let results = await Promise.all(promises as any[])
+  //   subcategory.ingredients = results[0];
+  //   subcategory.subcategories = results[1];
+
+  //   this.toggleCategory(subcategory);
+  // }
+
 
   isCategorySelected(category: Category, includeSubcategories: boolean = false) {
     return !!this.selectedCategories.find(sc => sc.id == category.id);
@@ -134,7 +187,7 @@ export class ReceiptBuyPage implements OnInit {
 
   async searchIngredients() {
     let filter = { $or: [{ name: { $regex: `.*${this.seach_term}.*`, $options: 'i' } }, { brand: { $regex: `.*${this.seach_term}.*`, $options: 'i' } }] };
-    this.ingredients = await this.ingredientsService.find(filter, ['-__v'], 0, 100, '-name')
+    this.ingredients = await this.ingredientsService.find(filter, ['-__v'], 0, 50, '-name')
   }
 
   getSelf(obj) {

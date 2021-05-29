@@ -30,7 +30,6 @@ export class HomePage {
 
   async ionViewWillEnter() {
     await this.getReceipts();
-
   }
 
   async getReceipts(event: any = null, force: boolean = false) {

@@ -2,20 +2,16 @@
 
 <ion-content>
   <div class="container">
+    <div id="top" class="ion-padding">
+      <ion-button class="custom-back-button" size="small" fill="outline" (click)="navCtrl.back()">{{'Receipt.back' | translate}}</ion-button>
+      <h2>Prima di proseguire..</h2>
+      <ion-icon size="large" name="cart-outline"></ion-icon>
+    </div>
+
     <ion-grid>
       <ion-row>
-        <ion-col class="ion-padding flex-center" size-xs="12" size-sm="12" size-md="4" size-lg="4"  size-xl="4">
-          <ion-button fill="outline"  size="small" class="custom-back-button" (click)="navCtrl.back()">{{'Receipt.back' | translate}}
-          </ion-button>
-          <div class="ion-hide-md-up ion-margin-start" style="font-size: 1.4em;">Prima di proseguire...</div>
-        </ion-col>
-        <ion-col class="ion-padding ion-hide-md-down">
-          <h1>Prima di proseguire...</h1>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col size="4" class="ion-hide-md-down">
-
+        <!-- cart desktop -->
+        <ion-col size="4" class="ion-hide-lg-down">
           <ion-card id="cart">
             <ion-card-content>
               <ion-grid class="neutral">
@@ -79,6 +75,7 @@
           </ion-card>
 
         </ion-col>
+        <!-- expandibles categories -->
         <ion-col>
           <div [ngStyle]="{'margin-top': i>0? '3em': '0'}" *ngFor="let category of categories; let i = index">
             <div class="suggested-category ion-padding-start" (click)="category.showed = !getSelf(category).showed">
@@ -88,39 +85,12 @@
               </h2>
               <div class="partial-border light partial-on-left"></div>
             </div>
-
-            <ion-grid id="product-list" class="neutral" *ngIf="getSelf(category).showed">
+            <!-- products -->
+            <ion-grid class="neutral" *ngIf="getSelf(category).showed">
               <ion-row>
-                <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="4" size-xl="4"
+                <ion-col size-xs="6" size-sm="4" size-md="3" size-lg="3" size-xl="3" 
                   *ngFor="let product of getIngredients(category)">
-                  <ion-card class="product">
-                    <ion-card-content>
-                      <div class="product-img"
-                        [ngStyle]="{background: 'url('+product.icon_url+') no-repeat center center', 'background-size': 'contain'}">
-                      </div>
-                      <div class="product-brand" [title]="product.brand">
-                        <ion-text color="tertiary">{{product.brand}}</ion-text>
-                      </div>
-                      <div class="product-name" [title]="product.name">{{product.name}}</div>
-                      <div>
-                        <small><i>{{getSelf(product).qty}}</i></small>
-                      </div>
-                      <div class="product-price ion-margin-top">
-                        € {{(product.price? product.price.toFixed(2) : '-')}}
-                      </div>
-                      <div class="ion-text-center actions">
-                        <ion-button fill="clear" color="primary" size="small" (click)="cart.add(product, -1)" style="float:left" *ngIf="cart.getQta(product) > 0">
-                          <ion-icon name="remove"></ion-icon>
-                        </ion-button>
-                        <ion-button fill="clear" color="secondary" size="small" (click)="cart.add(product, -1)" *ngIf="cart.getQta(product) > 0">
-                          {{cart.getQta(product)}}
-                        </ion-button>
-                        <ion-button color="primary" size="small" (click)="cart.add(product, 1)" style="float:right">
-                          <ion-icon name="add"></ion-icon>
-                        </ion-button>
-                      </div>
-                    </ion-card-content>
-                  </ion-card>
+                  <product-card [product]="product"></product-card>
                 </ion-col>
               </ion-row>
             </ion-grid>
@@ -131,6 +101,6 @@
   </div>
 </ion-content>
 
-<footer-cart class="ion-hide-md-up" [options]="{ confirm_button_text: 'ReceiptBuy.goto_checkout' }"
+<footer-cart class="ion-hide-lg-up" [options]="{ confirm_button_text: 'ReceiptBuy.goto_checkout' }"
   (confirm)="goto('/checkout')">
 </footer-cart>

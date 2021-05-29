@@ -16,14 +16,16 @@ export class ProductCardComponent implements OnInit {
     public cart: CartService,
   ){}
 
-  ngOnInit() {console.log(this.getObjectWidth('foo')) }
+  ngOnInit() {
+    console.log('card loaded')}
+
 
   getSelf(obj) {
     return obj as any;
   }
 
-  getObjectWidth(id) {
-    return document.getElementById(id).offsetWidth
+  getCardWidth() {
+    return document.getElementsByName('card').item(document.getElementsByName('card').length-1).offsetWidth
   }
 
 }

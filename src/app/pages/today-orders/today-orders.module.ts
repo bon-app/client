@@ -8,6 +8,7 @@ import { TodayOrdersPageRoutingModule } from './today-orders-routing.module';
 
 import { TodayOrdersPage } from './today-orders.page';
 import { ComponentsModule } from 'src/app/components/components.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { ComponentsModule } from 'src/app/components/components.module';
     FormsModule,
     IonicModule,
     TodayOrdersPageRoutingModule,
-    ComponentsModule
+    ComponentsModule,
+    TranslateModule
   ],
   declarations: [TodayOrdersPage]
 })

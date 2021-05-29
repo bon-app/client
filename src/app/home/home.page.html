@@ -66,7 +66,7 @@
                       <ion-icon src="assets/filters/qne.svg"></ion-icon>
                     </div>
                     <div class="ion-text-center ssprofont boldtext">
-                      Quick & Easy
+                      Quick&Easy
                     </div>
                   </div>
                 </ion-card-content>
@@ -143,7 +143,7 @@
       <div class="flex-center" >
         <ion-grid class="ion-no-padding">
           <ion-row>
-            <ion-col size-xs="4" size-sm="3" size-md="3" size-lg="3" size-xl="3" class="pad-5">
+            <ion-col size-xs="4" size-sm="4" size-md="3" size-lg="3" size-xl="3" class="pad-5">
               <ion-card [ngClass]="{'active': _filter.tags.indexOf('first') > -1}" (click)="onChangeFilter('first')">
                 <ion-card-content class="flex-center">
                   <div>
@@ -157,7 +157,7 @@
                 </ion-card-content>
               </ion-card>
             </ion-col>
-            <ion-col size-xs="4" size-sm="3" size-md="3" size-lg="3" size-xl="3" class="pad-5">
+            <ion-col size-xs="4" size-sm="4" size-md="3" size-lg="3" size-xl="3" class="pad-5">
               <ion-card [ngClass]="{'active': _filter.tags.indexOf('second') > -1}" (click)="onChangeFilter('second')">
                 <ion-card-content class="flex-center">
                   <div>
@@ -171,7 +171,7 @@
                 </ion-card-content>
               </ion-card>
             </ion-col>
-            <ion-col size-xs="4" size-sm="3" size-md="3" size-lg="3" size-xl="3" class="pad-5">
+            <ion-col size-xs="4" size-sm="4" size-md="3" size-lg="3" size-xl="3" class="pad-5">
               <ion-card [ngClass]="{'active': _filter.tags.indexOf('healthy') > -1}"
                 (click)="onChangeFilter('healthy')">
                 <ion-card-content class="flex-center">
@@ -188,7 +188,7 @@
             </ion-col>
             </ion-row>
             <ion-row>
-            <ion-col size-xs="4" size-sm="3" size-md="3" size-lg="3" size-xl="3" class="pad-5">
+            <ion-col size-xs="4" size-sm="4" size-md="3" size-lg="3" size-xl="3" class="pad-5">
               <ion-card [ngClass]="{'active': _filter.tags.indexOf('quick-n-easy') > -1}"
                 (click)="onChangeFilter('quick-n-easy')">
                 <ion-card-content class="flex-center">
@@ -203,7 +203,7 @@
                 </ion-card-content>
               </ion-card>
             </ion-col>
-            <ion-col size-xs="4" size-sm="3" size-md="3" size-lg="3" size-xl="3" class="pad-5">
+            <ion-col size-xs="4" size-sm="4" size-md="3" size-lg="3" size-xl="3" class="pad-5">
               <ion-card [ngClass]="{'active': _filter.tags.indexOf('vegetarian') > -1}"
                 (click)="onChangeFilter('vegetarian')">
                 <ion-card-content class="flex-center">
@@ -218,7 +218,7 @@
                 </ion-card-content>
               </ion-card>
             </ion-col>
-            <ion-col size-xs="4" size-sm="3" size-md="3" size-lg="3" size-xl="3" class="pad-5">
+            <ion-col size-xs="4" size-sm="4" size-md="3" size-lg="3" size-xl="3" class="pad-5">
               <ion-card [ngClass]="{'active': _filter.tags.indexOf('no-oven') > -1}"
                 (click)="onChangeFilter('no-oven')">
                 <ion-card-content class="flex-center">
@@ -263,9 +263,19 @@
     </div>
 
     <!-- Mostra le ricette -->
-    <random-receipts [receipts]="receipts"></random-receipts>
-
-
+    <ion-grid>
+      <ion-row>
+        <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="4" size-xl="4" *ngFor="let receipt of receipts">
+          <random-receipts [receipt]="receipt"></random-receipts>
+        </ion-col>
+        <!-- if no results -->
+        <ion-col id="no-results" class="flex-center" *ngIf="!receipts.length">
+          <div class="ion-text-center" style="width: 100%">
+            <h3>:( <br> {{"RandomReceipts.no_results" | translate}}</h3>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
     <ion-infinite-scroll threshold="100px" (ionInfinite)="getReceipts($event)">
       <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more recipes...">
       </ion-infinite-scroll-content>
@@ -296,6 +306,8 @@
     </div> -->
     <!-- <p>Servizio di consegna attivo su Milano zona<br/>Porta Romana, Bocconi, Navigli</p> -->
     <!-- <p id="explanation">BonApp: ingredienti a domicilio <br> con proposta di ricette</p> -->
+    <p id="zone">Zona operativa: Milano Porta Romana - Bocconi</p>
+    <div class="partial-bor"></div>
     <p id="questions"><em>Dubbi o domande? Clicca in alto a sinistra</em></p>
     <ion-button strong="true" class="ion-margin" fill="outline" (click)="isShow = false">
       VAI!

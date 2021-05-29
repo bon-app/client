@@ -10,7 +10,7 @@ import { Receipt } from 'src/app/models/receipt.model';
 })
 export class RandomReceiptsComponent implements OnInit {
 
-  @Input("receipts") receipts: Receipt[] = []
+  @Input("receipt") receipt: Receipt[] = []
 
   constructor(private navCtrl: NavController) { }
 

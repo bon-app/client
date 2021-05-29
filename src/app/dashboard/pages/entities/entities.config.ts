@@ -477,6 +477,19 @@ export const ENTITIES = {
                 },
             },
             {
+                key: 'verified',
+                type: 'checkbox',
+                defaultValue: false,
+                templateOptions: {
+                    label: 'Is verified?',
+                },
+                list: {
+                    parser: 'checkbox',
+                    filter_type: 'checkbox',
+                    filterable: true,
+                },
+            },
+            {
                 key: 'priority',
                 type: 'input',
                 defaultValue: 1000,

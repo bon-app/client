@@ -2,10 +2,9 @@
 
 <ion-content>
   <div class="container">
-
     <!-- back button and searchbar -->
     <div id="top" class="ion-padding">
-      <ion-button class="custom-back-button" size="small" fill="outline" (click)="navCtrl.back()">{{'Receipt.back' | translate}}</ion-button>
+      <ion-button class="custom-back-button" size="small" fill="outline" (click)="customBack()">{{'Receipt.back' | translate}}</ion-button>
       <h2>Il supermercato di BonApp</h2>
       <ion-icon size="large" name="cart-outline"></ion-icon>
       <!-- searchbar with continious input listner -->
@@ -18,13 +17,35 @@
       </div> -->
     </div>
 
-    <!-- categories mobile -->
-    <div class="ion-padding ion-hide-lg-up" id="categories-mobile">
+    <!-- categories mobile (from recipe)-->
+    <div *ngIf="receipt" class="ion-padding ion-hide-lg-up" id="categories-mobile">
       <!-- <ion-label class="ion-margin-bottom">{{"ReceiptBuy.categories" | translate}}</ion-label> -->
       <ion-select interface="action-sheet" placeholder="Esplora le categorie" (ionChange)="selectChange($event)">
-        <ion-select-option [value]="'receipt'" *ngIf="receipt">{{receipt.name}}</ion-select-option>
+        <ion-select-option [value]="'receipt'">{{receipt.name}}</ion-select-option>
         <ion-select-option [value]="category" *ngFor="let category of categories">{{category.name}}</ion-select-option>
       </ion-select>
+    </div>
+
+    <!-- categories mobile (shop general)-->
+    <div *ngIf="!receipt && !seach_term && !selectedCategories.length" class="ion-padding ion-hide-lg-up">
+      <ion-grid class="neutral">
+        <ion-row>
+          <ion-col size-xs="6" size-sm="6" size-md="4" size-lg="4" size-xl="4"
+            *ngFor="let category of categories">
+            <ion-card style="margin:4px; height:150px" button (click)="toggleCategory(category)">
+              <ion-card-content style="padding:7px;">
+                <div class="product-img"
+                  [ngStyle]="{background: 'url('+getSelf(category).image_url+') no-repeat center center', 'background-size': 'contain'}">
+                </div>
+                <div *ngIf="19 > getSelf(category).name.length" style="margin-top:1em"></div>
+                <div style="font-weight: 600; line-height: normal;" class="product-name ion-text-center" [title]="getSelf(category).name">
+                  {{getSelf(category).name}}
+                </div>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </div>
 
     <ion-grid>
@@ -65,45 +86,10 @@
             </div>
             <ion-grid class="neutral">
               <ion-row>
-                <!-- <ion-col class="ion-hide-sm-down" size-xs="12" size-sm="4" size-md="4" size-lg="4" size-xl="4"
-                  *ngFor="let product of getIngredients(false)">
-                  <product-card [product]="product"></product-card>
-                </ion-col> -->
                 <ion-col size-xs="6" size-sm="4" size-md="3" size-lg="3" size-xl="3" 
                 *ngFor="let product of getIngredients(false)">
                   <product-card [product]="product"></product-card>
                 </ion-col>
-                <!-- <ion-card>
-                    <ion-card-content>
-                      <div class="product-img"
-                        [ngStyle]="{background: 'url('+product.icon_url+') no-repeat center center', 'background-size': 'contain'}">
-                      </div>
-                      <div class="product-brand" [title]="product.brand">
-                        <ion-text color="tertiary">{{product.brand}}</ion-text>
-                      </div>
-                      <div class="product-name" [title]="product.name">{{product.name}}</div>
-                      <div>
-                        <small><i>{{getSelf(product).qty}}</i></small>
-                      </div>
-                      <div class="prod-card-bottom">
-                        <div class="product-price">
-                          € {{(product.price? product.price.toFixed(2) : '-')}}
-                        </div>
-                        <div class="actions">
-                          <ion-button fill="clear" color="primary" size="small" (click)="cart.add(product, -1)" *ngIf="cart.getQta(product) > 0">
-                            <ion-icon name="remove"></ion-icon>
-                          </ion-button>
-                          <ion-button fill="clear" color="secondary" size="small" *ngIf="cart.getQta(product)>0" style="margin-left:0;margin-right:1em;">
-                            {{cart.getQta(product)}}
-                          </ion-button>
-                          <ion-button color="primary" size="small" (click)="cart.add(product, 1)">
-                            <ion-icon name="add"></ion-icon>
-                          </ion-button>
-                        </div>
-                      </div>
-                    </ion-card-content>
-                  </ion-card> -->
-                
               </ion-row>
             </ion-grid>
             <!-- Condiments for recipe-->
@@ -125,52 +111,101 @@
           <ng-container *ngIf="!seach_term && selectedCategories.length">
             <div [ngStyle]="{'margin-top': i>0? '3em': '0'}" *ngFor="let category of selectedCategories; let i = index">
               <!-- subcategory title-->
-              <div class="ion-padding-start" *ngIf="category.subcategories.length">
-                <h2>
-                  <ion-text color="secondary">{{"ReceiptBuy.subcategories" | translate}}</ion-text>
-                </h2>
-                <div class="partial-border light partial-on-left"></div>
-              </div>
-              <!-- subcategories boxes -->
-              <ion-grid class="neutral">
-                <ion-row>
-                  <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="4" size-xl="4"
-                    *ngFor="let subcategory of category.subcategories">
-                    <ion-card button (click)="toggleSubCategory(subcategory)">
-                      <ion-card-content>
-                        <div class="product-img"
-                          [ngStyle]="{background: 'url('+getSelf(subcategory).image_url+') no-repeat center center', 'background-size': 'contain'}">
-                        </div>
-                        <div class="product-name ion-text-center" [title]="getSelf(subcategory).name">
-                          {{getSelf(subcategory).name}}
-                        </div>
-                      </ion-card-content>
-                    </ion-card>
-                  </ion-col>
-                </ion-row>
-              </ion-grid>
-
-              <!-- subcategory title -->
-              <div class="ion-padding-start" *ngIf="category.ingredients?.length">
+              <div class="ion-padding-start" *ngIf="category.subcategories.length" >
                 <h2>
                   <ion-text color="secondary">{{category.name}}</ion-text>
                 </h2>
-                <div class="partial-border light partial-on-left" style="margin-bottom: 1em;"></div>
+                <div class="partial-border light partial-on-left"></div>
               </div>
-              <!-- subcategory products -->
-              <ion-grid class="neutral">
-                <ion-row>
-                  <ion-col size-xs="6" size-sm="4" size-md="3" size-lg="3" size-xl="3" 
-                    *ngFor="let product of category.ingredients">
-                    <product-card [product]="product"></product-card>
-                  </ion-col>
-                </ion-row>
-              </ion-grid>
+             
+              <!-- subcategories boxes -->
+              <!-- <div style="padding:8px">
+                <ion-grid class="neutral">
+                  <ion-row>
+                    <ion-col size-xs="4" size-sm="6" size-md="4" size-lg="4" size-xl="4"
+                      *ngFor="let subcategory of category.subcategories">
+                      <ion-card style="margin:4px;" button (click)="toggleSubCategory(subcategory)">
+                        <ion-card-content style="padding:7px;">
+                          <div class="product-img"
+                            [ngStyle]="{background: 'url('+getSelf(subcategory).image_url+') no-repeat center center', 'background-size': 'contain'}">
+                          </div>
+                          <div class="product-name ion-text-center" style="font-weight: 600;" [title]="getSelf(subcategory).name">
+                            {{getSelf(subcategory).name}}
+                          </div>
+                        </ion-card-content>
+                      </ion-card>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </div> -->
+              <!-- <div style=" padding:8px;">
+                <ion-card *ngFor="let subcategory of category.subcategories" style="margin:4px; max-width: fit-content;" button (click)="toggleSubCategory(subcategory)">
+                  <ion-card-content style="padding:7px; max-width:fit-content">
+                    <div class="product-name ion-text-center" style="font-weight: 600; max-width:fit-content" [title]="getSelf(subcategory).name">
+                      {{getSelf(subcategory).name}}
+                    </div>
+                  </ion-card-content>
+                </ion-card>
+              </div>  -->
+              <div style="padding:8px;">
+                <ion-chip *ngFor="let subcategory of category.subcategories" style="margin:4px; background-image: linear-gradient(45deg, #F6D0C5, #FFF4F1); border-radius: 8px;" button (click)="toggleSubCategory(subcategory)">
+                    <ion-label style="font-weight: 600" [title]="getSelf(subcategory).name">
+                      {{getSelf(subcategory).name}}
+                    </ion-label>
+                </ion-chip>
+              </div> 
+
+              <!-- category title -->
+              <div *ngIf="category.ingredients?.length">
+                <div class="ion-padding-start">
+                  <h2>
+                    <ion-text color="secondary">{{category.name}}</ion-text>
+                  </h2>
+                  <div class="partial-border light partial-on-left" style="margin-bottom: 1em;"></div>
+                </div>
+                <!-- category products -->
+                <ion-grid class="neutral">
+                  <ion-row>
+                    <ion-col size-xs="6" size-sm="4" size-md="3" size-lg="3" size-xl="3" 
+                      *ngFor="let product of category.ingredients">
+                      <product-card [product]="product"></product-card>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+                <ion-infinite-scroll threshold="100px" (ionInfinite)="loadMoreIngredients($event, category)">
+                  <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more products...">
+                  </ion-infinite-scroll-content>
+                </ion-infinite-scroll>
+              </div>
+
+              <!-- subcategory title -->
+              <div *ngIf="selectedSubCategory">
+                <div class="ion-padding-start">
+                  <h2>
+                    <ion-text color="secondary">{{selectedSubCategory.name}}</ion-text>
+                  </h2>
+                  <div class="partial-border light partial-on-left" style="margin-bottom: 1em;"></div>
+                </div>
+                <!-- subcategory products -->
+                <ion-grid class="neutral">
+                  <ion-row>
+                    <ion-col size-xs="6" size-sm="4" size-md="3" size-lg="3" size-xl="3" 
+                      *ngFor="let product of selectedSubCategory.ingredients">
+                      <product-card [product]="product"></product-card>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+                <ion-infinite-scroll threshold="100px" (ionInfinite)="loadMoreIngredients($event, selectedSubCategory)">
+                  <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more products...">
+                  </ion-infinite-scroll-content>
+                </ion-infinite-scroll>
+              </div>
+              
             </div>
           </ng-container>
 
           <!-- products container for SEARCH -->
-          <ng-container *ngIf="(!receipt || seach_term)">
+          <ng-container *ngIf="(!receipt && seach_term)">
             <div>
               <!-- search title -->
               <div class="ion-padding-start">

@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Order } from "src/app/models/order.model";
 import { OrdersService } from "src/app/services/orders.service";
+import { NavController } from '@ionic/angular';
 
 @Component({
 	selector: "app-today-orders",
@@ -10,7 +11,7 @@ import { OrdersService } from "src/app/services/orders.service";
 export class TodayOrdersPage implements OnInit {
 	public orders: Order[] = [];
 
-	constructor(private ordersService: OrdersService) {}
+	constructor(private ordersService: OrdersService, public navCtrl: NavController) {}
 
 	async ionViewWillEnter() {
 		let start = new Date();
@@ -20,6 +21,8 @@ export class TodayOrdersPage implements OnInit {
 		this.orders = await this.ordersService.find({ created: { $gte: start, $lte: end } }, ["-__v"], 0, 1000, "-created");
 	}
 
-	ngOnInit() {}
+	ngOnInit() {
+		console.log('this.orders:',this.orders)
+	}
 }
 
