@@ -220,7 +220,8 @@ export const ENTITIES = {
                 },
                 list: {
                     parser: 'count',
-                    filterable: false
+                    filterable: false,
+
                 },
 
             },
@@ -288,7 +289,9 @@ export const ENTITIES = {
                 },
                 list: {
                     parser: 'count',
-                    filter_type: 'range',
+                    filterable: false,
+                    // filter_type: 'range',
+                    
                 },
 
             }
