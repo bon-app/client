@@ -18,7 +18,21 @@ export class CRUDService<T> {
             take: '' + take,
             orderBy: orderBy? orderBy : this.defaulSort
         }
+        console.log('filter params', params);
+
         return this.http.get<T[]>(this.endpoint, { params }).pipe(retry(2)).toPromise()
+    }
+
+    findByUser(user:string, fields: string[], skip: number,take: number,orderBy: any, includes: string[] = []): Promise<T[]>{
+        let params = {
+            filter: JSON.stringify({}),
+            fields: fields.join(' '),
+            includes: includes.join(' '),
+            skip: '' + skip,
+            take: '' + take,
+            orderBy: orderBy? orderBy : this.defaulSort
+        }
+        return this.http.get<T[]>(`${this.endpoint}/${user}`, { params }).pipe(retry(2)).toPromise()
     }
 
     findOne(filter: any, fields: string[], orderBy: any, includes: string[] = []): Promise<T> {
