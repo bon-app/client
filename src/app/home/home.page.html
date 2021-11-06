@@ -276,10 +276,17 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-    <ion-infinite-scroll threshold="100px" (ionInfinite)="getReceipts($event)">
+
+    <ion-infinite-scroll *ngIf="fromCreator" threshold="100px" (ionInfinite)="getCreatorRecipes($event)">
       <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more recipes...">
       </ion-infinite-scroll-content>
     </ion-infinite-scroll>
+
+    <ion-infinite-scroll *ngIf="!fromCreator" threshold="100px" (ionInfinite)="getReceipts($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more recipes...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
   </div>
 </ion-content>
 

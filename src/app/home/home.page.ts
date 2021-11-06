@@ -25,6 +25,7 @@ export class HomePage {
 
   public isShow: boolean = true;
   userName: string;
+  fromCreator: boolean = false;
 
   constructor(private receiptsService: ReceiptsService, private route: ActivatedRoute, private rimsService: RimsService, private translate: TranslateService) {
     this.rimsProvider = new RimsDataProvider(rimsService);
@@ -33,29 +34,43 @@ export class HomePage {
   }
 
   async ionViewWillEnter() {
-    await this.getReceipts();
+    if (this.userName == null) {
+      await this.getReceipts();
+    } else {
+      await this.getCreatorRecipes();
+    }
+    // console.log('source',this.userName)
   }
 
   async getReceipts(event: any = null, force: boolean = false) {
 
     let skip = force ? 0 : this.receipts.length || 0;
     try {
-      if (this.userName != null) {
-        this.receipts = await this.receiptsService.findByUser(this.filter, ['-__v'], skip, 12, '-priority', ['ingredients.ingredient']);
-      }
       if (skip > 0 && !force) {
         this.receipts.push(...(await this.receiptsService.find(this.filter, ['-__v'], skip, 12, '-priority', ['ingredients.ingredient'])));
-        // console.log('infinite loaded recipes', this.receipts);
         if (event) event.target.complete();
         return
       }
       this.receipts = await this.receiptsService.find(this.filter, ['-__v'], skip, 12, '-priority', ['ingredients.ingredient']);
-      // console.log('recipes', this.receipts);
       if (event) event.target.complete();
 
     } catch (error) {
 
     }
+  }
+
+  async getCreatorRecipes(event: any = null, force: boolean = false) {
+    this.fromCreator = true;
+    let skip = force ? 0 : this.receipts.length || 0;
+
+    if (skip > 0 && !force) {
+      this.receipts.push(...(await this.receiptsService.findByUser(this.userName, this.filter, ['-__v'], skip, 12, '-priority', ['ingredients.ingredient'])));
+      if (event) event.target.complete();
+      return
+    }
+    this.receipts = await this.receiptsService.findByUser(this.userName, this.filter, ['-__v'], skip, 12, '-priority', ['ingredients.ingredient']);
+    if (event) event.target.complete();
+
   }
 
   async onChangeFilter(value) {
