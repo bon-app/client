@@ -18,7 +18,7 @@ export class CRUDService<T> {
             take: '' + take,
             orderBy: orderBy? orderBy : this.defaulSort
         }
-        console.log('filter params', params);
+        // console.log('filter params', params);
 
         return this.http.get<T[]>(this.endpoint, { params }).pipe(retry(2)).toPromise()
     }

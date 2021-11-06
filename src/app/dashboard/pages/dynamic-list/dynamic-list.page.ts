@@ -42,6 +42,9 @@ export class DynamicListPage implements OnInit {
     this.service = this.injector.get(SERVICES_MAPPER.get(this.config.service));
     let findOptions = this.config.crudOptions.find || {};
     this.data = await this.service.find({}, findOptions.fields || ['-__v'], 0, this.settings.row_length, findOptions.orderBy, findOptions.includes);
+
+    // console.log('data',this.data)
+
     if (this.data.length < this.settings.row_length) {
       this.settings.showMoreButton = false;
     }
@@ -51,15 +54,16 @@ export class DynamicListPage implements OnInit {
     let entity = this.route.snapshot.params.entity;
     this.entity = entity
     this.config = ENTITIES[entity];
-    console.log('ionViewDidEnter - config:', this.config)
+    // console.log('ionViewDidEnter - config:', this.config)
 
     this.service = this.injector.get(SERVICES_MAPPER.get(this.config.service));
-    console.log('ionViewDidEnter - service:', this.service)
+    // console.log('ionViewDidEnter - service:', this.service)
     this.getRecords(true);
   }
 
   goto(url) {
     this.navCtrl.navigateForward(url);
+    // console.log('url',url)
   }
 
   async deleteElement($event) {
