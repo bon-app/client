@@ -23,7 +23,7 @@ export class HomePage {
     active: true
   }
 
-  public isShow: boolean = true;
+  public isShow: boolean = false;
   userName: string;
   fromCreator: boolean = false;
 
