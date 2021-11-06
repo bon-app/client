@@ -19,28 +19,33 @@ export class DynamicFormPage implements OnInit {
 
   public service: CRUDService<any>;
 
-  constructor(private route: ActivatedRoute, private injector: Injector, 
+  constructor(private route: ActivatedRoute, private injector: Injector,
     public navCtrl: NavController, private loadingCtrl: LoadingController, private auth: AuthService) {
 
   }
 
   ngOnInit() {
-    console.log('dynamic-form ngOnInit:', this.model)
+    // console.log('dynamic-form ngOnInit:', this.model)
   }
 
   async ionViewWillEnter() {
     let entity = this.route.snapshot.params.entity;
     let id = this.route.snapshot.params.id;
     this.config = ENTITIES[entity];
-    this.model = new (ENTITIES_MAPPER.get(this.config.object))();
+    // this.model = new (ENTITIES_MAPPER.get(this.config.object))();
     this.service = this.injector.get(SERVICES_MAPPER.get(this.config.service));
-    console.log('dynamic-form ionViewWillEnter:',this.model)
+    // console.log('dynamic-form ionViewWillEnter:',this.model)
 
-    if (id) {
+    if (!id) {
+      this.model = new (ENTITIES_MAPPER.get(this.config.object))();
+    }
+    else {
       let findOptions = this.config.crudOptions.findOne || {};
       this.model = await this.service.findById(id, findOptions.fields || ['-__v'], findOptions.includes);
-      console.log('dynamic-form ionViewWillEnter if (id):',this.model)
+      // console.log('dynamic-form ionViewWillEnter if (id):',this.model)
     }
+    console.log('dynamic-form ionViewWillEnter if (id):', this.model)
+
   }
 
   async save($event) {
@@ -64,7 +69,7 @@ export class DynamicFormPage implements OnInit {
       // }
       await this.service.update(model, fields, fields);
       loading.dismiss();
-      console.log('dynamic-form save($event)',this.model)
+      // console.log('dynamic-form save($event)', this.model);
       this.navCtrl.back();
     } catch (error) {
       loading.dismiss();

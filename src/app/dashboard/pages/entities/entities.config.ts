@@ -959,7 +959,7 @@ export const ENTITIES = {
         fields: [
             {
                 key: 'name',
-                type: 'label',
+                type: 'input',
                 templateOptions: {
                     label: 'Name'
                 },
@@ -975,7 +975,7 @@ export const ENTITIES = {
             },
             {
                 key: 'surname',
-                type: 'label',
+                type: 'input',
                 templateOptions: {
                     label: 'Surname'
                 },
@@ -991,7 +991,7 @@ export const ENTITIES = {
             },
             {
                 key: 'email',
-                type: 'label',
+                type: 'input',
                 templateOptions: {
                     label: 'Email'
                 },
@@ -1002,9 +1002,20 @@ export const ENTITIES = {
             },
             {
                 key: 'phone',
-                type: 'label',
+                type: 'input',
                 templateOptions: {
                     label: 'Phone'
+                },
+                list: {
+                    filter_type: 'text',
+                    filterable: true,
+                }
+            },
+            {
+                key: 'nickname',
+                type: 'input',
+                templateOptions: {
+                    label: 'Nickname'
                 },
                 list: {
                     filter_type: 'text',

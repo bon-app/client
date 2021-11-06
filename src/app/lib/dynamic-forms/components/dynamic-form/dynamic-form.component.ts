@@ -17,9 +17,10 @@ export class DynamicFormComponent implements OnInit {
 
   public form = new FormGroup({});
 
-  constructor() { }
+  constructor() { } 
 
-  ngOnInit() { }
+  ngOnInit() { 
+  }
 
   save() {
     this.onsave.emit(this.model);

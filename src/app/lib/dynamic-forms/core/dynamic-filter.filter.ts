@@ -65,7 +65,7 @@ export class DefaultDynamicFilterBuilder implements IDynamicFilterBuilder {
                 filter.$and.push(f);
             }
         }
-        console.log(filter)
+        // console.log(filter)
         return filter.$and.length ? filter : {};
     }
 }
