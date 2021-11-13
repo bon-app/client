@@ -3,6 +3,10 @@
     margin-bottom: 2em;
   }
   
+#username {
+  text-transform: capitalize;
+}
+
   #subtitle1 {
     margin-top: 1.6em;
     // margin-bottom: 0.8em;
@@ -20,18 +24,28 @@
     //text-align: center;
   }
   
-  #title h1 {
+  #title 
+    h1 {
     font-family: Recoleta !important;
-  }
+    }
+
+    h2 {
+    font-size: 1.4em;
+    text-align: center;
+    color: #545454;
+    margin-bottom: 1em;
+    }
   
   h1 {
     text-align: center;
-    font-size: 1.8em;
+    font-size: 2.1em;
     margin-top: 0.1em;
+    margin-bottom: 0.8em;
   }
   
   h2 {
-    font-size: 1.2em;
+    font-size: 1.5em;
+    text-align: center;
     color: #545454;
   }
   

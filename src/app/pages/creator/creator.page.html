@@ -5,7 +5,8 @@
     <!-- title -->
     <div class="ion-hide-md-down" style="margin:2em"></div>
     <div id="title">
-      <h1>{{'Home.h1' | translate}}</h1>
+      <h1>Le ricette di <span id="username">{{userName}}</span></h1>
+      <h2>Sfoglia il ricettario di @<span id="username">{{userName}}</span> in base ai tuoi ingredienti e preferenze..</h2>
       <div class="partial-border ion-margin-top ion-margin-bottom"></div>
     </div>
     <!-- subtitle1: "Usa gli ingredienti che hai in frigo" -->
@@ -276,7 +277,7 @@
 </ion-content>
 
 <!-- Message popup  -->
-<div id="message" *ngIf="isShow && ('Messages.home' | translate)">
+<!-- <div id="message" *ngIf="isShow && ('Messages.home' | translate)">
   <div class="ion-text-center">
     <img src="assets/brand.png" alt=''/>
     <h2>Il tuo nuovo modo di fare la spesa..</h2>
@@ -295,4 +296,4 @@
       VAI!
     </ion-button>
   </div>
-</div>
+</div> -->
