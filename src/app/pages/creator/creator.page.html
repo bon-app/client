@@ -1,0 +1,298 @@
+<bonapp-header></bonapp-header>
+
+<ion-content>
+  <div class="container">
+    <!-- title -->
+    <div class="ion-hide-md-down" style="margin:2em"></div>
+    <div id="title">
+      <h1>{{'Home.h1' | translate}}</h1>
+      <div class="partial-border ion-margin-top ion-margin-bottom"></div>
+    </div>
+    <!-- subtitle1: "Usa gli ingredienti che hai in frigo" -->
+    <h2 class="ion-text-center" id="subtitle1">{{'Home.subtitle' | translate}}</h2>
+    <!-- search bar -->
+    <div id="search">
+      <ion-auto-complete #autoComplete [options]="{ placeholder : 'es. tonno sott\'olio' }" [maxResults]="50"
+        [dataProvider]="rimsProvider" (itemSelected)="selectedRim($event)">
+      </ion-auto-complete>
+      <ion-chip *ngIf="selected_rim" color="primary" (click)="autoComplete.clearValue();selectedRim()">
+        <ion-label>{{selected_rim?.name}}</ion-label>
+        <ion-icon name="close"></ion-icon>
+      </ion-chip>
+    </div>
+    <!-- subtitle2: "e personalizza la proposta di ricette" -->
+    <h2 class="ion-text-center" id="subtitle2">{{'Home.h2' | translate}}</h2>
+    <!-- gruppo filtri per desktop -->
+    <div class="ion-hide-md-down" id="filters-desktop">
+      <div class="flex-center">
+        <ion-grid class="ion-no-padding">
+          <ion-row>
+            <ion-col size-xs="6" size-sm="3" size-md="3" size-lg="3" size-xl="3" class="pad-5">
+              <ion-card [ngClass]="{'active': _filter.tags.indexOf('healthy') > -1}"
+                (click)="onChangeFilter('healthy')">
+                <ion-card-content class="flex-center">
+                  <div>
+                    <div class="ion-text-center">
+                      <ion-icon src="assets/filters/healthy.svg"></ion-icon>
+                    </div>
+                    <div class="ion-text-center ssprofont boldtext">
+                      Healthy
+                    </div>
+                  </div>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+            <ion-col size-xs="6" size-sm="3" size-md="3" size-lg="3" size-xl="3" class="pad-5">
+              <ion-card [ngClass]="{'active': _filter.tags.indexOf('quick-n-easy') > -1}"
+                (click)="onChangeFilter('quick-n-easy')">
+                <ion-card-content class="flex-center">
+                  <div>
+                    <div class="ion-text-center">
+                      <ion-icon src="assets/filters/qne.svg"></ion-icon>
+                    </div>
+                    <div class="ion-text-center ssprofont boldtext">
+                      Quick&Easy
+                    </div>
+                  </div>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+            <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="6" size-xl="6" class="pad-5">
+              <ion-card>
+                <ion-card-content>
+                  <ion-item lines="none">
+                    <ion-label>Vegetariano</ion-label>
+                    <ion-toggle value="vegetarian" (click)="onChangeFilter('vegetarian')"></ion-toggle>
+                  </ion-item>
+                  <ion-item lines="none">
+                    <ion-label>Gluten-free</ion-label>
+                    <ion-toggle value="gluten-free" (click)="onChangeFilter('gluten-free')"></ion-toggle>
+                  </ion-item>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+      <div class="flex-center">
+        <ion-grid class="ion-no-padding">
+          <ion-row>
+            <ion-col size-xs="6" size-sm="3" size-md="3" size-lg="3" size-xl="3" class="pad-5">
+              <ion-card [ngClass]="{'active': _filter.tags.indexOf('first') > -1}" (click)="onChangeFilter('first')">
+                <ion-card-content class="flex-center">
+                  <div>
+                    <div class="ion-text-center">
+                      <ion-icon src="assets/filters/spaghetti.svg"></ion-icon>
+                    </div>
+                    <div class="ion-text-center ssprofont boldtext">
+                      Primi
+                    </div>
+                  </div>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+            <ion-col size-xs="6" size-sm="3" size-md="3" size-lg="3" size-xl="3" class="pad-5">
+              <ion-card [ngClass]="{'active': _filter.tags.indexOf('second') > -1}" (click)="onChangeFilter('second')">
+                <ion-card-content class="flex-center">
+                  <div>
+                    <div class="ion-text-center">
+                      <ion-icon src="assets/filters/meat.svg"></ion-icon>
+                    </div>
+                    <div class="ion-text-center ssprofont boldtext">
+                      Secondi
+                    </div>
+                  </div>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+            <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="6" size-xl="6" class="pad-5">
+              <ion-card>
+                <ion-card-content>
+                  <ion-item lines="none">
+                    <ion-label>Senza forno</ion-label>
+                    <ion-toggle value="no-oven" (click)="onChangeFilter('no-oven')"></ion-toggle>
+                  </ion-item>
+                  <ion-item lines="none">
+                    <ion-label>Senza mixer</ion-label>
+                    <ion-toggle value="no-mixer" (click)="onChangeFilter('no-mixer')"></ion-toggle>
+                  </ion-item>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </div>
+    <!-- gruppo filtri per mobile -->
+    <div class="ion-hide-md-up" id="filters">
+      <div class="flex-center" >
+        <ion-grid class="ion-no-padding">
+          <ion-row>
+            <ion-col size-xs="4" size-sm="4" size-md="3" size-lg="3" size-xl="3" class="pad-5">
+              <ion-card [ngClass]="{'active': _filter.tags.indexOf('first') > -1}" (click)="onChangeFilter('first')">
+                <ion-card-content class="flex-center">
+                  <div>
+                    <div class="ion-text-center">
+                      <ion-icon src="assets/filters/spaghetti.svg"></ion-icon>
+                    </div>
+                    <div class="ion-text-center ssprofont boldtext">
+                      Primi
+                    </div>
+                  </div>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+            <ion-col size-xs="4" size-sm="4" size-md="3" size-lg="3" size-xl="3" class="pad-5">
+              <ion-card [ngClass]="{'active': _filter.tags.indexOf('second') > -1}" (click)="onChangeFilter('second')">
+                <ion-card-content class="flex-center">
+                  <div>
+                    <div class="ion-text-center">
+                      <ion-icon src="assets/filters/meat.svg"></ion-icon>
+                    </div>
+                    <div class="ion-text-center ssprofont boldtext">
+                      Secondi
+                    </div>
+                  </div>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+            <ion-col size-xs="4" size-sm="4" size-md="3" size-lg="3" size-xl="3" class="pad-5">
+              <ion-card [ngClass]="{'active': _filter.tags.indexOf('healthy') > -1}"
+                (click)="onChangeFilter('healthy')">
+                <ion-card-content class="flex-center">
+                  <div>
+                    <div class="ion-text-center">
+                      <ion-icon src="assets/filters/healthy.svg"></ion-icon>
+                    </div>
+                    <div class="ion-text-center ssprofont boldtext">
+                      Healthy
+                    </div>
+                  </div>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+            </ion-row>
+            <ion-row>
+            <ion-col size-xs="4" size-sm="4" size-md="3" size-lg="3" size-xl="3" class="pad-5">
+              <ion-card [ngClass]="{'active': _filter.tags.indexOf('quick-n-easy') > -1}"
+                (click)="onChangeFilter('quick-n-easy')">
+                <ion-card-content class="flex-center">
+                  <div>
+                    <div class="ion-text-center">
+                      <ion-icon src="assets/filters/qne.svg"></ion-icon>
+                    </div>
+                    <div class="ion-text-center ssprofont boldtext">
+                      Quick&Easy
+                    </div>
+                  </div>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+            <ion-col size-xs="4" size-sm="4" size-md="3" size-lg="3" size-xl="3" class="pad-5">
+              <ion-card [ngClass]="{'active': _filter.tags.indexOf('vegetarian') > -1}"
+                (click)="onChangeFilter('vegetarian')">
+                <ion-card-content class="flex-center">
+                  <div>
+                    <div class="ion-text-center">
+                      <ion-icon src="assets/filters/veggie.svg"></ion-icon>
+                    </div>
+                    <div class="ion-text-center ssprofont boldtext">
+                      Vegetariano
+                    </div>
+                  </div>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+            <ion-col size-xs="4" size-sm="4" size-md="3" size-lg="3" size-xl="3" class="pad-5">
+              <ion-card [ngClass]="{'active': _filter.tags.indexOf('no-oven') > -1}"
+                (click)="onChangeFilter('no-oven')">
+                <ion-card-content class="flex-center">
+                  <div>
+                    <div class="ion-text-center">
+                      <ion-icon src="assets/filters/oven.svg"></ion-icon>
+                    </div>
+                    <div class="ion-text-center ssprofont boldtext">
+                      Senza forno
+                    </div>
+                  </div>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </div>
+      
+
+
+    <!-- 
+    <choose-ingredients></choose-ingredients>
+
+    <div class="ion-text-center" id="buttons">
+      <ion-button color="primary" size="large" [routerLink]="'/receipts'">
+        {{'Home.all_receipts' | translate}}
+      </ion-button>
+      <ion-button color="primary" size="large">
+        {{'Home.market' | translate}}
+      </ion-button>
+    </div> -->
+    <!-- 
+    <div>
+      <h2>{{'RandomReceipts.title' | translate}}</h2>
+      <div class="partial-border ion-margin-top ion-margin-bottom"></div>
+    </div> -->
+
+    <div>
+      <h2 class="ion-text-center" id="subtitle2">{{'RandomReceipts.results' | translate}}</h2>
+      <div class="partial-border"></div>
+    </div>
+
+    <!-- Mostra le ricette -->
+    <ion-grid>
+      <ion-row>
+        <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="4" size-xl="4" *ngFor="let receipt of receipts">
+          <random-receipts [receipt]="receipt"></random-receipts>
+        </ion-col>
+        <!-- if no results -->
+        <ion-col id="no-results" class="flex-center" *ngIf="!receipts.length">
+          <div class="ion-text-center" style="width: 100%">
+            <h3>:( <br> {{"RandomReceipts.no_results" | translate}}</h3>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-infinite-scroll *ngIf="fromCreator" threshold="100px" (ionInfinite)="getCreatorRecipes($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more recipes...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+    <ion-infinite-scroll *ngIf="!fromCreator" threshold="100px" (ionInfinite)="getReceipts($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more recipes...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+  </div>
+</ion-content>
+
+<!-- Message popup  -->
+<div id="message" *ngIf="isShow && ('Messages.home' | translate)">
+  <div class="ion-text-center">
+    <img src="assets/brand.png" alt=''/>
+    <h2>Il tuo nuovo modo di fare la spesa..</h2>
+    <ion-item lines="none">
+      <img slot="start" src="assets/popup/1.png" style="padding-left:10px">
+      <ion-label class="ion-text-wrap step" style="margin-left:8px"><b>Scopri cosa cucinare</b> con gli ingredienti che hai in frigo.</ion-label>
+    </ion-item>
+    <ion-item lines="none">
+      <img slot="start" src="assets/popup/2.png">
+      <ion-label class="ion-text-wrap step"><b>Ricevi gli ingredienti</b> che ti mancano in 20 minuti!</ion-label>
+    </ion-item>
+    <p id="zone">Zona operativa: Milano Porta Romana - Bocconi</p>
+    <div class="partial-bor"></div>
+    <p id="questions"><em>Dubbi o domande? Clicca in alto a sinistra</em></p>
+    <ion-button strong="true" class="ion-margin" fill="outline" (click)="isShow = false">
+      VAI!
+    </ion-button>
+  </div>
+</div>

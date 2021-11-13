@@ -6,10 +6,10 @@ const routes: Routes = [
     path: 'home',
     loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
   },
-  {
-    path: ':username',
-    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
-  },
+  // {
+  //   path: ':username',
+  //   loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
+  // },
   {
     path: '',
     redirectTo: 'home',
@@ -70,6 +70,10 @@ const routes: Routes = [
   {
     path: 'today-orders',
     loadChildren: () => import('./pages/today-orders/today-orders.module').then(m => m.TodayOrdersPageModule)
+  },
+  {
+    path: ':username',
+    loadChildren: () => import('./pages/creator/creator.module').then( m => m.CreatorPageModule)
   },
 
 ];
