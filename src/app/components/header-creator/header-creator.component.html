@@ -1,0 +1,61 @@
+
+<ion-header style="height: 3.5em !important" class="ion-no-border">
+<!-- <ion-header class="ion-no-border"> I added height: 3.5em only for making header static (remove when we make header fixed again)-->
+  <ion-toolbar>
+    <!-- left side -->
+    <!-- mobile -->
+    <ion-buttons slot="start" class="ion-hide-md-up">
+      <!-- authenticated user -->
+      <ng-container *ngIf="auth.isAuthenticate()">
+        <!-- popover with orders & logout -->
+        <ion-button style="padding-left:0.2em" fill="clear" size="large" color="primary"
+        (click)="presentUsersPopover($event)">
+        <ion-icon name="menu"></ion-icon>
+        </ion-button>
+      </ng-container>
+    </ion-buttons>
+    <!-- desktop -->
+    <ion-buttons slot="start" class="ion-hide-md-down">
+      <!-- authenticated user -->
+      <ng-container *ngIf="auth.isAuthenticate()">
+        <!-- popover with orders & logout -->
+        <ion-button style="padding-left:0.2em" fill="clear" size="large" color="primary"
+        (click)="presentUsersPopover($event)">
+        <ion-icon name="menu"></ion-icon>
+        <ion-label>Menu</ion-label>
+        </ion-button>
+      </ng-container>
+    </ion-buttons>
+    
+    <ion-title class="ion-hide-md-down">
+      <img src="assets/brand.png" (click)="goto('/home')" height="70px" style="cursor: pointer;" />
+    </ion-title>
+    <ion-title class="ion-hide-md-up">
+      <img src="assets/brand.png" (click)="goto('/home')" height="60px" style="cursor: pointer;" />
+    </ion-title>
+
+    <!-- mobile -->
+    <ion-buttons slot="end" class="ion-hide-md-up">
+      <!-- authenticated user -->
+      <ng-container *ngIf="auth.isAuthenticate()">
+        <!-- popover with orders & logout -->
+        <ion-button style="padding-left:0.2em" fill="clear" size="large" color="primary"
+        (click)="presentDatasPopover($event)">
+        <ion-icon name="grid-outline"></ion-icon>
+        </ion-button>
+      </ng-container>
+    </ion-buttons>
+    <!-- desktop -->
+    <ion-buttons slot="end" class="ion-hide-md-down">
+      <!-- authenticated user -->
+      <ng-container *ngIf="auth.isAuthenticate()">
+        <!-- popover with orders & logout -->
+        <ion-button style="padding-left:0.2em" fill="clear" size="large" color="primary"
+        (click)="presentDatasPopover($event)">
+        <ion-icon name="grid-outline"></ion-icon>
+        <ion-label>Gestione dati</ion-label>
+        </ion-button>
+      </ng-container>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>

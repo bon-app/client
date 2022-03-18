@@ -7,6 +7,7 @@ import { RandomReceiptsComponent } from './random-receipts/random-receipts.compo
 import { ProductCardComponent } from './product-card/product-card.component';
 import { ProductCardMobileComponent } from './product-card-mobile/product-card-mobile.component';
 import { BonAppHeaderComponent } from './header/header.component';
+import { BonAppCreatorHeaderComponent } from './header-creator/header-creator.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { AutoCompleteModule } from 'ionic4-auto-complete';
@@ -26,7 +27,7 @@ import { DFIngredientsComponent } from './dynamics-form-custom/df-ingredients/df
 import { PreparingFormComponent } from './dynamics-form-custom/preparing-form/preparing-form.component';
 
 const components = [
-  ChooseIngredientsComponent, RandomReceiptsComponent, ProductCardComponent, ProductCardMobileComponent, BonAppHeaderComponent,
+  ChooseIngredientsComponent, RandomReceiptsComponent, ProductCardComponent, ProductCardMobileComponent, BonAppHeaderComponent, BonAppCreatorHeaderComponent,
   LoginComponent, FooterCartComponent, CartDetailsComponent, AddressFormComponent,
   IngredientsPriorityComponent, IngredientsReceiptsComponent, IngredientsComponent,
   DFIngredientsPriorityComponent, DatasPopoverComponent, UsersPopoverComponent, IngredientsQtaComponent, DFIngredientsComponent,

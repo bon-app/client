@@ -3,9 +3,10 @@
         "home": "<h4>Benvenuto su</h4><p><img src='https://www.bonapp.life/assets/brand.png' alt='' width='153' height='74' /><br /><em> Ingredienti a domicilio con proposta di ricette! </em></p><ul style='text-align: center; list-style-position: inside;'><li>20 minuti garantito</li><li>0.99&euro; costo consegna</li><li>Nessuna spesa minima</li></ul><p>Servizio di consegna attivo su Milano zona<br />Porta Romana, Bocconi, Navigli</p><p>&nbsp;</p>"},
     
     "Home": {
-        "h1": "Scegli la ricetta e ordina gli ingredienti che ti mancano!",
-        "subtitle": "Usa un ingrediente che hai in frigo",
-        "h2": "e personalizza la proposta di ricette..",
+        "h1": "Un modo semplice ed intuitivo per condividere e scoprire ricette",
+        "h2": "Crea il tuo ricettario personale o scopri le ricette dei migliori Creators italiani:",
+        "search1": "Usa un ingrediente che hai in frigo",
+        "search2": "e personalizza la proposta di ricette..",
         "all_receipts": "Tutte le ricette",
         "market": "Il Supermercato"
     },
@@ -77,20 +78,24 @@
         "name": "Nome",
         "surname": "Cognome",
         "phone": "Telefono",
+        "nickname": "Scegli un Username",
         "c_password": "Conferma password",
         "c_password_error": "Le password non coincidono"
     },
     "NavBar": {
         "register": "Registrati",
-        "login": "Login",
+        "login": "Entra",
         "orders": "I tuoi ordini",
         "shop": "SHOP", 
         "go_to_shop": "VAI ALLO SHOP",
+        "become_creator": "Crea il tuo ricettario",
         "about": "Info & Contatti",
         "datas": "Gestione dati",
         "logout": "Logout",
         "profile": "Profilo",
-        "daily_orders": "Ordini giornalieri"
+        "menu": "Menu",
+        "daily_orders": "Ordini giornalieri",
+        "my_page": "Il mio ricettario"
 
     },
     "ChooseIngredients": {

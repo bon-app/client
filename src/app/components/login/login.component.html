@@ -33,7 +33,7 @@
     <form #loginForm="ngForm">
       <div class="ion-padding ion-text-center" style="padding-bottom:0em">
         <!-- <img src="assets/brand.png" height="60px" /> -->
-        <h1>Registrati su BonApp</h1>
+        <h1>Registrati per creare il tuo ricettario</h1>
       </div>
       <ion-item>
         <ion-label position="floating">{{'Login.name' | translate}}</ion-label>
@@ -43,9 +43,13 @@
         <ion-label position="floating">{{'Login.surname' | translate}}</ion-label>
         <ion-input type="text" name="surname" [(ngModel)]="user.surname" required></ion-input>
       </ion-item>
-      <ion-item>
+      <!-- <ion-item>
         <ion-label position="floating">{{'Login.phone' | translate}}</ion-label>
         <ion-input type="tel" name="phone" [(ngModel)]="user.phone" required></ion-input>
+      </ion-item> -->
+      <ion-item>
+        <ion-label position="floating">{{'Login.nickname' | translate}}</ion-label>
+        <ion-input type="text" name="nickname" [(ngModel)]="user.nickname" required></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">{{'Login.email' | translate}}</ion-label>

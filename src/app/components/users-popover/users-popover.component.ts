@@ -32,12 +32,18 @@ export class UsersPopoverComponent implements OnInit {
   setUser() {
     this.user = this.auth.getIdentity();
   }
+
   goto(url: string) {
     if (url.startsWith("http")) {
       window.open(url, '_blank');
       return;
     }
     this.navCtrl.navigateForward(url);
+    this.popoverCtrl.dismiss();
+  }
+
+  gotoCreatorPage() {
+    this.navCtrl.navigateForward(`/${this.user.nickname}`);
     this.popoverCtrl.dismiss();
   }
 

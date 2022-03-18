@@ -4,8 +4,11 @@
     <h4 *ngIf="auth.hasRoles(['admin','creator'])"> {{user.roles}}</h4>
     <div class="partial-border ion-margin-top ion-margin-bottom"></div>
   </div>
-  <ion-item (click)="goto('/orders')" style="cursor: pointer;">
+  <!-- <ion-item (click)="goto('/orders')" style="cursor: pointer;">
     {{'NavBar.orders' | translate}}
+  </ion-item> -->
+  <ion-item (click)="gotoCreatorPage()" style="cursor: pointer;">
+    {{'NavBar.my_page' | translate}}
   </ion-item>
   <ion-item (click)="logout('/')" style="cursor: pointer;">
     {{'NavBar.logout' | translate}}

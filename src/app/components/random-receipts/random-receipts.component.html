@@ -6,7 +6,7 @@
     <ion-grid class="neutral">
       <ion-row>
         <ion-col size="12" class="ssprofont HeaderRecipeFont ">
-          <div class="ion-padding-bottom wrap-text">
+          <div class="wrap-text" style="padding-bottom:6px; padding-left: 3px;">
             <strong>{{receipt.name}}</strong>
           </div>
         </ion-col>
@@ -22,17 +22,17 @@
                   <div>
                     <ion-icon src="assets/receipts/clock.svg" style="font-size: 1.5em;"></ion-icon>
                   </div>
-                  <div>
-                    {{receipt.time}}
+                  <div class="leftspace">
+                    {{receipt.time}}`
                   </div>
                 </div>
               </ion-col>
               <ion-col size-xs="6" size-sm="6" size-md="12" size-lg="12" size-xl="12" class="ion-text-center">
-                <div class="ion-margin-top">
+                <div class="ion-margin-top calories">
                   <div>
                     <ion-icon src="assets/receipts/flame.svg" style="font-size: 1.5em;"></ion-icon>
                   </div>
-                  <div>
+                  <div class="leftspace">
                     Kcal {{receipt.kcal}}
                   </div>
                 </div>
@@ -40,10 +40,11 @@
             </ion-row>
 
           </div>
-          <div class="partial-border primary ion-margin-top ion-margin-bottom"></div>
-          <div class="ingredients ion-padding" style="padding-left: 0.5em; padding-right: 0.5em;">
+          <div class="partial-border primary ion-margin-top ion-margin-bottom pinkbar"></div>
+
+          <div class="ingredients ion-padding ingredienti" style="padding-left: 0.5em; padding-right: 0.5em;">
             <!-- <div *ngFor="let i of sliceThree(receipt.ingredients)"> -->
-              <ion-button size="small" fill="outline" color="secondary" style="zoom: 0.8; max-width: 100%" *ngFor="let i of sliceThree(receipt.ingredients)">
+              <ion-button size="small" fill="outline" color="secondary" style="zoom: 0.85; max-width: 100%; padding:0px 0px !important" *ngFor="let i of sliceThree(receipt.ingredients)">
                 <span class="wrap-text">{{i.ingredient.name | translate}}</span>
               </ion-button>
             <!-- </div> -->

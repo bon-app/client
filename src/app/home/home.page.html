@@ -1,30 +1,44 @@
-<!-- <ion-header class="ion-no-border">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-button fill="clear" size="large" color="secondary">{{'NavBar.about' | translate}}</ion-button>
-    </ion-buttons>
-    <ion-title>
-      <img src="assets/logo.png" height="60px" />
-    </ion-title>
-    <ion-buttons slot="end">
-      <ion-button fill="clear" size="large" color="tertiary">{{'NavBar.register' | translate}}</ion-button>
-      <ion-button fill="solid" size="large">{{'NavBar.login' | translate}}</ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header> -->
 <bonapp-header></bonapp-header>
 
 <!-- body -->
 <ion-content>
   <div class="container">
     <!-- title -->
-    <div class="ion-hide-md-down" style="margin:2em"></div>
+    <div style="margin:6em 0" class="ion-hide-md-down"></div>
+    <div style="margin:3em 0" class="ion-hide-md-up"></div>
     <div id="title">
-      <h1>{{'Home.h1' | translate}}</h1>
+      <div class="ion-text-center">
+        <h1 class="ion-text-center">Un modo semplice ed intuitivo per <span> condividere e scoprire ricette </span></h1>
+        <!-- <h1>{{'Home.h1' | translate}}</h1> -->
+        <h2 class="ion-text-center">{{'Home.h2' | translate}}</h2>
+        <div>
+          <ion-chip class="creator_chip" button (click)="goto('/cuci.fi')">
+            <ion-avatar>
+              <img src="assets/creators/cucifi_low.jpeg">
+            </ion-avatar>
+            <ion-label>@cuci.fi</ion-label>
+          </ion-chip>
+          <ion-chip class="creator_chip" button (click)="goto('/lucasfoodandkitchen')">
+            <ion-avatar>
+              <img src="assets/creators/lucas_low.jpeg">
+            </ion-avatar>
+            <ion-label>@lucasfoodandkitchen</ion-label>
+          </ion-chip>
+          <ion-chip class="creator_chip" button (click)="goto('/gustamenno')">
+            <ion-avatar>
+              <img src="assets/creators/gustamenno_low.jpeg">
+            </ion-avatar>
+            <ion-label>@gustamenno</ion-label>
+          </ion-chip>
+        </div>
+      </div>
+    </div>
+    <div id="first_border" style="padding: 1.6em">
       <div class="partial-border ion-margin-top ion-margin-bottom"></div>
     </div>
+    <h1 class="ion-text-center allrecipes">Sloglia tutte le ricette..</h1>
     <!-- subtitle1: "Usa gli ingredienti che hai in frigo" -->
-    <h2 class="ion-text-center" id="subtitle1">{{'Home.subtitle' | translate}}</h2>
+    <h2 class="ion-text-center" id="subtitle1">{{'Home.search1' | translate}}</h2>
     <!-- search bar -->
     <div id="search">
       <ion-auto-complete #autoComplete [options]="{ placeholder : 'es. tonno sott\'olio' }" [maxResults]="50"
@@ -36,7 +50,7 @@
       </ion-chip>
     </div>
     <!-- subtitle2: "e personalizza la proposta di ricette" -->
-    <h2 class="ion-text-center" id="subtitle2">{{'Home.h2' | translate}}</h2>
+    <h2 class="ion-text-center" id="subtitle2">{{'Home.search2' | translate}}</h2>
     <!-- gruppo filtri per desktop -->
     <div class="ion-hide-md-down" id="filters-desktop">
       <div class="flex-center">
@@ -257,7 +271,7 @@
       <div class="partial-border ion-margin-top ion-margin-bottom"></div>
     </div> -->
 
-    <div>
+    <div id="sec_border">
       <h2 class="ion-text-center" id="subtitle2">{{'RandomReceipts.results' | translate}}</h2>
       <div class="partial-border"></div>
     </div>
@@ -281,17 +295,17 @@
       <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more recipes...">
       </ion-infinite-scroll-content>
     </ion-infinite-scroll>
-
     <ion-infinite-scroll *ngIf="!fromCreator" threshold="100px" (ionInfinite)="getReceipts($event)">
       <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more recipes...">
       </ion-infinite-scroll-content>
     </ion-infinite-scroll>
 
+
   </div>
 </ion-content>
 
 <!-- Message popup  -->
-<div id="message" *ngIf="isShow && ('Messages.home' | translate)">
+<!-- <div id="message" *ngIf="isShow && ('Messages.home' | translate)">
   <div class="ion-text-center">
     <img src="assets/brand.png" alt=''/>
     <h2>Il tuo nuovo modo di fare la spesa..</h2>
@@ -301,23 +315,14 @@
     </ion-item>
     <ion-item lines="none">
       <img slot="start" src="assets/popup/2.png">
-      <ion-label class="ion-text-wrap step"><b>Ricevi gli ingredienti</b> che ti mancano in 20 minuti!</ion-label>
+      <ion-label class="ion-text-wrap step"><b>Ricevi gli ingredienti</b> che ti mancano in 15 minuti!</ion-label>
     </ion-item>
-    <!-- <h3>Scegli la ricetta e ordina gli ingredienti che ti mancano</h3> -->
-    <!-- <div id=bulletPoints>
-      <ul>
-        <li>20 minuti garantito</li>
-        <li>0.99&euro; costo consegna</li>
-        <li>Nessuna spesa minima</li>
-      </ul>
-    </div> -->
-    <!-- <p>Servizio di consegna attivo su Milano zona<br/>Porta Romana, Bocconi, Navigli</p> -->
-    <!-- <p id="explanation">BonApp: ingredienti a domicilio <br> con proposta di ricette</p> -->
     <p id="zone">Zona operativa: Milano Porta Romana - Bocconi</p>
+    <p id="zone">DELIVERY AL MOMENTO NON ATTIVO</p>
     <div class="partial-bor"></div>
-    <p id="questions"><em>Dubbi o domande? Clicca in alto a sinistra</em></p>
+    <p id="questions"><em>Scopri di più cliccando in alto a sinistra</em></p>
     <ion-button strong="true" class="ion-margin" fill="outline" (click)="isShow = false">
       VAI!
     </ion-button>
   </div>
-</div>
+</div> -->

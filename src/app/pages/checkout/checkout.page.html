@@ -294,3 +294,16 @@
 </ion-content>
 
 <footer-cart class="ion-hide-md-up" [order]="order" (confirm)="payWithCard()"></footer-cart>
+
+<!-- TEMPORARY POPUP -->
+<div id="message">
+  <div class="ion-text-center">
+    <img src="assets/brand.png" alt=''/>
+    <h2>Il tuo nuovo modo di fare la spesa..</h2>
+    <div class="partial-bor"></div>
+    <p id="zone">Ci dispiace molto ma al momento il servizio di consegna di ingredienti non è disponibile.</p>
+    <ion-button style='height:2em;--border-width:2px' strong="false" class="ion-margin" fill="outline" (click)="navCtrl.back()">
+      Indietro
+    </ion-button>
+  </div>
+</div>

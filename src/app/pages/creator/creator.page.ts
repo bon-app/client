@@ -4,6 +4,8 @@ import { ReceiptsService } from "src/app/services/receipts.service";
 import { ActivatedRoute } from "@angular/router";
 import { AutoCompleteService } from "ionic4-auto-complete";
 import { RimsService } from "src/app/services/rims.service";
+import { LoadingController, NavController } from '@ionic/angular';
+
 
 
 @Component({
@@ -29,6 +31,8 @@ export class CreatorPage implements OnInit {
     private route: ActivatedRoute,
     private receiptsService: ReceiptsService,
     private rimsService: RimsService,
+    public navCtrl: NavController,
+
 
   ) {
     this.userName = this.route.snapshot.paramMap.get("username");
@@ -69,6 +73,10 @@ export class CreatorPage implements OnInit {
     console.log("receipts", this.receipts);
 
     if (event) event.target.complete();
+  }
+
+  goto(url: string) {
+    this.navCtrl.navigateForward(url);
   }
 
   async onChangeFilter(value) {

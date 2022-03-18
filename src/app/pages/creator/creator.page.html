@@ -1,16 +1,26 @@
-<bonapp-header></bonapp-header>
-
+<!-- I inverted ion-content with bonapp-header-creator so as to render the header static instead -->
 <ion-content>
+  <bonapp-header-creator></bonapp-header-creator>
+
   <div class="container">
     <!-- title -->
     <div class="ion-hide-md-down" style="margin:2em"></div>
-    <div id="title">
-      <h1>Le ricette di <span id="username">{{userName}}</span></h1>
+    
+    <div class="ion-text-center" id="title">
+      <div style="display:flex; align-items: center !important">
+        <ion-avatar>
+          <img src="assets/creators/vectorpaint.png">
+        </ion-avatar>
+        <h1 style="margin-left:10px; text-align: left">Le ricette di<br>@<span id="username">{{userName}}</span></h1>
+      </div>
       <h2>Sfoglia il ricettario di @<span id="username">{{userName}}</span> in base ai tuoi ingredienti e preferenze..</h2>
+    </div>
+    <div style="padding: 0.4em">
       <div class="partial-border ion-margin-top ion-margin-bottom"></div>
     </div>
+
     <!-- subtitle1: "Usa gli ingredienti che hai in frigo" -->
-    <h2 class="ion-text-center" id="subtitle1">{{'Home.subtitle' | translate}}</h2>
+    <h2 class="ion-text-center" id="subtitle1">{{'Home.search1' | translate}}</h2>
     <!-- search bar -->
     <div id="search">
       <ion-auto-complete #autoComplete [options]="{ placeholder : 'es. tonno sott\'olio' }" [maxResults]="50"
@@ -22,7 +32,7 @@
       </ion-chip>
     </div>
     <!-- subtitle2: "e personalizza la proposta di ricette" -->
-    <h2 class="ion-text-center" id="subtitle2">{{'Home.h2' | translate}}</h2>
+    <h2 class="ion-text-center" id="subtitle2">{{'Home.search2' | translate}}</h2>
     <!-- gruppo filtri per desktop -->
     <div class="ion-hide-md-down" id="filters-desktop">
       <div class="flex-center">

@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit {
   }
 
   async signIn() {
+    this.user.roles = ["creator"]
     try {
       await this.usersService.signIn(this.user);
       this.modalCtrl.dismiss();

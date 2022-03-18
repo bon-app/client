@@ -23,7 +23,7 @@ export class HomePage {
     active: true,
   };
 
-  public isShow: boolean = false;
+  public isShow: boolean = true;
   userName: string;
   fromCreator: boolean = false;
 
@@ -68,6 +68,10 @@ export class HomePage {
       );
       if (event) event.target.complete();
     } catch (error) {}
+  }
+
+  goto(url: string) {
+    this.navCtrl.navigateForward(url);
   }
 
   async onChangeFilter(value) {

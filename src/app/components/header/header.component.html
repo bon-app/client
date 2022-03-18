@@ -3,24 +3,24 @@
     <!-- left side -->
     <ion-buttons slot="start" class="ion-hide-md-up">
       <!-- mobile -->
-      <ion-button style="padding-left:0.2em" fill="clear" size="large" color="secondary"
+      <!-- <ion-button style="padding-left:0.2em" fill="clear" size="large" color="secondary"
       (click)="goto('https://about.bonapp.life/')">
       <ion-icon name="help-circle-outline"></ion-icon>
-      </ion-button>
+      </ion-button> -->
       <!-- authenticated user -->
       <ng-container *ngIf="auth.isAuthenticate()">
         <!-- popover with orders & logout -->
         <ion-button style="padding-left:0.2em" fill="clear" size="large" color="primary"
         (click)="presentUsersPopover($event)">
-        <ion-icon name="person-outline"></ion-icon>
+        <ion-icon name="menu"></ion-icon>
         </ion-button>
-        <ion-button style="padding-left:0.2em" *ngIf="auth.hasRoles(['admin'])" fill="clear" size="large" color="primary" (click)="goto('/today-orders')">
+        <!-- <ion-button style="padding-left:0.2em" *ngIf="auth.hasRoles(['admin'])" fill="clear" size="large" color="primary" (click)="goto('/today-orders')">
           <ion-icon name="clipboard"></ion-icon>
-        </ion-button>
+        </ion-button> -->
       </ng-container>
       <!-- not authenticated user -->
       <ng-container *ngIf="!auth.isAuthenticate()">
-        <ion-button style="padding-left:0.2em"  (click)="openLoginModal(true)">
+        <ion-button style="padding-left:0.2em"  (click)="openLoginModal(false)">
           <ion-icon name="person-add-outline"></ion-icon>
         </ion-button>
       </ng-container>
@@ -28,28 +28,28 @@
     
     <ion-buttons slot="start" class="ion-hide-md-down">
       <!-- desktop -->
-      <ion-button style="padding-left:0.5em"  fill="clear" size="large" color="secondary"
+      <!-- <ion-button style="padding-left:0.5em"  fill="clear" size="large" color="secondary"
         (click)="goto('https://about.bonapp.life/')">
         <ion-icon name="help-circle-outline"></ion-icon>
         {{'NavBar.about' | translate}}
-      </ion-button>
+      </ion-button> -->
       <!-- authenticated user -->
       <ng-container *ngIf="auth.isAuthenticate()">
         <!-- popover with orders & logout -->
         <ion-button style="padding-left:0.5em" fill="clear" size="large" color="secondary" (click)="presentUsersPopover($event)">
-          <ion-icon name="person-outline"></ion-icon>
-          {{'NavBar.profile' | translate}}
+          <ion-icon name="menu"></ion-icon>
+          {{'NavBar.menu' | translate}}
         </ion-button>
-        <ion-button style="padding-left:0.5em" *ngIf="auth.hasRoles(['admin'])" fill="clear" size="large" color="secondary" (click)="goto('/today-orders')">
+        <!-- <ion-button style="padding-left:0.5em" *ngIf="auth.hasRoles(['admin'])" fill="clear" size="large" color="secondary" (click)="goto('/today-orders')">
           <ion-icon name="clipboard"></ion-icon>
           <strong style="overflow: hidden; text-overflow: ellipsis;">Ordini</strong>
-        </ion-button>
+        </ion-button> -->
       </ng-container>
       <!-- not authenticated user -->
       <ng-container *ngIf="!auth.isAuthenticate()">
-        <ion-button style="padding-left:0.5em" color="secondary" size="large" (click)="openLoginModal(true)">
+        <ion-button style="padding-left:0.5em" color="secondary" size="large" (click)="openLoginModal(false)">
         <ion-icon name="person-add-outline"></ion-icon>
-        {{'NavBar.login' | translate}}
+        {{'NavBar.menu' | translate}}
         </ion-button>
       </ng-container>
     </ion-buttons>
@@ -57,13 +57,13 @@
     <!-- center logo -->
     <ion-title>
       <a *ngIf="auth.hasRoles(['admin'])" [href]="'/'" onclick="return false;">
-        <img src="assets/brand_grey.png" height="50px" (click)="navCtrl.navigateRoot('/')" style="cursor: pointer;" />
+        <img src="assets/brand_grey.png" height="60px" (click)="navCtrl.navigateRoot('/')" style="cursor: pointer;" />
       </a>
       <a *ngIf="auth.hasRoles(['creator'])" [href]="'/'" onclick="return false;">
-        <img src="assets/brand.png" height="50px" (click)="navCtrl.navigateRoot('/')" style="cursor: pointer;" />
+        <img src="assets/brand.png" height="60px" (click)="navCtrl.navigateRoot('/')" style="cursor: pointer;" />
       </a>
       <a *ngIf="!auth.hasRoles(['admin','creator'])" [href]="'/'" onclick="return false;">
-        <img src="assets/logo.png" height="50px" (click)="navCtrl.navigateRoot('/')" style="cursor: pointer;" />
+        <img src="assets/brand.png" height="70px" (click)="navCtrl.navigateRoot('/')" style="cursor: pointer;" />
       </a>
     </ion-title>
 
@@ -72,24 +72,29 @@
     <ng-container *ngIf="auth.isAuthenticate()">
       <!-- mobile -->
       <ion-buttons class="ion-hide-md-up" slot="end">
-        <ion-button style="padding-right:0.2em" fill="clear" size="large" color="primary" (click)="goto('/shop')">
+        <!-- <ion-button style="padding-right:0.2em" fill="clear" size="large" color="primary" (click)="goto('/shop')">
           <ion-icon style="font-size:1.5em" [ngClass]="{'icon-selected' : (router.url == '/shop' || router.url.includes('buy'))}" [name]="auth.hasRoles(['admin', 'creator']) ? 'cart-outline' : 'cart'"></ion-icon>
           <strong>{{'NavBar.shop' | translate}}</strong>
-        </ion-button>
-        <ion-button *ngIf="auth.hasRoles(['admin', 'creator'])" style="padding-right:0.2em" fill="clear" size="large" color="primary"
+        </ion-button> -->
+        <ion-button *ngIf="auth.hasRoles(['admin','creator'])" style="padding-right:0.2em" fill="clear" size="large" color="primary"
           (click)="presentDatasPopover($event)">
-          <ion-icon name="grid"></ion-icon>
+          <ion-icon name="grid-outline"></ion-icon>
         </ion-button>
       </ion-buttons>
       <!-- desktop -->
       <ion-buttons class="ion-hide-md-down" slot="end">
-        <ion-button style="padding-right:0.5em" fill="clear" size="large" color="secondary" (click)="goto('/shop')">
+        <!-- <ion-button style="padding-right:0.5em" fill="clear" size="large" color="secondary" (click)="goto('/shop')">
           <ion-icon style="font-size:1.5em" [ngClass]="{'icon-selected' : (router.url == '/shop' || router.url.includes('buy'))}" [name]="auth.hasRoles(['admin', 'creator']) ? 'cart-outline' : 'cart'"></ion-icon>
           <strong>{{'NavBar.go_to_shop' | translate}}</strong>
-        </ion-button>
-        <ion-button *ngIf="auth.hasRoles(['admin', 'creator'])" style="padding-right:0.5em" fill="clear" size="large" color="secondary"
+        </ion-button> -->
+        <!-- <ion-button style="padding-left:0.5em"  fill="clear" size="large" color="secondary"
+        (click)="openLoginModal(true)">
+        <ion-icon name="create-outline"></ion-icon>
+        {{'NavBar.become_creator' | translate}}
+        </ion-button> -->
+        <ion-button *ngIf="auth.hasRoles(['admin','creator'])" style="padding-right:0.5em" fill="clear" size="large" color="secondary"
           (click)="presentDatasPopover($event)">
-          <ion-icon name="grid"></ion-icon>
+          <ion-icon name="grid-outline"></ion-icon>
           <strong>{{'NavBar.datas' | translate}}</strong>
         </ion-button>
       </ion-buttons>
@@ -98,16 +103,25 @@
     <ng-container *ngIf="!auth.isAuthenticate()">
       <!-- mobile -->
       <ion-buttons class="ion-hide-md-up" slot="end">
-        <ion-button style="padding-right:0.2em" fill="clear" size="large" strong ="true" color="secondary" (click)="goto('/shop')">
+        <!-- <ion-button style="padding-right:0.2em" fill="clear" size="large" strong ="true" color="secondary" (click)="goto('/shop')">
           <ion-icon style="font-size:1.5em" [ngClass]="{'icon-selected' : (router.url == '/shop' || router.url.includes('buy'))}" name="cart" ></ion-icon>
           <strong>{{'NavBar.shop' | translate}}</strong>
+        </ion-button> -->
+        <ion-button style="padding-left:0.5em"  fill="clear" size="large" color="secondary"
+        (click)="openLoginModal(true)">
+        <ion-icon name="create-outline"></ion-icon>
         </ion-button>
       </ion-buttons>
       <!-- desktop -->
       <ion-buttons class="ion-hide-md-down" slot="end">
-        <ion-button style="padding-right:0.5em" fill="clear" size="large" color="secondary" (click)="goto('/shop')">
+        <!-- <ion-button style="padding-right:0.5em" fill="clear" size="large" color="secondary" (click)="goto('/shop')">
           <ion-icon style="font-size:1.5em" [ngClass]="{'icon-selected' : (router.url == '/shop' || router.url.includes('buy'))}" name="cart"></ion-icon>
           <strong>{{'NavBar.go_to_shop' | translate}}</strong>
+        </ion-button> -->
+        <ion-button style="padding-left:0.5em"  fill="clear" size="large" color="secondary"
+        (click)="openLoginModal(true)">
+        <ion-icon name="create-outline"></ion-icon>
+        <strong>{{'NavBar.become_creator' | translate}}</strong>
         </ion-button>
       </ion-buttons>
     </ng-container>
