@@ -22,9 +22,10 @@ export class CreatorPage implements OnInit {
   public selected_rim: any;
   public _filter = {
     tags: [],
-    active: true,
+    active: true, 
   };
   public filter: any = { active: true };
+  rimsProvider: RimsDataProvider;
 
 
   constructor(
@@ -36,6 +37,8 @@ export class CreatorPage implements OnInit {
 
   ) {
     this.userName = this.route.snapshot.paramMap.get("username");
+    this.rimsProvider = new RimsDataProvider(rimsService);
+
   }
 
   ngOnInit() {
