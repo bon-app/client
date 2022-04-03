@@ -1,6 +1,6 @@
 import { Component, Injector, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { LoadingController, NavController } from '@ionic/angular';
+import { LoadingController, NavController, ToastController } from '@ionic/angular';
 import { AuthService } from 'src/app/auth/auth.service';
 import { EntityConfig } from '../../../lib/dynamic-forms/core/entity.config';
 import { ENTITIES_MAPPER, SERVICES_MAPPER } from '../../../lib/dynamic-forms/core/mapper';
@@ -19,7 +19,7 @@ export class DynamicFormPage implements OnInit {
 
   public service: CRUDService<any>;
 
-  constructor(private route: ActivatedRoute, private injector: Injector,
+  constructor(private toastCtrl: ToastController,private route: ActivatedRoute, private injector: Injector,
     public navCtrl: NavController, private loadingCtrl: LoadingController, private auth: AuthService) {
 
   }
@@ -72,8 +72,12 @@ export class DynamicFormPage implements OnInit {
       // console.log('dynamic-form save($event)', this.model);
       this.navCtrl.back();
     } catch (error) {
+      console.log({error});
+      let toast = await this.toastCtrl.create({ message: error.error.code, duration: 2000 });
+      toast.present();
+      
       loading.dismiss();
-    }
+    } 
 
   }
 
