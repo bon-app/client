@@ -33,7 +33,6 @@ export class CRUDService<T> {
             orderBy: orderBy? orderBy : this.defaulSort
         }
         // console.log('filter params', params);
-
         return this.http.get<T[]>(`${this.endpoint}/findAll`, { params }).pipe(retry(2)).toPromise()
     }
 
