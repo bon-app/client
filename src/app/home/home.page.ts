@@ -46,7 +46,7 @@ export class HomePage {
     try {
       if (skip > 0 && !force) {
         this.receipts.push(
-          ...(await this.receiptsService.find(
+          ...(await this.receiptsService.findAll(
             this.filter,
             ["-__v"],
             skip,
@@ -58,7 +58,7 @@ export class HomePage {
         if (event) event.target.complete();
         return;
       }
-      this.receipts = await this.receiptsService.find(
+      this.receipts = await this.receiptsService.findAll(
         this.filter,
         ["-__v"],
         skip,
