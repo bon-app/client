@@ -1032,6 +1032,7 @@ export const ENTITIES = {
                     options: [
                         { label: 'Admin', value: 'admin' },
                         { label: 'Creator', value: 'creator' },
+                        { label: 'Verifies Creator', value: 'verified creator' },
                     ]
                 },
                 validation: {},
