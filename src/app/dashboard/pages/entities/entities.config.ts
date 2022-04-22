@@ -1055,4 +1055,137 @@ export const ENTITIES = {
         service: 'UsersService',
         object: "User"
     }),
+    profile: EntityConfig.fromJson({
+        title: "Profile",
+        fields: [
+            // {
+            //     key: 'image_url',
+            //     type: 'image-preview',
+            //     templateOptions: {
+            //         label: 'Image'
+            //     },
+            //     expressionProperties: {
+            //         'templateOptions.required': '!model.id',
+            //     },
+            //     validation: {
+            //         messages: {
+            //             required: "Field is required!",
+            //         },
+            //     },
+            //     list: {
+            //         parser: 'image',
+            //         cssStyle: { 'text-align': 'center' },
+            //         filterable: false
+            //     }
+            // },
+
+            {
+                key: 'name',
+                type: 'input',
+                templateOptions: {
+                    label: 'Name'
+                },
+                validation: {
+                    messages: {
+                        required: "Field is required!",
+                    },
+                },
+                list: {
+                    filter_type: 'text',
+                    filterable: true
+                }
+            },
+            {
+                key: 'surname',
+                type: 'input',
+                templateOptions: {
+                    label: 'Surname'
+                },
+                validation: {
+                    messages: {
+                        required: "Field is required!",
+                    },
+                },
+                list: {
+                    filter_type: 'text',
+                    filterable: true
+                }
+            },
+            {
+                key: 'email',
+                type: 'input',
+                templateOptions: {
+                    label: 'Email'
+                },
+                list: {
+                    filter_type: 'text',
+                    filterable: true
+                }
+            },
+            {
+                key: 'phone',
+                type: 'input',
+                templateOptions: {
+                    label: 'Phone'
+                },
+                list: {
+                    filter_type: 'text',
+                    filterable: true,
+                }
+            },
+            {
+                key: 'nickname',
+                type: 'input',
+                templateOptions: {
+                    label: 'Nickname'
+                },
+                list: {
+                    filter_type: 'text',
+                    filterable: true,
+                }
+            },
+            {
+                key: 'bio',
+                type: 'input',
+                templateOptions: {
+                    label: 'Bio'
+                },
+                list: {
+                    filter_type: 'text',
+                    filterable: true,
+                }
+            },
+            // {
+            //     key: 'roles',
+            //     type: 'select',
+            //     templateOptions: {
+            //         label: 'Roles',
+            //         multiple: true,
+            //         required: false,
+            //         options: [
+            //             { label: 'Admin', value: 'admin' },
+            //             { label: 'Creator', value: 'creator' },
+            //             { label: 'Verifies Creator', value: 'verified creator' },
+            //         ]
+            //     },
+            //     validation: {},
+            //     list: {
+            //         filter_type: 'text',
+            //         filterable: true,
+            //     }
+            // }
+        ],
+        crudOptions: {
+            find: {
+                includes: []
+            }
+        },
+        listOptions: {
+            rows: {
+                extraButtons: []
+            },
+        },
+        service: 'UsersService',
+        object: "User"
+    }),
 }
