@@ -42,6 +42,11 @@ export class UsersPopoverComponent implements OnInit {
     this.popoverCtrl.dismiss();
   }
 
+  goToProfile(){
+    const url = `/dashboard/data/profile/${this.user.id}`
+    this.navCtrl.navigateForward(url);
+  }
+
   gotoCreatorPage() {
     this.navCtrl.navigateForward(`/${this.user.nickname}`);
     this.popoverCtrl.dismiss();
