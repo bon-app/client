@@ -16,7 +16,7 @@ export class DatasPopoverComponent implements OnInit {
 
   ngOnInit() {
     for (let k in ENTITIES) {
-      if ((k == 'receiptsForCreator' && this.auth.hasRoles(['creator'])) || k != 'receiptsForCreator' && this.auth.hasRoles(['admin'])) {
+      if ((k == 'receiptsForCreator' && this.auth.hasRoles(['creator'])) || (k != 'receiptsForCreator' && k != 'profile' && this.auth.hasRoles(['admin']))) {
         this.items.push({ label: ENTITIES[k].title, url: `/dashboard/list/${k}` })
       }
     }
