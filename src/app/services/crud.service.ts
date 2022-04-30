@@ -78,6 +78,8 @@ export class CRUDService<T> {
             fields: fields.length ? fields.join(' ') : null,
             updateFields: updateFields.length ? updateFields.join(' ') : null,
         }
+        // console.log({entity});
+        
         return this.http.put<T>(this.endpoint, entity, { params }).toPromise();
     }
 

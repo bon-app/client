@@ -5,6 +5,7 @@ import { ActivatedRoute } from "@angular/router";
 import { AutoCompleteService } from "ionic4-auto-complete";
 import { RimsService } from "src/app/services/rims.service";
 import { LoadingController, NavController } from '@ionic/angular';
+import { AuthService } from "src/app/auth/auth.service";
 
 
 
@@ -26,6 +27,7 @@ export class CreatorPage implements OnInit {
   };
   public filter: any = { active: true };
   rimsProvider: RimsDataProvider;
+  user: any;
 
 
   constructor(
@@ -33,11 +35,14 @@ export class CreatorPage implements OnInit {
     private receiptsService: ReceiptsService,
     private rimsService: RimsService,
     public navCtrl: NavController,
+    public auth: AuthService
+
 
 
   ) {
-    this.userName = this.route.snapshot.paramMap.get("username");
     this.rimsProvider = new RimsDataProvider(rimsService);
+    this.userName = this.route.snapshot.paramMap.get("username");
+    this.setUser();
 
   }
 
@@ -45,6 +50,10 @@ export class CreatorPage implements OnInit {
     this.getCreatorRecipes();
   }
 
+  setUser() {
+    this.user = this.auth.getIdentity();
+    // console.log(this.user);
+  }
   async getCreatorRecipes(event: any = null, force: boolean = false) {
     this.fromCreator = true;
     let skip = force ? 0 : this.receipts.length || 0;

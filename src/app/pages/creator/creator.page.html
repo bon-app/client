@@ -8,12 +8,17 @@
     
     <div class="ion-text-center" id="title">
       <div style="display:flex; align-items: center !important">
-        <ion-avatar>
+        <ion-avatar *ngIf="user.image_url === ''">
           <img src="assets/creators/vectorpaint.png">
+        </ion-avatar>
+        <ion-avatar *ngIf="user.image_url != ''">
+          <img src={{user.image_url}}>
         </ion-avatar>
         <h1 style="margin-left:10px; text-align: left">Le ricette di<br>@<span id="username">{{userName}}</span></h1>
       </div>
-      <h2>Sfoglia il ricettario di @<span id="username">{{userName}}</span> in base ai tuoi ingredienti e preferenze..</h2>
+      <h2 *ngIf="user.bio === '' ">Sfoglia il ricettario di @<span id="username">{{userName}}</span> in base ai tuoi ingredienti e preferenze..</h2>
+      <h2 *ngIf="user.bio != '' ">{{user.bio}}</h2>
+
     </div>
     <div style="padding: 0.4em">
       <div class="partial-border ion-margin-top ion-margin-bottom"></div>
