@@ -95,7 +95,8 @@
         "profile": "Profilo",
         "menu": "Menu",
         "daily_orders": "Ordini giornalieri",
-        "my_page": "Il mio ricettario"
+        "my_page": "Il mio ricettario",
+        "settings": "Impostazioni"
 
     },
     "ChooseIngredients": {

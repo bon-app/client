@@ -83,11 +83,18 @@
     "NavBar": {
         "register": "Register",
         "login": "Login",
-        "orders": "Orders",
-        "shop": "Shop", 
-        "about": "About BonApp",
-        "datas": "Gestione dati",
-        "logout": "Logout"
+        "orders": "Your orders",
+        "shop": "SHOP", 
+        "go_to_shop": "GO TO SHOP",
+        "become_creator": "Create your recipes",
+        "about": "About",
+        "datas": "Add/modify recipes",
+        "logout": "Logout",
+        "profile": "Profile",
+        "menu": "Menu",
+        "daily_orders": "Daily orders",
+        "my_page": "My recipes",
+        "settings": "Settings"
     },
     "ChooseIngredients": {
         "title": "Scegli i tuoi ingredienti",

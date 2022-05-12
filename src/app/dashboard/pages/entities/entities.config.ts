@@ -1093,7 +1093,7 @@ export const ENTITIES = {
                 key: 'image_url',
                 type: 'image-preview',
                 templateOptions: {
-                    label: 'Image'
+                    label: 'Image (logout to see changes)'
                 },
                 expressionProperties: {
                     'templateOptions.required': '!model.id',
@@ -1178,7 +1178,7 @@ export const ENTITIES = {
                 key: 'bio',
                 type: 'input',
                 templateOptions: {
-                    label: 'Bio'
+                    label: 'Bio (logout to see changes)'
                 },
                 list: {
                     filter_type: 'text',
