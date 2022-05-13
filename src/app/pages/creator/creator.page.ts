@@ -4,10 +4,8 @@ import { ReceiptsService } from "src/app/services/receipts.service";
 import { ActivatedRoute } from "@angular/router";
 import { AutoCompleteService } from "ionic4-auto-complete";
 import { RimsService } from "src/app/services/rims.service";
-import { LoadingController, NavController } from '@ionic/angular';
+import { LoadingController, NavController } from "@ionic/angular";
 import { AuthService } from "src/app/auth/auth.service";
-
-
 
 @Component({
   selector: "app-creator",
@@ -17,18 +15,18 @@ import { AuthService } from "src/app/auth/auth.service";
 export class CreatorPage implements OnInit {
   fromCreator: boolean = false;
   userName: string;
-  
+
   public isShow: boolean = true;
   public receipts: Receipt[] = [];
   public selected_rim: any;
   public _filter = {
     tags: [],
-    active: true, 
+    active: true,
   };
   public filter: any = { active: true };
   rimsProvider: RimsDataProvider;
   user: any;
-
+  fetchedUser: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -36,31 +34,37 @@ export class CreatorPage implements OnInit {
     private rimsService: RimsService,
     public navCtrl: NavController,
     public auth: AuthService
-
-
-
   ) {
     this.rimsProvider = new RimsDataProvider(rimsService);
     this.userName = this.route.snapshot.paramMap.get("username");
-    this.setUser();
-
-  }
-
-  ngOnInit() {
+    console.log('user',this.userName);
+    // this.setUser();
     this.getCreatorRecipes();
   }
-
-  setUser() {
-    this.user = this.auth.getIdentity();
-    // console.log(this.user);
+  
+  ngOnInit() {
+    
+    // if (this.userName) this.setUser();
   }
+  ionViewDidEnter(){
+    // console.log(this.user);
+    // this.setUser();
+
+  }
+  
+  setUser() {
+    this.userName? this.user = this.fetchedUser : this.user = this.auth.getIdentity();
+    // this.user = this.auth.getIdentity();
+    
+  }
+
   async getCreatorRecipes(event: any = null, force: boolean = false) {
     this.fromCreator = true;
     let skip = force ? 0 : this.receipts.length || 0;
 
     if (skip > 0 && !force) {
-      this.receipts.push(
-        ...(await this.receiptsService.findByUser(
+ 
+        (await this.receiptsService.findByUser(
           this.userName,
           this.filter,
           ["-__v"],
@@ -68,22 +72,24 @@ export class CreatorPage implements OnInit {
           12,
           "-priority",
           ["ingredients.ingredient"]
-        ))
-      );
+        ).then((resp:any)=>{
+          this.receipts.push(...(resp.docs))
+        }))
+
       if (event) event.target.complete();
       return;
     }
-    this.receipts = await this.receiptsService.findByUser(
-      this.userName,
-      this.filter,
-      ["-__v"],
-      skip,
-      12,
-      "-priority",
-      ["ingredients.ingredient"]
-    );
-    console.log("receipts", this.receipts);
+    await this.receiptsService
+      .findByUser(this.userName, this.filter, ["-__v"], skip, 12, "-priority", [
+        "ingredients.ingredient",
+      ])
+      .then((resp: any) => {
+        this.receipts = resp.docs;
+        this.user = resp.user;
+        console.log('fetched user',this.user);
+      });
 
+    console.log("receipts", this.receipts);
     if (event) event.target.complete();
   }
 
@@ -117,7 +123,6 @@ export class CreatorPage implements OnInit {
     this.createFilter();
   }
 }
-
 
 export class RimsDataProvider implements AutoCompleteService {
   labelAttribute = "id";
