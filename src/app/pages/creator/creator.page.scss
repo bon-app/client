@@ -427,3 +427,10 @@ ion-toolbar {
 .icon-selected {
   color:#efbdae
 }
+
+.capfirst {
+  text-transform: lowercase
+}
+.capfirst::first-letter {
+  text-transform: uppercase
+}

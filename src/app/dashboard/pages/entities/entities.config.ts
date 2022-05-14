@@ -453,7 +453,7 @@ export const ENTITIES = {
                 templateOptions: {
                     label: 'Time',
                     type: "number",
-                    required: true,
+                    // required: true,
                 },
                 validation: {
                     messages: {
@@ -688,7 +688,7 @@ export const ENTITIES = {
                 templateOptions: {
                     label: 'Time',
                     type: "number",
-                    required: true,
+                    // required: true,
                 },
                 validation: {
                     messages: {
@@ -1093,7 +1093,7 @@ export const ENTITIES = {
                 key: 'image_url',
                 type: 'image-preview',
                 templateOptions: {
-                    label: 'Image (logout to see changes)'
+                    label: 'Image'
                 },
                 expressionProperties: {
                     'templateOptions.required': '!model.id',
@@ -1178,7 +1178,7 @@ export const ENTITIES = {
                 key: 'bio',
                 type: 'input',
                 templateOptions: {
-                    label: 'Bio (logout to see changes)'
+                    label: 'Bio (max 50 words)'
                 },
                 list: {
                     filter_type: 'text',

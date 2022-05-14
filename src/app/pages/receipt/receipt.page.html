@@ -3,8 +3,7 @@
 <ion-content>
   <div class="container" style="margin:2em" *ngIf="receipt">
     <div id="back">
-      <ion-button size="small" class="custom-back-button" fill="outline"  (click)="navCtrl.back()">{{'Receipt.back' | translate}}
-      </ion-button>
+      <ion-button size="small" class="custom-back-button" fill="outline"  (click)="navCtrl.back()">{{'Receipt.back' | translate}}</ion-button>
     </div>
     <ion-grid class="neutral">
       <ion-row style="position: relative;">
@@ -13,6 +12,8 @@
         </ion-col>
         <ion-col id="info" size-xs="12" size-sm="12" size-md="5" size-lg="5" size-xl="5">
           <h1>{{receipt?.name}}</h1>
+          <!-- <h3>{{receipt.fk_user}}</h3> -->
+          <a href="/{{user.nickname}}" style="text-decoration:none; color: inherit"><h3 style="margin-top:0.3em"><i>di @{{user.nickname}}</i></h3></a>
           <div class="partial-border light big ion-margin-top ion-margin-bottom"></div>
           <div id="receipt-info">
             <div class="ion-margin-top ion-margin-bottom ion-text-center">

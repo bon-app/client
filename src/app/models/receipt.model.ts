@@ -11,6 +11,7 @@ export class Receipt {
     public kcal: string;
     public time: string;
     public preparing?: string;
+    public fk_user: string;
 
     constructor() {
         this.ingredients = [];

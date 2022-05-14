@@ -22,8 +22,9 @@
 
         <h1 style="margin-left:10px; text-align: left">Le ricette di<br>@<span id="username">{{user? user.nickname : ''}}</span></h1>
       </div>
-      <h2 *ngIf="!user">Sfoglia il ricettario di creatore in base ai tuoi ingredienti e preferenze..</h2>
-      <h2 >{{user? user.bio : ''}}</h2>
+      <h2 *ngIf="user && user.bio == ''">Sfoglia il ricettario di <span style="text-transform: capitalize">{{user? user.nickname : ''}}</span> in base ai tuoi ingredienti e preferenze..</h2>
+      <h2 *ngIf="user && user.bio != ''" class="capfirst">{{user.bio}}</h2>
+      <!-- <h2 >{{user? user.bio : ''}}</h2> -->
 
 
     </div>

@@ -2,7 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { ReceiptsService } from 'src/app/services/receipts.service';
+import { UsersService } from 'src/app/services/users.service';
 import { Receipt } from '../../models/receipt.model';
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-receipt',
@@ -10,10 +12,18 @@ import { Receipt } from '../../models/receipt.model';
   styleUrls: ['./receipt.page.scss'],
 })
 export class ReceiptPage implements OnInit {
+  public Nickname : any;
+  public user: User;
 
   @Input("receipt") receipt: Receipt;
+  // @Input("user") user: User;
 
-  constructor(public navCtrl: NavController, private receiptsService: ReceiptsService, private route: ActivatedRoute) { }
+  constructor(
+    public navCtrl: NavController, 
+    private receiptsService: ReceiptsService, 
+    private route: ActivatedRoute,
+    public usersService: UsersService) 
+    { }
 
   ngOnInit() {
   }
@@ -21,6 +31,7 @@ export class ReceiptPage implements OnInit {
   async ionViewWillEnter() {
     try {
       this.receipt = await this.receiptsService.findById(this.route.snapshot.params.id, ['-__v'], ['ingredients.ingredient']);
+      this.user = await this.usersService.findById(this.receipt.fk_user,['-__v']);
       if (typeof this.receipt.preparing == 'string') {
         let steps = [];
         let div = document.createElement('div');
