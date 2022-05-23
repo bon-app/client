@@ -51,12 +51,6 @@ export class CreatorPage implements OnInit {
     // this.setUser();
 
   }
-  
-  setUser() {
-    this.userName? this.user = this.fetchedUser : this.user = this.auth.getIdentity();
-    // this.user = this.auth.getIdentity();
-    
-  }
 
   async getCreatorRecipes(event: any = null, force: boolean = false) {
     this.fromCreator = true;
