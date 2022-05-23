@@ -3,14 +3,30 @@
     <ion-label>{{field.templateOptions?.label}}</ion-label>
   </div>
 
-  <ion-card id="image-preview" (click)="image.click()">
-    <ion-content>
-      <div id="image-wrapper">
-        <div class="ion-text-center">Upload image</div>
-      </div>
-      <!-- <img [src]="model[field.key] || defaultImage" /> -->
-    </ion-content>
-  </ion-card>
 
-  <input #image type="file" style="display: none;" accept="image/*" (change)="previewImage($event)" />
+  <div *ngIf="!isApp" >    
+    <ion-card id="image-preview" (click)="image.click()">
+      <ion-content>
+        <div id="image-wrapper">
+          <div class="ion-text-center">Upload image</div>
+        </div>
+        <!-- <img [src]="model[field.key] || defaultImage" /> -->
+      </ion-content>
+    </ion-card>
+  
+    <input #image type="file" style="display: none;" accept="image/*" (change)="previewImage($event)" />
+  </div>
+
+  <!-- <div *ngIf="isApp" >    
+    <ion-card id="image-preview" (click)="image.click()">
+      <ion-content>
+        <div id="image-wrapper">
+          <div class="ion-text-center">Upload image</div>
+        </div>
+        
+      </ion-content>
+    </ion-card>
+  
+    <input #image type="file" style="display: none;" accept="image/*" (change)="previewImage($event)" />
+  </div> -->
 </div>

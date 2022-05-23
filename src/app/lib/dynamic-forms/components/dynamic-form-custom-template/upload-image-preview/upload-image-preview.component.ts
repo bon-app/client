@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FieldType } from '@ngx-formly/core';
 import { DEFAULT_IMAGE } from './default-image';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-upload-image-preview',
@@ -11,8 +12,15 @@ export class UploadImagePreviewComponent extends FieldType implements OnInit {
 
   public defaultImage: string = DEFAULT_IMAGE;
 
-  constructor() {
+  constructor(
+    public platform: Platform
+  ) {
     super();
+    let isApp;
+    // console.log(document.URL.startsWith('http') || document.URL.startsWith('http://localhost:8100'));
+    document.URL.startsWith('http')? isApp = false: isApp = true;
+    console.log({isApp});
+    
   }
 
   ngOnInit() {
@@ -35,6 +43,8 @@ export class UploadImagePreviewComponent extends FieldType implements OnInit {
         this.model[this.field.key as string] = e.target.result;
         this.setPreview();
         this.formControl.patchValue(this.model[this.field.key as string]);
+        // console.log(e.target);
+
       }
       reader.readAsDataURL(input.files[0]); // convert to base64 string
     }
