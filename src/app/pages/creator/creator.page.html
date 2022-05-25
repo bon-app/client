@@ -2,60 +2,89 @@
 <ion-content>
   <bonapp-header-creator></bonapp-header-creator>
 
-  <div class="container">
+  <div *ngIf="!error" class="container">
     <!-- title -->
-    <div class="ion-hide-md-down" style="margin:2em"></div>
-    
+    <div class="ion-hide-md-down" style="margin: 2em"></div>
+
     <div class="ion-text-center" id="title">
-      <div style="display:flex; align-items: center !important">
+      <div style="display: flex; align-items: center !important">
         <ion-avatar *ngIf="!user">
-          <img src="assets/creators/vectorpaint.png">
+          <img src="assets/creators/vectorpaint.png" />
         </ion-avatar>
 
         <ion-avatar *ngIf="user && user.image_url === ''">
-          <img src="assets/creators/vectorpaint.png">
+          <img src="assets/creators/vectorpaint.png" />
         </ion-avatar>
 
         <ion-avatar *ngIf="user && user.image_url != ''">
-          <img src={{user.image_url}}>
+          <img src="{{user.image_url}}" />
         </ion-avatar>
 
-        <h1 style="margin-left:10px; text-align: left">Le ricette di<br>@<span id="username">{{user? user.nickname : ''}}</span></h1>
+        <h1 style="margin-left: 10px; text-align: left">
+          Le ricette di<br />@<span id="username"
+            >{{user? user.nickname : ''}}</span
+          >
+        </h1>
       </div>
-      <h2 *ngIf="user && user.bio == ''">Sfoglia il ricettario di <span style="text-transform: capitalize">{{user? user.nickname : ''}}</span> in base ai tuoi ingredienti e preferenze..</h2>
+      <h2 *ngIf="user && user.bio == ''">
+        Sfoglia il ricettario di
+        <span style="text-transform: capitalize"
+          >{{user? user.nickname : ''}}</span
+        >
+        in base ai tuoi ingredienti e preferenze..
+      </h2>
       <h2 *ngIf="user && user.bio != ''" class="capfirst">{{user.bio}}</h2>
       <!-- <h2 >{{user? user.bio : ''}}</h2> -->
-
-
     </div>
 
-    
     <div style="padding: 0.4em">
       <div class="partial-border ion-margin-top ion-margin-bottom"></div>
     </div>
 
     <!-- subtitle1: "Usa gli ingredienti che hai in frigo" -->
-    <h2 class="ion-text-center" id="subtitle1">{{'Home.search1' | translate}}</h2>
+    <h2 class="ion-text-center" id="subtitle1">
+      {{'Home.search1' | translate}}
+    </h2>
     <!-- search bar -->
     <div id="search">
-      <ion-auto-complete #autoComplete [options]="{ placeholder : 'es. tonno sott\'olio' }" [maxResults]="50"
-        [dataProvider]="rimsProvider" (itemSelected)="selectedRim($event)">
+      <ion-auto-complete
+        #autoComplete
+        [options]="{ placeholder : 'es. tonno sott\'olio' }"
+        [maxResults]="50"
+        [dataProvider]="rimsProvider"
+        (itemSelected)="selectedRim($event)"
+      >
       </ion-auto-complete>
-      <ion-chip *ngIf="selected_rim" color="primary" (click)="autoComplete.clearValue();selectedRim()">
+      <ion-chip
+        *ngIf="selected_rim"
+        color="primary"
+        (click)="autoComplete.clearValue();selectedRim()"
+      >
         <ion-label>{{selected_rim?.name}}</ion-label>
         <ion-icon name="close"></ion-icon>
       </ion-chip>
     </div>
     <!-- subtitle2: "e personalizza la proposta di ricette" -->
-    <h2 class="ion-text-center" id="subtitle2">{{'Home.search2' | translate}}</h2>
+    <h2 class="ion-text-center" id="subtitle2">
+      {{'Home.search2' | translate}}
+    </h2>
     <!-- gruppo filtri per desktop -->
     <div class="ion-hide-md-down" id="filters-desktop">
       <div class="flex-center">
         <ion-grid class="ion-no-padding">
           <ion-row>
-            <ion-col size-xs="6" size-sm="3" size-md="3" size-lg="3" size-xl="3" class="pad-5">
-              <ion-card [ngClass]="{'active': _filter.tags.indexOf('healthy') > -1}"
-                (click)="onChangeFilter('healthy')">
+            <ion-col
+              size-xs="6"
+              size-sm="3"
+              size-md="3"
+              size-lg="3"
+              size-xl="3"
+              class="pad-5"
+            >
+              <ion-card
+                [ngClass]="{'active': _filter.tags.indexOf('healthy') > -1}"
+                (click)="onChangeFilter('healthy')"
+              >
                 <ion-card-content class="flex-center">
                   <div>
                     <div class="ion-text-center">
@@ -68,9 +97,18 @@
                 </ion-card-content>
               </ion-card>
             </ion-col>
-            <ion-col size-xs="6" size-sm="3" size-md="3" size-lg="3" size-xl="3" class="pad-5">
-              <ion-card [ngClass]="{'active': _filter.tags.indexOf('quick-n-easy') > -1}"
-                (click)="onChangeFilter('quick-n-easy')">
+            <ion-col
+              size-xs="6"
+              size-sm="3"
+              size-md="3"
+              size-lg="3"
+              size-xl="3"
+              class="pad-5"
+            >
+              <ion-card
+                [ngClass]="{'active': _filter.tags.indexOf('quick-n-easy') > -1}"
+                (click)="onChangeFilter('quick-n-easy')"
+              >
                 <ion-card-content class="flex-center">
                   <div>
                     <div class="ion-text-center">
@@ -83,16 +121,29 @@
                 </ion-card-content>
               </ion-card>
             </ion-col>
-            <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="6" size-xl="6" class="pad-5">
+            <ion-col
+              size-xs="12"
+              size-sm="6"
+              size-md="6"
+              size-lg="6"
+              size-xl="6"
+              class="pad-5"
+            >
               <ion-card>
                 <ion-card-content>
                   <ion-item lines="none">
                     <ion-label>Vegetariano</ion-label>
-                    <ion-toggle value="vegetarian" (click)="onChangeFilter('vegetarian')"></ion-toggle>
+                    <ion-toggle
+                      value="vegetarian"
+                      (click)="onChangeFilter('vegetarian')"
+                    ></ion-toggle>
                   </ion-item>
                   <ion-item lines="none">
                     <ion-label>Gluten-free</ion-label>
-                    <ion-toggle value="gluten-free" (click)="onChangeFilter('gluten-free')"></ion-toggle>
+                    <ion-toggle
+                      value="gluten-free"
+                      (click)="onChangeFilter('gluten-free')"
+                    ></ion-toggle>
                   </ion-item>
                 </ion-card-content>
               </ion-card>
@@ -103,22 +154,40 @@
       <div class="flex-center">
         <ion-grid class="ion-no-padding">
           <ion-row>
-            <ion-col size-xs="6" size-sm="3" size-md="3" size-lg="3" size-xl="3" class="pad-5">
-              <ion-card [ngClass]="{'active': _filter.tags.indexOf('first') > -1}" (click)="onChangeFilter('first')">
+            <ion-col
+              size-xs="6"
+              size-sm="3"
+              size-md="3"
+              size-lg="3"
+              size-xl="3"
+              class="pad-5"
+            >
+              <ion-card
+                [ngClass]="{'active': _filter.tags.indexOf('first') > -1}"
+                (click)="onChangeFilter('first')"
+              >
                 <ion-card-content class="flex-center">
                   <div>
                     <div class="ion-text-center">
                       <ion-icon src="assets/filters/spaghetti.svg"></ion-icon>
                     </div>
-                    <div class="ion-text-center ssprofont boldtext">
-                      Primi
-                    </div>
+                    <div class="ion-text-center ssprofont boldtext">Primi</div>
                   </div>
                 </ion-card-content>
               </ion-card>
             </ion-col>
-            <ion-col size-xs="6" size-sm="3" size-md="3" size-lg="3" size-xl="3" class="pad-5">
-              <ion-card [ngClass]="{'active': _filter.tags.indexOf('second') > -1}" (click)="onChangeFilter('second')">
+            <ion-col
+              size-xs="6"
+              size-sm="3"
+              size-md="3"
+              size-lg="3"
+              size-xl="3"
+              class="pad-5"
+            >
+              <ion-card
+                [ngClass]="{'active': _filter.tags.indexOf('second') > -1}"
+                (click)="onChangeFilter('second')"
+              >
                 <ion-card-content class="flex-center">
                   <div>
                     <div class="ion-text-center">
@@ -131,16 +200,29 @@
                 </ion-card-content>
               </ion-card>
             </ion-col>
-            <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="6" size-xl="6" class="pad-5">
+            <ion-col
+              size-xs="12"
+              size-sm="6"
+              size-md="6"
+              size-lg="6"
+              size-xl="6"
+              class="pad-5"
+            >
               <ion-card>
                 <ion-card-content>
                   <ion-item lines="none">
                     <ion-label>Senza forno</ion-label>
-                    <ion-toggle value="no-oven" (click)="onChangeFilter('no-oven')"></ion-toggle>
+                    <ion-toggle
+                      value="no-oven"
+                      (click)="onChangeFilter('no-oven')"
+                    ></ion-toggle>
                   </ion-item>
                   <ion-item lines="none">
                     <ion-label>Senza mixer</ion-label>
-                    <ion-toggle value="no-mixer" (click)="onChangeFilter('no-mixer')"></ion-toggle>
+                    <ion-toggle
+                      value="no-mixer"
+                      (click)="onChangeFilter('no-mixer')"
+                    ></ion-toggle>
                   </ion-item>
                 </ion-card-content>
               </ion-card>
@@ -151,25 +233,43 @@
     </div>
     <!-- gruppo filtri per mobile -->
     <div class="ion-hide-md-up" id="filters">
-      <div class="flex-center" >
+      <div class="flex-center">
         <ion-grid class="ion-no-padding">
           <ion-row>
-            <ion-col size-xs="4" size-sm="4" size-md="3" size-lg="3" size-xl="3" class="pad-5">
-              <ion-card [ngClass]="{'active': _filter.tags.indexOf('first') > -1}" (click)="onChangeFilter('first')">
+            <ion-col
+              size-xs="4"
+              size-sm="4"
+              size-md="3"
+              size-lg="3"
+              size-xl="3"
+              class="pad-5"
+            >
+              <ion-card
+                [ngClass]="{'active': _filter.tags.indexOf('first') > -1}"
+                (click)="onChangeFilter('first')"
+              >
                 <ion-card-content class="flex-center">
                   <div>
                     <div class="ion-text-center">
                       <ion-icon src="assets/filters/spaghetti.svg"></ion-icon>
                     </div>
-                    <div class="ion-text-center ssprofont boldtext">
-                      Primi
-                    </div>
+                    <div class="ion-text-center ssprofont boldtext">Primi</div>
                   </div>
                 </ion-card-content>
               </ion-card>
             </ion-col>
-            <ion-col size-xs="4" size-sm="4" size-md="3" size-lg="3" size-xl="3" class="pad-5">
-              <ion-card [ngClass]="{'active': _filter.tags.indexOf('second') > -1}" (click)="onChangeFilter('second')">
+            <ion-col
+              size-xs="4"
+              size-sm="4"
+              size-md="3"
+              size-lg="3"
+              size-xl="3"
+              class="pad-5"
+            >
+              <ion-card
+                [ngClass]="{'active': _filter.tags.indexOf('second') > -1}"
+                (click)="onChangeFilter('second')"
+              >
                 <ion-card-content class="flex-center">
                   <div>
                     <div class="ion-text-center">
@@ -182,9 +282,18 @@
                 </ion-card-content>
               </ion-card>
             </ion-col>
-            <ion-col size-xs="4" size-sm="4" size-md="3" size-lg="3" size-xl="3" class="pad-5">
-              <ion-card [ngClass]="{'active': _filter.tags.indexOf('healthy') > -1}"
-                (click)="onChangeFilter('healthy')">
+            <ion-col
+              size-xs="4"
+              size-sm="4"
+              size-md="3"
+              size-lg="3"
+              size-xl="3"
+              class="pad-5"
+            >
+              <ion-card
+                [ngClass]="{'active': _filter.tags.indexOf('healthy') > -1}"
+                (click)="onChangeFilter('healthy')"
+              >
                 <ion-card-content class="flex-center">
                   <div>
                     <div class="ion-text-center">
@@ -197,11 +306,20 @@
                 </ion-card-content>
               </ion-card>
             </ion-col>
-            </ion-row>
-            <ion-row>
-            <ion-col size-xs="4" size-sm="4" size-md="3" size-lg="3" size-xl="3" class="pad-5">
-              <ion-card [ngClass]="{'active': _filter.tags.indexOf('quick-n-easy') > -1}"
-                (click)="onChangeFilter('quick-n-easy')">
+          </ion-row>
+          <ion-row>
+            <ion-col
+              size-xs="4"
+              size-sm="4"
+              size-md="3"
+              size-lg="3"
+              size-xl="3"
+              class="pad-5"
+            >
+              <ion-card
+                [ngClass]="{'active': _filter.tags.indexOf('quick-n-easy') > -1}"
+                (click)="onChangeFilter('quick-n-easy')"
+              >
                 <ion-card-content class="flex-center">
                   <div>
                     <div class="ion-text-center">
@@ -214,9 +332,18 @@
                 </ion-card-content>
               </ion-card>
             </ion-col>
-            <ion-col size-xs="4" size-sm="4" size-md="3" size-lg="3" size-xl="3" class="pad-5">
-              <ion-card [ngClass]="{'active': _filter.tags.indexOf('vegetarian') > -1}"
-                (click)="onChangeFilter('vegetarian')">
+            <ion-col
+              size-xs="4"
+              size-sm="4"
+              size-md="3"
+              size-lg="3"
+              size-xl="3"
+              class="pad-5"
+            >
+              <ion-card
+                [ngClass]="{'active': _filter.tags.indexOf('vegetarian') > -1}"
+                (click)="onChangeFilter('vegetarian')"
+              >
                 <ion-card-content class="flex-center">
                   <div>
                     <div class="ion-text-center">
@@ -229,9 +356,18 @@
                 </ion-card-content>
               </ion-card>
             </ion-col>
-            <ion-col size-xs="4" size-sm="4" size-md="3" size-lg="3" size-xl="3" class="pad-5">
-              <ion-card [ngClass]="{'active': _filter.tags.indexOf('no-oven') > -1}"
-                (click)="onChangeFilter('no-oven')">
+            <ion-col
+              size-xs="4"
+              size-sm="4"
+              size-md="3"
+              size-lg="3"
+              size-xl="3"
+              class="pad-5"
+            >
+              <ion-card
+                [ngClass]="{'active': _filter.tags.indexOf('no-oven') > -1}"
+                (click)="onChangeFilter('no-oven')"
+              >
                 <ion-card-content class="flex-center">
                   <div>
                     <div class="ion-text-center">
@@ -248,8 +384,6 @@
         </ion-grid>
       </div>
     </div>
-      
-
 
     <!-- 
     <choose-ingredients></choose-ingredients>
@@ -269,35 +403,64 @@
     </div> -->
 
     <div>
-      <h2 class="ion-text-center" id="subtitle2">{{'RandomReceipts.results' | translate}}</h2>
+      <h2 class="ion-text-center" id="subtitle2">
+        {{'RandomReceipts.results' | translate}}
+      </h2>
       <div class="partial-border"></div>
     </div>
 
     <!-- Mostra le ricette -->
     <ion-grid>
       <ion-row>
-        <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="4" size-xl="4" *ngFor="let receipt of receipts">
+        <ion-col
+          size-xs="12"
+          size-sm="6"
+          size-md="6"
+          size-lg="4"
+          size-xl="4"
+          *ngFor="let receipt of receipts"
+        >
           <random-receipts [receipt]="receipt"></random-receipts>
         </ion-col>
         <!-- if no results -->
         <ion-col id="no-results" class="flex-center" *ngIf="!receipts.length">
           <div class="ion-text-center" style="width: 100%">
-            <h3>:( <br> {{"RandomReceipts.no_results" | translate}}</h3>
+            <h3>
+              :( <br />
+              {{"RandomReceipts.no_results" | translate}}
+            </h3>
           </div>
         </ion-col>
       </ion-row>
     </ion-grid>
 
-    <ion-infinite-scroll *ngIf="fromCreator" threshold="100px" (ionInfinite)="getCreatorRecipes($event)">
-      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more recipes...">
+    <ion-infinite-scroll
+      *ngIf="fromCreator"
+      threshold="100px"
+      (ionInfinite)="getCreatorRecipes($event)"
+    >
+      <ion-infinite-scroll-content
+        loadingSpinner="bubbles"
+        loadingText="Loading more recipes..."
+      >
       </ion-infinite-scroll-content>
     </ion-infinite-scroll>
 
-    <ion-infinite-scroll *ngIf="!fromCreator" threshold="100px" (ionInfinite)="getReceipts($event)">
-      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more recipes...">
+    <ion-infinite-scroll
+      *ngIf="!fromCreator"
+      threshold="100px"
+      (ionInfinite)="getReceipts($event)"
+    >
+      <ion-infinite-scroll-content
+        loadingSpinner="bubbles"
+        loadingText="Loading more recipes..."
+      >
       </ion-infinite-scroll-content>
     </ion-infinite-scroll>
+  </div>
 
+  <div *ngIf="error" class="container">
+    <bonapp-page-not-found></bonapp-page-not-found>
   </div>
 </ion-content>
 

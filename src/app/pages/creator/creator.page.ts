@@ -1,16 +1,16 @@
-import { Component, OnInit } from "@angular/core";
-import { Receipt } from "src/app/models/receipt.model";
-import { ReceiptsService } from "src/app/services/receipts.service";
-import { ActivatedRoute } from "@angular/router";
-import { AutoCompleteService } from "ionic4-auto-complete";
-import { RimsService } from "src/app/services/rims.service";
-import { LoadingController, NavController } from "@ionic/angular";
-import { AuthService } from "src/app/auth/auth.service";
+import { Component, OnInit } from '@angular/core';
+import { Receipt } from 'src/app/models/receipt.model';
+import { ReceiptsService } from 'src/app/services/receipts.service';
+import { ActivatedRoute } from '@angular/router';
+import { AutoCompleteService } from 'ionic4-auto-complete';
+import { RimsService } from 'src/app/services/rims.service';
+import { LoadingController, NavController } from '@ionic/angular';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
-  selector: "app-creator",
-  templateUrl: "./creator.page.html",
-  styleUrls: ["./creator.page.scss"],
+  selector: 'app-creator',
+  templateUrl: './creator.page.html',
+  styleUrls: ['./creator.page.scss'],
 })
 export class CreatorPage implements OnInit {
   fromCreator: boolean = false;
@@ -27,6 +27,7 @@ export class CreatorPage implements OnInit {
   rimsProvider: RimsDataProvider;
   user: any;
   fetchedUser: any;
+  error: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -36,20 +37,18 @@ export class CreatorPage implements OnInit {
     public auth: AuthService
   ) {
     this.rimsProvider = new RimsDataProvider(rimsService);
-    this.userName = this.route.snapshot.paramMap.get("username");
-    console.log('user',this.userName);
+    this.userName = this.route.snapshot.paramMap.get('username');
+    console.log('user', this.userName);
     // this.setUser();
     this.getCreatorRecipes();
   }
-  
+
   ngOnInit() {
-    
     // if (this.userName) this.setUser();
   }
-  ionViewDidEnter(){
+  ionViewDidEnter() {
     // console.log(this.user);
     // this.setUser();
-
   }
 
   async getCreatorRecipes(event: any = null, force: boolean = false) {
@@ -57,33 +56,38 @@ export class CreatorPage implements OnInit {
     let skip = force ? 0 : this.receipts.length || 0;
 
     if (skip > 0 && !force) {
- 
-        (await this.receiptsService.findByUser(
+      await this.receiptsService
+        .findByUser(
           this.userName,
           this.filter,
-          ["-__v"],
+          ['-__v'],
           skip,
           12,
-          "-priority",
-          ["ingredients.ingredient"]
-        ).then((resp:any)=>{
-          this.receipts.push(...(resp.docs))
-        }))
+          '-priority',
+          ['ingredients.ingredient']
+        )
+        .then((resp: any) => {
+          this.receipts.push(...resp.docs);
+        });
 
       if (event) event.target.complete();
       return;
     }
     await this.receiptsService
-      .findByUser(this.userName, this.filter, ["-__v"], skip, 12, "-priority", [
-        "ingredients.ingredient",
+      .findByUser(this.userName, this.filter, ['-__v'], skip, 12, '-priority', [
+        'ingredients.ingredient',
       ])
       .then((resp: any) => {
         this.receipts = resp.docs;
         this.user = resp.user;
-        console.log('fetched user',this.user);
+        console.log('fetched user', this.user);
+      })
+      .catch((e) => {
+        console.log(e.error.code);
+        this.error = true;
       });
 
-    console.log("receipts", this.receipts);
+    console.log('receipts', this.receipts);
     if (event) event.target.complete();
   }
 
@@ -106,7 +110,7 @@ export class CreatorPage implements OnInit {
       filter.tags = { $all: this._filter.tags };
     }
     if (this.selected_rim) {
-      filter["ingredients.ingredient"] = { $in: [this.selected_rim.id] };
+      filter['ingredients.ingredient'] = { $in: [this.selected_rim.id] };
     }
     this.filter = filter;
     await this.getCreatorRecipes(null, true);
@@ -119,8 +123,8 @@ export class CreatorPage implements OnInit {
 }
 
 export class RimsDataProvider implements AutoCompleteService {
-  labelAttribute = "id";
-  formValueAttribute = "_name";
+  labelAttribute = 'id';
+  formValueAttribute = '_name';
   field;
 
   constructor(private service: RimsService) {}
@@ -132,8 +136,8 @@ export class RimsDataProvider implements AutoCompleteService {
 
     return (
       await this.service.find(
-        { name: { $regex: `.*${keyword}.*`, $options: "i" } },
-        ["-__v"],
+        { name: { $regex: `.*${keyword}.*`, $options: 'i' } },
+        ['-__v'],
         0,
         25,
         { name: 1 }
