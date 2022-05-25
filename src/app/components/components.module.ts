@@ -25,13 +25,29 @@ import { UsersPopoverComponent } from './users-popover/users-popover.component';
 import { IngredientsQtaComponent } from './dynamics-form-custom/ingredients-qta/ingredients-qta.component';
 import { DFIngredientsComponent } from './dynamics-form-custom/df-ingredients/df-ingredients.component';
 import { PreparingFormComponent } from './dynamics-form-custom/preparing-form/preparing-form.component';
+import { BonAppPageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const components = [
-  ChooseIngredientsComponent, RandomReceiptsComponent, ProductCardComponent, ProductCardMobileComponent, BonAppHeaderComponent, BonAppCreatorHeaderComponent,
-  LoginComponent, FooterCartComponent, CartDetailsComponent, AddressFormComponent,
-  IngredientsPriorityComponent, IngredientsReceiptsComponent, IngredientsComponent,
-  DFIngredientsPriorityComponent, DatasPopoverComponent, UsersPopoverComponent, IngredientsQtaComponent, DFIngredientsComponent,
-  PreparingFormComponent
+  ChooseIngredientsComponent,
+  RandomReceiptsComponent,
+  ProductCardComponent,
+  ProductCardMobileComponent,
+  BonAppHeaderComponent,
+  BonAppCreatorHeaderComponent,
+  BonAppPageNotFoundComponent,
+  LoginComponent,
+  FooterCartComponent,
+  CartDetailsComponent,
+  AddressFormComponent,
+  IngredientsPriorityComponent,
+  IngredientsReceiptsComponent,
+  IngredientsComponent,
+  DFIngredientsPriorityComponent,
+  DatasPopoverComponent,
+  UsersPopoverComponent,
+  IngredientsQtaComponent,
+  DFIngredientsComponent,
+  PreparingFormComponent,
 ];
 
 @NgModule({
@@ -43,8 +59,8 @@ const components = [
     AutoCompleteModule,
     FormlyModule,
     TranslateModule.forChild(),
-    JoditAngularModule
+    JoditAngularModule,
   ],
-  exports: components
+  exports: components,
 })
-export class ComponentsModule { }
+export class ComponentsModule {}
