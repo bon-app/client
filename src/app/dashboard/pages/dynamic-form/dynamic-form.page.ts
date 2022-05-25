@@ -1,11 +1,18 @@
 import { Component, Injector, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { LoadingController, NavController, ToastController } from '@ionic/angular';
+import {
+  LoadingController,
+  NavController,
+  ToastController,
+} from '@ionic/angular';
 import { AuthService } from 'src/app/auth/auth.service';
 import { EntityConfig } from '../../../lib/dynamic-forms/core/entity.config';
-import { ENTITIES_MAPPER, SERVICES_MAPPER } from '../../../lib/dynamic-forms/core/mapper';
+import {
+  ENTITIES_MAPPER,
+  SERVICES_MAPPER,
+} from '../../../lib/dynamic-forms/core/mapper';
 import { CRUDService } from '../../../services/crud.service';
-import { ENTITIES } from "../entities/entities.config";
+import { ENTITIES } from '../entities/entities.config';
 
 @Component({
   selector: 'app-dynamic-form',
@@ -13,16 +20,19 @@ import { ENTITIES } from "../entities/entities.config";
   styleUrls: ['./dynamic-form.page.scss'],
 })
 export class DynamicFormPage implements OnInit {
-
-  @Input("model") model: any = {};
-  @Input("config") config: EntityConfig;
+  @Input('model') model: any = {};
+  @Input('config') config: EntityConfig;
 
   public service: CRUDService<any>;
 
-  constructor(private toastCtrl: ToastController,private route: ActivatedRoute, private injector: Injector,
-    public navCtrl: NavController, private loadingCtrl: LoadingController, private auth: AuthService) {
-
-  }
+  constructor(
+    private toastCtrl: ToastController,
+    private route: ActivatedRoute,
+    private injector: Injector,
+    public navCtrl: NavController,
+    private loadingCtrl: LoadingController,
+    private auth: AuthService
+  ) {}
 
   ngOnInit() {
     // console.log('dynamic-form ngOnInit:', this.model)
@@ -38,19 +48,22 @@ export class DynamicFormPage implements OnInit {
 
     if (!id) {
       this.model = new (ENTITIES_MAPPER.get(this.config.object))();
-    }
-    else {
+    } else {
       let findOptions = this.config.crudOptions.findOne || {};
-      this.model = await this.service.findById(id, findOptions.fields || ['-__v'], findOptions.includes);
+      this.model = await this.service.findById(
+        id,
+        findOptions.fields || ['-__v'],
+        findOptions.includes
+      );
       // console.log('dynamic-form ionViewWillEnter if (id):',this.model)
     }
-    console.log('dynamic-form ionViewWillEnter if (id):', this.model)
-
+    console.log('dynamic-form ionViewWillEnter if (id):', this.model);
   }
 
   async save($event) {
+    // console.log();
 
-    let loading = await this.loadingCtrl.create({ message: "loading..." });
+    let loading = await this.loadingCtrl.create({ message: 'loading...' });
     loading.present();
 
     try {
@@ -63,22 +76,23 @@ export class DynamicFormPage implements OnInit {
         return;
       }
 
-      let fields: string[] = this.config.fields.map(f => f.key) as string[];
+      let fields: string[] = this.config.fields.map((f) => f.key) as string[];
       // if (this.auth.hasRoles(['admin'])) {
       //   fields = fields.filter(f => f != 'fk_user');
       // }
+      // console.log('dynamic-form save($event)', this.model);
       await this.service.update(model, fields, fields);
       loading.dismiss();
-      // console.log('dynamic-form save($event)', this.model);
       this.navCtrl.back();
     } catch (error) {
-      console.log({error});
-      let toast = await this.toastCtrl.create({ message: error.error.code, duration: 2000 });
+      console.log({ error });
+      let toast = await this.toastCtrl.create({
+        message: error.error.code,
+        duration: 2000,
+      });
       toast.present();
-      
+
       loading.dismiss();
-    } 
-
+    }
   }
-
 }

@@ -8,7 +8,11 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpClientModule,
+  HTTP_INTERCEPTORS,
+} from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TokenInterceptor } from './auth/interceptors/token.interceptor';
@@ -37,6 +41,7 @@ import { BAImage } from './models/image.model';
 import { ImagesService } from './services/images.service';
 import { DynamicFormsModule } from './lib/dynamic-forms/dynamic-forms.module';
 import { PreparingFormComponent } from './components/dynamics-form-custom/preparing-form/preparing-form.component';
+import { Camera } from '@ionic-native/camera/ngx';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -54,21 +59,22 @@ export function createTranslateLoader(http: HttpClient) {
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
-        useFactory: (createTranslateLoader),
-        deps: [HttpClient]
-      }
+        useFactory: createTranslateLoader,
+        deps: [HttpClient],
+      },
     }),
     ReactiveFormsModule,
-    FormlyModule.forRoot(
-      {
-        types: [
-          { name: 'ingredients-priority', component: DFIngredientsPriorityComponent },
-          { name: 'ingredients', component: DFIngredientsComponent },
-          { name: 'ingredients-qta', component: IngredientsQtaComponent },
-          { name: 'preparing', component: PreparingFormComponent },
-        ]
-      }
-    ),
+    FormlyModule.forRoot({
+      types: [
+        {
+          name: 'ingredients-priority',
+          component: DFIngredientsPriorityComponent,
+        },
+        { name: 'ingredients', component: DFIngredientsComponent },
+        { name: 'ingredients-qta', component: IngredientsQtaComponent },
+        { name: 'preparing', component: PreparingFormComponent },
+      ],
+    }),
     FormlyIonicModule,
     JoditAngularModule,
     DynamicFormsModule.forRoot({
@@ -99,15 +105,16 @@ export function createTranslateLoader(http: HttpClient) {
         { service: OrdersService },
         { service: ImagesService },
         { service: UsersService },
-      ]
+      ],
     }),
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    Camera,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
