@@ -24,6 +24,7 @@ export class DynamicFormPage implements OnInit {
   @Input('config') config: EntityConfig;
 
   public service: CRUDService<any>;
+  updatedUser: any;
 
   constructor(
     private toastCtrl: ToastController,
@@ -62,6 +63,9 @@ export class DynamicFormPage implements OnInit {
 
   async save($event) {
     // console.log();
+    let id = this.route.snapshot.params.id;
+    let findOptions = this.config.crudOptions.findOne || {};
+    let entity = this.route.snapshot.params.entity;
 
     let loading = await this.loadingCtrl.create({ message: 'loading...' });
     loading.present();
@@ -82,17 +86,49 @@ export class DynamicFormPage implements OnInit {
       // }
       // console.log('dynamic-form save($event)', this.model);
       await this.service.update(model, fields, fields);
-      loading.dismiss();
-      this.navCtrl.back();
-    } catch (error) {
-      console.log({ error });
-      let toast = await this.toastCtrl.create({
-        message: error.error.code,
-        duration: 2000,
-      });
-      toast.present();
+
+      if ((entity = 'profile')) {
+        let identity = this.auth.getIdentity();
+        let checksum = identity.checksum;
+        let exp = identity.exp;
+        let iat = identity.iat;
+
+        this.updatedUser = await this.service.findById(
+          id,
+          findOptions.fields || ['-__v'],
+          findOptions.includes
+        );
+
+        let updatedUser = { ...this.updatedUser, checksum };
+        // let updatedUser = { ...this.updatedUser, checksum, exp, iat };
+        // console.log(updatedUser);
+
+        this.auth.setIdentity(null);
+        this.auth.setIdentity(updatedUser);
+      }
 
       loading.dismiss();
+      this.successToast();
+      this.navCtrl.navigateForward(`/`);
+    } catch (error) {
+      this.failToast(error);
+      loading.dismiss();
     }
+  }
+
+  async successToast() {
+    let toast = await this.toastCtrl.create({
+      message: 'Successfully updated',
+      duration: 3000,
+    });
+    toast.present();
+  }
+
+  async failToast(error) {
+    let toast = await this.toastCtrl.create({
+      message: error.error.code,
+      duration: 2000,
+    });
+    toast.present();
   }
 }

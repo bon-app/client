@@ -40,13 +40,13 @@ export class CreatorPage implements OnInit {
     this.userName = this.route.snapshot.paramMap.get('username');
     console.log('user', this.userName);
     // this.setUser();
-    this.getCreatorRecipes();
   }
 
   ngOnInit() {
     // if (this.userName) this.setUser();
   }
-  ionViewDidEnter() {
+  ionViewWillEnter() {
+    this.getCreatorRecipes();
     // console.log(this.user);
     // this.setUser();
   }

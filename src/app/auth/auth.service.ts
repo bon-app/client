@@ -1,10 +1,9 @@
 import { EventEmitter, Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
   public onLogout: EventEmitter<any> = new EventEmitter<any>();
 
   private identity: any;
@@ -30,7 +29,7 @@ export class AuthService {
   }
 
   getToken() {
-    return this.token || localStorage.getItem('token')
+    return this.token || localStorage.getItem('token');
   }
 
   setToken(token: string): void {
@@ -64,7 +63,7 @@ export class AuthService {
         user_roles = payload.roles || [];
       }
     }
-    return !!user_roles.find(ur => roles.find(r => r == ur))
+    return !!user_roles.find((ur) => roles.find((r) => r == ur));
   }
 
   impersonate(token: string): void {
@@ -80,5 +79,4 @@ export class AuthService {
     this.setIdentity(null);
     this.onLogout.emit(true);
   }
-
 }
