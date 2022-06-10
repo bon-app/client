@@ -9,22 +9,35 @@ import { ENTITIES } from 'src/app/dashboard/pages/entities/entities.config';
   styleUrls: ['./datas-popover.component.scss'],
 })
 export class DatasPopoverComponent implements OnInit {
+  @Input('items') items: { label: string; url: string }[] = [];
 
-  @Input("items") items: { label: string, url: string }[] = []
-
-  constructor(private navCtrl: NavController, private popoverCtrl: PopoverController, private auth: AuthService) { }
+  constructor(
+    private navCtrl: NavController,
+    private popoverCtrl: PopoverController,
+    private auth: AuthService
+  ) {}
 
   ngOnInit() {
     for (let k in ENTITIES) {
-      if ((k == 'receiptsForCreator' && this.auth.hasRoles(['creator'])) || (k != 'receiptsForCreator' && k != 'profile' && this.auth.hasRoles(['admin']))) {
-        this.items.push({ label: ENTITIES[k].title, url: `/dashboard/list/${k}` })
+      if (
+        (k == 'receiptsForCreator' &&
+          this.auth.hasRoles(['creator', 'verified creator'])) ||
+        (k != 'receiptsForCreator' &&
+          k != 'profile' &&
+          this.auth.hasRoles(['admin']))
+      ) {
+        this.items.push({
+          label: ENTITIES[k].title,
+          url: `/dashboard/list/${k}`,
+        });
       }
     }
   }
 
   goto(url: string) {
+    console.log(url);
+
     this.navCtrl.navigateForward(url);
     this.popoverCtrl.dismiss();
   }
-
 }
