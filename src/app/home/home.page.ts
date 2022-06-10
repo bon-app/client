@@ -1,17 +1,17 @@
-import { Component } from "@angular/core";
-import { Receipt } from "../models/receipt.model";
-import { ReceiptsService } from "../services/receipts.service";
-import Swal from "sweetalert2";
-import { TranslateService } from "@ngx-translate/core";
-import { AutoCompleteService } from "ionic4-auto-complete";
-import { RimsService } from "../services/rims.service";
-import { ActivatedRoute } from "@angular/router";
-import { NavController } from "@ionic/angular";
+import { Component } from '@angular/core';
+import { Receipt } from '../models/receipt.model';
+import { ReceiptsService } from '../services/receipts.service';
+import Swal from 'sweetalert2';
+import { TranslateService } from '@ngx-translate/core';
+import { AutoCompleteService } from 'ionic4-auto-complete';
+import { RimsService } from '../services/rims.service';
+import { ActivatedRoute } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 @Component({
-  selector: "app-home",
-  templateUrl: "home.page.html",
-  styleUrls: ["home.page.scss"],
+  selector: 'app-home',
+  templateUrl: 'home.page.html',
+  styleUrls: ['home.page.scss'],
 })
 export class HomePage {
   public receipts: Receipt[] = [];
@@ -48,11 +48,11 @@ export class HomePage {
         this.receipts.push(
           ...(await this.receiptsService.findAll(
             this.filter,
-            ["-__v"],
+            ['-__v'],
             skip,
             12,
-            "-priority",
-            ["ingredients.ingredient"]
+            '-priority',
+            ['ingredients.ingredient']
           ))
         );
         if (event) event.target.complete();
@@ -60,11 +60,11 @@ export class HomePage {
       }
       this.receipts = await this.receiptsService.findAll(
         this.filter,
-        ["-__v"],
+        ['-__v'],
         skip,
         12,
-        "-priority",
-        ["ingredients.ingredient"]
+        '-priority',
+        ['ingredients.ingredient']
       );
       if (event) event.target.complete();
     } catch (error) {}
@@ -89,7 +89,7 @@ export class HomePage {
       filter.tags = { $all: this._filter.tags };
     }
     if (this.selected_rim) {
-      filter["ingredients.ingredient"] = { $in: [this.selected_rim.id] };
+      filter['ingredients.ingredient'] = { $in: [this.selected_rim.id] };
     }
     this.filter = filter;
     await this.getReceipts(null, true);
@@ -102,8 +102,8 @@ export class HomePage {
 }
 
 export class RimsDataProvider implements AutoCompleteService {
-  labelAttribute = "id";
-  formValueAttribute = "_name";
+  labelAttribute = 'id';
+  formValueAttribute = '_name';
   field;
 
   constructor(private service: RimsService) {}
@@ -113,10 +113,12 @@ export class RimsDataProvider implements AutoCompleteService {
       return false;
     }
 
+    // if(keyword first value == @ ,search in the users endpoint)
+
     return (
       await this.service.find(
-        { name: { $regex: `.*${keyword}.*`, $options: "i" } },
-        ["-__v"],
+        { name: { $regex: `.*${keyword}.*`, $options: 'i' } },
+        ['-__v'],
         0,
         25,
         { name: 1 }
