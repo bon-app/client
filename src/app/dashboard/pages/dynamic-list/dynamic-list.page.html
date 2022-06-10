@@ -5,40 +5,52 @@
 
   <div class="container">
     <div id="back">
-      <ion-button size="small" fill="outline" color="secondary" (click)="navCtrl.back()">Back</ion-button>
+      <ion-button
+        size="small"
+        fill="outline"
+        color="secondary"
+        (click)="navCtrl.back()"
+        >Back</ion-button
+      >
     </div>
-    <input id="import-csv" type="file" style="display: none;" (change)="importCSV($event)" accept="text/csv"/>
-    <input id="copy" style="display: none;" />
-    <dynamic-list *ngIf="config && auth.hasRoles(['admin'])" #list 
-      [config]="config" 
-      [data]="data" 
+    <input
+      id="import-csv"
+      type="file"
+      style="display: none"
+      (change)="importCSV($event)"
+      accept="text/csv"
+    />
+    <input id="copy" style="display: none" />
+    <dynamic-list
+      *ngIf="config && auth.hasRoles(['admin'])"
+      #list
+      [config]="config"
+      [data]="data"
       [settings]="settings"
-      [extraButtons]="config.listOptions?.extraButtons" 
-
+      [extraButtons]="config.listOptions?.extraButtons"
       (add)="goto('/dashboard/data/'+entity)"
-      (edit)="goto('/dashboard/data/'+entity+'/'+$event.id)" 
-      (delete)="deleteElement($event)" 
-
+      (edit)="goto('/dashboard/data/'+entity+'/'+$event.id)"
+      (delete)="deleteElement($event)"
       (more)="getRecords()"
-      (filterChange)="getRecords(true)" 
-      
-      (extraButtonClick)="handleExtraButtons($event)" 
-      (rowLengthChange)="getRecords(true)">
+      (filterChange)="getRecords(true)"
+      (extraButtonClick)="handleExtraButtons($event)"
+      (rowLengthChange)="getRecords(true)"
+    >
     </dynamic-list>
-    <dynamic-list *ngIf="config && auth.hasRoles(['creator'])" #list 
-    [config]="config" 
-    [data]="data" 
-    [settings]="settings"
-    [extraButtons]="config.listOptions?.extraButtons" 
-
-    (add)="goto('/dashboard/data/'+entity)"
-    (edit)="goto('/dashboard/data/'+entity+'/'+$event.id)" 
-
-    (more)="getRecords()"
-    (filterChange)="getRecords(true)" 
-    
-    (extraButtonClick)="handleExtraButtons($event)" 
-    (rowLengthChange)="getRecords(true)">
-  </dynamic-list>
+    <dynamic-list
+      *ngIf="config && auth.hasRoles(['creator','verified creator'])"
+      #list
+      [config]="config"
+      [data]="data"
+      [settings]="settings"
+      [extraButtons]="config.listOptions?.extraButtons"
+      (add)="goto('/dashboard/data/'+entity)"
+      (edit)="goto('/dashboard/data/'+entity+'/'+$event.id)"
+      (more)="getRecords()"
+      (filterChange)="getRecords(true)"
+      (extraButtonClick)="handleExtraButtons($event)"
+      (rowLengthChange)="getRecords(true)"
+    >
+    </dynamic-list>
   </div>
 </ion-content>
