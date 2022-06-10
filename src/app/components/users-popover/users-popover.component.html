@@ -1,19 +1,21 @@
 <ng-container *ngIf="auth.isAuthenticate()">
   <div class="popup_text">
     <h3>Ciao {{ user.name }}!</h3>
-    <h4 *ngIf="auth.hasRoles(['admin', 'creator'])">{{ user.roles }}</h4>
+    <h4 *ngIf="auth.hasRoles(['admin', 'creator', 'verified creator'])">
+      {{ user.roles }}
+    </h4>
     <div class="partial-border ion-margin-top ion-margin-bottom"></div>
   </div>
   <!-- <ion-item (click)="goto('/orders')" style="cursor: pointer;">
     {{'NavBar.orders' | translate}}
   </ion-item> -->
   <ion-item (click)="gotoCreatorPage()" style="cursor: pointer">
-    {{ "NavBar.my_page" | translate }}
+    {{ 'NavBar.my_page' | translate }}
   </ion-item>
   <ion-item (click)="goToProfile()" style="cursor: pointer">
-    {{ "NavBar.settings" | translate }}
+    {{ 'NavBar.settings' | translate }}
   </ion-item>
   <ion-item (click)="logout('/')" style="cursor: pointer">
-    {{ "NavBar.logout" | translate }}
+    {{ 'NavBar.logout' | translate }}
   </ion-item>
 </ng-container>
