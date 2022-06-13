@@ -472,19 +472,19 @@ export const ENTITIES = {
           filterable: true,
         },
       },
-      {
-        key: 'verified',
-        type: 'checkbox',
-        defaultValue: false,
-        templateOptions: {
-          label: 'Is verified?',
-        },
-        list: {
-          parser: 'checkbox',
-          filter_type: 'checkbox',
-          filterable: true,
-        },
-      },
+      // {
+      //   key: 'verified',
+      //   type: 'checkbox',
+      //   defaultValue: false,
+      //   templateOptions: {
+      //     label: 'Is verified?',
+      //   },
+      //   list: {
+      //     parser: 'checkbox',
+      //     filter_type: 'checkbox',
+      //     filterable: true,
+      //   },
+      // },
       {
         key: 'priority',
         type: 'input',
@@ -1054,12 +1054,25 @@ export const ENTITIES = {
           options: [
             { label: 'Admin', value: 'admin' },
             { label: 'Creator', value: 'creator' },
-            { label: 'Verified Creator', value: 'verified creator' },
+            // { label: 'Verified Creator', value: 'verified creator' },
           ],
         },
         validation: {},
         list: {
           filter_type: 'text',
+          filterable: true,
+        },
+      },
+      {
+        key: 'verified',
+        type: 'checkbox',
+        defaultValue: false,
+        templateOptions: {
+          label: 'Is verified?',
+        },
+        list: {
+          parser: 'checkbox',
+          filter_type: 'checkbox',
           filterable: true,
         },
       },
