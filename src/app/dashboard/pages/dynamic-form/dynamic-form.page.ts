@@ -43,6 +43,8 @@ export class DynamicFormPage implements OnInit {
     let entity = this.route.snapshot.params.entity;
     let id = this.route.snapshot.params.id;
     this.config = ENTITIES[entity];
+    console.log(entity);
+
     // this.model = new (ENTITIES_MAPPER.get(this.config.object))();
     this.service = this.injector.get(SERVICES_MAPPER.get(this.config.service));
     // console.log('dynamic-form ionViewWillEnter:',this.model)
@@ -85,31 +87,29 @@ export class DynamicFormPage implements OnInit {
       //   fields = fields.filter(f => f != 'fk_user');
       // }
       // console.log('dynamic-form save($event)', this.model);
+
       await this.service.update(model, fields, fields);
 
-      if ((entity = 'profile')) {
+      if (entity === 'profile') {
         let identity = this.auth.getIdentity();
         let checksum = identity.checksum;
         let exp = identity.exp;
         let iat = identity.iat;
-
         this.updatedUser = await this.service.findById(
           id,
           findOptions.fields || ['-__v'],
           findOptions.includes
         );
-
         let updatedUser = { ...this.updatedUser, checksum };
         // let updatedUser = { ...this.updatedUser, checksum, exp, iat };
         // console.log(updatedUser);
-
         this.auth.setIdentity(null);
         this.auth.setIdentity(updatedUser);
+        this.navCtrl.navigateForward(`/`);
       }
 
       loading.dismiss();
       this.successToast();
-      this.navCtrl.navigateForward(`/`);
     } catch (error) {
       this.failToast(error);
       loading.dismiss();
