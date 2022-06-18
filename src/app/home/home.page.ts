@@ -15,7 +15,7 @@ import { NavController } from '@ionic/angular';
 })
 export class HomePage {
   public receipts: Receipt[] = [];
-  public filter: any = { active: true };
+  public filter: any = { active: true, verified: true };
   public selected_rim: any;
   public rimsProvider: any;
   public _filter = {
