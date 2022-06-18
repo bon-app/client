@@ -11,32 +11,34 @@
         <h1 class="ion-text-center">Un modo semplice ed intuitivo per <span> condividere e scoprire ricette </span></h1>
         <!-- <h1>{{'Home.h1' | translate}}</h1> -->
         <h2 class="ion-text-center">{{'Home.h2' | translate}}</h2>
-        <div>
-          <ion-chip class="creator_chip" button (click)="goto('/cuci.fi')">
-            <ion-avatar>
-              <img src="assets/creators/cucifi_low.jpeg">
-            </ion-avatar>
-            <ion-label>@cuci.fi</ion-label>
-          </ion-chip>
-          <ion-chip class="creator_chip" button (click)="goto('/lucasfoodandkitchen')">
-            <ion-avatar>
-              <img src="assets/creators/lucas_low.jpeg">
-            </ion-avatar>
-            <ion-label>@lucasfoodandkitchen</ion-label>
-          </ion-chip>
-          <ion-chip class="creator_chip" button (click)="goto('/gustamenno')">
-            <ion-avatar>
-              <img src="assets/creators/gustamenno_low.jpeg">
-            </ion-avatar>
-            <ion-label>@gustamenno</ion-label>
-          </ion-chip>
-        </div>
+        <ion-button id="button" (click)="openLoginModal(true)">Crea il tuo ricettario</ion-button>
       </div>
     </div>
     <div id="first_border" style="padding: 1.6em">
       <div class="partial-border ion-margin-top ion-margin-bottom"></div>
     </div>
-    <h1 class="ion-text-center allrecipes">Sloglia tutte le ricette..</h1>
+    <h1 class="ion-text-center allrecipes">Sfoglia le ricette degli utenti verificati:</h1>
+    <div id="cboxes" class="ion-text-center">
+      <ion-chip class="creator_chip" button (click)="goto('/cuci.fi')">
+        <ion-avatar>
+          <img src="assets/creators/cucifi_low.jpeg">
+        </ion-avatar>
+        <ion-label>@cuci.fi</ion-label>
+      </ion-chip>
+      <ion-chip class="creator_chip" button (click)="goto('/lucasfoodandkitchen')">
+        <ion-avatar>
+          <img src="assets/creators/lucas_low.jpeg">
+        </ion-avatar>
+        <ion-label>@lucasfoodandkitchen</ion-label>
+      </ion-chip>
+      <ion-chip class="creator_chip" button (click)="goto('/gustamenno')">
+        <ion-avatar>
+          <img src="assets/creators/gustamenno_low.jpeg">
+        </ion-avatar>
+        <ion-label>@gustamenno</ion-label>
+      </ion-chip>
+    </div>
+
     <!-- subtitle1: "Usa gli ingredienti che hai in frigo" -->
     <h2 class="ion-text-center" id="subtitle1">{{'Home.search1' | translate}}</h2>
     <!-- search bar -->

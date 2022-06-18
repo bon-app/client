@@ -4,7 +4,7 @@
     <ion-buttons slot="start" class="ion-hide-md-up">
       <!-- mobile -->
       <!-- <ion-button style="padding-left:0.2em" fill="clear" size="large" color="secondary"
-      (click)="goto('https://about.bonapp.life/')">
+      (click)="goto('https://www.bonapp.life/about')">
       <ion-icon name="help-circle-outline"></ion-icon>
       </ion-button> -->
       <!-- authenticated user -->
@@ -33,11 +33,11 @@
 
     <ion-buttons slot="start" class="ion-hide-md-down">
       <!-- desktop -->
-      <!-- <ion-button style="padding-left:0.5em"  fill="clear" size="large" color="secondary"
-        (click)="goto('https://about.bonapp.life/')">
+      <ion-button style="padding-left:0.5em"  fill="clear" size="large" color="secondary"
+      (click)="navCtrl.navigateForward('/about')">
         <ion-icon name="help-circle-outline"></ion-icon>
-        {{'NavBar.about' | translate}}
-      </ion-button> -->
+        About
+      </ion-button>
       <!-- authenticated user -->
       <ng-container *ngIf="auth.isAuthenticate()">
         <!-- popover with orders & logout -->

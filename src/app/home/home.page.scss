@@ -9,7 +9,7 @@
 // }
 #title {
   margin: 0.5em 7em !important;
-  padding-bottom: 3em;
+  //padding-bottom: 3em;
   h1 {
     font-family: Recoleta !important;
     text-align: center;
@@ -39,7 +39,6 @@
     display: block;
     margin-top: -8px;
   }
-
   .creator_chip {
     // margin:4px; 
     background-image: linear-gradient(45deg, #F6D0C5, #FFF4F1); 
@@ -50,6 +49,32 @@
 
   }
 }
+
+#cboxes {
+  margin-bottom: 1.5em;
+  span {
+    display: inline-block;
+  }
+  span::after {
+    content: '';
+    height: 5px;
+    background: #efbdae;
+    border-radius: 10px;
+    display: block;
+    margin-top: -8px;
+  }
+  .creator_chip {
+    // margin:4px; 
+    //background-image: linear-gradient(45deg, #F6D0C5, #FFF4F1); 
+    background-image: linear-gradient(45deg, #F9E5DF, #FDF8F7); 
+    // border-radius: 8px;
+    font-weight:500;
+    font-size: 1.3em;
+    // padding: 1em;
+
+  }
+}
+
 
 @media only screen and (max-width: 768px) {
   #title {
@@ -73,6 +98,28 @@
       font-weight:500;
     }
   }
+  #cboxes {
+    margin: 0.5em 1em !important;
+    padding-bottom: 0em;
+    span::after {
+    display: none;
+    }
+    h1 {
+      font-family: Recoleta !important;
+      text-align: center;
+      font-size: 2em;
+      margin-top: 0.1em;
+      margin-bottom: 2em;
+    }
+    h2 {
+      font-size: 1.5em;
+      text-align: center;
+      color: #545454;
+      margin-bottom: 2em;
+      font-weight:500;
+    }
+  }
+
 }
 
 #first_border {
@@ -465,4 +512,17 @@ li {
   background: url("/assets/popup/1.png") left center no-repeat; 
   /** move the text to the right **/
   padding-left: 20px; 
+}
+
+
+#button {
+  cursor: pointer;
+  font-size: 1 em;
+  background-color: #efbdae !important;
+  color: white;
+  // margin-top: 2em;
+  //padding: 10px 10px; 
+  border-radius: 10px;
+  font-size: 1.3em !important;
+  font-family: 'Recoleta'
 }

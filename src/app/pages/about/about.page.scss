@@ -2,9 +2,14 @@
 @import "../../../assets/about/css/normalize.css";
 @import "../../../assets/about/css/webflow.css";
 
+
+
 *{
+    color: #545454 !important;
+    font-family: Recoleta;
     opacity: 1 !important;
 }
+
 
 a {
     background-color: transparent !important;
@@ -18,4 +23,20 @@ a {
     position: relative;
     background: transparent;
     z-index: 1000;
+}
+     
+@font-face {   
+    font-family: 'Recoleta';    //This is what we are going to call
+    src: url('../../../assets/font/recoleta-semibold.otf');
+}
+
+#button {
+    cursor: pointer;
+    font-size: 1 em;
+    background-color: #efbdae !important;
+    color: #545454;
+    // margin-top: 2em;
+    padding: 10px 10px; 
+    border-radius: 5px;
+    font-size: 1.3em !important;
 }

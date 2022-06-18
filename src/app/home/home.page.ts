@@ -7,6 +7,10 @@ import { AutoCompleteService } from 'ionic4-auto-complete';
 import { RimsService } from '../services/rims.service';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { LoginComponent } from '../components/login/login.component';
+import { ModalController, PopoverController } from '@ionic/angular';
+
+
 
 @Component({
   selector: 'app-home',
@@ -32,7 +36,8 @@ export class HomePage {
     private route: ActivatedRoute,
     private rimsService: RimsService,
     private translate: TranslateService,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private modalCtrl: ModalController
   ) {
     this.rimsProvider = new RimsDataProvider(rimsService);
   }
@@ -98,6 +103,17 @@ export class HomePage {
   selectedRim(rim = null) {
     this.selected_rim = rim;
     this.createFilter();
+  }
+  async openLoginModal(signin: boolean = false) {
+    let modal = await this.modalCtrl.create({
+      component: LoginComponent,
+      componentProps: {
+        section: signin ? 'signin' : 'login'
+      },
+      cssClass: ['auto-height']
+    });
+
+    modal.present();
   }
 }
 
