@@ -22,8 +22,12 @@
 
         <h1 style="text-align: left">
           Le ricette di<br />@<span id="username"
-            >{{user? user.nickname : ''}}</span
-          >
+            >{{user? user.nickname : ''}}
+            <ion-icon
+              *ngIf="user && user.verified "
+              src="assets/filters/healthy.svg"
+            ></ion-icon
+          ></span>
         </h1>
       </div>
       <h2 *ngIf="user && user.bio == ''">
