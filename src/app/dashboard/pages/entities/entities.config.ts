@@ -705,6 +705,25 @@ export const ENTITIES = {
           filterable: true,
         },
       },
+      {
+        key: 'creator_priority',
+        type: 'input',
+        defaultValue: 1000,
+        templateOptions: {
+          label: 'Creator Priority',
+          type: 'number',
+          required: true,
+        },
+        validation: {
+          messages: {
+            required: 'Non modificare!',
+          },
+        },
+        list: {
+          filter_type: 'range',
+          filterable: true,
+        },
+      },
     ],
     crudOptions: {
       findOne: {
