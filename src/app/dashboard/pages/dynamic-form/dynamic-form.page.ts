@@ -72,25 +72,31 @@ export class DynamicFormPage implements OnInit {
     try {
       let model = JSON.parse(JSON.stringify(this.model));
       model = this.config.validateModel(model);
-      if (!$event.id) {
-        await this.service.add(model);
-        loading.dismiss();
-        this.navCtrl.back();
-        return;
-      }
 
-      let fields: string[] = this.config.fields.map((f) => f.key) as string[];
-      await this.service.update(model, fields, fields);
+      $event.id
+        ? await this.editEntry(findOptions, model)
+        : await this.newEntry(loading, model);
 
-      if (this.entity === 'profile') {
-        await this.updateUserCredentials(findOptions);
-      }
-
-      loading.dismiss();
       this.successToast();
     } catch (error) {
       this.failToast(error);
-      loading.dismiss();
+    }
+    loading.dismiss();
+  }
+
+  async newEntry(loading: HTMLIonLoadingElement, model) {
+    await this.service.add(model);
+    loading.dismiss();
+    this.navCtrl.back();
+    return;
+  }
+
+  async editEntry(findOptions, model) {
+    let fields: string[] = this.config.fields.map((f) => f.key) as string[];
+    await this.service.update(model, fields, fields);
+
+    if (this.entity === 'profile') {
+      await this.updateUserCredentials(findOptions);
     }
   }
 
