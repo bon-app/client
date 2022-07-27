@@ -31,25 +31,26 @@ export class LoginComponent implements OnInit {
       await this.usersService.login(this.user);
       this.modalCtrl.dismiss();
     } catch (error) {
-      let toast = await this.toastCtrl.create({
-        message: this.translate.instant('Errors.' + error.error.code),
-        duration: 3000,
-      });
-      toast.present();
+      this.errorToast(error);
     }
   }
 
   async signIn() {
     try {
+      this.user.nickname = this.user.nickname.toLowerCase();
       await this.usersService.signIn(this.user);
       this.modalCtrl.dismiss();
     } catch (error) {
-      let toast = await this.toastCtrl.create({
-        message: this.translate.instant('Errors.' + error.error.code),
-        duration: 3000,
-      });
-      toast.present();
+      this.errorToast(error);
     }
+  }
+
+  async errorToast(error) {
+    let toast = await this.toastCtrl.create({
+      message: this.translate.instant('Errors.' + error.error.code),
+      duration: 3000,
+    });
+    toast.present();
   }
 
   togglePassword() {
