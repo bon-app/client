@@ -82,11 +82,16 @@ export class DynamicListPage implements OnInit {
     if (
       confirm(`Are you sure you want to delete the "${$event.name}" element?`)
     ) {
-      console.log($event);
-      if (this.auth.hasRoles(['admin'])) {
+      let loading = await this.loadingCtrl.create({
+        message: 'Please wait...',
+      });
+      await loading.present();
+
+      if (this.auth.hasRoles(['admin', 'creator'])) {
         await this.service.delete($event.id);
         this.data = this.data.filter((d) => d.id != $event.id);
       }
+      loading.dismiss();
     }
   }
 

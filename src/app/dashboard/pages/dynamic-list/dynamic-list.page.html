@@ -46,6 +46,7 @@
       [extraButtons]="config.listOptions?.extraButtons"
       (add)="goto('/dashboard/data/'+entity)"
       (edit)="goto('/dashboard/data/'+entity+'/'+$event.id)"
+      (delete)="deleteElement($event)"
       (more)="getRecords()"
       (filterChange)="getRecords(true)"
       (extraButtonClick)="handleExtraButtons($event)"
