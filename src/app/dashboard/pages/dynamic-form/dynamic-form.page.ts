@@ -45,22 +45,22 @@ export class DynamicFormPage implements OnInit {
     this.entity = this.route.snapshot.params.entity;
     this.id = this.route.snapshot.params.id;
     this.config = ENTITIES[this.entity];
-    console.log(this.entity);
 
-    // this.model = new (ENTITIES_MAPPER.get(this.config.object))();
     this.service = this.injector.get(SERVICES_MAPPER.get(this.config.service));
-    // console.log('dynamic-form ionViewWillEnter:',this.model)
 
-    if (!this.id) {
-      this.model = new (ENTITIES_MAPPER.get(this.config.object))();
-    } else {
-      let findOptions = this.config.crudOptions.findOne || {};
+    this.id ? this.editModel() : this.newModel();
+  }
 
-      await this.fetchById(findOptions).then((response) => {
-        this.model = response;
-      });
-    }
-    console.log('dynamic-form ionViewWillEnter if (id):', this.model);
+  newModel() {
+    this.model = new (ENTITIES_MAPPER.get(this.config.object))();
+  }
+
+  async editModel() {
+    let findOptions = this.config.crudOptions.findOne || {};
+
+    await this.fetchById(findOptions).then((response) => {
+      this.model = response;
+    });
   }
 
   async save($event) {
@@ -77,7 +77,8 @@ export class DynamicFormPage implements OnInit {
         ? await this.editEntry(findOptions, model)
         : await this.newEntry(loading, model);
 
-      this.successToast();
+      await this.successToast();
+      this.navCtrl.navigateForward(`/`);
     } catch (error) {
       this.failToast(error);
     }
@@ -114,7 +115,6 @@ export class DynamicFormPage implements OnInit {
 
       this.auth.setIdentity(null);
       this.auth.setIdentity(updatedUserCredentials);
-      this.navCtrl.navigateForward(`/`);
     });
   }
 
