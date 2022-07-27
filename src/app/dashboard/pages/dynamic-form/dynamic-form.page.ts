@@ -24,7 +24,9 @@ export class DynamicFormPage implements OnInit {
   @Input('config') config: EntityConfig;
 
   public service: CRUDService<any>;
-  updatedUser: any;
+  entity: any;
+  id: string;
+  // updatedUser: any;
 
   constructor(
     private toastCtrl: ToastController,
@@ -40,34 +42,29 @@ export class DynamicFormPage implements OnInit {
   }
 
   async ionViewWillEnter() {
-    let entity = this.route.snapshot.params.entity;
-    let id = this.route.snapshot.params.id;
-    this.config = ENTITIES[entity];
-    console.log(entity);
+    this.entity = this.route.snapshot.params.entity;
+    this.id = this.route.snapshot.params.id;
+    this.config = ENTITIES[this.entity];
+    console.log(this.entity);
 
     // this.model = new (ENTITIES_MAPPER.get(this.config.object))();
     this.service = this.injector.get(SERVICES_MAPPER.get(this.config.service));
     // console.log('dynamic-form ionViewWillEnter:',this.model)
 
-    if (!id) {
+    if (!this.id) {
       this.model = new (ENTITIES_MAPPER.get(this.config.object))();
     } else {
       let findOptions = this.config.crudOptions.findOne || {};
-      this.model = await this.service.findById(
-        id,
-        findOptions.fields || ['-__v'],
-        findOptions.includes
-      );
-      // console.log('dynamic-form ionViewWillEnter if (id):',this.model)
+
+      await this.fetchById(findOptions).then((response) => {
+        this.model = response;
+      });
     }
     console.log('dynamic-form ionViewWillEnter if (id):', this.model);
   }
 
   async save($event) {
-    // console.log();
-    let id = this.route.snapshot.params.id;
     let findOptions = this.config.crudOptions.findOne || {};
-    let entity = this.route.snapshot.params.entity;
 
     let loading = await this.loadingCtrl.create({ message: 'loading...' });
     loading.present();
@@ -83,29 +80,10 @@ export class DynamicFormPage implements OnInit {
       }
 
       let fields: string[] = this.config.fields.map((f) => f.key) as string[];
-      // if (this.auth.hasRoles(['admin'])) {
-      //   fields = fields.filter(f => f != 'fk_user');
-      // }
-      // console.log('dynamic-form save($event)', this.model);
-
       await this.service.update(model, fields, fields);
 
-      if (entity === 'profile') {
-        let identity = this.auth.getIdentity();
-        let checksum = identity.checksum;
-        let exp = identity.exp;
-        let iat = identity.iat;
-        this.updatedUser = await this.service.findById(
-          id,
-          findOptions.fields || ['-__v'],
-          findOptions.includes
-        );
-        let updatedUser = { ...this.updatedUser, checksum };
-        // let updatedUser = { ...this.updatedUser, checksum, exp, iat };
-        // console.log(updatedUser);
-        this.auth.setIdentity(null);
-        this.auth.setIdentity(updatedUser);
-        this.navCtrl.navigateForward(`/`);
+      if (this.entity === 'profile') {
+        await this.updateUserCredentials(findOptions);
       }
 
       loading.dismiss();
@@ -114,6 +92,32 @@ export class DynamicFormPage implements OnInit {
       this.failToast(error);
       loading.dismiss();
     }
+  }
+
+  async updateUserCredentials(findOptions) {
+    let identity = this.auth.getIdentity();
+    const { checksum, exp, iat } = identity;
+
+    await this.fetchById(findOptions).then((fetchedUserDetails) => {
+      let updatedUserCredentials = {
+        ...fetchedUserDetails,
+        checksum,
+        exp,
+        iat,
+      };
+
+      this.auth.setIdentity(null);
+      this.auth.setIdentity(updatedUserCredentials);
+      this.navCtrl.navigateForward(`/`);
+    });
+  }
+
+  async fetchById(findOptions) {
+    return await this.service.findById(
+      this.id,
+      findOptions.fields || ['-__v'],
+      findOptions.includes
+    );
   }
 
   async successToast() {
