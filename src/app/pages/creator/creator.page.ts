@@ -55,40 +55,44 @@ export class CreatorPage implements OnInit {
     this.fromCreator = true;
     let skip = force ? 0 : this.receipts.length || 0;
 
-    if (skip > 0 && !force) {
-      await this.receiptsService
-        .findByUser(
-          this.userName,
-          this.filter,
-          ['-__v'],
-          skip,
-          12,
-          '-priority',
-          ['ingredients.ingredient']
-        )
-        .then((resp: any) => {
-          this.receipts.push(...resp.docs);
-        });
+    skip > 0 && !force
+      ? this.loadMoreRecipes(event, skip)
+      : this.loadInitialRecipes(event, skip);
+  }
 
-      if (event) event.target.complete();
-      return;
-    }
-    await this.receiptsService
-      .findByUser(this.userName, this.filter, ['-__v'], skip, 12, '-priority', [
-        'ingredients.ingredient',
-      ])
+  async loadInitialRecipes(event, skip: number) {
+    await this.fetchRecipes(skip)
       .then((resp: any) => {
         this.receipts = resp.docs;
         this.user = resp.user;
-        console.log('fetched user', this.user);
       })
       .catch((e) => {
         console.log(e.error.code);
         this.error = true;
       });
 
-    console.log('receipts', this.receipts);
     if (event) event.target.complete();
+  }
+
+  async loadMoreRecipes(event, skip: number) {
+    await this.fetchRecipes(skip).then((resp: any) => {
+      this.receipts.push(...resp.docs);
+    });
+
+    if (event) event.target.complete();
+    return;
+  }
+
+  async fetchRecipes(skip: number) {
+    return await this.receiptsService.findByUser(
+      this.userName,
+      this.filter,
+      ['-__v'],
+      skip,
+      12,
+      '-priority',
+      ['ingredients.ingredient']
+    );
   }
 
   goto(url: string) {
