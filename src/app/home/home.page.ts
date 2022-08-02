@@ -10,8 +10,6 @@ import { NavController } from '@ionic/angular';
 import { LoginComponent } from '../components/login/login.component';
 import { ModalController, PopoverController } from '@ionic/angular';
 
-
-
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -49,30 +47,32 @@ export class HomePage {
   async getReceipts(event: any = null, force: boolean = false) {
     let skip = force ? 0 : this.receipts.length || 0;
     try {
-      if (skip > 0 && !force) {
-        this.receipts.push(
-          ...(await this.receiptsService.findAll(
-            this.filter,
-            ['-__v'],
-            skip,
-            12,
-            '-priority',
-            ['ingredients.ingredient']
-          ))
-        );
-        if (event) event.target.complete();
-        return;
-      }
-      this.receipts = await this.receiptsService.findAll(
-        this.filter,
-        ['-__v'],
-        skip,
-        12,
-        '-priority',
-        ['ingredients.ingredient']
-      );
-      if (event) event.target.complete();
+      skip > 0 && !force
+        ? this.loadMoreRecipes(event, skip)
+        : this.loadInitialRecipes(event, skip);
     } catch (error) {}
+  }
+
+  async loadInitialRecipes(event, skip: number) {
+    this.receipts = await this.fetchRecipes(skip);
+    if (event) event.target.complete();
+  }
+
+  async loadMoreRecipes(event, skip: number) {
+    this.receipts.push(...(await this.fetchRecipes(skip)));
+    if (event) event.target.complete();
+    return;
+  }
+
+  async fetchRecipes(skip: number) {
+    return await this.receiptsService.findAll(
+      this.filter,
+      ['-__v'],
+      skip,
+      12,
+      '-priority',
+      ['ingredients.ingredient']
+    );
   }
 
   goto(url: string) {
@@ -108,9 +108,9 @@ export class HomePage {
     let modal = await this.modalCtrl.create({
       component: LoginComponent,
       componentProps: {
-        section: signin ? 'signin' : 'login'
+        section: signin ? 'signin' : 'login',
       },
-      cssClass: ['auto-height']
+      cssClass: ['auto-height'],
     });
 
     modal.present();
