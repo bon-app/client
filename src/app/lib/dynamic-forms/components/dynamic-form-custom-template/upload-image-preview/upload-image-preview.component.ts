@@ -3,16 +3,15 @@ import { FieldType } from '@ngx-formly/core';
 import { DEFAULT_IMAGE } from './default-image';
 import {
   ActionSheetController,
-  LoadingController,
-  Platform,
-} from '@ionic/angular';
+} from '@ionic/angular/lazy';
 import { Capacitor } from '@capacitor/core';
-import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
 @Component({
-  selector: 'app-upload-image-preview',
-  templateUrl: './upload-image-preview.component.html',
-  styleUrls: ['./upload-image-preview.component.scss'],
+    selector: 'app-upload-image-preview',
+    templateUrl: './upload-image-preview.component.html',
+    styleUrls: ['./upload-image-preview.component.scss'],
+    standalone: false
 })
 export class UploadImagePreviewComponent extends FieldType implements OnInit {
   public defaultImage: string = DEFAULT_IMAGE;
@@ -21,10 +20,7 @@ export class UploadImagePreviewComponent extends FieldType implements OnInit {
   capturedSnapURL: string;
 
   constructor(
-    private camera: Camera,
-    public platform: Platform,
-    public actionSheetController: ActionSheetController,
-    private loadingCtrl: LoadingController
+    public actionSheetController: ActionSheetController
   ) {
     super();
     console.log(Capacitor.getPlatform());
@@ -66,43 +62,24 @@ export class UploadImagePreviewComponent extends FieldType implements OnInit {
     }
   }
 
-  takePicture() {
-    const options: CameraOptions = {
+  async takePicture() {
+    try {
+      const photo = await Camera.getPhoto({
       quality: 100,
-      sourceType: 1,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-      targetWidth: 400,
-      targetHeight: 400,
-      saveToPhotoAlbum: false,
-    };
-    this.camera.getPicture(options).then(
-      async (imageData: any) => {
-        const loading = await this.loadingCtrl.create({
-          cssClass: 'my-custom-class',
-          message: 'Please wait...',
-        });
-        loading.present();
-
-        console.log({ imageData });
-        loading.dismiss();
-
-        this.capturedSnapURL = 'data:image/jpeg;base64,' + imageData;
-        const img = new Image();
-        img.src = 'data:image/jpeg;base64,' + imageData;
-
-        img.onload = () => {
-          this.model[this.field.key as string] = img.src;
-          this.setPreview();
-          this.formControl.patchValue(this.model[this.field.key as string]);
-          loading.dismiss();
-        };
-      },
-      (err) => {
-        // Handle error
-      }
-    );
+        source: CameraSource.Camera,
+        resultType: CameraResultType.DataUrl,
+        width: 400,
+        height: 400,
+        saveToGallery: false,
+      });
+      if (!photo.dataUrl) return;
+      this.capturedSnapURL = photo.dataUrl;
+      this.model[this.field.key as string] = photo.dataUrl;
+      this.setPreview();
+      this.formControl.patchValue(photo.dataUrl);
+    } catch (error) {
+      console.warn('Camera capture was cancelled or unavailable', error);
+    }
   }
 
   async selectImage() {
@@ -119,7 +96,7 @@ export class UploadImagePreviewComponent extends FieldType implements OnInit {
           text: 'Use Camera',
           handler: () => {
             // this.pickImage();
-            this.takePicture();
+            void this.takePicture();
             console.log('model reaches', this.model);
           },
         },

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { NavController, PopoverController } from '@ionic/angular';
+import { NavController, PopoverController } from '@ionic/angular/lazy';
 import { AuthService } from 'src/app/auth/auth.service';
 import { ENTITIES } from 'src/app/dashboard/pages/entities/entities.config';
 import Swal from 'sweetalert2'
@@ -7,9 +7,10 @@ import { TranslateService } from '@ngx-translate/core';
 import { User } from '../../models/user.model';
 
 @Component({
-  selector: 'users-popover',
-  templateUrl: './users-popover.component.html',
-  styleUrls: ['./users-popover.component.scss'],
+    selector: 'users-popover',
+    templateUrl: './users-popover.component.html',
+    styleUrls: ['./users-popover.component.scss'],
+    standalone: false
 })
 export class UsersPopoverComponent implements OnInit {
 

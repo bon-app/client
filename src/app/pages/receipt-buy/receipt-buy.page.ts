@@ -2,7 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { Category } from '../../models/category.model';
 import { CartService } from '../../services/cart.service';
 import { Receipt } from '../../models/receipt.model';
-import { LoadingController, NavController } from '@ionic/angular';
+import { LoadingController, NavController } from '@ionic/angular/lazy';
 import { ReceiptIngredientsMatching } from 'src/app/models/receipt-ingredientsMatching.model';
 import { ReceiptsService } from 'src/app/services/receipts.service';
 import { IngredientsService } from 'src/app/services/ingredients.service';
@@ -10,12 +10,12 @@ import { ActivatedRoute } from '@angular/router';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { Ingredient } from 'src/app/models/ingredient.model';
 import { Router } from '@angular/router';
-import { NullTemplateVisitor } from '@angular/compiler';
 
 @Component({
-  selector: 'app-receipt-buy',
-  templateUrl: './receipt-buy.page.html',
-  styleUrls: ['./receipt-buy.page.scss'],
+    selector: 'app-receipt-buy',
+    templateUrl: './receipt-buy.page.html',
+    styleUrls: ['./receipt-buy.page.scss'],
+    standalone: false
 })
 export class ReceiptBuyPage implements OnInit {
 

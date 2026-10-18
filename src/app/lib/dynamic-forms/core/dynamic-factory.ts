@@ -4,7 +4,8 @@ import { DynamicDirective } from "./dynamic.directive";
 
 @Component({
     selector: "dynamic-factory",
-    template: `<ng-template dynamic></ng-template>`
+    template: `<ng-template dynamic></ng-template>`,
+    standalone: false
 })
 export class DynamicFactory implements OnInit, OnChanges {
 

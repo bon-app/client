@@ -1,13 +1,14 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular/lazy';
 import { Order } from '../../models/order.model';
 import { CartService } from '../../services/cart.service';
 import { CartDetailsComponent } from '../cart-details/cart-details.component';
 
 @Component({
-  selector: 'footer-cart',
-  templateUrl: './footer-cart.component.html',
-  styleUrls: ['./footer-cart.component.scss'],
+    selector: 'footer-cart',
+    templateUrl: './footer-cart.component.html',
+    styleUrls: ['./footer-cart.component.scss'],
+    standalone: false
 })
 export class FooterCartComponent implements OnInit {
 

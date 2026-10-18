@@ -1,13 +1,14 @@
 import { Component, Injectable, Injector, Input, OnInit } from '@angular/core';
-import { ModalController, ToastController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular/lazy';
 import { FieldType, FormlyFieldConfig } from '@ngx-formly/core';
-import { AutoCompleteService } from 'ionic4-auto-complete';
+import { AutoCompleteProvider } from '../../../../../components/autocomplete/autocomplete.component';
 import { SERVICES_MAPPER } from '../../../core/mapper';
 
 @Component({
-  selector: 'app-dynamic-many-relation',
-  templateUrl: './dynamic-many-relation.component.html',
-  styleUrls: ['./dynamic-many-relation.component.scss'],
+    selector: 'app-dynamic-many-relation',
+    templateUrl: './dynamic-many-relation.component.html',
+    styleUrls: ['./dynamic-many-relation.component.scss'],
+    standalone: false
 })
 export class DynamicManyRelationComponent implements OnInit {
 
@@ -47,13 +48,14 @@ export class DynamicManyRelationComponent implements OnInit {
   }
 
   label(item) {
-    return eval(this.field.templateOptions.selected_key || 'item.name')
+    const selectedKey = this.field.templateOptions.selected_key;
+    return typeof selectedKey === 'function' ? selectedKey(item) : item?.name;
   }
 
 }
 
 
-export class ManyRelationDataProvider implements AutoCompleteService {
+export class ManyRelationDataProvider implements AutoCompleteProvider {
   labelAttribute = 'id';
   formValueAttribute = '_name';
   field;
@@ -66,7 +68,8 @@ export class ManyRelationDataProvider implements AutoCompleteService {
     if (!keyword) { return false; }
 
     return (await this.service.find({ name: { $regex: `.*${keyword}.*`, $options: 'i' } }, ['-__v'], 0, 50, { name: 1 })).filter(item => {
-      item._name = eval(this.field.templateOptions.selected_key || 'item.name')
+      const selectedKey = this.field.templateOptions.selected_key;
+      item._name = typeof selectedKey === 'function' ? selectedKey(item) : item?.name;
       return item;
     })
   }

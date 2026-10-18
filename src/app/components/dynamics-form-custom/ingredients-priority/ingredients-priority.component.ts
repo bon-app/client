@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular/lazy';
 import { FieldType } from '@ngx-formly/core';
 import { Ingredient } from 'src/app/models/ingredient.model';
 import { IngredientsPriorityComponent } from '../../ingredients-priority/ingredients-priority.component';
 
 @Component({
-  selector: 'ingredients-priority',
-  templateUrl: './ingredients-priority.component.html',
-  styleUrls: ['./ingredients-priority.component.scss'],
+    selector: 'ingredients-priority',
+    templateUrl: './ingredients-priority.component.html',
+    styleUrls: ['./ingredients-priority.component.scss'],
+    standalone: false
 })
 export class DFIngredientsPriorityComponent extends FieldType implements OnInit {
 
@@ -26,7 +27,6 @@ export class DFIngredientsPriorityComponent extends FieldType implements OnInit 
         items: rim.ingredients
       },
       backdropDismiss: false,
-      swipeToClose: false,
       cssClass: ['auto-height']
     });
 

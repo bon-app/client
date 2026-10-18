@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular/lazy';
 import { FieldType } from '@ngx-formly/core';
 import { Ingredient } from 'src/app/models/ingredient.model';
 import { IngredientsComponent } from '../../ingredients/ingredients.component';
 
 @Component({
-  selector: 'app-df-ingredients',
-  templateUrl: './df-ingredients.component.html',
-  styleUrls: ['./df-ingredients.component.scss'],
+    selector: 'app-df-ingredients',
+    templateUrl: './df-ingredients.component.html',
+    styleUrls: ['./df-ingredients.component.scss'],
+    standalone: false
 })
 export class DFIngredientsComponent extends FieldType implements OnInit {
 
@@ -25,7 +26,6 @@ export class DFIngredientsComponent extends FieldType implements OnInit {
         items: this.model.ingredients
       },
       backdropDismiss: false,
-      swipeToClose: false,
       cssClass: ['auto-height']
     });
 

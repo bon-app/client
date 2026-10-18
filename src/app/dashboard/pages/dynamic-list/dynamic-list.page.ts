@@ -6,16 +6,17 @@ import {
   LoadingController,
   NavController,
   ToastController,
-} from '@ionic/angular';
+} from '@ionic/angular/lazy';
 import { ENTITIES } from '../entities/entities.config';
 import { DynamicListComponent } from '../../../lib/dynamic-forms/components/dynamic-list/dynamic-list.component';
 import { SERVICES_MAPPER } from '../../../lib/dynamic-forms/core/mapper';
 import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
-  selector: 'app-dynamic-list',
-  templateUrl: './dynamic-list.page.html',
-  styleUrls: ['./dynamic-list.page.scss'],
+    selector: 'app-dynamic-list',
+    templateUrl: './dynamic-list.page.html',
+    styleUrls: ['./dynamic-list.page.scss'],
+    standalone: false
 })
 export class DynamicListPage implements OnInit {
   @ViewChild('list', { static: false }) list: DynamicListComponent;
@@ -33,10 +34,10 @@ export class DynamicListPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private injector: Injector,
-    private navCtrl: NavController,
+    public navCtrl: NavController,
     private loadingCtrl: LoadingController,
     private toastCtrl: ToastController,
-    private auth: AuthService
+    public auth: AuthService
   ) {}
 
   async ngOnInit() {

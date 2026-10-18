@@ -7,7 +7,8 @@
     <div id="back">
       <ion-button size="small" fill="outline" color="secondary" (click)="navCtrl.back()">{{'Receipt.back' | translate}}</ion-button>
     </div>
-    <dynamic-form *ngIf="config" [model]="model" [config]="config" (save)="save($event)"></dynamic-form>
+    @if (config) {
+      <dynamic-form [model]="model" [config]="config" (save)="save($event)"></dynamic-form>
+    }
   </div>
 </ion-content>
- 

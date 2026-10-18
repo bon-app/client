@@ -4,13 +4,16 @@ import { OrdersService } from 'src/app/services/orders.service';
 import { Order } from '../../models/order.model';
 
 @Component({
-  selector: 'app-order-confirm',
-  templateUrl: './order-confirm.page.html',
-  styleUrls: ['./order-confirm.page.scss'],
+    selector: 'app-order-confirm',
+    templateUrl: './order-confirm.page.html',
+    styleUrls: ['./order-confirm.page.scss'],
+    standalone: false
 })
 export class OrderConfirmPage implements OnInit {
 
   public order: Order;
+  public selectedImage: string;
+  public imageViewerOpen = false;
 
   constructor(public route: ActivatedRoute, public ordersService: OrdersService) { }
 
@@ -35,7 +38,9 @@ export class OrderConfirmPage implements OnInit {
   }
 
   openImage(item) {
-    let encoded_url = encodeURIComponent(`<img src="${item.ingredient.icon_url}">`);
-    window.open(`data:text/html,${encoded_url}`, '_blank')
+    this.selectedImage = item?.ingredient?.icon_url;
+    this.imageViewerOpen = !!this.selectedImage;
   }
+
+  closeImage() { this.imageViewerOpen = false; this.selectedImage = ''; }
 }

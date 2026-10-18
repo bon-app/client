@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit, } from '@angular/core';
-import { LoadingController, ModalController, NavController, ToastController } from '@ionic/angular';
+import { LoadingController, ModalController, NavController, ToastController } from '@ionic/angular/lazy';
 import { TranslateService } from '@ngx-translate/core';
 import { User } from '../../models/user.model';
 import { Order } from '../../models/order.model';
@@ -9,14 +9,14 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { AddressFormComponent } from 'src/app/components/address-form/address-form.component';
 import { Global } from 'src/app/services/global';
 import { PaymentService } from 'src/app/services/payment.service';
-import { ICreateOrderRequest, IPayPalConfig, IPurchaseUnit } from 'ngx-paypal';
 
 declare var Stripe: any;
 
 @Component({
-  selector: 'app-checkout',
-  templateUrl: './checkout.page.html',
-  styleUrls: ['./checkout.page.scss'],
+    selector: 'app-checkout',
+    templateUrl: './checkout.page.html',
+    styleUrls: ['./checkout.page.scss'],
+    standalone: false
 })
 export class CheckoutPage implements OnInit {
 
@@ -35,7 +35,8 @@ export class CheckoutPage implements OnInit {
     { id: 'P123457', last4: '3578' },
   ];
 
-  public payPalConfig?: IPayPalConfig;
+  public paypalEligible = false;
+  private paypalSession: any;
 
   constructor(
     public cart: CartService,
@@ -62,6 +63,7 @@ export class CheckoutPage implements OnInit {
     }
     this.setUser();
     this.selectAddress(null);
+    if (Global.PAYPAL_ENABLED) void this.initializePayPal();
   }
 
   getTotal() {
@@ -92,7 +94,6 @@ export class CheckoutPage implements OnInit {
         section: signin ? 'signin' : 'login'
       },
       backdropDismiss: false,
-      swipeToClose: false,
       cssClass: ['auto-height']
     });
 
@@ -107,7 +108,6 @@ export class CheckoutPage implements OnInit {
     let modal = await this.modalCtrl.create({
       component: AddressFormComponent,
       backdropDismiss: false,
-      swipeToClose: false,
       cssClass: ['auto-height']
     });
 
@@ -234,94 +234,68 @@ export class CheckoutPage implements OnInit {
 
   }
 
-  private initConfig(): void {
-    let amount = (this.cart.total + (this.order.delivery_method == 'standard' ? 0.99 : 2.49)).toFixed(2);
-    let payment: IPurchaseUnit = {
-      amount: {
-        currency_code: 'EUR',
-        value: amount,
-        breakdown: {
-          item_total: {
-            currency_code: 'EUR',
-            value: amount
+  private async initializePayPal(): Promise<void> {
+    if (!Global.PAYPAL_CLIENT_ID || !Global.PAYPAL_ENABLED) return;
+    try {
+      await this.loadPayPalSdk();
+      const sdk = await (window as any).paypal.createInstance({
+        clientId: Global.PAYPAL_CLIENT_ID,
+        components: ['paypal-payments'],
+        pageType: 'checkout',
+      });
+      const methods = await sdk.findEligibleMethods({ currencyCode: 'EUR' });
+      if (!methods.isEligible('paypal')) return;
+      this.paypalSession = sdk.createPayPalOneTimePaymentSession({
+        onApprove: async (data: any) => {
+          try {
+            const result = await this.paymentService.capturePayPalOrder(data.orderId);
+            this.cart.clear();
+            await this.navCtrl.navigateRoot('/order-confirm/' + result.orderId);
+          } catch (error) {
+            await this.showPayPalError(error);
           }
-        }
-      },
-      items: [...this.cart.items.map(i => {
-        return {
-          name: i.ingredient.brand + ' - ' + i.ingredient.name,
-          quantity: '' + i.qta,
-          unit_amount: {
-            currency_code: 'EUR',
-            value: i.ingredient.price.toFixed(2),
-          },
-        }
-      }),
-      {
-        name: this.order.delivery_method == 'standard' ? "Consegna standard" : "Consegna FootStep",
-        quantity: '1',
-        unit_amount: {
-          currency_code: 'EUR',
-          value: this.order.delivery_method == 'standard' ? '0.99' : '2.49',
         },
-      }
-      ]
-    };
-    this.payPalConfig = {
-      currency: 'EUR',
-      clientId: 'AWYaTJP6VQTX0rciOzG_Lw2Da5ILf_4lhQyYp7engsMtK-HeQeYS2ricKyx5TU13DOupHJ7L0BvOwglt',
-      createOrderOnClient: (data) => <ICreateOrderRequest>{
-        intent: 'CAPTURE',
-        purchase_units: [payment],
-        // [{
-        //   amount: {
-        //     currency_code: 'EUR',
-        //     value: '9.99',
-        //     breakdown: {
-        //       item_total: {
-        //         currency_code: 'EUR',
-        //         value: '9.99'
-        //       }
-        //     }
-        //   },
-        //   items: [{
-        //     name: 'Enterprise Subscription',
-        //     quantity: '1',
-        //     category: 'DIGITAL_GOODS',
-        //     unit_amount: {
-        //       currency_code: 'EUR',
-        //       value: '9.99',
-        //     },
-        //   }]
-        // }]
-      },
-      advanced: {
-        commit: 'true'
-      },
-      style: {
-        label: 'paypal',
-        layout: 'horizontal'
-      },
-      onApprove: (data, actions) => {
-        console.log('onApprove - transaction was approved, but not authorized', data, actions);
-        actions.order.get().then(details => {
-          console.log('onApprove - you can get full order details inside onApprove: ', details);
-        });
+        onCancel: () => undefined,
+        onError: (error: any) => void this.showPayPalError(error),
+      });
+      this.paypalEligible = true;
+    } catch (error) {
+      await this.showPayPalError(error);
+    }
+  }
 
-      },
-      onClientAuthorization: (data) => {
-        console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
-      },
-      onCancel: (data, actions) => {
-        console.log('OnCancel', data, actions);
-      },
-      onError: err => {
-        console.log('OnError', err);
-      },
-      onClick: (data, actions) => {
-        console.log('onClick', data, actions);
-      },
-    };
+  private loadPayPalSdk(): Promise<void> {
+    if ((window as any).paypal) return Promise.resolve();
+    return new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = Global.PAYPAL_SDK_URL;
+      script.async = true;
+      script.onload = () => resolve();
+      script.onerror = () => reject(new Error('PayPal SDK could not be loaded'));
+      document.head.appendChild(script);
+    });
+  }
+
+  async payWithPayPal(): Promise<void> {
+    if (!this.order.address) {
+      const toast = await this.toastCtrl.create({ message: this.translate.instant('Errors._NO_ORDER_ADDRESS'), duration: 5000 });
+      await toast.present(); return;
+    }
+    this.order.info = this.cart.items;
+    this.order.shipping_cost = this.order.delivery_method === 'standard' ? 0.99 : 2.49;
+    try {
+      const createOrder = this.paymentService.createPayPalOrder({ order: this.order, receipt_email: this.user.email })
+        .then(result => ({ orderId: result.id }));
+      await this.paypalSession.start({ presentationMode: 'auto' }, createOrder);
+    } catch (error) {
+      await this.showPayPalError(error);
+    }
+  }
+
+  private async showPayPalError(error: any): Promise<void> {
+    const message = error?.error?.message || error?.message || 'PayPal payment could not be completed.';
+    const toast = await this.toastCtrl.create({ message, duration: 5000 });
+    await toast.present();
   }
 
 }

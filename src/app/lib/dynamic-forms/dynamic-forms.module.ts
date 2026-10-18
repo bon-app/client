@@ -1,12 +1,10 @@
+import { TranslateCompatModule } from '../../shared/translate-compat.module';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule } from '@ionic/angular/lazy';
 import { FormsModule } from '@angular/forms';
 import { FormlyModule } from '@ngx-formly/core';
-import { TranslateModule } from '@ngx-translate/core';
-import { JoditAngularModule } from 'jodit-angular';
-import { FormlyIonicModule } from '@ngx-formly/ionic';
-import { AutoCompleteModule } from 'ionic4-auto-complete';
+import { ComponentsModule } from '../../components/components.module';
 import { DefaultFilterComponent } from './components/default-filter/default-filter.component';
 import { DynamicTableComponent } from './components/dynamic-table/dynamic-table.component';
 import { DynamicFactory } from './core/dynamic-factory';
@@ -58,10 +56,8 @@ const components = [
         { name: 'one', component: OneRelationComponent },
       ]
     }),
-    FormlyIonicModule,
-    AutoCompleteModule,
-    TranslateModule.forChild(),
-    JoditAngularModule
+    ComponentsModule,
+    TranslateCompatModule,
   ],
   exports: components
 })

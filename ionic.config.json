@@ -1,7 +1,6 @@
 {
   "name": "bonapp.client",
   "integrations": {
-    "cordova": {},
     "capacitor": {}
   },
   "type": "angular"

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, NavController, PopoverController } from '@ionic/angular';
+import { ModalController, NavController, PopoverController } from '@ionic/angular/lazy';
 import { AuthService } from '../../auth/auth.service';
 import { DatasPopoverComponent } from '../datas-popover/datas-popover.component';
 import { UsersPopoverComponent } from '../users-popover/users-popover.component';
@@ -10,9 +10,10 @@ import { Router } from '@angular/router';
 
 
 @Component({
-  selector: 'bonapp-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
+    selector: 'bonapp-header',
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.scss'],
+    standalone: false
 })
 export class BonAppHeaderComponent implements OnInit {
 

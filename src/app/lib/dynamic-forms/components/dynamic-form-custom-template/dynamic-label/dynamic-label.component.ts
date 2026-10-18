@@ -3,9 +3,10 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FieldType } from '@ngx-formly/core';
 
 @Component({
-  selector: 'app-dynamic-label',
-  templateUrl: './dynamic-label.component.html',
-  styleUrls: ['./dynamic-label.component.scss'],
+    selector: 'app-dynamic-label',
+    templateUrl: './dynamic-label.component.html',
+    styleUrls: ['./dynamic-label.component.scss'],
+    standalone: false
 })
 export class DynamicLabelComponent extends FieldType implements OnInit {
 

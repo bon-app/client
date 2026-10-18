@@ -1,12 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CartService } from '../../services/cart.service';
 import { Order } from '../../models/order.model';
-import { ModalController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular/lazy';
 
 @Component({
-  selector: 'cart-details',
-  templateUrl: './cart-details.component.html',
-  styleUrls: ['./cart-details.component.scss'],
+    selector: 'cart-details',
+    templateUrl: './cart-details.component.html',
+    styleUrls: ['./cart-details.component.scss'],
+    standalone: false
 })
 export class CartDetailsComponent implements OnInit {
 

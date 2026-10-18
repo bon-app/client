@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular/lazy';
 import { FieldType } from '@ngx-formly/core';
 import { DynamicOneRelationComponent } from '../dynamic-one-relation/dynamic-one-relation.component';
 
 @Component({
-  selector: 'app-one-relation',
-  templateUrl: './one-relation.component.html',
-  styleUrls: ['./one-relation.component.scss'],
+    selector: 'app-one-relation',
+    templateUrl: './one-relation.component.html',
+    styleUrls: ['./one-relation.component.scss'],
+    standalone: false
 })
 export class OneRelationComponent extends FieldType implements OnInit {
 
@@ -26,7 +27,6 @@ export class OneRelationComponent extends FieldType implements OnInit {
         field: this.field
       },
       backdropDismiss: false,
-      swipeToClose: false,
       cssClass: ['auto-height']
     });
 

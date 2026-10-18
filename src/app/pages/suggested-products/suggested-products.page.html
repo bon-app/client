@@ -24,22 +24,23 @@
                   </ion-col>
                   <ion-col size="6" class="ion-text-right">
                     <ion-icon src="assets/cart/delivery.svg" color="secondary"
-                      style="font-size: 1.5em;margin-right: 1em;"></ion-icon>
+                    style="font-size: 1.5em;margin-right: 1em;"></ion-icon>
                     € 0.99
                   </ion-col>
                 </ion-row>
               </ion-grid>
 
               <div class="items-list">
-                <ion-grid class="neutral cart-item" *ngFor="let item of cart.items">
-                  <ion-row>
-                    <ion-col class="item-name" size="9">{{item.ingredient?.name}}</ion-col>
-                    <ion-col size="3" class="ion-text-right">€ {{item.ingredient?.price.toFixed(2)}}</ion-col>
-                  </ion-row>
-                  <ion-row class="qta-wrapper">
-                    <ion-col class="less" size="3" (click)="cart.add(item.ingredient, -1)">
-                      <!-- <ion-button fill="clear" color="secondary"> -->
-                      <ion-icon name="remove" color="secondary"></ion-icon>
+                @for (item of cart.items; track item) {
+                  <ion-grid class="neutral cart-item">
+                    <ion-row>
+                      <ion-col class="item-name" size="9">{{item.ingredient?.name}}</ion-col>
+                      <ion-col size="3" class="ion-text-right">€ {{item.ingredient?.price.toFixed(2)}}</ion-col>
+                    </ion-row>
+                    <ion-row class="qta-wrapper">
+                      <ion-col class="less" size="3" (click)="cart.add(item.ingredient, -1)">
+                        <!-- <ion-button fill="clear" color="secondary"> -->
+                        <ion-icon name="remove" color="secondary"></ion-icon>
                       <!-- </ion-button> -->
                     </ion-col>
                     <ion-col size="6" class="qta">
@@ -50,55 +51,62 @@
                     <ion-col class="add" size="3" class="ion-text-right" (click)="cart.add(item.ingredient, 1)">
                       <!-- <ion-button fill="clear" color="secondary"> -->
                       <ion-icon name="add" color="secondary"></ion-icon>
-                      <!-- </ion-button> -->
-                    </ion-col>
-                  </ion-row>
-                </ion-grid>
-              </div>
+                    <!-- </ion-button> -->
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            }
+          </div>
 
-              <div id="goto-checkout">
-                <ion-grid class="neutral">
-                  <ion-row>
-                    <ion-col size="9">
-                      <strong>{{"ReceiptBuy.cart_total" | translate}}</strong>
-                    </ion-col>
-                    <ion-col size="3" class="ion-text-right">
-                      € {{cart.total.toFixed(2)}}
-                    </ion-col>
-                  </ion-row>
-                </ion-grid>
-                <ion-button expand="full" size="large" [disabled]="cart.items.length == 0" [routerLink]="'/checkout'">
-                  {{"ReceiptBuy.goto_checkout" | translate}}</ion-button>
-              </div>
-
-            </ion-card-content>
-          </ion-card>
-
-        </ion-col>
-        <!-- expandibles categories -->
-        <ion-col>
-          <div [ngStyle]="{'margin-top': i>0? '3em': '0'}" *ngFor="let category of categories; let i = index">
-            <div class="suggested-category ion-padding-start" (click)="category.showed = !getSelf(category).showed">
-              <h2>
-                <ion-text color="secondary">{{category.name}}</ion-text>
-                <ion-icon [name]="getSelf(category).showed?'chevron-down' : 'chevron-forward'" style="float: right;"></ion-icon>
-              </h2>
-              <div class="partial-border light partial-on-left"></div>
-            </div>
-            <!-- products -->
-            <ion-grid class="neutral" *ngIf="getSelf(category).showed">
+          <div id="goto-checkout">
+            <ion-grid class="neutral">
               <ion-row>
-                <ion-col size-xs="6" size-sm="4" size-md="3" size-lg="3" size-xl="3" 
-                  *ngFor="let product of getIngredients(category)">
-                  <product-card [product]="product"></product-card>
+                <ion-col size="9">
+                  <strong>{{"ReceiptBuy.cart_total" | translate}}</strong>
+                </ion-col>
+                <ion-col size="3" class="ion-text-right">
+                  € {{cart.total.toFixed(2)}}
                 </ion-col>
               </ion-row>
             </ion-grid>
+            <ion-button expand="full" size="large" [disabled]="cart.items.length == 0" [routerLink]="'/checkout'">
+            {{"ReceiptBuy.goto_checkout" | translate}}</ion-button>
           </div>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </div>
+
+        </ion-card-content>
+      </ion-card>
+
+    </ion-col>
+    <!-- expandibles categories -->
+    <ion-col>
+      @for (category of categories; track category; let i = $index) {
+        <div [ngStyle]="{'margin-top': i>0? '3em': '0'}">
+          <div class="suggested-category ion-padding-start" (click)="category.showed = !getSelf(category).showed">
+            <h2>
+              <ion-text color="secondary">{{category.name}}</ion-text>
+              <ion-icon [name]="getSelf(category).showed?'chevron-down' : 'chevron-forward'" style="float: right;"></ion-icon>
+            </h2>
+            <div class="partial-border light partial-on-left"></div>
+          </div>
+          <!-- products -->
+          @if (getSelf(category).showed) {
+            <ion-grid class="neutral">
+              <ion-row>
+                @for (product of getIngredients(category); track product) {
+                  <ion-col size-xs="6" size-sm="4" size-md="3" size-lg="3" size-xl="3"
+                    >
+                    <product-card [product]="product"></product-card>
+                  </ion-col>
+                }
+              </ion-row>
+            </ion-grid>
+          }
+        </div>
+      }
+    </ion-col>
+  </ion-row>
+</ion-grid>
+</div>
 </ion-content>
 
 <footer-cart class="ion-hide-lg-up" [options]="{ confirm_button_text: 'ReceiptBuy.goto_checkout' }"

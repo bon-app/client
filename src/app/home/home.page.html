@@ -23,19 +23,19 @@
         <ion-avatar>
           <img src="assets/creators/cucifi_low.jpeg">
         </ion-avatar>
-        <ion-label>@cuci.fi</ion-label>
+        <ion-label>&#64;cuci.fi</ion-label>
       </ion-chip>
       <ion-chip class="creator_chip" button (click)="goto('/lucasfoodandkitchen')">
         <ion-avatar>
           <img src="assets/creators/lucas_low.jpeg">
         </ion-avatar>
-        <ion-label>@lucasfoodandkitchen</ion-label>
+        <ion-label>&#64;lucasfoodandkitchen</ion-label>
       </ion-chip>
       <ion-chip class="creator_chip" button (click)="goto('/gustamenno')">
         <ion-avatar>
           <img src="assets/creators/gustamenno_low.jpeg">
         </ion-avatar>
-        <ion-label>@gustamenno</ion-label>
+        <ion-label>&#64;gustamenno</ion-label>
       </ion-chip>
     </div>
 
@@ -43,13 +43,15 @@
     <h2 class="ion-text-center" id="subtitle1">{{'Home.search1' | translate}}</h2>
     <!-- search bar -->
     <div id="search">
-      <ion-auto-complete #autoComplete [options]="{ placeholder : 'es. tonno sott\'olio' }" [maxResults]="50"
+      <app-autocomplete #autoComplete [placeholder]="'es. tonno sott\'olio'" [maxResults]="50"
         [dataProvider]="rimsProvider" (itemSelected)="selectedRim($event)">
-      </ion-auto-complete>
-      <ion-chip *ngIf="selected_rim" color="primary" (click)="autoComplete.clearValue();selectedRim()">
-        <ion-label>{{selected_rim?.name}}</ion-label>
-        <ion-icon name="close"></ion-icon>
-      </ion-chip>
+      </app-autocomplete>
+      @if (selected_rim) {
+        <ion-chip color="primary" (click)="autoComplete.clearValue();selectedRim()">
+          <ion-label>{{selected_rim?.name}}</ion-label>
+          <ion-icon name="close"></ion-icon>
+        </ion-chip>
+      }
     </div>
     <!-- subtitle2: "e personalizza la proposta di ricette" -->
     <h2 class="ion-text-center" id="subtitle2">{{'Home.search2' | translate}}</h2>
@@ -202,8 +204,8 @@
                 </ion-card-content>
               </ion-card>
             </ion-col>
-            </ion-row>
-            <ion-row>
+          </ion-row>
+          <ion-row>
             <ion-col size-xs="4" size-sm="4" size-md="3" size-lg="3" size-xl="3" class="pad-5">
               <ion-card [ngClass]="{'active': _filter.tags.indexOf('quick-n-easy') > -1}"
                 (click)="onChangeFilter('quick-n-easy')">
@@ -253,10 +255,10 @@
         </ion-grid>
       </div>
     </div>
-      
 
 
-    <!-- 
+
+    <!--
     <choose-ingredients></choose-ingredients>
 
     <div class="ion-text-center" id="buttons">
@@ -267,7 +269,7 @@
         {{'Home.market' | translate}}
       </ion-button>
     </div> -->
-    <!-- 
+    <!--
     <div>
       <h2>{{'RandomReceipts.title' | translate}}</h2>
       <div class="partial-border ion-margin-top ion-margin-bottom"></div>
@@ -281,26 +283,34 @@
     <!-- Mostra le ricette -->
     <ion-grid>
       <ion-row>
-        <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="4" size-xl="4" *ngFor="let receipt of receipts">
-          <random-receipts [receipt]="receipt"></random-receipts>
-        </ion-col>
+        @for (receipt of receipts; track receipt) {
+          <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="4" size-xl="4">
+            <random-receipts [receipt]="receipt"></random-receipts>
+          </ion-col>
+        }
         <!-- if no results -->
-        <ion-col id="no-results" class="flex-center" *ngIf="!receipts.length">
-          <div class="ion-text-center" style="width: 100%">
-            <h3>:( <br> {{"RandomReceipts.no_results" | translate}}</h3>
-          </div>
-        </ion-col>
+        @if (!receipts.length) {
+          <ion-col id="no-results" class="flex-center">
+            <div class="ion-text-center" style="width: 100%">
+              <h3>:( <br> {{"RandomReceipts.no_results" | translate}}</h3>
+            </div>
+          </ion-col>
+        }
       </ion-row>
     </ion-grid>
 
-    <ion-infinite-scroll *ngIf="fromCreator" threshold="100px" (ionInfinite)="getCreatorRecipes($event)">
-      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more recipes...">
-      </ion-infinite-scroll-content>
-    </ion-infinite-scroll>
-    <ion-infinite-scroll *ngIf="!fromCreator" threshold="100px" (ionInfinite)="getReceipts($event)">
-      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more recipes...">
-      </ion-infinite-scroll-content>
-    </ion-infinite-scroll>
+    @if (fromCreator) {
+      <ion-infinite-scroll threshold="100px" (ionInfinite)="getCreatorRecipes($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more recipes...">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    }
+    @if (!fromCreator) {
+      <ion-infinite-scroll threshold="100px" (ionInfinite)="getReceipts($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more recipes...">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    }
 
 
   </div>
@@ -308,23 +318,23 @@
 
 <!-- Message popup  -->
 <!-- <div id="message" *ngIf="isShow && ('Messages.home' | translate)">
-  <div class="ion-text-center">
-    <img src="assets/brand.png" alt=''/>
-    <h2>Il tuo nuovo modo di fare la spesa..</h2>
-    <ion-item lines="none">
-      <img slot="start" src="assets/popup/1.png" style="padding-left:10px">
-      <ion-label class="ion-text-wrap step" style="margin-left:8px"><b>Scopri cosa cucinare</b> con gli ingredienti che hai in frigo.</ion-label>
-    </ion-item>
-    <ion-item lines="none">
-      <img slot="start" src="assets/popup/2.png">
-      <ion-label class="ion-text-wrap step"><b>Ricevi gli ingredienti</b> che ti mancano in 15 minuti!</ion-label>
-    </ion-item>
-    <p id="zone">Zona operativa: Milano Porta Romana - Bocconi</p>
-    <p id="zone">DELIVERY AL MOMENTO NON ATTIVO</p>
-    <div class="partial-bor"></div>
-    <p id="questions"><em>Scopri di più cliccando in alto a sinistra</em></p>
-    <ion-button strong="true" class="ion-margin" fill="outline" (click)="isShow = false">
-      VAI!
-    </ion-button>
-  </div>
+<div class="ion-text-center">
+  <img src="assets/brand.png" alt=''/>
+  <h2>Il tuo nuovo modo di fare la spesa..</h2>
+  <ion-item lines="none">
+    <img slot="start" src="assets/popup/1.png" style="padding-left:10px">
+    <ion-label class="ion-text-wrap step" style="margin-left:8px"><b>Scopri cosa cucinare</b> con gli ingredienti che hai in frigo.</ion-label>
+  </ion-item>
+  <ion-item lines="none">
+    <img slot="start" src="assets/popup/2.png">
+    <ion-label class="ion-text-wrap step"><b>Ricevi gli ingredienti</b> che ti mancano in 15 minuti!</ion-label>
+  </ion-item>
+  <p id="zone">Zona operativa: Milano Porta Romana - Bocconi</p>
+  <p id="zone">DELIVERY AL MOMENTO NON ATTIVO</p>
+  <div class="partial-bor"></div>
+  <p id="questions"><em>Scopri di più cliccando in alto a sinistra</em></p>
+  <ion-button strong="true" class="ion-margin" fill="outline" (click)="isShow = false">
+    VAI!
+  </ion-button>
+</div>
 </div> -->

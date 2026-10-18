@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular/lazy';
 import { FieldType } from '@ngx-formly/core';
 import { Ingredient } from 'src/app/models/ingredient.model';
 import { IngredientsReceiptsComponent } from '../../ingredients-receipts/ingredients-receipts.component';
 
 @Component({
-  selector: 'app-ingredients-qta',
-  templateUrl: './ingredients-qta.component.html',
-  styleUrls: ['./ingredients-qta.component.scss'],
+    selector: 'app-ingredients-qta',
+    templateUrl: './ingredients-qta.component.html',
+    styleUrls: ['./ingredients-qta.component.scss'],
+    standalone: false
 })
 export class IngredientsQtaComponent extends FieldType implements OnInit {
 
@@ -26,7 +27,6 @@ export class IngredientsQtaComponent extends FieldType implements OnInit {
         items: rim.ingredients
       },
       backdropDismiss: false,
-      swipeToClose: false,
       cssClass: ['auto-height']
     });
 

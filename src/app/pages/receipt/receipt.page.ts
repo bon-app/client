@@ -1,15 +1,16 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NavController } from '@ionic/angular';
+import { NavController } from '@ionic/angular/lazy';
 import { ReceiptsService } from 'src/app/services/receipts.service';
 import { UsersService } from 'src/app/services/users.service';
 import { Receipt } from '../../models/receipt.model';
 import { User } from '../../models/user.model';
 
 @Component({
-  selector: 'app-receipt',
-  templateUrl: './receipt.page.html',
-  styleUrls: ['./receipt.page.scss'],
+    selector: 'app-receipt',
+    templateUrl: './receipt.page.html',
+    styleUrls: ['./receipt.page.scss'],
+    standalone: false
 })
 export class ReceiptPage implements OnInit {
   public Nickname : any;

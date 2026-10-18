@@ -1,3 +1,5 @@
-<ion-item *ngFor="let item of items" (click)="goto(item.url)" style="cursor: pointer;">
-  {{item.label}}
-</ion-item>
+@for (item of items; track item) {
+  <ion-item (click)="goto(item.url)" style="cursor: pointer;">
+    {{item.label}}
+  </ion-item>
+}

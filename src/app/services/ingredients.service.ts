@@ -4,6 +4,7 @@ import { DynamicService } from '../lib/dynamic-forms/decorators/dynamic-service.
 import { Ingredient } from '../models/ingredient.model';
 import { CRUDService } from './crud.service';
 import { Global } from './global';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class IngredientsService extends CRUDService<Ingredient> {
   }
 
   importCSV(ingredients: Ingredient[]) {
-    return this.http.post(`${this.endpoint.replace('/ingredients', '')}/import/csv/ingredients`, ingredients).toPromise();
+    return firstValueFrom(this.http.post(`${this.endpoint.replace('/ingredients', '')}/import/csv/ingredients`, ingredients));
   }
 
 }

@@ -1,60 +1,64 @@
+@for (receipt of receiptList; track receipt.id) {
 <ion-card (click)="goto('/receipt/'+receipt.id)" class="recipesBox">
   <!-- <ion-card-header class="cardHeaderRecipes">
-    <ion-card-title class="ssprofont HeaderRecipeFont">{{receipt.name}}</ion-card-title>
-  </ion-card-header> -->
-  <ion-card-content>
-    <ion-grid class="neutral">
-      <ion-row>
-        <ion-col size="12" class="ssprofont HeaderRecipeFont ">
-          <div class="wrap-text" style="padding-bottom:6px; padding-left: 3px;">
-            <strong>{{receipt.name}}</strong>
-          </div>
-        </ion-col>
-        <ion-col size-xs="12" size-sm="12" size-md="9" size-lg="9" size-xl="9" style="background: gray"
-          [ngStyle]="{background: 'url('+receipt.image_url+') no-repeat center center', 'background-size': 'cover', 'min-height': '300px'}">
+  <ion-card-title class="ssprofont HeaderRecipeFont">{{receipt.name}}</ion-card-title>
+</ion-card-header> -->
+<ion-card-content>
+  <ion-grid class="neutral">
+    <ion-row>
+      <ion-col size="12" class="ssprofont HeaderRecipeFont ">
+        <div class="wrap-text" style="padding-bottom:6px; padding-left: 3px;">
+          <strong>{{receipt.name}}</strong>
+        </div>
+      </ion-col>
+      <ion-col size-xs="12" size-sm="12" size-md="9" size-lg="9" size-xl="9" style="background: gray"
+        [ngStyle]="{background: 'url('+receipt.image_url+') no-repeat center center', 'background-size': 'cover', 'min-height': '300px'}">
 
-        </ion-col>
-        <ion-col size-xs="12" size-sm="12" size-md="3" size-lg="3" size-xl="3" class="ion-text-center">
-          <div id="info-cook">
-            <ion-row class="width-100 ">
-              <ion-col size-xs="6" size-sm="6" size-md="12" size-lg="12" size-xl="12" class="ion-text-center">
-                <div class="time">
-                  <div>
-                    <ion-icon src="assets/receipts/clock.svg" style="font-size: 1.5em;"></ion-icon>
-                  </div>
-                  <div class="leftspace">
-                    {{receipt.time}}`
-                  </div>
+      </ion-col>
+      <ion-col size-xs="12" size-sm="12" size-md="3" size-lg="3" size-xl="3" class="ion-text-center">
+        <div id="info-cook">
+          <ion-row class="width-100 ">
+            <ion-col size-xs="6" size-sm="6" size-md="12" size-lg="12" size-xl="12" class="ion-text-center">
+              <div class="time">
+                <div>
+                  <ion-icon src="assets/receipts/clock.svg" style="font-size: 1.5em;"></ion-icon>
                 </div>
-              </ion-col>
-              <ion-col size-xs="6" size-sm="6" size-md="12" size-lg="12" size-xl="12" class="ion-text-center">
-                <div class="ion-margin-top calories">
-                  <div>
-                    <ion-icon src="assets/receipts/flame.svg" style="font-size: 1.5em;"></ion-icon>
-                  </div>
-                  <div class="leftspace">
-                    Kcal {{receipt.kcal}}
-                  </div>
+                <div class="leftspace">
+                  {{receipt.time}}`
                 </div>
-              </ion-col>
-            </ion-row>
+              </div>
+            </ion-col>
+            <ion-col size-xs="6" size-sm="6" size-md="12" size-lg="12" size-xl="12" class="ion-text-center">
+              <div class="ion-margin-top calories">
+                <div>
+                  <ion-icon src="assets/receipts/flame.svg" style="font-size: 1.5em;"></ion-icon>
+                </div>
+                <div class="leftspace">
+                  Kcal {{receipt.kcal}}
+                </div>
+              </div>
+            </ion-col>
+          </ion-row>
 
-          </div>
-          <div class="partial-border primary ion-margin-top ion-margin-bottom pinkbar"></div>
+        </div>
+        <div class="partial-border primary ion-margin-top ion-margin-bottom pinkbar"></div>
 
-          <div class="ingredients ion-padding ingredienti" style="padding-left: 0.5em; padding-right: 0.5em;">
-            <!-- <div *ngFor="let i of sliceThree(receipt.ingredients)"> -->
-              <ion-button size="small" fill="outline" color="secondary" style="zoom: 0.85; max-width: 100%; padding:0px 0px !important" *ngFor="let i of sliceThree(receipt.ingredients)">
-                <span class="wrap-text">{{i.ingredient.name | translate}}</span>
-              </ion-button>
-            <!-- </div> -->
-            <ion-button size="small" fill="outline" color="secondary" style="zoom: 0.8">...</ion-button>
-          </div>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-card-content>
+        <div class="ingredients ion-padding ingredienti" style="padding-left: 0.5em; padding-right: 0.5em;">
+          <!-- <div *ngFor="let i of sliceThree(receipt.ingredients)"> -->
+          @for (i of sliceThree(receipt.ingredients); track i) {
+            <ion-button size="small" fill="outline" color="secondary" style="zoom: 0.85; max-width: 100%; padding:0px 0px !important">
+              <span class="wrap-text">{{i.ingredient.name | translate}}</span>
+            </ion-button>
+          }
+        <!-- </div> -->
+        <ion-button size="small" fill="outline" color="secondary" style="zoom: 0.8">...</ion-button>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+</ion-card-content>
 </ion-card>
+}
 
 
 

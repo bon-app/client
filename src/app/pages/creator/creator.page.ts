@@ -2,15 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { Receipt } from 'src/app/models/receipt.model';
 import { ReceiptsService } from 'src/app/services/receipts.service';
 import { ActivatedRoute } from '@angular/router';
-import { AutoCompleteService } from 'ionic4-auto-complete';
+import { AutoCompleteProvider } from '../../components/autocomplete/autocomplete.component';
 import { RimsService } from 'src/app/services/rims.service';
-import { LoadingController, NavController } from '@ionic/angular';
+import { LoadingController, NavController } from '@ionic/angular/lazy';
 import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
-  selector: 'app-creator',
-  templateUrl: './creator.page.html',
-  styleUrls: ['./creator.page.scss'],
+    selector: 'app-creator',
+    templateUrl: './creator.page.html',
+    styleUrls: ['./creator.page.scss'],
+    standalone: false
 })
 export class CreatorPage implements OnInit {
   fromCreator: boolean = false;
@@ -126,7 +127,7 @@ export class CreatorPage implements OnInit {
   }
 }
 
-export class RimsDataProvider implements AutoCompleteService {
+export class RimsDataProvider implements AutoCompleteProvider {
   labelAttribute = 'id';
   formValueAttribute = '_name';
   field;

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-dynamic-json',
-  templateUrl: './dynamic-json.component.html',
-  styleUrls: ['./dynamic-json.component.scss'],
+    selector: 'app-dynamic-json',
+    templateUrl: './dynamic-json.component.html',
+    styleUrls: ['./dynamic-json.component.scss'],
+    standalone: false
 })
 export class DynamicJsonComponent implements OnInit {
 

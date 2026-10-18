@@ -1,5 +1,5 @@
 <div id="login-wrapper">
-  <ng-container *ngIf="section == 'login'">
+  @if (section == 'login') {
     <form #loginForm="ngForm">
       <div class="ion-padding ion-text-center" style="padding-bottom:0.5em">
         <!-- <img src="assets/brand.png" height="60px" /> -->
@@ -27,9 +27,9 @@
         </ion-button>
       </div>
     </form>
-  </ng-container>
+  }
 
-  <ng-container *ngIf="section == 'signin'">
+  @if (section == 'signin') {
     <form #loginForm="ngForm">
       <div class="ion-padding ion-text-center" style="padding-bottom:0em">
         <!-- <img src="assets/brand.png" height="60px" /> -->
@@ -44,33 +44,32 @@
         <ion-input type="text" name="surname" [(ngModel)]="user.surname" required></ion-input>
       </ion-item>
       <!-- <ion-item>
-        <ion-label position="floating">{{'Login.phone' | translate}}</ion-label>
-        <ion-input type="tel" name="phone" [(ngModel)]="user.phone" required></ion-input>
-      </ion-item> -->
-      <ion-item>
-        <ion-label position="floating">{{'Login.nickname' | translate}}</ion-label>
-        <ion-input type="text" name="nickname" [(ngModel)]="user.nickname" required></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">{{'Login.email' | translate}}</ion-label>
-        <ion-input type="email" name="username" [(ngModel)]="user.email" required></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">{{'Login.password' | translate}}</ion-label>
-        <ion-input [type]="showPassword ? 'text' : 'password'" name="password" [(ngModel)]="user.password" required></ion-input>
-        <ion-icon class="ion-align-self-end" slot="end" position="floating" [name]="passwordToggleIcon" (click)="togglePassword()"></ion-icon>
-      </ion-item>
-
-      <div class="big-button">
-        <ion-button shape="round" strong="true" type="submit" expand="full" color="primary"
-          [disabled]="loginForm.invalid" (click)="signIn()">
-          {{'Login.signin' | translate}}
-        </ion-button>
-      </div>
-      <div class="login_bottom">
-        <ion-label>Hai già un account?</ion-label>
-        <ion-button fill="clear" strong="true" color="primary" (click)="section = 'login'">Login</ion-button>
-      </div>
-    </form>
-  </ng-container>
+      <ion-label position="floating">{{'Login.phone' | translate}}</ion-label>
+      <ion-input type="tel" name="phone" [(ngModel)]="user.phone" required></ion-input>
+    </ion-item> -->
+    <ion-item>
+      <ion-label position="floating">{{'Login.nickname' | translate}}</ion-label>
+      <ion-input type="text" name="nickname" [(ngModel)]="user.nickname" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">{{'Login.email' | translate}}</ion-label>
+      <ion-input type="email" name="username" [(ngModel)]="user.email" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">{{'Login.password' | translate}}</ion-label>
+      <ion-input [type]="showPassword ? 'text' : 'password'" name="password" [(ngModel)]="user.password" required></ion-input>
+      <ion-icon class="ion-align-self-end" slot="end" position="floating" [name]="passwordToggleIcon" (click)="togglePassword()"></ion-icon>
+    </ion-item>
+    <div class="big-button">
+      <ion-button shape="round" strong="true" type="submit" expand="full" color="primary"
+        [disabled]="loginForm.invalid" (click)="signIn()">
+        {{'Login.signin' | translate}}
+      </ion-button>
+    </div>
+    <div class="login_bottom">
+      <ion-label>Hai già un account?</ion-label>
+      <ion-button fill="clear" strong="true" color="primary" (click)="section = 'login'">Login</ion-button>
+    </div>
+  </form>
+}
 </div>

@@ -2,28 +2,20 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
-import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { IonicModule, IonicRouteStrategy } from '@ionic/angular/lazy';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import {
-  HttpClient,
-  HttpClientModule,
-  HTTP_INTERCEPTORS,
-} from '@angular/common/http';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { TranslateHttpLoader, provideTranslateHttpLoader } from '@ngx-translate/http-loader';
+import { provideTranslateService } from '@ngx-translate/core';
 import { TokenInterceptor } from './auth/interceptors/token.interceptor';
 import { FormlyModule } from '@ngx-formly/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FormlyIonicModule } from '@ngx-formly/ionic';
 import { ComponentsModule } from './components/components.module';
 import { DFIngredientsPriorityComponent } from './components/dynamics-form-custom/ingredients-priority/ingredients-priority.component';
 import { DFIngredientsComponent } from './components/dynamics-form-custom/df-ingredients/df-ingredients.component';
 import { IngredientsQtaComponent } from './components/dynamics-form-custom/ingredients-qta/ingredients-qta.component';
-import { JoditAngularModule } from 'jodit-angular';
 import { ENTITIES } from './dashboard/pages/entities/entities.config';
 import { ReceiptIngredientsMatching } from './models/receipt-ingredientsMatching.model';
 import { Ingredient } from './models/ingredient.model';
@@ -41,80 +33,62 @@ import { BAImage } from './models/image.model';
 import { ImagesService } from './services/images.service';
 import { DynamicFormsModule } from './lib/dynamic-forms/dynamic-forms.module';
 import { PreparingFormComponent } from './components/dynamics-form-custom/preparing-form/preparing-form.component';
-import { Camera } from '@ionic-native/camera/ngx';
+import { FormlyIonicCheckboxType, FormlyIonicInputType, FormlyIonicSelectType } from './lib/dynamic-forms/components/formly-ionic-types';
 
-export function createTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-}
-
-@NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
-  imports: [
-    BrowserModule,
-    IonicModule.forRoot({ mode: 'ios' }),
-    AppRoutingModule,
-    HttpClientModule,
-    ComponentsModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: createTranslateLoader,
-        deps: [HttpClient],
-      },
-    }),
-    ReactiveFormsModule,
-    FormlyModule.forRoot({
-      types: [
-        {
-          name: 'ingredients-priority',
-          component: DFIngredientsPriorityComponent,
-        },
-        { name: 'ingredients', component: DFIngredientsComponent },
-        { name: 'ingredients-qta', component: IngredientsQtaComponent },
-        { name: 'preparing', component: PreparingFormComponent },
-      ],
-    }),
-    FormlyIonicModule,
-    JoditAngularModule,
-    DynamicFormsModule.forRoot({
-      entitiesConfig: [
-        { key: 'ingredients', config: ENTITIES.ingredients },
-        { key: 'categories', config: ENTITIES.categories },
-        { key: 'receipts', config: ENTITIES.receipts },
-        { key: 'rims', config: ENTITIES.rims },
-        { key: 'orders', config: ENTITIES.orders },
-        { key: 'images', config: ENTITIES.images },
-      ],
-      entities: [
-        { entity: Ingredient },
-        { entity: Category },
-        { entity: Receipt },
-        { entity: ReceiptIngredientsMatching },
-        { entity: User },
-        { entity: Order },
-        { entity: BAImage },
-        { entity: User },
-      ],
-      entitiesService: [
-        { service: IngredientsService },
-        { service: CategoriesService },
-        { service: ReceiptsService },
-        { service: RimsService },
-        { service: UsersService },
-        { service: OrdersService },
-        { service: ImagesService },
-        { service: UsersService },
-      ],
-    }),
-  ],
-  providers: [
-    StatusBar,
-    SplashScreen,
-    Camera,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
-  ],
-  bootstrap: [AppComponent],
-})
+@NgModule({ declarations: [AppComponent, FormlyIonicInputType, FormlyIonicCheckboxType, FormlyIonicSelectType],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        IonicModule.forRoot({ mode: 'ios' }),
+        AppRoutingModule,
+        ComponentsModule,
+        ReactiveFormsModule,
+        FormlyModule.forRoot({
+            types: [
+                { name: 'input', component: FormlyIonicInputType },
+                { name: 'checkbox', component: FormlyIonicCheckboxType },
+                { name: 'select', component: FormlyIonicSelectType },
+                {
+                    name: 'ingredients-priority',
+                    component: DFIngredientsPriorityComponent,
+                },
+                { name: 'ingredients', component: DFIngredientsComponent },
+                { name: 'ingredients-qta', component: IngredientsQtaComponent },
+                { name: 'preparing', component: PreparingFormComponent },
+            ],
+        }),
+        DynamicFormsModule.forRoot({
+            entitiesConfig: [
+                { key: 'ingredients', config: ENTITIES.ingredients },
+                { key: 'categories', config: ENTITIES.categories },
+                { key: 'receipts', config: ENTITIES.receipts },
+                { key: 'rims', config: ENTITIES.rims },
+                { key: 'orders', config: ENTITIES.orders },
+                { key: 'images', config: ENTITIES.images },
+            ],
+            entities: [
+                { entity: Ingredient },
+                { entity: Category },
+                { entity: Receipt },
+                { entity: ReceiptIngredientsMatching },
+                { entity: User },
+                { entity: Order },
+                { entity: BAImage },
+                { entity: User },
+            ],
+            entitiesService: [
+                { service: IngredientsService },
+                { service: CategoriesService },
+                { service: ReceiptsService },
+                { service: RimsService },
+                { service: UsersService },
+                { service: OrdersService },
+                { service: ImagesService },
+                { service: UsersService },
+            ],
+        })], providers: [
+        { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+        { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideTranslateService({ fallbackLang: 'en', lang: 'en', loader: TranslateHttpLoader }),
+        ...provideTranslateHttpLoader({ prefix: './assets/i18n/', suffix: '.json' }),
+    ] })
 export class AppModule {}

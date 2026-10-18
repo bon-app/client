@@ -1,6 +1,16 @@
 
-import * as _ from 'lodash';
 import { DynamicFormFieldConfig } from './dynamic-form-field.config';
+
+function getPathValue(value: any, path: string): any {
+    return path.split('.').reduce((current, key) => current?.[key], value);
+}
+
+function setPathValue(value: any, path: string, nextValue: any): void {
+    const keys = path.split('.');
+    const finalKey = keys.pop();
+    const target = keys.reduce((current, key) => current[key] ??= {}, value);
+    if (finalKey !== undefined) target[finalKey] = nextValue;
+}
 
 export class EntityConfig {
     key: string;
@@ -69,12 +79,12 @@ export class EntityRelation {
 
     resolve(data: any) {
         if (this.fk_field) {
-            _.set(data, this.fk_field, _.get(data, this.pk_field));
+            setPathValue(data, this.fk_field, getPathValue(data, this.pk_field));
             return data;
         }
 
         if (typeof data != 'string') {
-            data = _.get(data, this.pk_field);
+            data = getPathValue(data, this.pk_field);
         }
         
         return data;

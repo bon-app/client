@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController } from '@ionic/angular/lazy';
 import { CategoriesService } from '../../services/categories.service';
 import { Category } from '../../models/category.model';
 import { CartService } from '../../services/cart.service';
 
 @Component({
-  selector: 'app-suggested-products',
-  templateUrl: './suggested-products.page.html',
-  styleUrls: ['./suggested-products.page.scss'],
+    selector: 'app-suggested-products',
+    templateUrl: './suggested-products.page.html',
+    styleUrls: ['./suggested-products.page.scss'],
+    standalone: false
 })
 export class SuggestedProductsPage implements OnInit {
 

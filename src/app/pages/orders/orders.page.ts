@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController } from '@ionic/angular/lazy';
 import { OrdersService } from 'src/app/services/orders.service';
 import { Order } from '../../models/order.model';
 
 @Component({
-  selector: 'app-orders',
-  templateUrl: './orders.page.html',
-  styleUrls: ['./orders.page.scss'],
+    selector: 'app-orders',
+    templateUrl: './orders.page.html',
+    styleUrls: ['./orders.page.scss'],
+    standalone: false
 })
 export class OrdersPage implements OnInit {
 

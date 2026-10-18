@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { retry } from "rxjs/operators";
+import { firstValueFrom } from 'rxjs';
 
 export class CRUDService<T> {
 
@@ -20,7 +21,7 @@ export class CRUDService<T> {
         }
         // console.log('filter params', params);
 
-        return this.http.get<T[]>(this.endpoint, { params }).pipe(retry(2)).toPromise()
+        return firstValueFrom(this.http.get<T[]>(this.endpoint, { params }).pipe(retry(2)))
     }
 
     findAll(filter: any, fields: string[], skip: number, take: number, orderBy: any, includes: string[] = []): Promise<T[]> {
@@ -33,7 +34,7 @@ export class CRUDService<T> {
             orderBy: orderBy? orderBy : this.defaulSort
         }
         // console.log('filter params', params);
-        return this.http.get<T[]>(`${this.endpoint}/findAll`, { params }).pipe(retry(2)).toPromise()
+        return firstValueFrom(this.http.get<T[]>(`${this.endpoint}/findAll`, { params }).pipe(retry(2)))
     }
 
     findByUser(user:string, filter: any,fields: string[], skip: number,take: number,orderBy: any, includes: string[] = []): Promise<T[]>{
@@ -45,7 +46,7 @@ export class CRUDService<T> {
             take: '' + take,
             orderBy: orderBy? orderBy : this.defaulSort
         }
-        return this.http.get<T[]>(`${this.endpoint}/creator/${user}`, { params }).pipe(retry(2)).toPromise()
+        return firstValueFrom(this.http.get<T[]>(`${this.endpoint}/creator/${user}`, { params }).pipe(retry(2)))
     }
 
     findOne(filter: any, fields: string[], orderBy: any, includes: string[] = []): Promise<T> {
@@ -57,7 +58,7 @@ export class CRUDService<T> {
             take: '1',
             orderBy: orderBy ? JSON.stringify(orderBy) : this.defaulSort
         }
-        return this.http.get<T[]>(this.endpoint, { params }).pipe(retry(2)).toPromise().then(res => res[0])
+        return firstValueFrom(this.http.get<T[]>(this.endpoint, { params }).pipe(retry(2))).then(res => res[0])
     }
 
     findById(id: any, fields: string[], includes: string[] = []): Promise<T> {
@@ -66,11 +67,11 @@ export class CRUDService<T> {
             fields: fields.join(' '),
             includes: includes.join(' ')
         }
-        return this.http.get<T>(`${this.endpoint}/${id}`, { params }).pipe(retry(2)).toPromise()
+        return firstValueFrom(this.http.get<T>(`${this.endpoint}/${id}`, { params }).pipe(retry(2)))
     }
 
     add(entity: T): Promise<T> {
-        return this.http.post<T>(this.endpoint, entity).toPromise();
+        return firstValueFrom(this.http.post<T>(this.endpoint, entity));
     }
 
     update(entity: T, fields: string[], updateFields: string[]): Promise<T> {
@@ -80,10 +81,10 @@ export class CRUDService<T> {
         }
         // console.log({entity});
         
-        return this.http.put<T>(this.endpoint, entity, { params }).toPromise();
+        return firstValueFrom(this.http.put<T>(this.endpoint, entity, { params }));
     }
 
     delete(id: string): Promise<T> {
-        return this.http.delete<T>(`${this.endpoint}/${id}`).toPromise();
+        return firstValueFrom(this.http.delete<T>(`${this.endpoint}/${id}`));
     }
 }

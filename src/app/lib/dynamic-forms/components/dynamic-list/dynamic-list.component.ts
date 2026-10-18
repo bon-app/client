@@ -6,9 +6,10 @@ import { EntityConfig } from '../../core/entity.config';
 import { REGISTER } from '../../utils/dynamic-form.utils';
 
 @Component({
-  selector: 'dynamic-list',
-  templateUrl: './dynamic-list.component.html',
-  styleUrls: ['./dynamic-list.component.scss'],
+    selector: 'dynamic-list',
+    templateUrl: './dynamic-list.component.html',
+    styleUrls: ['./dynamic-list.component.scss'],
+    standalone: false
 })
 export class DynamicListComponent implements OnInit, OnChanges {
 
@@ -132,7 +133,6 @@ export class DynamicListComponent implements OnInit, OnChanges {
   }
 
   printConsole(result: { key: string, $event: any }) {
-    debugger
     console.log(result);
   }
 

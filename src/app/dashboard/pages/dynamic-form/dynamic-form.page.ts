@@ -4,7 +4,7 @@ import {
   LoadingController,
   NavController,
   ToastController,
-} from '@ionic/angular';
+} from '@ionic/angular/lazy';
 import { AuthService } from 'src/app/auth/auth.service';
 import { EntityConfig } from '../../../lib/dynamic-forms/core/entity.config';
 import {
@@ -15,9 +15,10 @@ import { CRUDService } from '../../../services/crud.service';
 import { ENTITIES } from '../entities/entities.config';
 
 @Component({
-  selector: 'app-dynamic-form',
-  templateUrl: './dynamic-form.page.html',
-  styleUrls: ['./dynamic-form.page.scss'],
+    selector: 'app-dynamic-form',
+    templateUrl: './dynamic-form.page.html',
+    styleUrls: ['./dynamic-form.page.scss'],
+    standalone: false
 })
 export class DynamicFormPage implements OnInit {
   @Input('model') model: any = {};

@@ -1,14 +1,15 @@
 import { Component, Injectable, Input, OnInit } from '@angular/core';
-import { ModalController, ToastController } from '@ionic/angular';
-import { AutoCompleteService } from 'ionic4-auto-complete';
+import { ModalController, ToastController } from '@ionic/angular/lazy';
+import { AutoCompleteProvider } from '../autocomplete/autocomplete.component';
 import { Ingredient } from 'src/app/models/ingredient.model';
 import { IngredientsService } from 'src/app/services/ingredients.service';
 import { RimsService } from 'src/app/services/rims.service';
 
 @Component({
-  selector: 'app-ingredients-receipts',
-  templateUrl: './ingredients-receipts.component.html',
-  styleUrls: ['./ingredients-receipts.component.scss'],
+    selector: 'app-ingredients-receipts',
+    templateUrl: './ingredients-receipts.component.html',
+    styleUrls: ['./ingredients-receipts.component.scss'],
+    standalone: false
 })
 export class IngredientsReceiptsComponent implements OnInit {
 
@@ -45,7 +46,7 @@ export class IngredientsReceiptsComponent implements OnInit {
 @Injectable({
   providedIn: 'root'
 })
-export class IngredientDataProvider implements AutoCompleteService {
+export class IngredientDataProvider implements AutoCompleteProvider {
   labelAttribute = 'id';
   formValueAttribute = '_name';
 

@@ -1,10 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController } from '@ionic/angular/lazy';
 
 @Component({
-  selector: 'choose-ingredients',
-  templateUrl: './choose-ingredients.component.html',
-  styleUrls: ['./choose-ingredients.component.scss'],
+    selector: 'choose-ingredients',
+    templateUrl: './choose-ingredients.component.html',
+    styleUrls: ['./choose-ingredients.component.scss'],
+    standalone: false
 })
 export class ChooseIngredientsComponent implements OnInit {
 

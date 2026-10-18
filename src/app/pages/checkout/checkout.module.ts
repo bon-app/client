@@ -1,13 +1,12 @@
+import { TranslateCompatModule } from '../../shared/translate-compat.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { NgxPayPalModule } from 'ngx-paypal';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule } from '@ionic/angular/lazy';
 
 import { CheckoutPageRoutingModule } from './checkout-routing.module';
 
 import { CheckoutPage } from './checkout.page';
-import { TranslateModule } from '@ngx-translate/core';
 import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
@@ -16,9 +15,8 @@ import { ComponentsModule } from '../../components/components.module';
     FormsModule,
     IonicModule,
     CheckoutPageRoutingModule,
-    TranslateModule.forChild(),
-    ComponentsModule,
-    NgxPayPalModule
+    TranslateCompatModule,
+    ComponentsModule
   ],
   declarations: [CheckoutPage]
 })

@@ -1,13 +1,12 @@
+import { TranslateCompatModule } from '../shared/translate-compat.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule } from '@ionic/angular/lazy';
 import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
-import { TranslateModule } from '@ngx-translate/core';
 import { ComponentsModule } from '../components/components.module';
-import { AutoCompleteModule } from 'ionic4-auto-complete';
 
 
 @NgModule({
@@ -16,8 +15,7 @@ import { AutoCompleteModule } from 'ionic4-auto-complete';
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-    TranslateModule.forChild(),
-    AutoCompleteModule,
+    TranslateCompatModule,
     ComponentsModule
   ],
   declarations: [HomePage]

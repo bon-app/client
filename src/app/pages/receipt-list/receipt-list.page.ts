@@ -1,13 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ReceiptsService } from '../../services/receipts.service';
 import { Receipt } from '../../models/receipt.model';
-import { NavController } from '@ionic/angular';
+import { NavController } from '@ionic/angular/lazy';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-receipt-list',
-  templateUrl: './receipt-list.page.html',
-  styleUrls: ['./receipt-list.page.scss'],
+    selector: 'app-receipt-list',
+    templateUrl: './receipt-list.page.html',
+    styleUrls: ['./receipt-list.page.scss'],
+    standalone: false
 })
 export class ReceiptListPage implements OnInit {
 

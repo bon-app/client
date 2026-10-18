@@ -1,8 +1,5 @@
-These are Cordova resources. You can replace icon.png and splash.png and run
-`ionic cordova resources` to generate custom icons and splash screens for your
-app. See `ionic cordova resources --help` for details.
+# Native app resources
 
-Cordova reference documentation:
+Bonapp's native applications are managed with Capacitor. Platform-specific icons and splash-screen artwork live in the Android and iOS projects after they are scaffolded. For future source artwork changes, update the shared source assets and regenerate native resources with the Capacitor asset tooling used by the team.
 
-- Icons: https://cordova.apache.org/docs/en/latest/config_ref/images.html
-- Splash Screens: https://cordova.apache.org/docs/en/latest/reference/cordova-plugin-splashscreen/
+See the root README for Android/iOS setup, Capacitor sync, and build commands.

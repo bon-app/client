@@ -3,40 +3,42 @@
     <ion-label>{{ field.templateOptions?.label }}</ion-label>
   </div>
 
-  <div *ngIf="isApp === 'web'">
-    <ion-card id="image-preview" (click)="image.click()">
-      <ion-content>
-        <div id="image-wrapper">
-          <div class="ion-text-center">Upload image</div>
-        </div>
-      </ion-content>
-    </ion-card>
+  @if (isApp === 'web') {
+    <div>
+      <ion-card id="image-preview" (click)="image.click()">
+        <ion-content>
+          <div id="image-wrapper">
+            <div class="ion-text-center">Upload image</div>
+          </div>
+        </ion-content>
+      </ion-card>
+      <input
+        #image
+        type="file"
+        style="display: none"
+        accept="image/*"
+        (change)="previewImage($event)"
+        />
+    </div>
+  }
 
-    <input
-      #image
-      type="file"
-      style="display: none"
-      accept="image/*"
-      (change)="previewImage($event)"
-    />
-  </div>
-
-  <div *ngIf="isApp === 'platform'">
-    <ion-card id="image-preview" (click)="selectImage()">
-      <ion-content>
-        <div id="image-wrapper">
-          <div class="ion-text-center">Upload image</div>
-        </div>
-      </ion-content>
-    </ion-card>
-
-    <input
-      #image
-      id="image"
-      type="file"
-      style="display: none"
-      accept="image/*"
-      (change)="previewImage($event)"
-    />
-  </div>
+  @if (isApp === 'platform') {
+    <div>
+      <ion-card id="image-preview" (click)="selectImage()">
+        <ion-content>
+          <div id="image-wrapper">
+            <div class="ion-text-center">Upload image</div>
+          </div>
+        </ion-content>
+      </ion-card>
+      <input
+        #image
+        id="image"
+        type="file"
+        style="display: none"
+        accept="image/*"
+        (change)="previewImage($event)"
+        />
+    </div>
+  }
 </div>

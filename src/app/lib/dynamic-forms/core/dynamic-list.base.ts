@@ -3,7 +3,8 @@ import { DynamicFormFieldConfig } from "./dynamic-form-field.config";
 import { EntityConfig } from "./entity.config";
 
 @Component({
-  template: ''
+    template: '',
+    standalone: false
 })
 export abstract class DynamicList {
 

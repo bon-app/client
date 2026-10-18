@@ -4,13 +4,14 @@ import { CartService } from '../../services/cart.service';
 import { Ingredient } from 'src/app/models/ingredient.model';
 
 @Component({
-  selector: 'product-card-mobile',
-  templateUrl: './product-card-mobile.component.html',
-  styleUrls: ['./product-card-mobile.component.scss'],
+    selector: 'product-card-mobile',
+    templateUrl: './product-card-mobile.component.html',
+    styleUrls: ['./product-card-mobile.component.scss'],
+    standalone: false
 })
 export class ProductCardMobileComponent implements OnInit {
 
-  @Input("product") product: Ingredient[] = []
+  @Input("product") product: Ingredient
 
   constructor(
     public cart: CartService,

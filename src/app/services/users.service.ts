@@ -5,6 +5,7 @@ import { DynamicService } from '../lib/dynamic-forms/decorators/dynamic-service.
 import { User } from '../models/user.model';
 import { CRUDService } from './crud.service';
 import { Global } from './global';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class UsersService extends CRUDService<User>{
   }
 
   login(user: User) {
-    return this.http.post(`${Global.ENDPOINTS.BASE}/login`, user).toPromise()
+    return firstValueFrom(this.http.post(`${Global.ENDPOINTS.BASE}login`, user))
       .then((res: { token: string, user: User }) => {
         this.auth.setIdentity(res.user);
         this.auth.setToken(res.token);
@@ -26,7 +27,7 @@ export class UsersService extends CRUDService<User>{
   }
 
   signIn(user: User) {
-    return this.http.post(`${Global.ENDPOINTS.BASE}/sign-in`, user).toPromise()
+    return firstValueFrom(this.http.post(`${Global.ENDPOINTS.BASE}sign-in`, user))
       .then((res: { token: string, user: User }) => {
         this.auth.setIdentity(res.user);
         this.auth.setToken(res.token);

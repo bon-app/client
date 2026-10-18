@@ -1,4 +1,4 @@
-import { TypeOption } from "@ngx-formly/core/lib/services/formly.config";
+type TypeOption = { name: string; [key: string]: any };
 import { EntityConfig } from "./entity.config";
 
 export class DynamicFormsModuleConfig {

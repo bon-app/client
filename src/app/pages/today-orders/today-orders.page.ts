@@ -1,12 +1,13 @@
 import { Component, OnInit } from "@angular/core";
 import { Order } from "src/app/models/order.model";
 import { OrdersService } from "src/app/services/orders.service";
-import { NavController } from '@ionic/angular';
+import { NavController } from '@ionic/angular/lazy';
 
 @Component({
-	selector: "app-today-orders",
-	templateUrl: "./today-orders.page.html",
-	styleUrls: ["./today-orders.page.scss"],
+    selector: "app-today-orders",
+    templateUrl: "./today-orders.page.html",
+    styleUrls: ["./today-orders.page.scss"],
+    standalone: false
 })
 export class TodayOrdersPage implements OnInit {
 	public orders: Order[] = [];

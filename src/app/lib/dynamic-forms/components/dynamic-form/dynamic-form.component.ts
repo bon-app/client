@@ -1,11 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { EntityConfig } from '../../core/entity.config';
 
 @Component({
-  selector: 'dynamic-form',
-  templateUrl: './dynamic-form.component.html',
-  styleUrls: ['./dynamic-form.component.scss'],
+    selector: 'dynamic-form',
+    templateUrl: './dynamic-form.component.html',
+    styleUrls: ['./dynamic-form.component.scss'],
+    standalone: false
 })
 export class DynamicFormComponent implements OnInit {
 
@@ -15,7 +16,7 @@ export class DynamicFormComponent implements OnInit {
   @Output("save") onsave: EventEmitter<any> = new EventEmitter<any>();
   @Output("cancel") oncancel: EventEmitter<any> = new EventEmitter<any>();
 
-  public form = new FormGroup({});
+  public form = new UntypedFormGroup({});
 
   constructor() { } 
 

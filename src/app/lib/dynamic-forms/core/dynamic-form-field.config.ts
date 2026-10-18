@@ -1,7 +1,8 @@
-import { FormGroup, AbstractControl } from "@angular/forms";
+import { UntypedFormGroup, AbstractControl } from "@angular/forms";
 import { FormlyFieldConfig, FormlyFormOptions, FormlyTemplateOptions } from "@ngx-formly/core";
-import { FormlyLifeCycleOptions, FormlyHookFn } from "@ngx-formly/core/lib/components/formly.field.config";
-import { ValidationMessageOption } from "@ngx-formly/core/lib/services/formly.config";
+type FormlyHookFn = (field: FormlyFieldConfig) => void;
+type FormlyLifeCycleOptions<T = FormlyHookFn> = { onInit?: T; onChanges?: T; afterContentInit?: T; afterViewInit?: T; onDestroy?: T };
+type ValidationMessageOption = { message: string | ((error: any, field: FormlyFieldConfig) => string) };
 import { Observable } from "rxjs";
 import { REGISTER } from "../utils/dynamic-form.utils";
 
@@ -17,7 +18,7 @@ export class DynamicFormFieldConfig implements FormlyFieldConfig {
      */
     readonly parent?: FormlyFieldConfig;
     readonly options?: FormlyFormOptions;
-    readonly form?: FormGroup;
+    readonly form?: UntypedFormGroup;
     /**
      * The key that relates to the model. This will link the field value to the model
      */

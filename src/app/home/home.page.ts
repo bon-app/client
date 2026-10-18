@@ -3,17 +3,18 @@ import { Receipt } from '../models/receipt.model';
 import { ReceiptsService } from '../services/receipts.service';
 import Swal from 'sweetalert2';
 import { TranslateService } from '@ngx-translate/core';
-import { AutoCompleteService } from 'ionic4-auto-complete';
+import { AutoCompleteProvider } from '../components/autocomplete/autocomplete.component';
 import { RimsService } from '../services/rims.service';
 import { ActivatedRoute } from '@angular/router';
-import { NavController } from '@ionic/angular';
+import { NavController } from '@ionic/angular/lazy';
 import { LoginComponent } from '../components/login/login.component';
-import { ModalController, PopoverController } from '@ionic/angular';
+import { ModalController, PopoverController } from '@ionic/angular/lazy';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+    selector: 'app-home',
+    templateUrl: 'home.page.html',
+    styleUrls: ['home.page.scss'],
+    standalone: false
 })
 export class HomePage {
   public receipts: Receipt[] = [];
@@ -117,7 +118,7 @@ export class HomePage {
   }
 }
 
-export class RimsDataProvider implements AutoCompleteService {
+export class RimsDataProvider implements AutoCompleteProvider {
   labelAttribute = 'id';
   formValueAttribute = '_name';
   field;

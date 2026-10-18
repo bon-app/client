@@ -201,7 +201,7 @@ export const ENTITIES = {
         templateOptions: {
           label: 'Products',
           service: 'IngredientsService',
-          selected_key: "item.name + ' - ' + item.brand + ' - ' + item.qty",
+          selected_key: (item) => `${item.name} - ${item.brand} - ${item.qty}`,
         },
         list: {
           parser: 'count',
@@ -510,7 +510,7 @@ export const ENTITIES = {
         templateOptions: {
           label: 'Creator',
           service: 'UsersService',
-          selected_key: 'item.name + " " + item.surname',
+          selected_key: (item) => `${item.name} ${item.surname}`,
           dataProvider: {
             label: 'email',
             value: 'email',

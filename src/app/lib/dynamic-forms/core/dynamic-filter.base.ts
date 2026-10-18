@@ -3,7 +3,8 @@ import { IDynamicFilterBuilder } from "./dynamic-filter.interface";
 import { DynamicFormFieldConfig, FilterTypes } from "./dynamic-form-field.config";
 
 @Component({
-  template: ''
+    template: '',
+    standalone: false
 })
 export abstract class DynamicFilter {
 
