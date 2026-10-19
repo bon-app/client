@@ -27,7 +27,9 @@ The Angular production build is a static single-page application. Connect this r
 | Build output directory | `www` |
 | Node.js version | `24` (`.nvmrc`) |
 
-Set the Pages build environment variable `SKIP_DEPENDENCY_INSTALL` to `1`. The build command already runs `npm ci`, so this prevents Pages from running a separate automatic package install before it. Keep the build command exactly `npm ci && npm run build`; do not append `--allow-scripts` to `npm ci`. Packages that need install-time scripts are approved by the version-pinned `allowScripts` policy in `package.json`.
+Set the Pages build environment variable `SKIP_DEPENDENCY_INSTALL` to `1` for both Production and Preview. The build command already runs `npm ci`, so this prevents Pages from running a separate automatic package install before it. Keep the build command exactly `npm ci && npm run build`; do not append `--allow-scripts` to `npm ci`.
+
+Do not set `NPM_CONFIG_ALLOW_SCRIPTS`, `NPM_CONFIG_STRICT_ALLOW_SCRIPTS`, or `NPM_CONFIG_DANGEROUSLY_ALLOW_ALL_SCRIPTS` in Pages. Remove those variables if they already exist. Packages that need install-time scripts are approved by the version-pinned `allowScripts` policy in `package.json`.
 
 Enable preview deployments for non-production branches and pull requests. Attach `bonapp.life` as the production custom domain. Cloudflare Pages provides the SPA fallback to `index.html` for deep links; do not add a top-level `404.html` to `www/`.
 
