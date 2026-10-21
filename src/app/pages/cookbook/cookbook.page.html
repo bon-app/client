@@ -8,21 +8,33 @@
       <section class="hero"><p class="eyebrow">BONAPP</p><h1>{{t('yourCookbook')}}</h1><p>{{t('welcome')}}</p><button class="primary" (click)="login(true)">{{t('createAccount')}}</button><button (click)="login()">{{t('login')}}</button></section>
     }
     @if (mode === 'discover' || mode === 'cookbook' && authenticated || mode === 'creator') {
-      <section class="hero" [class.compact]="mode !== 'discover'">
-        <p class="eyebrow">{{mode === 'discover' ? 'BONAPP' : t('personalCookbook')}}</p>
+      <section class="hero" [class.compact]="mode !== 'discover'" [class.discovery-hero]="mode === 'discover'">
+        @if (mode !== 'discover') { <p class="eyebrow">{{t('personalCookbook')}}</p> }
         @if (mode === 'creator' && user) {
           <div class="profile-heading">@if(user.image_url) { <img class="avatar" [src]="user.image_url" alt=""> }<div><h1>{{user.name}}</h1><p>&#64;{{user.nickname}}</p></div></div>
           @if(user.bio) { <p class="bio">{{user.bio}}</p> }
-        } @else { <h1>{{t(mode === 'discover' ? 'discoverTitle' : 'yourCookbook')}}</h1><p>{{t(mode === 'discover' ? 'discoverIntro' : 'cookbookIntro')}}</p> }
+        } @else if (mode === 'discover') { <h1>{{t('discoverTitleLead')}} <span>{{t('discoverTitleEmphasis')}}</span></h1><p>{{t('discoverIntro')}}</p> }
+        @else { <h1>{{t('yourCookbook')}}</h1><p>{{t('cookbookIntro')}}</p> }
         @if (mode === 'discover' && !authenticated) { <button class="primary" (click)="login(true)">{{t('createAccount')}}</button> }
         @if (authenticated && mode !== 'creator') { <a class="button primary" routerLink="/new">{{t('addRecipe')}}</a> }
       </section>
       <form class="filters" (ngSubmit)="fetchRecipes()">
         <label class="search-label">{{t('search')}}<input name="search" [(ngModel)]="search" [placeholder]="t(mode === 'cookbook' ? 'searchOwn' : 'searchTitle')" type="search"></label>
         @if(mode === 'cookbook') { <label>{{t('visibility')}}<select name="visibility" [(ngModel)]="visibility"><option value="">{{t('all')}}</option><option value="private">{{t('private')}}</option><option value="public">{{t('public')}}</option></select></label> }
-        <label>{{t('tags')}}<select name="tag" [(ngModel)]="selectedTag"><option value="">{{t('all')}}</option>@for(tag of tags; track tag) { <option [value]="tag">{{t('tag.' + tag)}}</option> }</select></label>
         <button type="submit" [disabled]="loading">{{t('search')}}</button>
       </form>
+      <section class="filter-section" [attr.aria-label]="t('tags')">
+        <h2>{{t('filterHeading')}}</h2>
+        <div class="filter-cards">
+          @for(tag of tags; track tag) {
+            <button type="button" class="filter-card" [class.active]="selectedTags.includes(tag)" [attr.aria-pressed]="selectedTags.includes(tag)" (click)="toggleFilter(tag)">
+              @if(filterIcons[tag]) { <img [src]="'assets/filters/' + filterIcons[tag]" alt=""> }
+              @else { <ion-icon [name]="tag === 'gluten-free' ? 'leaf-outline' : 'restaurant-outline'" aria-hidden="true"></ion-icon> }
+              <span>{{t('tag.' + tag)}}</span>
+            </button>
+          }
+        </div>
+      </section>
       <details class="catalogue-filter"><summary>{{t('filterIngredient')}}</summary><div class="line-row"><input name="filter-catalogue" [(ngModel)]="filterCatalogueQuery" [attr.aria-label]="t('catalogueSearch')"><button type="button" (click)="searchFilterCatalogue()">{{t('search')}}</button></div>@if(filterCatalogueError) { <p role="status">{{t('filterCatalogueUnavailable')}}</p> }@for(match of filterMatches; track match.id) { <button type="button" class="match-option" (click)="selectCatalogueFilter(match)">{{match.name}}</button> }</details>
       @if(catalogueFilter) { <p class="match-state">{{t('ingredient')}}: {{catalogueFilter.name}} <button (click)="selectCatalogueFilter(null)">{{t('clearFilter')}}</button></p> }
       @if(!loading && !recipes.length && !error) { <section class="empty"><h2>{{t('empty')}}</h2><p>{{t(mode === 'cookbook' ? 'startRecipe' : 'trySearch')}}</p></section> }

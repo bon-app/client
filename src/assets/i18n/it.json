@@ -217,8 +217,8 @@
     "login": "Accedi",
     "logout": "Esci",
     "personalCookbook": "Il tuo ricettario personale",
-    "discoverTitle": "Le buone idee in cucina meritano un posto speciale.",
-    "discoverIntro": "Scopri le ricette della community e raccogli le tue preferite in un ricettario tutto tuo.",
+    "discoverTitle": "Un modo semplice ed intuitivo per condividere e scoprire ricette",
+    "discoverIntro": "Trova ispirazione, condividi le tue ricette e crea il tuo ricettario.",
     "cookbookIntro": "Le tue ricette, con le tue parole. Tienile private o condividi qualcosa di buono.",
     "createAccount": "Crea il tuo ricettario",
     "welcome": "Una casa per le tue ricette. Private finché non decidi di condividerle.",
@@ -341,6 +341,9 @@
     "about": "Informazioni su Bonapp",
     "filterIngredient": "Facoltativo: filtra per un ingrediente del catalogo",
     "clearFilter": "Rimuovi filtro",
-    "filterCatalogueUnavailable": "Il catalogo ingredienti non è disponibile. Puoi comunque cercare per titolo."
+    "filterCatalogueUnavailable": "Il catalogo ingredienti non è disponibile. Puoi comunque cercare per titolo.",
+    "filterHeading": "Personalizza la tua selezione di ricette",
+    "discoverTitleLead": "Un modo semplice ed intuitivo per",
+    "discoverTitleEmphasis": "condividere e scoprire ricette"
   }
 }

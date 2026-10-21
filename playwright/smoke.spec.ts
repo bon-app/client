@@ -36,10 +36,25 @@ async function minimum(page: Page) {
 }
 test('discover, keyboard navigation and retired commerce', async ({page}) => {
   await mockApi(page); const errors: string[] = []; page.on('pageerror', e => errors.push(e.message));
-  await page.goto('/'); await expect(page.getByRole('heading', {level:1})).toContainText('Good food');
+  await page.goto('/'); await expect(page.getByRole('heading', {level:1})).toContainText('share and discover recipes');
   await page.keyboard.press('Tab'); await expect(page.locator(':focus')).toHaveAttribute('aria-label','Bonapp');
   for(const path of ['/shop','/checkout','/receipt/example/buy']) { await page.goto(path); await expect(page.getByRole('heading',{level:1})).toHaveText('Ingredient delivery has ended.'); }
   expect(errors).toEqual([]);
+});
+test('original icon filters combine and can be toggled with the keyboard', async ({page}) => {
+  await mockApi(page);
+  const filters: any[] = [];
+  page.on('request', request => {
+    const url = new URL(request.url());
+    if (url.pathname === '/dev/receipts' && url.searchParams.has('filter')) filters.push(JSON.parse(url.searchParams.get('filter')!));
+  });
+  await page.goto('/');
+  const healthy = page.getByRole('button', {name:'Healthy', exact:true});
+  const first = page.getByRole('button', {name:'First courses', exact:true});
+  await healthy.focus(); await page.keyboard.press('Enter'); await expect(healthy).toHaveAttribute('aria-pressed', 'true');
+  await first.click(); await expect(first).toHaveAttribute('aria-pressed', 'true');
+  await expect.poll(() => filters.some(filter => JSON.stringify(filter.tags?.$all) === JSON.stringify(['healthy', 'first']))).toBe(true);
+  await healthy.click(); await expect(healthy).toHaveAttribute('aria-pressed', 'false');
 });
 test('register and start a cookbook', async ({page}) => {
   await mockApi(page); await page.goto('/'); await page.getByRole('button',{name:'Create your cookbook',exact:true}).click();

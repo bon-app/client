@@ -217,8 +217,8 @@
     "login": "Sign in",
     "logout": "Sign out",
     "personalCookbook": "Your personal cookbook",
-    "discoverTitle": "Good food starts with a recipe worth keeping.",
-    "discoverIntro": "Discover recipes from home cooks. Keep your own favourites in a cookbook that feels like yours.",
+    "discoverTitle": "A simple and intuitive way to share and discover recipes",
+    "discoverIntro": "Find inspiration, share your recipes and build your own cookbook.",
     "cookbookIntro": "Your recipes, your words. Keep them private, or share something delicious.",
     "createAccount": "Create your cookbook",
     "welcome": "A home for your recipes. Private by default, ready to share when you are.",
@@ -341,6 +341,9 @@
     "about": "About Bonapp",
     "filterIngredient": "Optional: filter by a catalogue ingredient",
     "clearFilter": "Clear filter",
-    "filterCatalogueUnavailable": "The ingredient catalogue is unavailable. You can still search by title."
+    "filterCatalogueUnavailable": "The ingredient catalogue is unavailable. You can still search by title.",
+    "filterHeading": "Make your recipe selection your own",
+    "discoverTitleLead": "A simple and intuitive way to",
+    "discoverTitleEmphasis": "share and discover recipes"
   }
 }

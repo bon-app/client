@@ -13,3 +13,35 @@ h1,h2,h3,label,li { color: var(--ink); }
 .cookbook-footer { margin-top: 60px; padding-top: 24px; border-top: 1px solid #e8dfd5; display: flex; justify-content: space-between; font-size: .85rem; }.cookbook-footer a,.cookbook-footer span { color: var(--muted); }
 
 h1 { overflow-wrap: anywhere; }.profile-heading>div { min-width: 0; }.catalogue-filter { margin: -12px 0 28px; max-width: 580px; }.catalogue-filter>.line-row { margin-top: 10px; }
+
+/* The original Bonapp visual language, applied to the cookbook flows. */
+:host { --paper: #fff; --ink: #454545; --muted: #666; font-family: 'Source Sans Pro', sans-serif; }
+ion-content { --background: #fff; }
+h1, .page-heading h1 { font-family: 'Recoleta', serif; letter-spacing: 0; }
+.discovery-hero { text-align: center; padding: 80px 0 54px; }
+.discovery-hero h1 { max-width: 780px; margin: 0 auto 32px; font-size: clamp(2rem, 4vw, 2.7rem); line-height: 1.35; }
+.discovery-hero h1 span { display: inline-block; color: var(--ink); }
+.discovery-hero h1 span::after { content: ''; display: block; height: 5px; margin-top: -8px; border-radius: 10px; background: #efbdae; }
+.discovery-hero p:not(.eyebrow) { max-width: 700px; margin: 0 auto 28px; color: #545454; }
+.discovery-hero button { font-family: 'Recoleta', serif; font-size: 1.05rem; }
+.filters { max-width: 700px; margin: 0 auto 24px; padding: 0; border: 0; border-radius: 0; }
+.filters input, .filters select { border: 2px solid #fff; box-shadow: 0 4px 16px #0000001f; }
+.filter-section { max-width: 700px; margin: 0 auto 30px; text-align: center; }
+.filter-section h2 { font-size: 1.2rem; font-weight: 500; color: #545454; margin: 18px 0; }
+.filter-cards { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.filter-card { min-width: 0; min-height: 88px; padding: 8px 4px; border: 2px solid transparent; border-radius: 8px; box-shadow: 0 4px 16px #0000001f; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; color: #545454; font-weight: 700; }
+.filter-card.active { border-color: #efbdae; }
+.filter-card span { color: #545454; }
+.filter-card img, .filter-card ion-icon { width: 29px; height: 29px; font-size: 29px; object-fit: contain; }
+.catalogue-filter { max-width: 700px; margin: 0 auto 30px; }
+.recipe-card { border: 0; border-radius: 8px; box-shadow: 0 4px 16px #0000001f; }
+.recipe-card h2 { font-family: 'Source Sans Pro', sans-serif; letter-spacing: 0; }
+.editor-section, .conversion, .save-bar { border-radius: 8px; }
+@media(max-width: 600px) {
+  .discovery-hero { padding: 40px 0 35px; }
+  .discovery-hero h1 { margin-bottom: 22px; }
+  .discovery-hero h1 span::after { display: none; }
+  .filter-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .filter-card { min-height: 80px; font-size: .9rem; }
+  .filters { display: flex; padding: 0; }
+}
