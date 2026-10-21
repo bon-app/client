@@ -1,12 +1,3 @@
-ion-header {
-    height:100%;
-}
+.bonapp-nav { display: flex; gap: 22px; align-items: center; justify-content: space-between; padding: 16px max(22px,calc((100vw - 1200px)/2 + 28px)); border-bottom: 1px solid #e9e1d9; background: #fffdfb; color: #38352f; }.brand { flex-shrink: 0; }.brand img { width: 115px; height: 48px; object-fit: contain; display: block; }nav { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }a,button { color: inherit; text-decoration: none; font: inherit; }nav a,button,.admin { padding: 10px 13px; border-radius: 10px; font-size: .9rem; border: 0; background: transparent; cursor: pointer; }nav a.active { background: #f6e9e2; }nav a.add { background: #efbdae; }a:focus-visible,button:focus-visible { outline: 3px solid #9f6551; outline-offset: 3px; }.logout { color: #706c66; font-size: .8rem; }@media(max-width:700px) { .bonapp-nav { padding: 12px 18px; flex-wrap: wrap; gap: 10px; }.brand img { width: 90px; height: 36px; }nav { order: 3; width: 100%; justify-content: space-between; gap: 4px; }nav a,nav button { padding: 10px 7px; font-size: .79rem; }.logout { margin-left: auto; } }
 
-ion-toolbar {
-    --min-height:75px;
-    height: 4.35em;
-}
-
-.icon-selected {
-    color:#efbdae
-}
+:host { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }.bonapp-nav nav a { color: #38352f; }

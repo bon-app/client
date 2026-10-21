@@ -20,7 +20,7 @@ export class AppComponent {
     private injector: Injector
   ) {
     translate.setFallbackLang('en');
-    translate.use(translate.getBrowserLang() || 'en');
+    translate.use(['it', 'en'].includes(translate.getBrowserLang() || '') ? translate.getBrowserLang()! : 'en');
     this.initializeApp();
     ServiceLocator.injector = injector;
   }

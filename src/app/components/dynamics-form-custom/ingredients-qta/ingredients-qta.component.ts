@@ -24,7 +24,7 @@ export class IngredientsQtaComponent extends FieldType implements OnInit {
     let modal = await this.modalCtrl.create({
       component: IngredientsReceiptsComponent,
       componentProps: {
-        items: rim.ingredients
+        items: JSON.parse(JSON.stringify(rim.ingredients || []))
       },
       backdropDismiss: false,
       cssClass: ['auto-height']
@@ -35,6 +35,7 @@ export class IngredientsQtaComponent extends FieldType implements OnInit {
     modal.onDidDismiss().then((res: { data: { qta: string, ingredient: Ingredient }[] }) => {
       if (res.data) {
         rim.ingredients = res.data;
+        this.formControl.setValue(res.data);
       }
     })
   }

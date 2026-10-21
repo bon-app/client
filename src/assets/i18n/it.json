@@ -1,215 +1,346 @@
 {
-    "Messages": {
-        "home": "<h4>Benvenuto su</h4><p><img src='https://www.bonapp.life/assets/brand.png' alt='' width='153' height='74' /><br /><em> Ingredienti a domicilio con proposta di ricette! </em></p><ul style='text-align: center; list-style-position: inside;'><li>20 minuti garantito</li><li>0.99&euro; costo consegna</li><li>Nessuna spesa minima</li></ul><p>Servizio di consegna attivo su Milano zona<br />Porta Romana, Bocconi, Navigli</p><p>&nbsp;</p>"},
-    
-    "Home": {
-        "h1": "Un modo semplice ed intuitivo per condividere e scoprire ricette",
-        "h2": "Crea il tuo ricettario personale e condividi le tue ricette con chi vuoi",
-        "search1": "Filtra usando un ingrediente che hai in frigo",
-        "search2": "e personalizza la proposta di ricette..",
-        "all_receipts": "Tutte le ricette",
-        "market": "Il Supermercato"
-    },
-
-    "Errors": {
+  "Messages": {},
+  "Home": {
+    "h1": "Un modo semplice ed intuitivo per condividere e scoprire ricette",
+    "h2": "Crea il tuo ricettario personale e condividi le tue ricette con chi vuoi",
+    "search1": "Filtra usando un ingrediente che hai in frigo",
+    "search2": "e personalizza la proposta di ricette..",
+    "all_receipts": "Tutte le ricette",
+    "market": "Il Supermercato"
+  },
+  "Errors": {
     "_USER_NOT_FOUND": "Email e/o password errate",
     "_NO_ORDER_ADDRESS": "Seleziona o aggiungi un indirizzo",
     "_NO_ORDER_PAYMENT": "Seleziona o aggiungi un metodo di pagamento"
-    },
-    "DB": {
-        "Ingredients": {
-            "name": "Nome",
-            "brand": "Marca",
-            "price": "Prezzo",
-            "icon_url": "URL Immagine",
-            "active": "Attivo"
-        },
-        "Categories": {
-            "id": "id",
-            "name": "Nome",
-            "ingredients": "Prodotti",
-            "subcategories": "Sottocategorie"
-        },
-        "Receipts": {
-            "id": "id",
-            "name": "Nome",
-            "description": "Descrizione",
-            "kcal": "Kcal",
-            "preparing": "Preparazione",
-            "time": "Tempo",
-            "image_url": "URL immagine",
-            "ingredients": "Ingredienti"
-        },
-        "RIM": {
-            "id": "id",
-            "name": "Nome",
-            "matchingName": "Matching name",
-            "isCondiment": "Condimento",
-            "icon_url": "URL immagine",
-            "ingredients": "Ingredienti"
-        }
-    },
+  },
+  "DB": {
     "Ingredients": {
-        "asparagus": "Asparagi",
-        "avocado": "Avocado",
-        "beef": "Manzo",
-        "broccoli": "Broccoli",
-        "chicken": "Pollo",
-        "egg": "Uova",
-        "gorgonzola": "Gorgonzola",
-        "mozzarella": "Mozzarella",
-        "pasta": "Pasta",
-        "pesto": "Pesto",
-        "pork": "Maiale",
-        "salmon": "Salmone",
-        "tuna": "Tonno",
-        "wheat": "Farina",
-        "zucchini": "Zucchine"
+      "name": "Nome",
+      "brand": "Marca",
+      "price": "Prezzo",
+      "icon_url": "URL Immagine",
+      "active": "Attivo"
     },
-    "HomeMessage": {
-        "message": ""
+    "Categories": {
+      "id": "id",
+      "name": "Nome",
+      "ingredients": "Prodotti",
+      "subcategories": "Sottocategorie"
     },
-    "Login": {
-        "email": "Email",
-        "password": "Password",
-        "login": "Accedi",
-        "signin": "Registrati",
-        "cancel": "indietro",
-        "name": "Nome",
-        "surname": "Cognome",
-        "phone": "Telefono",
-        "nickname": "Scegli un Username",
-        "c_password": "Conferma password",
-        "c_password_error": "Le password non coincidono"
+    "Receipts": {
+      "id": "id",
+      "name": "Nome",
+      "description": "Descrizione",
+      "kcal": "Kcal",
+      "preparing": "Preparazione",
+      "time": "Tempo",
+      "image_url": "URL immagine",
+      "ingredients": "Ingredienti"
     },
-    "NavBar": {
-        "register": "Registrati",
-        "login": "Entra",
-        "orders": "I tuoi ordini",
-        "shop": "SHOP", 
-        "go_to_shop": "VAI ALLO SHOP",
-        "become_creator": "Crea il tuo ricettario",
-        "about": "Info & Contatti",
-        "datas": "Gestione dati",
-        "logout": "Logout",
-        "profile": "Profilo",
-        "menu": "Menu",
-        "daily_orders": "Ordini giornalieri",
-        "my_page": "Il mio ricettario",
-        "settings": "Impostazioni"
-
-    },
-    "ChooseIngredients": {
-        "title": "Scegli i tuoi ingredienti",
-        "subtitle": "Personalizza la tua esperienza..",
-        "bonapp": "BonAppa!"
-    },
-    "RandomReceipts": {
-        "title": "Scelte per questa sera",
-        "results": "Risultati",
-        "no_results": "Nessuna ricetta trovata con i filtri attuali.."
-    },
-    "Receipt": {
-        "back": "Back",
-        "ingredients_info": "Ingredienti per 1 porzione",
-        "goto_market": "Vai al negozio"
-    },
-    "ReceiptBuy": {
-        "ingredients_for": "Ingredienti per {{name}}",
-        "products": "Prodotti",
-        "goto_checkout": "Prosegui",
-        "cart": "Carrello",
-        "cart_total": "Totale",
-        "categories": "Categorie",
-        "subcategories": "Sottocategorie",
-        "condiments": "Condimenti",
-        "element_in_cart": "{{items.length}} prodotti nel carrello",
-        "cart_details": "Dettiglio carrello",
-        "no_products": "Cerca qualsiasi ingrediente..."
-    },
-    "AddressForm": {
-        "address": "Indirizzo",
-        "street": "Via / C.so / Piazza",
-        "street_number": "Civico",
-        "city": "Città",
-        "prov": "Provincia",
-        "state": "Stato",
-        "note": "Note",
-        "save": "Salva",
-        "cancel": "Annulla",
-        "save_address": "Salva indirizzo"
-    },
-    "FooterCart": {
-        "element_in_cart": " prodotti nel carrello",
-        "cart_total": "Totale",
-        "cart_details": "Dettiglio carrello",
-        "confirm_order": "Conferma ordine"
-    },
-    "Checkout": {
-        "products": "Prodotti",
-        "delivery": "Consegna",
-        "total": "Totale",
-        "your_order": "Il tuo ordine",
-        "delivery_address": "Indirizzo",
-        "delivery_time": "Orario di consegna",
-        "delivery_method": "Metodo di consegna",
-        "delivery_standard": "Consegna al citofono",
-        "delivery_footstep": "Consegna fino alla porta (+ € 1.50)",
-        "payment_info": "Pagamento",
-        "contact_info": "Contatti",
-        "title": "Checkout",
-        "name": "Nome e cognome",
-        "phone": "Telefono",
-        "confirm_order": "Conferma ordine",
-        "add_address": "Aggiungi indirizzo",
-        "address": "Indirizzo",
-        "address_note": "Note",
-        "credit_card": "Carta di credito/debito",
-        "save_card": "Salva metodo di pagamento",
-        "add_payment_cancel": "Annulla",
-        "add_payment_next": "Procedi",
-        "asap": "ASAP",
-        "asap_time": "15 - 25 min",
-        "asap_info": "* Dalle 19:00 alle 21:00"
-    },
-    "OrderConfirm": {
-        "status": "Il tuo ordine è stato ricevuto!",
-        "status_sub": "Riceverai un'e-mail con i dettagli dell'ordine",
-        "order_detail": "Dettaglio ordine",
-        "customer_details": "Dettaglio cliente",
-        "order_details": {
-            "name": "Nome e cognome",
-            "id": "ID ordine",
-            "address": "Indirizzo",
-            "note": "Note",
-            "payment_method": "Metodo di pagamento",
-            "credit_card": "Carta di credito/debito"
-        }
-    },
-    "Orders": {
-        "details": "Dettagli",
-        "title": "Ordini effettati",
-        "status": "Stato ordine",
-        "status_list": {
-            "payment_pending": "In attesa di pagamento",
-            "paid": "Pagato"
-        }
-    },
-    "IngredientsPriority": {
-        "title": "Lista ingredienti",
-        "add_ingredient": "Cerca e aggiungi ingrediente",
-        "cancel": "Annulla",
-        "save": "Salva"
-    },
-    "IngredientsForm": {
-        "title": "Lista ingredienti",
-        "add_ingredient": "Cerca e aggiungi ingrediente",
-        "cancel": "Annulla",
-        "save": "Salva"
-    },
-    "Alerts": {
-        "logout": "Sei sicuro di voler effettuare il logout?",
-        "conferma": "Si",
-        "annulla": "Annulla"
+    "RIM": {
+      "id": "id",
+      "name": "Nome",
+      "matchingName": "Matching name",
+      "isCondiment": "Condimento",
+      "icon_url": "URL immagine",
+      "ingredients": "Ingredienti"
     }
+  },
+  "Ingredients": {
+    "asparagus": "Asparagi",
+    "avocado": "Avocado",
+    "beef": "Manzo",
+    "broccoli": "Broccoli",
+    "chicken": "Pollo",
+    "egg": "Uova",
+    "gorgonzola": "Gorgonzola",
+    "mozzarella": "Mozzarella",
+    "pasta": "Pasta",
+    "pesto": "Pesto",
+    "pork": "Maiale",
+    "salmon": "Salmone",
+    "tuna": "Tonno",
+    "wheat": "Farina",
+    "zucchini": "Zucchine"
+  },
+  "HomeMessage": {
+    "message": ""
+  },
+  "Login": {
+    "email": "Email",
+    "password": "Password",
+    "login": "Accedi",
+    "signin": "Registrati",
+    "cancel": "indietro",
+    "name": "Nome",
+    "surname": "Cognome",
+    "phone": "Telefono",
+    "nickname": "Scegli un Username",
+    "c_password": "Conferma password",
+    "c_password_error": "Le password non coincidono"
+  },
+  "NavBar": {
+    "register": "Registrati",
+    "login": "Entra",
+    "orders": "I tuoi ordini",
+    "shop": "SHOP",
+    "go_to_shop": "VAI ALLO SHOP",
+    "become_creator": "Crea il tuo ricettario",
+    "about": "Info & Contatti",
+    "datas": "Gestione dati",
+    "logout": "Logout",
+    "profile": "Profilo",
+    "menu": "Menu",
+    "daily_orders": "Ordini giornalieri",
+    "my_page": "Il mio ricettario",
+    "settings": "Impostazioni"
+  },
+  "ChooseIngredients": {
+    "title": "Scegli i tuoi ingredienti",
+    "subtitle": "Personalizza la tua esperienza..",
+    "bonapp": "BonAppa!"
+  },
+  "RandomReceipts": {
+    "title": "Scelte per questa sera",
+    "results": "Risultati",
+    "no_results": "Nessuna ricetta trovata con i filtri attuali.."
+  },
+  "Receipt": {
+    "back": "Back",
+    "ingredients_info": "Ingredienti per 1 porzione",
+    "goto_market": "Vai al negozio"
+  },
+  "ReceiptBuy": {
+    "ingredients_for": "Ingredienti per {{name}}",
+    "products": "Prodotti",
+    "goto_checkout": "Prosegui",
+    "cart": "Carrello",
+    "cart_total": "Totale",
+    "categories": "Categorie",
+    "subcategories": "Sottocategorie",
+    "condiments": "Condimenti",
+    "element_in_cart": "{{items.length}} prodotti nel carrello",
+    "cart_details": "Dettiglio carrello",
+    "no_products": "Cerca qualsiasi ingrediente..."
+  },
+  "AddressForm": {
+    "address": "Indirizzo",
+    "street": "Via / C.so / Piazza",
+    "street_number": "Civico",
+    "city": "Città",
+    "prov": "Provincia",
+    "state": "Stato",
+    "note": "Note",
+    "save": "Salva",
+    "cancel": "Annulla",
+    "save_address": "Salva indirizzo"
+  },
+  "FooterCart": {
+    "element_in_cart": " prodotti nel carrello",
+    "cart_total": "Totale",
+    "cart_details": "Dettiglio carrello",
+    "confirm_order": "Conferma ordine"
+  },
+  "Checkout": {
+    "products": "Prodotti",
+    "delivery": "Consegna",
+    "total": "Totale",
+    "your_order": "Il tuo ordine",
+    "delivery_address": "Indirizzo",
+    "delivery_time": "Orario di consegna",
+    "delivery_method": "Metodo di consegna",
+    "delivery_standard": "Consegna al citofono",
+    "delivery_footstep": "Consegna fino alla porta (+ € 1.50)",
+    "payment_info": "Pagamento",
+    "contact_info": "Contatti",
+    "title": "Checkout",
+    "name": "Nome e cognome",
+    "phone": "Telefono",
+    "confirm_order": "Conferma ordine",
+    "add_address": "Aggiungi indirizzo",
+    "address": "Indirizzo",
+    "address_note": "Note",
+    "credit_card": "Carta di credito/debito",
+    "save_card": "Salva metodo di pagamento",
+    "add_payment_cancel": "Annulla",
+    "add_payment_next": "Procedi",
+    "asap": "ASAP",
+    "asap_time": "15 - 25 min",
+    "asap_info": "* Dalle 19:00 alle 21:00"
+  },
+  "OrderConfirm": {
+    "status": "Il tuo ordine è stato ricevuto!",
+    "status_sub": "Riceverai un'e-mail con i dettagli dell'ordine",
+    "order_detail": "Dettaglio ordine",
+    "customer_details": "Dettaglio cliente",
+    "order_details": {
+      "name": "Nome e cognome",
+      "id": "ID ordine",
+      "address": "Indirizzo",
+      "note": "Note",
+      "payment_method": "Metodo di pagamento",
+      "credit_card": "Carta di credito/debito"
+    }
+  },
+  "Orders": {
+    "details": "Dettagli",
+    "title": "Ordini effettati",
+    "status": "Stato ordine",
+    "status_list": {
+      "payment_pending": "In attesa di pagamento",
+      "paid": "Pagato"
+    }
+  },
+  "IngredientsPriority": {
+    "title": "Lista ingredienti",
+    "add_ingredient": "Cerca e aggiungi ingrediente",
+    "cancel": "Annulla",
+    "save": "Salva"
+  },
+  "IngredientsForm": {
+    "title": "Lista ingredienti",
+    "add_ingredient": "Cerca e aggiungi ingrediente",
+    "cancel": "Annulla",
+    "save": "Salva"
+  },
+  "Alerts": {
+    "logout": "Sei sicuro di voler effettuare il logout?",
+    "conferma": "Si",
+    "annulla": "Annulla"
+  },
+  "Cookbook": {
+    "navigation": "Navigazione principale",
+    "discover": "Scopri",
+    "yourCookbook": "Il mio ricettario",
+    "addRecipe": "Aggiungi ricetta",
+    "profile": "Profilo",
+    "login": "Accedi",
+    "logout": "Esci",
+    "personalCookbook": "Il tuo ricettario personale",
+    "discoverTitle": "Le buone idee in cucina meritano un posto speciale.",
+    "discoverIntro": "Scopri le ricette della community e raccogli le tue preferite in un ricettario tutto tuo.",
+    "cookbookIntro": "Le tue ricette, con le tue parole. Tienile private o condividi qualcosa di buono.",
+    "createAccount": "Crea il tuo ricettario",
+    "welcome": "Una casa per le tue ricette. Private finché non decidi di condividerle.",
+    "search": "Cerca",
+    "searchOwn": "Cerca per titolo o ingrediente",
+    "searchTitle": "Cerca per titolo della ricetta",
+    "visibility": "Visibilità",
+    "all": "Tutte",
+    "private": "Privata",
+    "public": "Pubblica",
+    "tags": "Categorie",
+    "empty": "Non ci sono ancora ricette",
+    "startRecipe": "Inizia con una foto e un titolo. Potrai aggiungere il resto quando vuoi.",
+    "trySearch": "Prova una ricerca o un filtro diverso.",
+    "minutes": "min",
+    "edit": "Modifica",
+    "delete": "Elimina",
+    "publish": "Pubblica",
+    "unpublish": "Rendi privata",
+    "loadMore": "Carica altre ricette",
+    "editRecipe": "Modifica ricetta",
+    "minimum": "Bastano una foto e un titolo. Tutto il resto è facoltativo.",
+    "title": "Titolo della ricetta",
+    "image": "Foto della ricetta",
+    "imageHelp": "JPEG, PNG o WebP, fino a 20 MB. Ridimensioniamo la foto prima di caricarla.",
+    "preview": "Anteprima immagine",
+    "preparingImage": "Preparazione immagine…",
+    "ingredients": "Ingredienti",
+    "ingredientsHelp": "Scrivi gli ingredienti come preferisci, uno per riga. Quantità e collegamenti al catalogo sono facoltativi.",
+    "pasteIngredients": "Scrivi o incolla gli ingredienti",
+    "ingredientsExample": "200 g di pasta\nUna manciata di basilico\nSale q.b.",
+    "addLines": "Aggiungi le righe",
+    "ingredient": "Ingrediente",
+    "moveUp": "Sposta su",
+    "moveDown": "Sposta giù",
+    "removeIngredient": "Rimuovi ingrediente",
+    "matched": "Ingrediente collegato al catalogo",
+    "unlink": "Rimuovi collegamento",
+    "optionalMatch": "Facoltativo: collega al catalogo ingredienti",
+    "catalogueSearch": "Cerca nel catalogo ingredienti",
+    "catalogueUnavailable": "Il catalogo non è disponibile. Puoi comunque salvare questo ingrediente così com’è.",
+    "instructions": "Preparazione",
+    "useSteps": "Usa passaggi numerati",
+    "useText": "Usa un unico testo",
+    "conversionPreview": "Anteprima del formato",
+    "conversionHelp": "Controlla il risultato prima di applicarlo. Il testo rimane unito: non suddividiamo automaticamente i passaggi.",
+    "apply": "Applica formato",
+    "cancel": "Annulla",
+    "writeInstructions": "Scrivi o incolla la preparazione",
+    "step": "Passaggio",
+    "addStep": "Aggiungi passaggio",
+    "details": "Qualche dettaglio in più (facoltativo)",
+    "description": "Descrizione",
+    "time": "Tempo di preparazione (minuti)",
+    "whoCanSee": "Chi può vedere questa ricetta?",
+    "privateHelp": "Solo tu puoi vedere questa ricetta nel tuo ricettario.",
+    "publicHelp": "Tutti possono vedere questa ricetta nella tua pagina pubblica e in Scopri.",
+    "saveHint": "Sono richiesti solo una foto e un titolo.",
+    "saveRecipe": "Salva ricetta",
+    "saving": "Salvataggio…",
+    "loading": "Caricamento…",
+    "saved": "Modifiche salvate.",
+    "failed": "Qualcosa è andato storto. Riprova: i dati inseriti sono stati conservati.",
+    "required": "Aggiungi un titolo e una foto prima di salvare.",
+    "titleRequired": "Inserisci il titolo della ricetta.",
+    "imageRequired": "Scegli una foto della ricetta.",
+    "leave": "Uscire senza salvare le modifiche?",
+    "deleteConfirm": "Eliminare questa ricetta? Non potrai recuperarla.",
+    "recipe": "Ricetta",
+    "profileIntro": "Personalizza la tua pagina pubblica di ricette.",
+    "displayName": "Nome visualizzato",
+    "nickname": "Nome utente",
+    "nicknameHelp": "Da 2 a 40 caratteri: lettere, numeri, punti, trattini o underscore.",
+    "bio": "Qualcosa su di te",
+    "avatar": "Foto del profilo (facoltativa)",
+    "publicProfileHelp": "Nome, nome utente, biografia e foto del profilo sono pubblici. Nella tua pagina compaiono solo le ricette pubblicate.",
+    "saveProfile": "Salva profilo",
+    "viewPublicPage": "Vedi pagina pubblica",
+    "aboutTitle": "Una casa per le ricette che ami.",
+    "aboutIntro": "Bonapp è il tuo ricettario personale: salva una ricetta con una foto e un titolo, aggiungi i dettagli con le tue parole e scegli cosa condividere. Il servizio di acquisto e consegna ingredienti è terminato.",
+    "retiredTitle": "La consegna ingredienti è terminata.",
+    "retiredIntro": "Bonapp è ora un’app di ricette personali. Il negozio, gli ordini di ingredienti e le consegne non sono più disponibili. Scopri una ricetta o crea il tuo ricettario.",
+    "loginTitle": "Bentornato su Bonapp",
+    "registerTitle": "Crea il tuo ricettario personale",
+    "email": "Email",
+    "password": "Password",
+    "passwordHelp": "Usa almeno 8 caratteri.",
+    "showPassword": "Mostra password",
+    "hidePassword": "Nascondi password",
+    "show": "Mostra",
+    "hide": "Nascondi",
+    "tag": {
+      "healthy": "Leggere",
+      "quick-n-easy": "Facili e veloci",
+      "first": "Primi",
+      "second": "Secondi",
+      "vegetarian": "Vegetariane",
+      "gluten-free": "Senza glutine",
+      "no-oven": "Senza forno",
+      "no-mixer": "Senza mixer"
+    },
+    "errors": {
+      "_UNAUTHORIZE": "Accedi per continuare.",
+      "_RECEIPT_NOT_FOUND": "Questa ricetta non è disponibile o è privata.",
+      "_USER_NOT_FOUND": "Account o pagina non disponibili. Se stai accedendo, controlla le credenziali.",
+      "_RECIPE_TITLE_REQUIRED": "Inserisci un titolo.",
+      "_RECIPE_IMAGE_REQUIRED": "Scegli una foto.",
+      "_INVALID_RECIPE_IMAGE": "Scegli un’immagine JPEG, PNG o WebP valida.",
+      "_RECIPE_IMAGE_TOO_LARGE": "L’immagine è troppo grande. Scegline una più piccola.",
+      "_INVALID_NICKNAME": "Scegli un nome utente disponibile di 2–40 caratteri. I nomi delle pagine dell’app sono riservati.",
+      "_NICKNAME_JUST_USED": "Questo nome utente è già in uso.",
+      "_EMAIL_JUST_USED": "Questa email è già registrata.",
+      "_IDENTITY_ALREADY_USED": "Email o nome utente già in uso.",
+      "_INVALID_REGISTRATION": "Inserisci nome, nome utente, email valida e una password di almeno 8 caratteri.",
+      "_INVALID_PROFILE": "Controlla il nome e la biografia (massimo 1.000 caratteri).",
+      "_INVALID_VISIBILITY": "Scegli visibilità privata o pubblica.",
+      "_INVALID_INGREDIENTS": "Controlla le righe degli ingredienti.",
+      "_INVALID_INSTRUCTIONS": "Controlla la preparazione."
+    },
+    "about": "Informazioni su Bonapp",
+    "filterIngredient": "Facoltativo: filtra per un ingrediente del catalogo",
+    "clearFilter": "Rimuovi filtro",
+    "filterCatalogueUnavailable": "Il catalogo ingredienti non è disponibile. Puoi comunque cercare per titolo."
+  }
 }

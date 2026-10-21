@@ -88,8 +88,6 @@ export class DynamicFormPage implements OnInit {
 
   async newEntry(loading: HTMLIonLoadingElement, model) {
     await this.service.add(model);
-    loading.dismiss();
-    this.navCtrl.back();
     return;
   }
 

@@ -10,6 +10,7 @@ import { BonAppHeaderComponent } from './header/header.component';
 import { BonAppCreatorHeaderComponent } from './header-creator/header-creator.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { FooterCartComponent } from './footer-cart/footer-cart.component';
 import { CartDetailsComponent } from './cart-details/cart-details.component';
 import { AddressFormComponent } from './address-form/address-form.component';
@@ -55,6 +56,7 @@ const components = [
   imports: [
     IonicModule,
     FormsModule,
+    RouterModule,
     CommonModule,
     FormlyModule,
     TranslateCompatModule,

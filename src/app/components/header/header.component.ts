@@ -41,7 +41,9 @@ export class BonAppHeaderComponent implements OnInit {
       cssClass: ['auto-height']
     });
 
-    modal.present();
+    await modal.present();
+    await modal.onDidDismiss();
+    if (this.auth.isAuthenticate()) this.navCtrl.navigateRoot('/cookbook');
   }
 
   async presentUsersPopover(ev: any) {
@@ -68,6 +70,10 @@ export class BonAppHeaderComponent implements OnInit {
       return;
     }
     this.navCtrl.navigateForward(url)
+  }
+
+  async signOut() {
+    if (await this.router.navigate(['/home'])) this.auth.logout();
   }
 
   logout(redirect: string) {

@@ -23,7 +23,7 @@ export class DFIngredientsComponent extends FieldType implements OnInit {
     let modal = await this.modalCtrl.create({
       component: IngredientsComponent,
       componentProps: {
-        items: this.model.ingredients
+        items: JSON.parse(JSON.stringify(this.model.ingredients || []))
       },
       backdropDismiss: false,
       cssClass: ['auto-height']
@@ -34,6 +34,7 @@ export class DFIngredientsComponent extends FieldType implements OnInit {
     modal.onDidDismiss().then((res: { data: Ingredient[] }) => {
       if (res.data) {
         this.model.ingredients = res.data;
+        this.formControl.setValue(res.data);
       }
     })
   }

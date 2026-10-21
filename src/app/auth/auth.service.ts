@@ -17,7 +17,9 @@ export class AuthService {
 
   isAuthenticate(): boolean {
     ///console.log(this.token || localStorage.getItem('token'))
-    return !!(this.token || localStorage.getItem('token'));
+    const token = this.getToken();
+    const payload = this.getPayload(token);
+    return !!(token && payload.id && (!payload.exp || payload.exp > Date.now() / 1000));
   }
 
   getIdentity() {
@@ -44,9 +46,10 @@ export class AuthService {
 
   getPayload(token: string): any {
     if (!token) return {};
-    var base64Url = token.split('.')[1];
-    var base64 = base64Url.replace('-', '+').replace('_', '/');
-    return JSON.parse(window.atob(base64));
+    try {
+      const base64 = token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/');
+      return JSON.parse(decodeURIComponent(Array.from(window.atob(base64), c => '%' + c.charCodeAt(0).toString(16).padStart(2, '0')).join('')));
+    } catch { return {}; }
   }
 
   hasRoles(roles: string[]): boolean {

@@ -1,6 +1,6 @@
 <div class="ion-padding">
   <ion-label>Preparing</ion-label>
-  @for (step of model[modelKey]; track step; let i = $index) {
+  @for (step of model[modelKey]; track $index; let i = $index) {
     <ion-card>
       <ion-card-content>
         <div class="ion-margin-bottom ion-margin-top">
@@ -10,7 +10,7 @@
           </ion-button>
         </div>
         <ion-textarea placeholder="Inserisci un passaggio.." [id]="'step-'+(i+1)" [name]="'step-'+(i+1)"
-        [value]="step" (ionBlur)="editStep($event, i)"></ion-textarea>
+        [value]="step" (ionInput)="editStep($event, i)"></ion-textarea>
       </ion-card-content>
     </ion-card>
   }

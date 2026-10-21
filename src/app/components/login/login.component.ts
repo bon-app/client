@@ -16,6 +16,9 @@ export class LoginComponent implements OnInit {
   public c_password: string;
   public section: 'login' | 'signin' = 'login';
   public showPassword = false;
+  public busy = false;
+  public error = '';
+  close() { this.modalCtrl.dismiss(); }
   public passwordToggleIcon = 'eye-outline';
 
   constructor(
@@ -28,30 +31,30 @@ export class LoginComponent implements OnInit {
   ngOnInit() {}
 
   async login() {
+    if(this.busy) return; this.busy = true; this.error = '';
     try {
       await this.usersService.login(this.user);
       this.modalCtrl.dismiss();
     } catch (error) {
       this.errorToast(error);
-    }
+    } finally { this.busy = false; }
   }
 
   async signIn() {
+    if(this.busy) return; this.busy = true; this.error = '';
     try {
       this.user.nickname = this.user.nickname.toLowerCase();
       await this.usersService.signIn(this.user);
       this.modalCtrl.dismiss();
     } catch (error) {
       this.errorToast(error);
-    }
+    } finally { this.busy = false; }
   }
 
   async errorToast(error) {
-    let toast = await this.toastCtrl.create({
-      message: this.translate.instant('Errors.' + error.error.code),
-      duration: 3000,
-    });
-    toast.present();
+    const key = 'Cookbook.errors.' + error?.error?.code;
+    const message = this.translate.instant(key);
+    this.error = message === key ? this.translate.instant('Cookbook.failed') : message;
   }
 
   togglePassword() {
