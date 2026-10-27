@@ -1,0 +1,36 @@
+ion-item {
+    --padding-start: 0;
+    margin: 0.25em;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+.popup_text {
+    --padding-start: 0;
+    margin: 0.25em;
+    margin-left: 1em;
+    margin-right: 1em;
+    margin-top:1em;
+    text-align:left;
+}
+
+h3 {
+    font-size: 1.2em;
+    text-transform:capitalize;
+}
+
+h4 {
+    font-size: 1em;
+    margin-top: 0em !important;
+    font-style: italic;
+    text-transform:capitalize;
+}
+
+
+.partial-border:after {
+    background: #efbdae;
+    width: 30px;
+    border-radius : 10px;
+    height: 5px;
+    margin-left: calc(50% - 15px);
+  }

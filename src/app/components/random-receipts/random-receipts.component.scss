@@ -1,0 +1,122 @@
+#no-results {
+    min-height: 300px;
+}
+
+h3,
+h2 {
+    margin: 0;
+    text-align: center;
+}
+
+h2 {
+    font-size: 1.4em;
+}
+
+h3 {
+    font-size: 1.2em;
+}
+
+ion-card {
+    padding: 0;
+    --padding-start: 0;
+    --padding-end: 0;
+    border-radius: 0.5em;
+    overflow: hidden;
+    cursor: pointer;
+
+    ion-card-header {
+        padding-left: 0;
+    }
+
+    ion-card-content {
+        padding: 0;
+        --padding-start: 0;
+        --padding-end: 0;
+    }
+}
+
+.ingredients {
+    text-align: left;
+}
+
+.partial-border.primary:after {
+    content: "";
+    width: 30px;
+    height: 4px;
+    margin-left: -15px;
+    background: #efbdae;
+    position: absolute;
+    bottom: -4px;
+    border-radius : 10px;
+}
+
+
+ion-button::part(native) {
+    padding-left: 0;
+    padding-right: 0;
+    padding-inline-start: 0.6em !important;
+    padding-inline-end: 0.6em !important;
+}
+
+@media only screen and (min-width: 769px) {
+    .time {
+        padding-top:0.6em;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .recipesBox {
+        .wrap-text {
+            text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: normal;
+            line-height: 1;
+            padding-top: 0.25em;
+            padding-bottom: 0.4em !important;
+
+        }
+    }
+
+    ion-card-title {
+        font-size: 1.4em;
+        text-align: center;
+    }
+
+    .ingredients {
+        text-align: center;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        padding: 0.5em 0.5em 0.3em 0.5em !important;
+    }
+
+    .pinkbar {
+        margin: 0.2em 0.2em 0.3em 0.2em !important;
+    }
+
+    #info-cook {
+        display: flex;
+        align-items: center;
+
+        > div {
+            padding: 0.5em;
+            padding-top: 1.5em;
+            margin: 0 auto;
+        }
+
+        .time {
+            margin-top: 0.8em;
+            display: inline-flex;
+        }
+
+        .calories {
+            margin-top: 0.8em;
+            display: inline-flex;
+        }
+
+        .leftspace {
+            margin-left: 0.8em;
+        }
+    }
+
+}

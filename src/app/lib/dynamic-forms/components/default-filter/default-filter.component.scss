@@ -1,0 +1,11 @@
+#filter {
+    margin: 0;
+
+    .filter-section {
+        margin-bottom: 0.9em;
+
+        ion-input {
+            --padding-end: 0;
+        }
+    }
+}

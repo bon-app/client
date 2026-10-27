@@ -1,0 +1,108 @@
+#receipt-info {
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    >div {
+        float: left;
+        padding: 1em;
+        font-size: 1.2em;
+        color: var(--ion-color-tertiary);
+
+        ion-icon {
+            font-size: 2em;
+            color: var(--ion-color-tertiary);
+        }
+    }
+
+    >.divider {
+        background: var(--ion-color-tertiary);
+        width: 2px;
+        height: 3em;
+    }
+}
+
+#image {
+    min-height: 300px;
+}
+
+#ingredients {
+    padding: 1em;
+    position: fixed;
+    right: 0;
+}
+
+h1 {
+    margin-top: 0;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+#info {
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+ul {
+    list-style-type: square;
+    border-left: 2px solid var(--ion-color-tertiary);
+    max-height: 40vh;
+    overflow: hidden;
+    overflow-y: auto;
+
+    li {
+        font-size: 1em;
+        margin-bottom: 0.5em;
+    }
+}
+
+#recept-description {
+    font-size: 1.4em;
+}
+
+#back {
+    margin-top: 1em;
+    margin-bottom: 2em;
+}
+
+.partial-border.big:after {
+    margin-left: 0 !important;
+}
+
+#button-goto-market {
+    margin-top: 1em;
+
+    ion-button {
+        font-weight: bold;
+    }
+}
+
+#preparation {
+    margin-top: 3em;
+    width: 75%
+}
+
+
+@media only screen and (max-width: 768px) {
+    #receipt-info {
+        >div {
+            margin: 0 auto;
+        }
+    }
+
+    #info {
+        h1 {
+            padding-top: 1em;
+        }
+    }
+
+    #ingredients {
+        padding: 1em;
+        position: static;
+    }
+
+    #preparation {
+        margin-top: 1em;
+        width: 100%;
+    }
+}

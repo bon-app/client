@@ -1,0 +1,104 @@
+<bonapp-header></bonapp-header>
+<ion-content>
+  <main class="cookbook-shell">
+    @if (error) { <div id="cookbook-error" tabindex="-1" class="notice error" role="alert">{{error}}</div> }
+    @if (saved) { <div class="notice" role="status">{{saved}}</div> }
+    @if (loading && !recipes.length) { <p role="status">{{t('loading')}}</p> }
+    @if (['cookbook', 'editor', 'profile'].includes(mode) && !authenticated) {
+      <section class="hero"><p class="eyebrow">BONAPP</p><h1>{{t('yourCookbook')}}</h1><p>{{t('welcome')}}</p><button class="primary" (click)="login(true)">{{t('createAccount')}}</button><button (click)="login()">{{t('login')}}</button></section>
+    }
+    @if (mode === 'discover' || mode === 'feed' || mode === 'cookbook' && authenticated || mode === 'creator') {
+      <section class="hero" [class.compact]="mode !== 'discover' && mode !== 'feed'" [class.discovery-hero]="mode === 'discover' || mode === 'feed'">
+        @if (mode !== 'discover' && mode !== 'feed') { <p class="eyebrow">{{t('personalCookbook')}}</p> }
+        @if (mode === 'creator' && user) {
+          <div class="profile-heading">@if(user.image_url) { <img class="avatar" [src]="user.image_url" alt=""> }<div><h1>{{user.name}}</h1><p>&#64;{{user.nickname}}</p></div></div>
+          @if(user.bio) { <p class="bio">{{user.bio}}</p> }
+        } @else if (mode === 'feed') { <h1>{{t('feedTitle')}}</h1><p>{{t('feedIntro')}}</p> }
+        @else if (mode === 'discover') { <h1>{{t('discoverTitleLead')}} <span>{{t('discoverTitleEmphasis')}}</span></h1><p>{{t('discoverIntro')}}</p> }
+        @else { <h1>{{t('yourCookbook')}}</h1><p>{{t('cookbookIntro')}}</p> }
+        @if ((mode === 'discover' || mode === 'feed') && !authenticated) { <button class="primary" (click)="login(true)">{{t('createAccount')}}</button> }
+        @if (authenticated && mode !== 'creator') { @if (android) { <a class="button primary" routerLink="/app/capture" [queryParams]="{open: '1'}">{{t('addRecipe')}}</a> } @else { <a class="button primary" routerLink="/new">{{t('addRecipe')}}</a> } }
+        @if (mode === 'cookbook' && android) { <a class="button" routerLink="/receipts">{{captureText('discover')}}</a> }
+      </section>
+      <form class="filters" (ngSubmit)="fetchRecipes()">
+        <label class="search-label">{{t('search')}}<input name="search" [(ngModel)]="search" [placeholder]="t(mode === 'cookbook' ? 'searchOwn' : 'searchTitle')" type="search"></label>
+        @if(mode === 'cookbook') { <label>{{t('visibility')}}<select name="visibility" [(ngModel)]="visibility"><option value="">{{t('all')}}</option><option value="private">{{t('private')}}</option><option value="public">{{t('public')}}</option></select></label> }
+        <button type="submit" [disabled]="loading">{{t('search')}}</button>
+      </form>
+      <section class="filter-section" [attr.aria-label]="t('tags')">
+        <h2>{{t('filterHeading')}}</h2>
+        <div class="filter-cards">
+          @for(tag of tags; track tag) {
+            <button type="button" class="filter-card" [class.active]="selectedTags.includes(tag)" [attr.aria-pressed]="selectedTags.includes(tag)" (click)="toggleFilter(tag)">
+              @if(filterIcons[tag]) { <img [src]="'assets/filters/' + filterIcons[tag]" alt=""> }
+              @else { <ion-icon [name]="tag === 'gluten-free' ? 'leaf-outline' : 'restaurant-outline'" aria-hidden="true"></ion-icon> }
+              <span>{{t('tag.' + tag)}}</span>
+            </button>
+          }
+        </div>
+      </section>
+      @if (mode === 'feed') {
+        <section class="fridge-filter" [attr.aria-label]="t('fridgeHeading')">
+          <div class="fridge-heading"><div><h2>{{t('fridgeHeading')}}</h2><p>{{t('fridgeHelp')}}</p></div>@if(feedIngredients.length) { <button type="button" class="quiet-button" (click)="clearFeedIngredients()">{{t('clearIngredients')}}</button> }</div>
+          <div class="line-row fridge-entry"><input name="feed-ingredient" [(ngModel)]="filterCatalogueQuery" [attr.aria-label]="t('ingredientEntry')" [placeholder]="t('ingredientEntry')" (keydown.enter)="$event.preventDefault(); addFeedIngredient()"><button type="button" (click)="addFeedIngredient()" [disabled]="!filterCatalogueQuery.trim()">{{t('addIngredient')}}</button><button type="button" class="secondary-action" (click)="searchFilterCatalogue()" [disabled]="!filterCatalogueQuery.trim()">{{t('suggestions')}}</button></div>
+          @if(filterCatalogueLoading) { <p class="suggestion-status" role="status">{{t('loading')}}</p> }
+          @if(filterCatalogueError) { <p class="suggestion-status" role="status">{{t('filterCatalogueUnavailable')}}</p> }
+          @if(filterMatches.length) { <div class="ingredient-suggestions" [attr.aria-label]="t('ingredientSuggestions')">@for(match of filterMatches; track match.id) { <button type="button" class="match-option" (click)="addFeedIngredient(match)">{{match.name}} <span aria-hidden="true">+</span></button> }</div> }
+          @if(feedIngredients.length) { <div class="ingredient-chips" [attr.aria-label]="t('selectedIngredients')">@for(item of feedIngredients; track item.name; let i = $index) { <span class="ingredient-chip">{{item.name}}<button type="button" (click)="removeFeedIngredient(i)" [attr.aria-label]="t('removeSelectedIngredient', {name: item.name})">×</button></span> }</div> }
+        </section>
+      } @else {
+        <details class="catalogue-filter"><summary>{{t('filterIngredient')}}</summary><div class="line-row"><input name="filter-catalogue" [(ngModel)]="filterCatalogueQuery" [attr.aria-label]="t('catalogueSearch')"><button type="button" (click)="searchFilterCatalogue()">{{t('search')}}</button></div>@if(filterCatalogueLoading) { <p role="status">{{t('loading')}}</p> }@if(filterCatalogueError) { <p role="status">{{t('filterCatalogueUnavailable')}}</p> }@for(match of filterMatches; track match.id) { <button type="button" class="match-option" (click)="selectCatalogueFilter(match)">{{match.name}}</button> }</details>
+      }
+      @if(catalogueFilter) { <p class="match-state">{{t('ingredient')}}: {{catalogueFilter.name}} <button (click)="selectCatalogueFilter(null)">{{t('clearFilter')}}</button></p> }
+      @if(!loading && !recipes.length && !error) { <section class="empty"><h2>{{t('empty')}}</h2><p>{{t(mode === 'cookbook' ? 'startRecipe' : 'trySearch')}}</p></section> }
+      <div class="recipe-grid" [attr.aria-busy]="loading">
+        @for(item of recipes; track item.id) {
+          <article class="recipe-card">
+            <a [routerLink]="['/receipt',item.id]"><img [src]="item.image_url" [alt]="item.name" loading="lazy"><div class="card-copy">@if(mode === 'cookbook') { <span class="badge">{{t(item.visibility)}}</span> }<h2>{{item.name}}</h2>@if(mode === 'feed' && item.matchedIngredientCount) { <p class="ingredient-match-count">{{t('matchedIngredientCount', {count: item.matchedIngredientCount})}}</p> }@if(item.time) { <p>{{item.time}} {{t('minutes')}}</p> }</div></a>
+            @if(mode === 'cookbook') { <div class="card-actions"><a class="button quiet" [routerLink]="['/edit',item.id]">{{t('edit')}}</a><button (click)="setVisibility(item)" [disabled]="saving">{{t(item.visibility === 'public' ? 'unpublish' : 'publish')}}</button><button class="danger" (click)="deleteRecipe(item)" [disabled]="saving">{{t('delete')}}</button></div> }
+          </article>
+        }
+      </div>
+      @if(hasMore) { <div class="more"><button (click)="fetchRecipes(false)" [disabled]="loading">{{t('loadMore')}}</button></div> }
+    }
+    @if(mode === 'editor' && authenticated && recipe) {
+      <section class="page-heading"><p class="eyebrow">{{t('personalCookbook')}}</p><h1>{{t(recipe.id ? 'editRecipe' : 'addRecipe')}}</h1><p>{{t('minimum')}}</p></section>
+      <form class="editor" (ngSubmit)="saveRecipe()">
+        <fieldset [disabled]="saving">
+          <section class="editor-section basics"><div><label for="recipe-title">{{t('title')}} *</label><input id="recipe-title" name="title" [(ngModel)]="recipe.name" [attr.aria-invalid]="attempted && !recipe.name?.trim()" aria-describedby="title-help">@if(attempted && !recipe.name?.trim()) { <small id="title-help" class="field-error">{{t('titleRequired')}}</small> }
+          <label for="recipe-image">{{t('image')}} *</label><input id="recipe-image" type="file" accept="image/jpeg,image/png,image/webp" (change)="chooseImage($event)" [disabled]="imageLoading" aria-describedby="image-help"><small id="image-help">{{t('imageHelp')}}</small>@if(attempted && !recipe.image_url) { <small class="field-error">{{t('imageRequired')}}</small> }@if(imageLoading) { <p role="status">{{t('preparingImage')}}</p> }</div>
+          @if(recipe.image_url) { <img class="image-preview" [src]="recipe.image_url" [alt]="t('preview')"> }
+          </section>
+          <section class="editor-section"><h2>{{t('ingredients')}}</h2><p>{{t('ingredientsHelp')}}</p><label for="ingredient-bulk">{{t('pasteIngredients')}}</label><textarea id="ingredient-bulk" name="bulk" [(ngModel)]="bulk" rows="5" [placeholder]="t('ingredientsExample')"></textarea><button type="button" (click)="addLines()" [disabled]="!bulk.trim()">{{t('addLines')}}</button>
+            <ol class="ingredient-list">@for(line of recipe.ingredients; track $index; let i = $index) { <li><div class="line-row"><input [name]="'ingredient-'+i" [(ngModel)]="line.text" [attr.aria-label]="t('ingredient') + ' ' + (i+1)"><button type="button" (click)="move(recipe.ingredients,i,-1)" [disabled]="i===0" [attr.aria-label]="t('moveUp')">↑</button><button type="button" (click)="move(recipe.ingredients,i,1)" [disabled]="i===recipe.ingredients.length-1" [attr.aria-label]="t('moveDown')">↓</button><button type="button" (click)="removeLine(i)" [attr.aria-label]="t('removeIngredient')">×</button></div>
+            @if(line.catalogueId) { <p class="match-state">{{t('matched')}} <button type="button" (click)="line.catalogueId=null">{{t('unlink')}}</button></p> }
+            <details><summary>{{t('optionalMatch')}}</summary><div class="line-row"><input [name]="'match-'+i" [(ngModel)]="catalogueQuery[i]" [attr.aria-label]="t('catalogueSearch')"><button type="button" (click)="searchCatalogue(i)">{{t('search')}}</button></div>@if(catalogueErrors[i]) { <p role="status">{{t('catalogueUnavailable')}}</p> }@for(match of matches[i] || []; track match.id) { <button type="button" class="match-option" (click)="link(i,match)">{{match.name}}</button> }</details></li> }</ol>
+          </section>
+          <section class="editor-section"><div class="section-heading"><h2>{{t('instructions')}}</h2><button type="button" (click)="convert()" [disabled]="!!preview">{{t(recipe.instructions.mode === 'text' ? 'useSteps' : 'useText')}}</button></div>
+            @if(preview) { <div class="conversion" role="region" [attr.aria-label]="t('conversionPreview')"><h3>{{t('conversionPreview')}}</h3><p>{{t('conversionHelp')}}</p>@if(preview.mode === 'text') { <p class="preserve">{{preview.text}}</p> } @else { <ol>@for(step of preview.steps; track $index) { <li class="preserve">{{step}}</li> }</ol> }<button type="button" class="primary" (click)="acceptConversion()">{{t('apply')}}</button><button type="button" (click)="preview=null">{{t('cancel')}}</button></div> }
+            @if(recipe.instructions.mode === 'text') { <label for="instructions">{{t('writeInstructions')}}</label><textarea id="instructions" name="instructions" [(ngModel)]="recipe.instructions.text" rows="10"></textarea> } @else {
+            <ol class="step-list">@for(step of recipe.instructions.steps; track $index; let i = $index) { <li><label [for]="'step-'+i">{{t('step')}} {{i+1}}</label><textarea [id]="'step-'+i" [name]="'step-'+i" [(ngModel)]="recipe.instructions.steps[i]" rows="4"></textarea><div class="step-actions"><button type="button" (click)="move(recipe.instructions.steps,i,-1)" [disabled]="i===0">{{t('moveUp')}}</button><button type="button" (click)="move(recipe.instructions.steps,i,1)" [disabled]="i===recipe.instructions.steps.length-1">{{t('moveDown')}}</button><button type="button" (click)="recipe.instructions.steps.splice(i,1)">{{t('delete')}}</button></div></li> }</ol><button type="button" (click)="recipe.instructions.steps.push('')">{{t('addStep')}}</button> }
+          </section>
+          <section class="editor-section"><h2>{{t('details')}}</h2><label for="description">{{t('description')}}</label><textarea id="description" name="description" [(ngModel)]="recipe.description" rows="3"></textarea><label for="time">{{t('time')}}</label><input id="time" name="time" [(ngModel)]="recipe.time" type="number" min="0"><div class="tag-options">@for(tag of tags; track tag) { <button type="button" [class.selected]="recipe.tags?.includes(tag)" [attr.aria-pressed]="recipe.tags?.includes(tag) || false" (click)="toggleTag(tag)">{{t('tag.'+tag)}}</button> }</div></section>
+          <section class="editor-section"><h2>{{t('visibility')}}</h2><label for="visibility">{{t('whoCanSee')}}</label><select id="visibility" name="visibility" [(ngModel)]="recipe.visibility"><option value="private">{{t('private')}}</option><option value="public">{{t('public')}}</option></select><p>{{t(recipe.visibility === 'private' ? 'privateHelp' : 'publicHelp')}}</p></section>
+        </fieldset>
+        <div class="save-bar"><p role="status">@if(saving) { {{t('saving')}} @if(progress !== null) { {{progress}}% } } @else { {{t('saveHint')}} }</p><button class="primary" type="submit" [disabled]="saving || imageLoading" [attr.aria-busy]="saving">{{t(saving ? 'saving' : 'saveRecipe')}}</button></div>
+      </form>
+    }
+    @if(mode === 'detail' && recipe) {
+      <article class="recipe-detail"><div class="detail-hero"><img class="cover" [src]="recipe.image_url" [alt]="recipe.name"><div><p class="eyebrow">{{t('recipe')}}</p><h1>{{recipe.name}}</h1>@if(user?.nickname) { <a class="author" [routerLink]="['/',user.nickname]">{{user.name}} · &#64;{{user.nickname}}</a> }@if(owner) { <p><span class="badge">{{t(recipe.visibility)}}</span></p><a class="button" [routerLink]="['/edit',recipe.id]">{{t('editRecipe')}}</a> }@if(recipe.time) { <p>{{recipe.time}} {{t('minutes')}}</p> }@if(recipe.description) { <div class="description" [innerHTML]="recipe.description"></div> }</div></div>
+        @if (android && owner && recipe.captureId) { <section class="editor-section"><button type="button" (click)="playRecording()">{{captureText('playRecording')}}</button> @if(audioUrl) { <audio controls [src]="audioUrl" [attr.aria-label]="captureText('playRecording')"></audio> } <button type="button" (click)="deleteRecording()">{{captureText('deleteRecording')}}</button></section> }
+        <div class="recipe-body">@if(recipe.ingredients?.length) { <section><h2>{{t('ingredients')}}</h2><ul class="cooking-ingredients">@for(line of recipe.ingredients; track $index) { <li>{{line.text}}</li> }</ul></section> }
+        @if(recipe.instructions?.mode === 'text' && recipe.instructions.text) { <section><h2>{{t('instructions')}}</h2><div class="preserve">{{recipe.instructions.text}}</div></section> }
+        @if(recipe.instructions?.mode === 'steps' && recipe.instructions.steps?.length) { <section><h2>{{t('instructions')}}</h2><ol class="cooking-steps">@for(step of recipe.instructions.steps; track $index) { <li class="preserve">{{step}}</li> }</ol></section> }</div>
+      </article>
+    }
+    @if(mode === 'profile' && authenticated && profile.id) {
+      <section class="page-heading"><p class="eyebrow">BONAPP</p><h1>{{t('profile')}}</h1><p>{{t('profileIntro')}}</p></section>
+      <form class="editor profile-editor" (ngSubmit)="saveProfile()"><fieldset [disabled]="saving"><label for="display-name">{{t('displayName')}}</label><input id="display-name" name="name" [(ngModel)]="profile.name" required><label for="nickname">{{t('nickname')}}</label><input id="nickname" name="nickname" [(ngModel)]="profile.nickname" required minlength="2" maxlength="40" pattern="[a-zA-Z0-9][a-zA-Z0-9._-]*"><label for="bio">{{t('bio')}}</label><textarea id="bio" name="bio" [(ngModel)]="profile.bio" maxlength="1000" rows="5"></textarea><label for="avatar">{{t('avatar')}}</label><input id="avatar" type="file" accept="image/jpeg,image/png,image/webp" (change)="chooseImage($event,true)">@if(profile.image_url) { <img class="avatar" [src]="profile.image_url" [alt]="t('preview')"> }<p>{{t('publicProfileHelp')}}</p></fieldset><button class="primary" type="submit" [disabled]="saving || imageLoading">{{t(saving ? 'saving' : 'saveProfile')}}</button><a class="button" [routerLink]="['/',profile.nickname]">{{t('viewPublicPage')}}</a></form>
+    }
+    @if(mode === 'about') { <section class="hero"><p class="eyebrow">BONAPP</p><h1>{{t('aboutTitle')}}</h1><p>{{t('aboutIntro')}}</p><a class="button primary" routerLink="/cookbook">{{t('yourCookbook')}}</a></section> }
+    @if(mode === 'retired') { <section class="hero"><p class="eyebrow">BONAPP</p><h1>{{t('retiredTitle')}}</h1><p>{{t('retiredIntro')}}</p><a class="button primary" routerLink="/receipts">{{t('discover')}}</a></section> }
+    <footer class="cookbook-footer"><a routerLink="/about">{{t('about')}}</a><span>Bonapp</span></footer>
+  </main>
+</ion-content>

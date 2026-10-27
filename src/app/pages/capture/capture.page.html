@@ -1,0 +1,55 @@
+<bonapp-header></bonapp-header>
+<ion-content>
+  <main class="capture-shell">
+    <header class="heading"><span class="eyebrow">BONAPP</span><h1>{{t('title')}}</h1><p>{{t('intro')}}</p></header>
+    @if (error) { <p role="alert" class="notice error">{{error}}</p> }
+    @if (notice) { <p role="status" class="notice">{{notice}}</p> }
+    @if (!auth.isAuthenticate()) { <p>{{t('signIn')}}</p><a routerLink="/cookbook">{{t('myRecipes')}}</a> }
+    @else if (!android) { <p>{{t('androidOnly')}}</p><a routerLink="/new">{{t('writeInstead')}}</a> }
+    @else {
+      @if (draft.recipe) { <section class="panel"><p>{{t('unfinishedEditor')}}</p><button type="button" class="primary" routerLink="/new">{{t('resumeEditor')}}</button></section> }
+      <section class="panel photo-panel">
+        @if (draft.photo) { <img [src]="draft.photo" [alt]="t('photoPreview')" class="photo"> }
+        @else { <div class="empty-photo"><ion-icon name="camera-outline" aria-hidden="true"></ion-icon><p>{{t('addPhoto')}}</p></div> }
+        <div class="actions"><button type="button" class="secondary" (click)="photo()">{{t(draft.photo ? 'retake' : 'takePhoto')}}</button><button type="button" class="secondary" (click)="gallery()">{{t('gallery')}}</button></div>
+      </section>
+      @if (!draft.photo) { <a class="manual" routerLink="/new">{{t('writeInstead')}}</a> }
+      @if (draft.photo) {
+        <section class="panel recorder">
+          <h2>{{t('recordTitle')}}</h2><p>{{t('recordHelp')}}</p>
+          @if (active && status.notificationsAllowed === false) { <p class="notice warning" role="status">{{t('notificationsDenied')}}</p> }
+          <p class="clock" role="timer">{{time}} <span>/ 05:00</span></p>
+          @if (status.duration >= 240000 && active) { <p class="notice warning" role="alert">{{t('oneMinute')}}</p> }
+          <div class="actions">
+            @if (!active) { <button type="button" class="primary" [disabled]="loading" (click)="record()"><ion-icon name="mic" aria-hidden="true"></ion-icon> {{t(status.state === 'stopped' ? 'recordAgain' : 'record')}}</button> }
+            @if (status.state === 'recording') { <button type="button" class="secondary" (click)="pause()">{{t('pause')}}</button> }
+            @if (status.state === 'paused') { <button type="button" class="secondary" (click)="resume()">{{t('resume')}}</button> }
+            @if (active && status.state !== 'starting') { <button type="button" class="stop" (click)="stop()">{{t('stop')}}</button> }
+          </div>
+          @if (playback && !active) { <audio controls [src]="playback" [attr.aria-label]="t('listen')"></audio> }
+        </section>
+        @if (playback && !active && !draft.result) {
+          <section class="panel">
+            <label for="capture-language">{{t('recipeLanguage')}}</label><select id="capture-language" [(ngModel)]="draft.language" (ngModelChange)="persist()"><option [ngValue]="undefined">{{t('spokenLanguage')}}</option><option value="en">English</option><option value="it">Italiano</option></select>
+            <label class="check"><input type="checkbox" [(ngModel)]="draft.keep" (ngModelChange)="persist()">{{t('keepRecording')}}</label><small>{{t('keepHelp')}}</small>
+            @if (pendingResult) { <p role="status">{{t('processing')}}</p> }
+            @else { <button type="button" class="primary" [disabled]="loading" [attr.aria-busy]="loading" (click)="retry()">{{t(loading ? 'uploading' : 'generate')}}</button> }
+          </section>
+        }
+        @if (draft.result) {
+          <section class="panel preview">
+            <h2>{{t('reviewTitle')}}</h2><p>{{t('reviewHelp')}}</p>
+            <label for="generated-title">{{t('recipeName')}}</label><input id="generated-title" [(ngModel)]="draft.result.name" (ngModelChange)="persist()">
+            <label for="generated-ingredients">{{t('ingredients')}}</label><textarea id="generated-ingredients" rows="5" [ngModel]="format(draft.result.ingredients)" (ngModelChange)="setLines('ingredients', $event)"></textarea>
+            <label for="generated-steps">{{t('steps')}}</label><textarea id="generated-steps" rows="7" [ngModel]="format(draft.result.steps)" (ngModelChange)="setLines('steps', $event)"></textarea>
+            @if (draft.result.questions.length) { <h3>{{t('questions')}}</h3><ul>@for (question of draft.result.questions; track $index) { <li>{{question}}</li> }</ul> }
+            <details><summary>{{t('transcript')}}</summary><textarea rows="7" [(ngModel)]="draft.result.transcript" (ngModelChange)="persist()" [attr.aria-label]="t('transcript')"></textarea></details>
+            <label class="check"><input type="checkbox" [(ngModel)]="draft.keep" (ngModelChange)="persist()">{{t('keepRecording')}}</label><small>{{t('keepHelp')}}</small>
+            <button type="button" class="primary" (click)="edit(true)">{{t('continueEdit')}}</button>
+          </section>
+        }
+        <button type="button" class="manual" (click)="edit(false)" [disabled]="active || loading || (pendingResult && draft.keep)">{{t('writeInstead')}}</button>
+      }
+    }
+  </main>
+</ion-content>

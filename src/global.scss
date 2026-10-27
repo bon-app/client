@@ -1,0 +1,245 @@
+@use "./assets/ionic-style.extended";
+
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import '@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+.toast-alert {
+    --background: var(--ion-color-primary);
+    font-size: 1.2em;
+}
+
+.wrap-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+*:not(.ion-invalid) {
+    color: var(--ion-color-secondary);
+}
+
+ion-header {
+    background: white;
+}
+
+.container {
+    max-width: 1360px;
+    margin: 0 auto;
+}
+
+ion-header {
+    box-shadow: 0px 9px 20px 2px rgba(188, 188, 188, 0.05);
+}
+
+ion-toolbar {
+    --min-height: 90px;
+    max-width: 1360px;
+    margin: 0 auto;
+}
+
+.text-ellips {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/** PARTIAL BORDER */
+.partial-border {
+    position: relative;
+}
+
+.partial-border:after {
+    content: '';
+    width: 60px;
+    height: 2px;
+    margin-left: calc(50% - 30px);
+    background: #545454;
+    position: absolute;
+    bottom: -2px;
+}
+
+.partial-border.light:after {
+    background: #bcbcbc2f;
+}
+
+.partial-border.big:after {
+    width: 30%;
+    margin-left: 35%;
+}
+
+
+.partial-border.partial-on-left:after {
+    content: '';
+    width: 60px;
+    height: 2px;
+    margin-left: 0;
+    background: #545454;
+    position: absolute;
+    bottom: -2px;
+}
+
+// LUCKYSHEET CSS FIX
+//#luckysheet_info_detail,
+#luckysheet-bottom-controll-row,
+#luckysheet-wa-editor {
+    display: none !important;
+}
+
+#luckysheet-rich-text-editor {
+    -webkit-user-modify: read-write;
+    color: black;
+}
+
+.htCore {
+    td {
+        text-align: center;
+    }
+}
+
+.ht_master .wtHolder {
+    height: auto !important;
+}
+
+.boldtext{  
+    font-weight: bold;
+}
+
+.HeaderRecipeFont{
+    font-size: 21px;
+}
+
+.resulttexth3{
+    font-size: 19px;
+    color: #7d7c7c !important;
+}
+
+.cardHeaderRecipes{
+    padding: 8px !important;
+    height: 66px;
+}
+
+.width-100{
+    width: 100%;
+}
+
+ion-card.recipesBox {
+    margin: 10px 10px !important;
+}
+.swal2-styled.swal2-confirm{
+    background-color: #efbdae !important;
+}
+.swal2-styled:focus {
+    box-shadow: 0 0 0 3px rgb(239 189 174) !important;
+}
+
+/*Font Globale Recoleta*/
+@font-face {   
+    font-family: 'Recoleta';    //This is what we are going to call
+    src: url('./assets/font/recoleta-semibold.otf');
+}
+
+/*Font Globale Poppins*/
+@font-face {   
+    font-family: 'Poppins';    //This is what we are going to call
+    src: url('./assets/font/Poppins-SemiBold.ttf');
+}
+
+/*RESPONSIVE RULES*/
+
+/* smartphones, iPhone, portrait 480x320 phones */
+@media (max-width:480px)  { 
+    
+ }
+
+/* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
+@media (max-width:481px)  {  
+    #filters {
+        width: 90% !important;
+    }
+    #title{
+        margin-top: 1em !important;
+        margin-bottom: 1em !important;
+        width: 90%;
+        margin: auto;
+    }
+    #title h1{
+        font-size: 1.5em  !important;
+    }
+    #filters{
+        margin: 2em auto !important;
+    }
+}
+
+@media screen and (min-width: 482px) and (max-width: 641px) {
+    #filters {
+        width: 65% !important;
+    }
+}
+@media screen and (min-width: 961px) and (max-width: 1281px) {
+    #filters {
+        width: 45% !important;
+    }
+}
+@media screen and (min-width: 1282px) and (max-width: 1981px) {
+    #filters {
+        width: 35% !important;
+    }
+}
+
+
+/* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
+@media (min-width:641px)  { }
+
+/* tablet, landscape iPad, lo-res laptops ands desktops */ 
+@media (min-width:961px)  { }
+
+/* big landscape tablets, laptops, and desktops */
+@media (min-width:1025px) {  }
+
+/* hi-res laptops and desktops */
+@media (min-width:1281px) {  }
+
+
+ion-auto-complete {
+    ul {
+        max-height: 40vh;
+        overflow: hidden;
+        overflow-y: auto;
+    }
+}
+
+.custom-back-button {
+    margin:5px;
+    font-size:0.88em;
+    font-weight: 600;
+    --border-width:2px;
+    height:24px;
+    width: 49px;
+    color: #E0C8C2;
+    border-color: #E0C8C2;
+    --border-color: #E0C8C2;
+}

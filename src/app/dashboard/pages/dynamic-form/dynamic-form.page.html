@@ -1,0 +1,14 @@
+<!-- inverted ion-header and ion-content -->
+<bonapp-header class="ion-hide-md-down"></bonapp-header>
+<ion-content>
+  <bonapp-header-creator class="ion-hide-md-up"></bonapp-header-creator>
+
+  <div class="container">
+    <div id="back">
+      <ion-button size="small" fill="outline" color="secondary" (click)="navCtrl.back()">{{'Receipt.back' | translate}}</ion-button>
+    </div>
+    @if (config) {
+      <dynamic-form [model]="model" [config]="config" (save)="save($event)"></dynamic-form>
+    }
+  </div>
+</ion-content>

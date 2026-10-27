@@ -1,0 +1,10 @@
+<div id="html-editor-wrapper">
+  <ion-item>
+    <ion-label>
+      <div style="font-weight: 600; margin-bottom: 0.5em;">{{field.templateOptions.label}}</div>
+      <textarea #editor [formlyAttributes]="field" [required]="field.templateOptions.required"
+        [name]="field.key" style="color: black; width: 100%; min-height: 300px"></textarea>
+
+    </ion-label>
+  </ion-item>
+</div>

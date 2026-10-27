@@ -1,0 +1,14 @@
+:host { --bottom-menu-height: calc(72px + env(safe-area-inset-bottom, 0px)); }
+.android-app:not(.keyboard-open) ion-router-outlet { bottom: var(--bottom-menu-height); }
+.bottom-nav { position: absolute; bottom: 0; left: 0; right: 0; z-index: 20; height: var(--bottom-menu-height); padding: 0 0 env(safe-area-inset-bottom, 0px); padding-left: max(8px, env(safe-area-inset-left, 0px)); padding-right: max(8px, env(safe-area-inset-right, 0px)); background: #fff; border-top: 1px solid #eadbd7; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); align-items: center; text-align: center; box-shadow: 0 -4px 22px #63483b12; }
+.bottom-nav a { min-width: 0; color: #74635c; text-decoration: none; display: flex; flex-direction: column; gap: 3px; align-items: center; font-size: 11px; line-height: 1.15; font-weight: 600; }
+.bottom-nav a:first-of-type { grid-column: 1; }
+.bottom-nav a:nth-of-type(2) { grid-column: 2; }
+.bottom-nav a:last-of-type { grid-column: 5; }
+.bottom-nav a.selected { color: #b77461; }
+.bottom-nav a span, .bottom-nav a ion-icon { color: inherit; }
+.bottom-nav a ion-icon { font-size: 25px; }
+.camera-action { grid-column: 3; width: 62px; height: 62px; margin: -22px auto 0; border-radius: 50%; border: 5px solid white; background: #c77f69; box-shadow: 0 4px 15px #77534433; color: white; display: grid; place-items: center; }
+.camera-action ion-icon { font-size: 30px; }
+.bottom-nav .camera-action ion-icon { color: #fff; }
+.bottom-nav a:focus-visible, .camera-action:focus-visible { outline: 3px solid #6d4438; outline-offset: 3px; }

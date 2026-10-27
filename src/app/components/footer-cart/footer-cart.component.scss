@@ -1,0 +1,46 @@
+// #xxx {
+
+//     ion-toolbar::part(placeholder) {
+//         padding:16px;
+//       }
+// }
+
+// ion-toolbar::part(container) {
+//     padding:16px !important;
+//   }
+
+// ng-deep ion-toolbar {
+    
+//     .toolbar-container {}
+//         div
+// }
+
+
+#dettaglio {
+    ion-button {
+        margin:0;
+    }
+
+    ion-button::part(native) {
+        padding:0em;
+    }
+}
+
+#proceed-button {
+
+    ion-button {
+        font-size:1.23em; 
+        font-weight: bold; 
+        margin: 0 0 0 auto;
+    }
+
+    ion-button::part(native) {
+        padding:0.5em;
+        min-width: 7em;
+    }
+}
+
+// ion-button::part(native) {
+//     padding:0em;
+// }
+

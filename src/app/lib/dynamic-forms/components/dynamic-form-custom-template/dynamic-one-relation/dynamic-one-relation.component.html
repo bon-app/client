@@ -1,0 +1,20 @@
+<div id="many-wrapper">
+  <h2>{{field.templateOptions?.label}}</h2>
+  <app-autocomplete #autoComplete [placeholder]="'Search'" [dataProvider]="oneRelationDataProvider"
+    (itemSelected)="add($event); autoComplete.clearValue()">
+  </app-autocomplete>
+  <div id="many-list" class="ion-padding-top ion-padding-bottom">
+    @if (item) {
+      <ion-item>
+        <ion-label>
+          {{label(item)}}
+        </ion-label>
+        <ion-icon name="trash" slot="end" (click)="remove(item)"></ion-icon>
+      </ion-item>
+    }
+  </div>
+  <div class="ion-padding">
+    <ion-button fill="clear" (click)="close()">Cancel</ion-button>
+    <ion-button class="ion-float-right" color="primary" (click)="save()">Save</ion-button>
+  </div>
+</div>

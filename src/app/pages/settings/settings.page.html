@@ -1,0 +1,6 @@
+<bonapp-header></bonapp-header>
+<ion-content><main class="settings"><span>BONAPP</span><h1>{{t('settings')}}</h1>
+  <section><h2>{{t('account')}}</h2>@if (auth.isAuthenticate()) { <a routerLink="/profile">{{t('editProfile')}}</a><button type="button" (click)="signOut()">{{t('signOut')}}</button> } @else { <a routerLink="/cookbook">{{t('signIn')}}</a> }</section>
+  <section><h2>{{t('language')}}</h2><label for="app-language">{{t('appLanguage')}}</label><select id="app-language" [ngModel]="language" (ngModelChange)="setLanguage($event)"><option value="en">English</option><option value="it">Italiano</option></select></section>
+  <section><h2>{{t('recordingPreferences')}}</h2><label class="check"><input type="checkbox" [ngModel]="keepDefault" (ngModelChange)="setKeep($event)">{{t('keepByDefault')}}</label><p>{{t('keepHelp')}}</p></section>
+</main></ion-content>

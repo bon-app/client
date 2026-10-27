@@ -1,0 +1,59 @@
+<!-- inverted ion-header with ion-content -->
+<bonapp-header class="ion-hide-md-down"></bonapp-header>
+<ion-content>
+  <bonapp-header-creator class="ion-hide-md-up"></bonapp-header-creator>
+
+  <div class="container">
+    <div id="back">
+      <ion-button
+        size="small"
+        fill="outline"
+        color="secondary"
+        (click)="navCtrl.back()"
+        >Back</ion-button
+        >
+      </div>
+      <input
+        id="import-csv"
+        type="file"
+        style="display: none"
+        (change)="importCSV($event)"
+        accept="text/csv"
+        />
+      <input id="copy" style="display: none" />
+      @if (config && auth.hasRoles(['admin'])) {
+        <dynamic-list
+          #list
+          [config]="config"
+          [data]="data"
+          [settings]="settings"
+          [extraButtons]="config.listOptions?.extraButtons"
+          (add)="goto('/dashboard/data/'+entity)"
+          (edit)="goto('/dashboard/data/'+entity+'/'+$event.id)"
+          (delete)="deleteElement($event)"
+          (more)="getRecords()"
+          (filterChange)="getRecords(true)"
+          (extraButtonClick)="handleExtraButtons($event)"
+          (rowLengthChange)="getRecords(true)"
+          >
+        </dynamic-list>
+      }
+      @if (config && auth.hasRoles(['creator','verified creator'])) {
+        <dynamic-list
+          #list
+          [config]="config"
+          [data]="data"
+          [settings]="settings"
+          [extraButtons]="config.listOptions?.extraButtons"
+          (add)="goto('/dashboard/data/'+entity)"
+          (edit)="goto('/dashboard/data/'+entity+'/'+$event.id)"
+          (delete)="deleteElement($event)"
+          (more)="getRecords()"
+          (filterChange)="getRecords(true)"
+          (extraButtonClick)="handleExtraButtons($event)"
+          (rowLengthChange)="getRecords(true)"
+          >
+        </dynamic-list>
+      }
+    </div>
+  </ion-content>

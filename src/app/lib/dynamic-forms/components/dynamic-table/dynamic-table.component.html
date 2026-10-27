@@ -1,0 +1,54 @@
+
+<table id="list" class="ion-margin-top">
+  <thead>
+    <tr>
+      @for (field of fields; track field) {
+        <th>
+          {{field.templateOptions?.label}}
+        </th>
+      }
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (row of data; track row) {
+      <tr>
+        @for (field of fields; track field) {
+          <td [ngStyle]="field.list.cssStyle" [ngClass]="field.list.cssClass"
+          [innerHTML]="getParser(field, row[field.key]) | safeHtml"></td>
+        }
+        <td class="ion-text-right">
+          @for (button of (config.listOptions?.rows?.extraButtons || []); track button) {
+            <ion-button size="icon-only"
+              color="secondary" fill="clear" class="ion-margin-top ion-margin-bottom"
+              (click)="extraButtonClick.emit({ key:button.key, data: row })">
+              <ion-icon [name]="button.icon" color="secondary"></ion-icon>
+            </ion-button>
+          }
+          <ion-button fill="clear" size="icon-only" color="secondary" (click)="edit.emit(row)">
+            <ion-icon name="create"></ion-icon>
+          </ion-button>
+          <ion-button fill="clear" size="icon-only" color="danger" (click)="delete.emit(row)">
+            <ion-icon name="trash"></ion-icon>
+          </ion-button>
+          <!-- <span (click)="edit.emit(row)">edit</span> | <span (click)="delete.emit(row)">delete</span> -->
+        </td>
+      </tr>
+    }
+    @if (!data.length) {
+      <tr>
+        <td style="text-align: center;padding-top: 2em;padding-bottom: 2em;" [attr.colspan]="fields.length+1">
+          No elements
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+@if (settings.showMoreButton) {
+  <div class="ion-padding">
+    <ion-button expand="full" fill="clear" color="primary" (click)="more.emit()">
+      more
+    </ion-button>
+  </div>
+}

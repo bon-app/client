@@ -1,0 +1,11 @@
+<ion-app [class.android-app]="android" [class.keyboard-open]="keyboardOpen">
+  <ion-router-outlet></ion-router-outlet>
+  @if (android && !keyboardOpen) {
+    <nav class="bottom-nav" [attr.aria-label]="'Capture.navigation' | translate">
+      <a routerLink="/cookbook" routerLinkActive="selected"><ion-icon name="book-outline" aria-hidden="true"></ion-icon><span>{{'Capture.myRecipes' | translate}}</span></a>
+      <a routerLink="/app/feed" routerLinkActive="selected"><ion-icon name="compass-outline" aria-hidden="true"></ion-icon><span>{{'Capture.feed' | translate}}</span></a>
+      <button class="camera-action" type="button" (click)="startCapture()" [attr.aria-label]="'Capture.takePhoto' | translate"><ion-icon name="camera" aria-hidden="true"></ion-icon></button>
+      <a routerLink="/app/settings" routerLinkActive="selected"><ion-icon name="settings-outline" aria-hidden="true"></ion-icon><span>{{'Capture.settings' | translate}}</span></a>
+    </nav>
+  }
+</ion-app>

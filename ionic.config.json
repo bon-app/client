@@ -1,0 +1,7 @@
+{
+  "name": "bonapp.client",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

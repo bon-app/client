@@ -1,0 +1,39 @@
+<ion-card [ngClass]="{'prod-selected' : (cart.getQta(product)>0)}" id="foo" name="card">
+  <ion-card-content>
+    <div class="product-img"
+      [ngStyle]="{background: 'url('+product.icon_url+') no-repeat center center', 'background-size': 'contain'}">
+    </div>
+    <div class="product-brand" [title]="product.brand">
+      <ion-text color="tertiary">{{product.brand}}</ion-text>
+    </div>
+    <div class="product-name" [title]="product.name">{{product.name}}</div>
+    <div>
+      <small><i>{{getSelf(product).qty}}</i></small>
+    </div>
+    <div class="prod-card-bottom">
+      <div class="product-price">
+        € {{(product.price? product.price.toFixed(2) : '-')}}
+      </div>
+      <div class="actions">
+        <span [ngClass]="{'narrow' : (163>(getCardWidth())), 'normal' : ((getCardWidth())>=163)}">
+          <!-- <span [ngClass]="{'narrow' : (163>(getObjectWidth('foo'))), 'normal' : ((getObjectWidth('foo'))>=163)}"> -->
+          <!-- <span [ngClass]="{((getObjectWidth('foo'))<163) ? 'narrow' : 'normal'}"> -->
+          <!-- <span class="narrow"> -->
+          @if (cart.getQta(product)>0) {
+            <ion-button id="less-quantity" fill="clear" color="primary" size="small" (click)="cart.add(product, -1)">
+              <ion-icon name="remove"></ion-icon>
+            </ion-button>
+          }
+          @if ((cart.getQta(product)>0) && (getCardWidth())>135) {
+            <ion-button id="show-quantity" fill="clear" color="secondary" size="small">
+              {{cart.getQta(product)}}
+            </ion-button>
+          }
+        </span>
+        <ion-button color="primary" size="small" (click)="cart.add(product, 1)">
+          <ion-icon name="add"></ion-icon>
+        </ion-button>
+      </div>
+    </div>
+  </ion-card-content>
+</ion-card>

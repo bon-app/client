@@ -1,0 +1,5 @@
+@for (item of items; track item) {
+  <ion-item (click)="goto(item.url)" style="cursor: pointer;">
+    {{item.label}}
+  </ion-item>
+}

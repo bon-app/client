@@ -1,0 +1,12 @@
+<header class="bonapp-nav">
+  <a class="brand" routerLink="/home" aria-label="Bonapp"><img src="assets/brand.png" alt="Bonapp"></a>
+  <nav *ngIf="!android" [attr.aria-label]="'Cookbook.navigation' | translate">
+    <a routerLink="/receipts" routerLinkActive="active">{{'Cookbook.discover' | translate}}</a>
+    <a routerLink="/cookbook" routerLinkActive="active">{{'Cookbook.yourCookbook' | translate}}</a>
+    <a routerLink="/new" routerLinkActive="active">{{'Cookbook.addRecipe' | translate}}</a>
+    @if(auth.isAuthenticate()) { <a routerLink="/profile" routerLinkActive="active">{{'Cookbook.profile' | translate}}</a> }
+    @else { <button (click)="openLoginModal(false)">{{'Cookbook.login' | translate}}</button> }
+    @if(auth.hasRoles(['admin'])) { <a routerLink="/dashboard/list/receipts">Admin</a> }
+    @if(auth.isAuthenticate()) { <button (click)="signOut()">{{'Cookbook.logout' | translate}}</button> }
+  </nav>
+</header>
