@@ -49,3 +49,5 @@ Cloudflare Git integration publishes production after pushes to `master`; branch
 ## Smoke checks
 
 For each preview, check the home page, sign-in, recipe browsing, and direct navigation to `/checkout` and `/order-confirm/:id`. Confirm that browser API requests reach the configured AWS endpoint. After domain activation, verify HTTPS on `bonapp.life` and that `www.bonapp.life` returns a permanent redirect preserving paths and query strings.
+
+g
